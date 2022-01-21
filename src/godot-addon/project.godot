@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="godot-addon"
-run/main_scene="res://Scenes/Login.tscn"
+run/main_scene="res://Scenes/Register.tscn"
 config/icon="res://icon.png"
 
 [autoload]
