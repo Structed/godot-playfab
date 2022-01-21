@@ -13,6 +13,10 @@ config_version=4
 config/name="godot-addon"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg" )
+
 [physics]
 
 common/enable_pause_aware_picking=true
