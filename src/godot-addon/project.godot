@@ -8,11 +8,25 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Object",
+"class": "PlayFab",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/pf.gd"
+} ]
+_global_script_class_icons={
+"PlayFab": ""
+}
+
 [application]
 
 config/name="godot-addon"
 run/main_scene="res://Scenes/Login.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
 
 [editor_plugins]
 

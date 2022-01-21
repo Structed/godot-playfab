@@ -20,46 +20,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Login" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 924.0
 margin_bottom = 500.0
 
-[node name="Name" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Name" type="HBoxContainer" parent="MarginContainer/Login"]
 margin_right = 924.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Name"]
+[node name="Label" type="Label" parent="MarginContainer/Login/Name"]
 margin_top = 5.0
 margin_right = 38.0
 margin_bottom = 19.0
 text = "Name"
 
-[node name="Input" type="LineEdit" parent="MarginContainer/VBoxContainer/Name"]
+[node name="Input" type="LineEdit" parent="MarginContainer/Login/Name"]
 margin_left = 42.0
 margin_right = 242.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 expand_to_text_length = true
 
-[node name="Password" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Password" type="HBoxContainer" parent="MarginContainer/Login"]
 margin_top = 28.0
 margin_right = 924.0
 margin_bottom = 52.0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Password"]
+[node name="Label" type="Label" parent="MarginContainer/Login/Password"]
 margin_top = 5.0
 margin_right = 60.0
 margin_bottom = 19.0
 text = "Password"
 
-[node name="Input" type="LineEdit" parent="MarginContainer/VBoxContainer/Password"]
+[node name="Input" type="LineEdit" parent="MarginContainer/Login/Password"]
 margin_left = 64.0
 margin_right = 264.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 secret = true
 
-[node name="Login" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Login" type="Button" parent="MarginContainer/Login"]
 margin_top = 56.0
 margin_right = 924.0
 margin_bottom = 76.0
