@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "Pf",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/pf.gd"
-}, {
-"base": "Object",
-"class": "PlayFab",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/pf_http_client.gd"
 } ]
 _global_script_class_icons={
-"Pf": "",
-"PlayFab": ""
+"Pf": ""
 }
 
 [application]
