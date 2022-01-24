@@ -1,6 +1,11 @@
 extends Node
 class_name Pf
 
+## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
+signal json_parse_error(json_result)
+
+signal api_error
+
 var _http: HTTPRequest
 var _title_id
 var _base_uri = "playfabapi.com"
@@ -26,9 +31,26 @@ func register_email_password(username: String, email: String, password: String):
 	}
 	_post(params, "/Client/RegisterPlayFabUser")
 	
-func _on_register_email_password(result, response_code, headers, body):
-	var json = JSON.parse(body.get_string_from_utf8())
-	print(json.result)
+func _on_register_email_password(result, response_code: int, headers, body):
+	var json_result = JSON.parse(body.get_string_from_utf8())
+	if json_result.error == OK:
+		print("JSON Parse result: %s" % json_result.result)
+		pass
+	else:
+		emit_signal("json_parse_error", json_result)
+		
+	if (response_code >= 200 && response_code < 300):
+		pass
+	elif (response_code >= 400):
+		var result_dict: Dictionary = json_result.result
+		var apiErrorWrapper = ApiErrorWrapper.new()
+		
+		for key in result_dict.keys():
+			apiErrorWrapper.set(key, result_dict[key])
+			
+#		print_debug("Property list:")
+#		print_debug(apiErrorWrapper.get_property_list())
+#		print_debug("End property list")
 	_http.disconnect("request_completed", self, "_on_register_email_password")
 	
 func _post(body, path: String):

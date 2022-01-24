@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "ApiErrorWrapper",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/ApiErrorWrapper.gd"
+}, {
 "base": "Node",
 "class": "Pf",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/pf.gd"
 } ]
 _global_script_class_icons={
+"ApiErrorWrapper": "",
 "Pf": ""
 }
 
