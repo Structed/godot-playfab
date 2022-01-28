@@ -4,7 +4,11 @@ class_name PlayFab
 ## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
 signal json_parse_error(json_result)
 
-signal api_error
+## Emitted when a PlayFab API error occurs. Will receive a LoginResult as parameter.
+signal api_error(login_result)
+
+## Arguments: LoginResult
+signal logged_in(LoginResult)
 
 var _http: HTTPRequest
 var _title_id
@@ -39,10 +43,15 @@ func _on_register_email_password(result, response_code: int, headers, body):
 	else:
 		emit_signal("json_parse_error", json_result)
 		
+	var result_dict: Dictionary = json_result.result
 	if (response_code >= 200 && response_code < 300):
-		pass
+		var login_result = LoginResult.new()
+		for key in result_dict.keys():
+			login_result.set(key, result_dict[key])
+			emit_signal("logged_in", login_result)
+			pass
 	elif (response_code >= 400):
-		var result_dict: Dictionary = json_result.result
+		
 		var apiErrorWrapper = ApiErrorWrapper.new()
 		
 		for key in result_dict.keys():
@@ -51,6 +60,8 @@ func _on_register_email_password(result, response_code: int, headers, body):
 #		print_debug("Property list:")
 #		print_debug(apiErrorWrapper.get_property_list())
 #		print_debug("End property list")
+		emit_signal("api_error", apiErrorWrapper)
+		
 	_http.disconnect("request_completed", self, "_on_register_email_password")
 	
 func _post(body, path: String):
