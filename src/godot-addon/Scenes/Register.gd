@@ -30,7 +30,6 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 		text += "[color=red][b]%s[/b][/color]: " % key 
 		for element in error_details[key]:
 			text += "%s\n" % element
-		pass
+			
 	$HSplitContainer/Response/RichTextLabel.bbcode_text = text
 	$Register.self_modulate = Color(1, 0, 0, 0.5)
-	pass
