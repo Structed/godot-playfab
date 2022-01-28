@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "PlayFab",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFab.gd"
+}, {
+"base": "Reference",
+"class": "RegisterPlayFabUserResult",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 } ]
 _global_script_class_icons={
 "ApiErrorWrapper": "",
 "EntityTokenResponse": "",
 "LoginResult": "",
-"PlayFab": ""
+"PlayFab": "",
+"RegisterPlayFabUserResult": ""
 }
 
 [application]
