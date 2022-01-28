@@ -13,14 +13,12 @@ func _on_Register_pressed():
 	var password = $HSplitContainer/Request/Password/Input.text
 	Global.play_fab.register_email_password(username, email, password)
 	if !Global.play_fab.is_connected("registered", self, "_on_registered"):
-		Global.play_fab.connect("registered", self, "_on_registered")
+		Global.play_fab.connect("registered", self, "_on_registered", [], CONNECT_ONESHOT)
 
 	if !Global.play_fab.is_connected("api_error", self, "_on_api_error"):
-		Global.play_fab.connect("api_error", self, "_on_api_error")
-#
-#	Global.play_fab.connect("registered", self, "_on_registered", [], CONNECT_ONESHOT)
-#	Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
-	
+		Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
+
+
 func _on_registered(result: RegisterPlayFabUserResult):
 	$Register.self_modulate = Color(0, 1, 0, 0.5)
 

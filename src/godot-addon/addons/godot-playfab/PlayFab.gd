@@ -23,7 +23,7 @@ func _ready():
 	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
 
 func register_email_password(username: String, email: String, password: String):
-	_http.connect("request_completed", self, "_on_register_email_password")	
+	_http.connect("request_completed", self, "_on_register_email_password", [], CONNECT_ONESHOT)
 	var params = {
 		"TitleId": _title_id,
 		"DisplayName": username,
@@ -59,8 +59,6 @@ func _on_register_email_password(result, response_code: int, headers, body):
 #		print_debug(apiErrorWrapper.get_property_list())
 #		print_debug("End property list")
 		emit_signal("api_error", apiErrorWrapper)
-		
-	_http.disconnect("request_completed", self, "_on_register_email_password")
 	
 func _post(body, path: String):
 	var json = JSON.print(body)
