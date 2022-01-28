@@ -12,11 +12,17 @@ func _on_Register_pressed():
 	var email = $HSplitContainer/Request/Email/Input.text
 	var password = $HSplitContainer/Request/Password/Input.text
 	Global.play_fab.register_email_password(username, email, password)
-	Global.play_fab.connect("logged_in", self, "_on_logged_in")
-	Global.play_fab.connect("api_error", self, "_on_api_error")
+	if !Global.play_fab.is_connected("registered", self, "_on_registered"):
+		Global.play_fab.connect("registered", self, "_on_registered")
+
+	if !Global.play_fab.is_connected("api_error", self, "_on_api_error"):
+		Global.play_fab.connect("api_error", self, "_on_api_error")
+#
+#	Global.play_fab.connect("registered", self, "_on_registered", [], CONNECT_ONESHOT)
+#	Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
 	
-func _on_logged_in(login_result: LoginResult):
-	pass
+func _on_registered(result: RegisterPlayFabUserResult):
+	$Register.self_modulate = Color(0, 1, 0, 0.5)
 
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 	var text = ""
@@ -28,4 +34,5 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 			text += "%s\n" % element
 		pass
 	$HSplitContainer/Response/RichTextLabel.bbcode_text = text
+	$Register.self_modulate = Color(1, 0, 0, 0.5)
 	pass

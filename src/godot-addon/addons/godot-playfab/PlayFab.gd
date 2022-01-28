@@ -7,8 +7,8 @@ signal json_parse_error(json_result)
 ## Emitted when a PlayFab API error occurs. Will receive a LoginResult as parameter.
 signal api_error(login_result)
 
-## Arguments: LoginResult
-signal logged_in(LoginResult)
+## Arguments: RegisterPlayFabUserResult
+signal registered(LoginResult)
 
 var _http: HTTPRequest
 var _title_id
@@ -39,17 +39,15 @@ func _on_register_email_password(result, response_code: int, headers, body):
 	var json_result = JSON.parse(body.get_string_from_utf8())
 	if json_result.error == OK:
 		print("JSON Parse result: %s" % json_result.result)
-		pass
 	else:
 		emit_signal("json_parse_error", json_result)
 		
 	var result_dict: Dictionary = json_result.result
 	if (response_code >= 200 && response_code < 300):
-		var login_result = LoginResult.new()
+		var login_result = RegisterPlayFabUserResult.new()
 		for key in result_dict.keys():
 			login_result.set(key, result_dict[key])
-			emit_signal("logged_in", login_result)
-			pass
+			emit_signal("registered", login_result)
 	elif (response_code >= 400):
 		
 		var apiErrorWrapper = ApiErrorWrapper.new()
