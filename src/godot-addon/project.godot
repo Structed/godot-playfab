@@ -15,13 +15,13 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/ApiErrorWrapper.gd"
 }, {
 "base": "Node",
-"class": "Pf",
+"class": "PlayFab",
 "language": "GDScript",
-"path": "res://addons/godot-playfab/pf.gd"
+"path": "res://addons/godot-playfab/PlayFab.gd"
 } ]
 _global_script_class_icons={
 "ApiErrorWrapper": "",
-"Pf": ""
+"PlayFab": ""
 }
 
 [application]

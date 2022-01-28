@@ -1,5 +1,5 @@
 extends Node
-class_name Pf
+class_name PlayFab
 
 ## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
 signal json_parse_error(json_result)
