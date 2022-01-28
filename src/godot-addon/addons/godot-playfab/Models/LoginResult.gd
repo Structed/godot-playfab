@@ -2,7 +2,7 @@ extends Reference
 class_name LoginResult
 
 ## If LoginTitlePlayerAccountEntity flag is set on the login request the title_player_account will also be logged in and returned.
-var EntityToken#: EntityTokenResponse
+var EntityToken: EntityTokenResponse
 
 # Results for requested info.
 var InfoResultPayload#: GetPlayerCombinedInfoResultPayload
