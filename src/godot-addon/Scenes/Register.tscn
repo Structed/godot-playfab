@@ -99,11 +99,6 @@ margin_bottom = 80.0
 size_flags_vertical = 3
 bbcode_enabled = true
 
-[node name="HBox" type="HBoxContainer" parent="MarginContainer/Register"]
-margin_top = 84.0
-margin_right = 924.0
-margin_bottom = 84.0
-
 [node name="Register" type="Button" parent="MarginContainer/Register"]
 margin_top = 88.0
 margin_right = 924.0
