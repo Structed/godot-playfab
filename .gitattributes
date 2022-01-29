@@ -1,3 +1,6 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
 # Project items
 /docs                       export-ignore
 project.godot               export-ignore
