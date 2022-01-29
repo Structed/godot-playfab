@@ -13,6 +13,7 @@ signal registered(LoginResult)
 var _http: HTTPRequest
 var _title_id
 var _base_uri = "playfabapi.com"
+var _emit_counter = 0
 
 func _init(title_id: String):
 	_title_id = title_id
@@ -41,13 +42,17 @@ func _on_register_email_password(result, response_code: int, headers, body):
 		print("JSON Parse result: %s" % json_result.result)
 	else:
 		emit_signal("json_parse_error", json_result)
+		return
 		
 	var result_dict: Dictionary = json_result.result
 	if (response_code >= 200 && response_code < 300):
 		var login_result = RegisterPlayFabUserResult.new()
-		for key in result_dict.keys():
-			login_result.set(key, result_dict[key])
-			emit_signal("registered", login_result)
+		var data = result_dict["data"]
+		for key in data.keys():
+			login_result.set(key, data[key])
+			
+		emit_signal("registered", login_result)
+		_emit_counter += 1
 	elif (response_code >= 400):
 		
 		var apiErrorWrapper = ApiErrorWrapper.new()

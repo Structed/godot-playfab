@@ -21,6 +21,8 @@ func _on_Register_pressed():
 
 func _on_registered(result: RegisterPlayFabUserResult):
 	$Register.self_modulate = Color(0, 1, 0, 0.5)
+	$HSplitContainer/Response/RichTextLabel.bbcode_text = "[color=green]Registration for %s succeeded!" % result.Username
+
 
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 	var text = ""
