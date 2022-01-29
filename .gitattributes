@@ -1,0 +1,15 @@
+# Project items
+/docs                       export-ignore
+project.godot               export-ignore
+default_env.tres            export-ignore
+icon.png                    export-ignore
+icon.png.import             export-ignore
+/Scenes                     export-ignore
+/Scripts                    export-ignore
+
+# Defautl repository stuff
+README.md                   export-ignore
+LICENSE                     export-ignore
+/.github                    export-ignore
+/.gitattributes             export-ignore
+/.gitignore                 export-ignore
