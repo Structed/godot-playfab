@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFab.gd"
 }, {
+"base": "Object",
+"class": "PlayFabConstants",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/PlayFabConstants.gd"
+}, {
 "base": "Reference",
 "class": "RegisterPlayFabUserResult",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "EntityTokenResponse": "",
 "LoginResult": "",
 "PlayFab": "",
+"PlayFabConstants": "",
 "RegisterPlayFabUserResult": ""
 }
 

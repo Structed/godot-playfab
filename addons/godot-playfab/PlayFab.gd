@@ -1,6 +1,7 @@
 extends Node
 class_name PlayFab
 
+
 ## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
 ## @param json_result: JSONResult
 signal json_parse_error(json_result)
@@ -30,8 +31,12 @@ var _title_id
 var _base_uri = "playfabapi.com"
 var _emit_counter = 0
 
-func _init(title_id: String):
-	_title_id = title_id
+func _init():
+	
+	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) && ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) != "":
+		_title_id = ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
+	else:
+		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
 	
 func _ready():
 	_http = HTTPRequest.new()
