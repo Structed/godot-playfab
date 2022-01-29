@@ -68,8 +68,14 @@ margin_right = 924.0
 margin_bottom = 76.0
 text = "Login"
 
-[node name="Output" type="RichTextLabel" parent="MarginContainer/Login"]
+[node name="Back" type="Button" parent="MarginContainer/Login"]
 margin_top = 80.0
+margin_right = 924.0
+margin_bottom = 100.0
+text = "Back"
+
+[node name="Output" type="RichTextLabel" parent="MarginContainer/Login"]
+margin_top = 104.0
 margin_right = 924.0
 margin_bottom = 500.0
 size_flags_horizontal = 3
@@ -77,3 +83,4 @@ size_flags_vertical = 3
 bbcode_enabled = true
 
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer/Login" method="_on_Login_pressed"]
+[connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer/Login" method="_on_Back_pressed"]

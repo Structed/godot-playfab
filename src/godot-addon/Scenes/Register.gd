@@ -1,12 +1,6 @@
 extends VBoxContainer
 
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 func _on_Register_pressed():
 	var username = $HSplitContainer/Request/Name/Input.text
 	var email = $HSplitContainer/Request/Email/Input.text
@@ -36,3 +30,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 			
 	$HSplitContainer/Response/RichTextLabel.bbcode_text = text
 	$Register.self_modulate = Color(1, 0, 0, 0.5)
+
+
+func _on_Back_pressed():
+	SceneManager.goto_scene("res://Scenes/Main.tscn")

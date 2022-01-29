@@ -105,4 +105,11 @@ margin_right = 924.0
 margin_bottom = 104.0
 text = "Register"
 
+[node name="Back" type="Button" parent="MarginContainer/Register"]
+margin_top = 108.0
+margin_right = 924.0
+margin_bottom = 128.0
+text = "Back"
+
 [connection signal="pressed" from="MarginContainer/Register/Register" to="MarginContainer/Register" method="_on_Register_pressed"]
+[connection signal="pressed" from="MarginContainer/Register/Back" to="MarginContainer/Register" method="_on_Back_pressed"]

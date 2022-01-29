@@ -45,12 +45,13 @@ _global_script_class_icons={
 [application]
 
 config/name="godot-addon"
-run/main_scene="res://Scenes/Register.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+SceneManager="*res://Scripts/SceneManager.gd"
 
 [editor_plugins]
 

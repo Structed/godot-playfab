@@ -28,3 +28,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 			
 	$Login.self_modulate = Color(1, 0, 0, 0.5)
 	$Output.bbcode_text = text	
+
+
+func _on_Back_pressed():
+	SceneManager.goto_scene("res://Scenes/Main.tscn")
