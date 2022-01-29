@@ -5,10 +5,10 @@ class_name PlayFab
 signal json_parse_error(json_result)
 
 ## Emitted when a PlayFab API error occurs. Will receive a LoginResult as parameter.
-signal api_error(login_result)
+signal api_error(LoginResult)
 
 ## Arguments: RegisterPlayFabUserResult
-signal registered(LoginResult)
+signal registered(RegisterPlayFabUserResult)
 
 var _http: HTTPRequest
 var _title_id
