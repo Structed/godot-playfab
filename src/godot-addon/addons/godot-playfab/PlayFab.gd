@@ -21,6 +21,7 @@ signal request_succeeded(response)
 signal registered(RegisterPlayFabUserResult)
 
 var _http: HTTPRequest
+var _request_in_progress = false
 var _title_id
 var _base_uri = "playfabapi.com"
 var _emit_counter = 0
@@ -57,6 +58,11 @@ func _on_register_email_password(result: Dictionary):
 func _post(body, path: String, callback: FuncRef):
 	var json = JSON.print(body)
 	var headers = ["Content-Type: application/json", "Content-Length: " + str(json.length())]
+	
+	while (_request_in_progress):
+		yield(_http.get_tree(), "idle_frame")
+	
+	_request_in_progress = true
 	var error = _http.request("%s%s" % [ _base_uri, path], headers, true, HTTPClient.METHOD_POST, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
@@ -68,6 +74,7 @@ func _post(body, path: String, callback: FuncRef):
 	var response_code = args[1]
 	var response_headers = args[2]
 	var response_body = args[3]
+	_request_in_progress = false
 	
 	var json_parse_result = JSON.parse(response_body.get_string_from_utf8())
 	print_debug("JSON Parse result: %s" % json_parse_result.result)
