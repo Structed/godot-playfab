@@ -20,6 +20,10 @@ signal request_succeeded(response)
 ## Arguments: RegisterPlayFabUserResult
 signal registered(RegisterPlayFabUserResult)
 
+## Emitted when the player logged in successfully
+## @param login_result: LoginResult
+signal logged_in(login_result)
+
 var _http: HTTPRequest
 var _request_in_progress = false
 var _title_id
@@ -46,6 +50,15 @@ func register_email_password(username: String, email: String, password: String):
 	}
 	var result = _post(params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
 
+func login_with_email(email: String, password: String, custom_tags, info_request_parameters):
+	var params = {
+		"TitleId": _title_id,								# Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+		"Email": email,										# Email address for the account.
+		"Password": password,								# Password for the PlayFab account (6-100 characters)
+		"CustomTags": custom_tags,							# The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
+		"InfoRequestParameters": info_request_parameters	# Flags for which pieces of info to return for the user.
+	}
+	var result = _post(params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
 
 func _on_register_email_password(result: Dictionary):
 	var register_result = RegisterPlayFabUserResult.new()
@@ -54,6 +67,14 @@ func _on_register_email_password(result: Dictionary):
 		register_result.set(key, data[key])
 		
 	emit_signal("registered", register_result)
+	
+func _on_login_with_email(result: Dictionary):
+	var login_result = LoginResult.new()
+	var data = result["data"]
+	for key in data.keys():
+		login_result.set(key, data[key])
+	
+	emit_signal("logged_in", login_result)
 	
 func _post(body, path: String, callback: FuncRef):
 	var json = JSON.print(body)
@@ -78,6 +99,7 @@ func _post(body, path: String, callback: FuncRef):
 	
 	var json_parse_result = JSON.parse(response_body.get_string_from_utf8())
 	print_debug("JSON Parse result: %s" % json_parse_result.result)
+	
 	
 	if json_parse_result.error != OK:
 		emit_signal("json_parse_error", json_parse_result)
