@@ -39,7 +39,7 @@ func register_email_password(username: String, email: String, password: String):
 func _on_register_email_password(result, response_code: int, headers, body):
 	var json_result = JSON.parse(body.get_string_from_utf8())
 	if json_result.error == OK:
-		print("JSON Parse result: %s" % json_result.result)
+		print_debug("JSON Parse result: %s" % json_result.result)
 	else:
 		emit_signal("json_parse_error", json_result)
 		return
@@ -52,17 +52,11 @@ func _on_register_email_password(result, response_code: int, headers, body):
 			login_result.set(key, data[key])
 			
 		emit_signal("registered", login_result)
-		_emit_counter += 1
 	elif (response_code >= 400):
-		
 		var apiErrorWrapper = ApiErrorWrapper.new()
-		
 		for key in result_dict.keys():
 			apiErrorWrapper.set(key, result_dict[key])
 			
-#		print_debug("Property list:")
-#		print_debug(apiErrorWrapper.get_property_list())
-#		print_debug("End property list")
 		emit_signal("api_error", apiErrorWrapper)
 	
 func _post(body, path: String):
