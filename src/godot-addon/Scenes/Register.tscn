@@ -27,77 +27,58 @@ margin_right = 924.0
 margin_bottom = 500.0
 script = ExtResource( 1 )
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/Register"]
+[node name="Name" type="HBoxContainer" parent="MarginContainer/Register"]
 margin_right = 924.0
-margin_bottom = 80.0
-
-[node name="Request" type="VBoxContainer" parent="MarginContainer/Register/HSplitContainer"]
-margin_right = 264.0
-margin_bottom = 80.0
-
-[node name="Name" type="HBoxContainer" parent="MarginContainer/Register/HSplitContainer/Request"]
-margin_right = 264.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="MarginContainer/Register/HSplitContainer/Request/Name"]
+[node name="Label" type="Label" parent="MarginContainer/Register/Name"]
 margin_top = 5.0
 margin_right = 38.0
 margin_bottom = 19.0
 text = "Name"
 
-[node name="Input" type="LineEdit" parent="MarginContainer/Register/HSplitContainer/Request/Name"]
+[node name="Input" type="LineEdit" parent="MarginContainer/Register/Name"]
 margin_left = 42.0
 margin_right = 242.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 expand_to_text_length = true
 
-[node name="Email" type="HBoxContainer" parent="MarginContainer/Register/HSplitContainer/Request"]
+[node name="Email" type="HBoxContainer" parent="MarginContainer/Register"]
 margin_top = 28.0
-margin_right = 264.0
+margin_right = 924.0
 margin_bottom = 52.0
 
-[node name="Label" type="Label" parent="MarginContainer/Register/HSplitContainer/Request/Email"]
+[node name="Label" type="Label" parent="MarginContainer/Register/Email"]
 margin_top = 5.0
 margin_right = 35.0
 margin_bottom = 19.0
 text = "Email"
 
-[node name="Input" type="LineEdit" parent="MarginContainer/Register/HSplitContainer/Request/Email"]
+[node name="Input" type="LineEdit" parent="MarginContainer/Register/Email"]
 margin_left = 39.0
 margin_right = 239.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 expand_to_text_length = true
 
-[node name="Password" type="HBoxContainer" parent="MarginContainer/Register/HSplitContainer/Request"]
+[node name="Password" type="HBoxContainer" parent="MarginContainer/Register"]
 margin_top = 56.0
-margin_right = 264.0
+margin_right = 924.0
 margin_bottom = 80.0
 
-[node name="Label" type="Label" parent="MarginContainer/Register/HSplitContainer/Request/Password"]
+[node name="Label" type="Label" parent="MarginContainer/Register/Password"]
 margin_top = 5.0
 margin_right = 60.0
 margin_bottom = 19.0
 text = "Password"
 
-[node name="Input" type="LineEdit" parent="MarginContainer/Register/HSplitContainer/Request/Password"]
+[node name="Input" type="LineEdit" parent="MarginContainer/Register/Password"]
 margin_left = 64.0
 margin_right = 264.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 secret = true
-
-[node name="Response" type="VBoxContainer" parent="MarginContainer/Register/HSplitContainer"]
-margin_left = 276.0
-margin_right = 924.0
-margin_bottom = 80.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Register/HSplitContainer/Response"]
-margin_right = 648.0
-margin_bottom = 80.0
-size_flags_vertical = 3
-bbcode_enabled = true
 
 [node name="Register" type="Button" parent="MarginContainer/Register"]
 margin_top = 84.0
@@ -110,6 +91,13 @@ margin_top = 108.0
 margin_right = 924.0
 margin_bottom = 128.0
 text = "Back"
+
+[node name="Output" type="RichTextLabel" parent="MarginContainer/Register"]
+margin_top = 132.0
+margin_right = 924.0
+margin_bottom = 500.0
+size_flags_vertical = 3
+bbcode_enabled = true
 
 [connection signal="pressed" from="MarginContainer/Register/Register" to="MarginContainer/Register" method="_on_Register_pressed"]
 [connection signal="pressed" from="MarginContainer/Register/Back" to="MarginContainer/Register" method="_on_Back_pressed"]

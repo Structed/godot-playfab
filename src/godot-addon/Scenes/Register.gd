@@ -2,10 +2,11 @@ extends VBoxContainer
 
 
 func _on_Register_pressed():
-	var username = $HSplitContainer/Request/Name/Input.text
-	var email = $HSplitContainer/Request/Email/Input.text
-	var password = $HSplitContainer/Request/Password/Input.text
+	var username = $Name/Input.text
+	var email = $Email/Input.text
+	var password = $Password/Input.text
 	Global.play_fab.register_email_password(username, email, password)
+	
 	if !Global.play_fab.is_connected("registered", self, "_on_registered"):
 		Global.play_fab.connect("registered", self, "_on_registered", [], CONNECT_ONESHOT)
 
@@ -15,7 +16,7 @@ func _on_Register_pressed():
 
 func _on_registered(result: RegisterPlayFabUserResult):
 	$Register.self_modulate = Color(0, 1, 0, 0.5)
-	$HSplitContainer/Response/RichTextLabel.bbcode_text = "[color=green]Registration for \"%s\" succeeded!" % result.Username
+	$Output.bbcode_text = "[color=green]Registration for \"%s\" succeeded!" % result.Username
 
 
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
@@ -28,7 +29,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 			for element in error_details[key]:
 				text += "%s\n" % element
 			
-	$HSplitContainer/Response/RichTextLabel.bbcode_text = text
+	$Output.bbcode_text = text
 	$Register.self_modulate = Color(1, 0, 0, 0.5)
 
 
