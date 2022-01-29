@@ -6,6 +6,7 @@
 
 # Project items
 /docs                           export-ignore
+/raw_assets                     export-ignore
 project.godot                   export-ignore
 default_env.tres                export-ignore
 icon.png                        export-ignore
