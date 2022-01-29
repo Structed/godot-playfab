@@ -100,9 +100,9 @@ size_flags_vertical = 3
 bbcode_enabled = true
 
 [node name="Register" type="Button" parent="MarginContainer/Register"]
-margin_top = 88.0
+margin_top = 84.0
 margin_right = 924.0
-margin_bottom = 108.0
+margin_bottom = 104.0
 text = "Register"
 
 [connection signal="pressed" from="MarginContainer/Register/Register" to="MarginContainer/Register" method="_on_Register_pressed"]
