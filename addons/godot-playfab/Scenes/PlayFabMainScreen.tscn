@@ -11,9 +11,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ClassNameContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 39.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ClassNameContainer"]
+margin_top = 12.0
+margin_right = 79.0
+margin_bottom = 26.0
+text = "Class Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="ClassNameContainer"]
+margin_left = 83.0
+margin_right = 1024.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Input" type="TextEdit" parent="."]
-anchor_right = 0.454102
 anchor_bottom = 1.0
+margin_top = 84.0
+margin_right = 456.0
 text = "GetUserData	
 boolean
 Whether to get the player's custom data. Defaults to false
@@ -50,15 +76,17 @@ UserReadOnlyDataKeys
 string[]
 Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserReadOnlyData is false"
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Output" type="TextEdit" parent="."]
-anchor_left = 0.568359
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -444.0
+margin_top = 88.0
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="Generate" type="Button" parent="."]
