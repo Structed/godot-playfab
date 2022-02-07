@@ -1,33 +1,78 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/godot-playfab/Scenes/Generate.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-playfab/Scenes/PlayFabMainScreen.gd" type="Script" id=2]
 
-[node name="Control" type="CenterContainer"]
+[node name="MainScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Input" type="TextEdit" parent="."]
+anchor_right = 0.454102
+anchor_bottom = 1.0
+text = "GetUserData	
+boolean
+Whether to get the player's custom data. Defaults to false
+
+GetUserInventory	
+boolean
+Whether to get the player's inventory. Defaults to false
+
+GetUserReadOnlyData	
+boolean
+Whether to get the player's read only data. Defaults to false
+
+GetUserVirtualCurrency	
+boolean
+Whether to get the player's virtual currency balances. Defaults to false
+
+PlayerStatisticNames	
+string[]
+Specific statistics to retrieve. Leave null to get all keys. Has no effect if GetPlayerStatistics is false
+
+ProfileConstraints	
+PlayerProfileViewConstraints
+Specifies the properties to return from the player profile. Defaults to returning the player's display name.
+
+TitleDataKeys	
+string[]
+Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetTitleData is false
+
+UserDataKeys	
+string[]
+Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserData is false
+
+UserReadOnlyDataKeys	
+string[]
+Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserReadOnlyData is false"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Output" type="TextEdit" parent="."]
+anchor_left = 0.568359
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="Generate" type="Button" parent="."]
-margin_left = 476.0
-margin_top = 290.0
-margin_right = 547.0
-margin_bottom = 310.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -35.5
+margin_top = -10.0
+margin_right = 35.5
+margin_bottom = 10.0
 text = "Generate"
-script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 512.0
-margin_top = 300.0
-margin_right = 512.0
-margin_bottom = 300.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 512.0
-margin_top = 300.0
-margin_right = 512.0
-margin_bottom = 300.0
-
-[connection signal="pressed" from="Generate" to="Generate" method="_on_Generate_pressed"]
+[connection signal="pressed" from="Generate" to="." method="_on_Generate_pressed"]
