@@ -19,11 +19,15 @@ static func to_model(object_name: String, input: String) -> String:
 		
 		if not str_line.empty():
 			match prop_line:
-				0:
-					current_prop = str_line
-				1:
-					current_prop = "var %s: %s" % [current_prop, str_line] 
-				2:
+				0: # Variable name
+					current_prop = "var " + str_line
+				1:	# Type
+					str_line = fix_type(str_line)
+					if not str_line.empty() and not str_line.begins_with("#"):
+						current_prop += ": %s" % str_line
+					else:
+						current_prop = str_line
+				2:	# Comment
 					current_prop = "# %s\n%s" % [str_line, current_prop]
 			
 			prop_line += 1
@@ -35,3 +39,15 @@ static func to_model(object_name: String, input: String) -> String:
 	for prop in props:
 		model += prop + "\n\n"
 	return model
+
+static func fix_type(type: String) -> String:
+	
+	match type:
+		"string":
+			return "String"
+		"boolean":
+			return "bool"
+		_:
+			if type.ends_with("]"):
+				return "Array"
+			return type
