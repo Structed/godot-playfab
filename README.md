@@ -6,6 +6,14 @@ is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://
 1. A GDscript-native SDK to Azure PlayFab
 2. A Godot Editor integration to administer your game
 
+## Motivation
+I wanted to create an opinionated, "natural" Godot integration/SDK.
+Anyone could use the C# SDK right now or use any SDK with GDnative. But these SDKs are only generated SDKs, with a lot of duplicated mdoels, which are nohing more than an API wrapper. However, I wan it to feel natural to the environment of Godot.
+
+So my plan is to not only create a GDScript-Native with more or less everythign handcrafted,
+but also use Godot'S Signals and also provide in-editor tools to work with Godot.
+
+
 
 ## Setup
 ### Enabling the addon
