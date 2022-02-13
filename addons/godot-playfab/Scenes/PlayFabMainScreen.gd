@@ -9,6 +9,7 @@ func _on_Generate_pressed():
 
 static func to_model(object_name: String, input: String) -> String:
 	var lines = input.split("\n", true)
+	lines.push_back("") # Hack: add an empty line at the bottom so below logic works & is simpler :-) Otherwise, the last prop would not be written
 	
 	var props = []
 	var current_prop = ""
