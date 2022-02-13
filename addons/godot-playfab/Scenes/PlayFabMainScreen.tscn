@@ -11,35 +11,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ClassNameContainer" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-margin_bottom = 39.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="ClassNameContainer"]
-margin_top = 12.0
-margin_right = 79.0
-margin_bottom = 26.0
-text = "Class Name:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LineEdit" type="LineEdit" parent="ClassNameContainer"]
-margin_left = 83.0
-margin_right = 1024.0
-margin_bottom = 39.0
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_right = 400.0
+margin_bottom = 300.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+window_title = "Save Model"
+resizable = true
+filters = PoolStringArray( "*.gd" )
+show_hidden_files = true
+current_dir = "res://addons/godot-playfab/Models"
+current_path = "res://addons/godot-playfab/Models/"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Input" type="TextEdit" parent="."]
-anchor_bottom = 1.0
-margin_top = 84.0
-margin_right = 456.0
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 82.0
+text = "Convert Model Text to a model
+
+1. Paste text below
+2. Type in class name
+3. Click \"Save Model\""
+
+[node name="Input" type="TextEdit" parent="VBoxContainer"]
+margin_top = 94.0
+margin_right = 1024.0
+margin_bottom = 564.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "GetUserData	
 boolean
 Whether to get the player's custom data. Defaults to false
@@ -79,28 +85,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Output" type="TextEdit" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -444.0
-margin_top = 88.0
+[node name="ClassNameContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 576.0
+margin_right = 1024.0
+margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Generate" type="Button" parent="."]
+[node name="Label" type="Label" parent="VBoxContainer/ClassNameContainer"]
+margin_top = 5.0
+margin_right = 79.0
+margin_bottom = 19.0
+text = "Class Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/ClassNameContainer"]
+margin_left = 83.0
+margin_right = 935.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveModel" type="Button" parent="VBoxContainer/ClassNameContainer"]
+margin_left = 939.0
+margin_right = 1024.0
+margin_bottom = 24.0
+text = "Save Model"
+
+[node name="ErrorPopupDialog" type="PopupDialog" parent="."]
+margin_right = 354.0
+margin_bottom = 76.0
+
+[node name="Label" type="Label" parent="ErrorPopupDialog"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -35.5
-margin_top = -10.0
-margin_right = 35.5
-margin_bottom = 10.0
-text = "Generate"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = -177.0
+margin_top = -38.0
+margin_right = 177.0
+margin_bottom = 38.0
+text = "Please first enter a class name!"
+align = 1
+valign = 1
 
-[connection signal="pressed" from="Generate" to="." method="_on_Generate_pressed"]
+[connection signal="pressed" from="VBoxContainer/ClassNameContainer/SaveModel" to="." method="_on_SaveModel_pressed"]

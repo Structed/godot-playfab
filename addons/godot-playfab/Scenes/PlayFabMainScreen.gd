@@ -2,9 +2,27 @@
 extends Control
 
 
-func _on_Generate_pressed():
-	var model = to_model($ClassNameContainer/LineEdit.text, $Input.text)
-	$Output.text = model
+
+func _on_SaveModel_pressed():
+	
+	if $VBoxContainer/ClassNameContainer/LineEdit.text.empty():
+		$ErrorPopupDialog/Label.text = "Please first enter a Class Name!"
+		$ErrorPopupDialog.popup_centered(Vector2(0,0))
+		return
+		
+	var file_dialog = $FileDialog
+	file_dialog.current_file = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
+	file_dialog.show()
+	file_dialog.connect("file_selected", self, "_on_file_selected")
+	
+	
+func _on_file_selected(file_path: String):
+	
+	var model = to_model($VBoxContainer/ClassNameContainer/LineEdit.text, $VBoxContainer/Input.text)
+	var file = File.new()
+	file.open(file_path, File.WRITE)
+	file.store_string(model)
+	file.close()
 
 
 static func to_model(object_name: String, input: String) -> String:
@@ -52,3 +70,5 @@ static func fix_type(type: String) -> String:
 			if type.ends_with("]"):
 				return "Array"
 			return type
+
+
