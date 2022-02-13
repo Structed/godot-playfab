@@ -46,41 +46,6 @@ margin_right = 1024.0
 margin_bottom = 564.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "GetUserData	
-boolean
-Whether to get the player's custom data. Defaults to false
-
-GetUserInventory	
-boolean
-Whether to get the player's inventory. Defaults to false
-
-GetUserReadOnlyData	
-boolean
-Whether to get the player's read only data. Defaults to false
-
-GetUserVirtualCurrency	
-boolean
-Whether to get the player's virtual currency balances. Defaults to false
-
-PlayerStatisticNames	
-string[]
-Specific statistics to retrieve. Leave null to get all keys. Has no effect if GetPlayerStatistics is false
-
-ProfileConstraints	
-PlayerProfileViewConstraints
-Specifies the properties to return from the player profile. Defaults to returning the player's display name.
-
-TitleDataKeys	
-string[]
-Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetTitleData is false
-
-UserDataKeys	
-string[]
-Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserData is false
-
-UserReadOnlyDataKeys	
-string[]
-Specific keys to search for in the custom data. Leave null to get all keys. Has no effect if GetUserReadOnlyData is false"
 __meta__ = {
 "_edit_use_anchors_": false
 }
