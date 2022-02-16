@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "RegisterPlayFabUserResult",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
+}, {
+"base": "Reference",
+"class": "UserTitleInfo",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/UserTitleInfo.gd"
 } ]
 _global_script_class_icons={
 "ApiErrorWrapper": "",
@@ -58,6 +63,7 @@ _global_script_class_icons={
 "PlayFab": "",
 "PlayFabConstants": "",
 "RegisterPlayFabUserResult": ""
+"UserTitleInfo": ""
 }
 
 [application]
