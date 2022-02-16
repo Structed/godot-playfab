@@ -53,7 +53,7 @@ var PsnInfo#: UserPsnInfo
 var SteamInfo#: UserSteamInfo
 
 # Title-specific information for the user account
-var TitleInfo#: UserTitleInfo
+var TitleInfo: UserTitleInfo
 
 # User Twitch account information, if a Twitch account has been linked
 var TwitchInfo#: UserTwitchInfo
