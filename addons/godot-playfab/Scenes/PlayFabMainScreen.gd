@@ -13,7 +13,7 @@ func _on_SaveModel_pressed():
 	var file_dialog = $FileDialog
 	file_dialog.current_file = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
 	file_dialog.show()
-	file_dialog.connect("file_selected", self, "_on_file_selected")
+	file_dialog.connect("file_selected", self, "_on_file_selected", [], CONNECT_ONESHOT)
 	
 	
 func _on_file_selected(file_path: String):
