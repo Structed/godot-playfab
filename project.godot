@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/EntityTokenResponse.gd"
 }, {
 "base": "Reference",
+"class": "GetPlayerCombinedInfoResultPayload",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoResultPayload.gd"
+}, {
+"base": "Reference",
 "class": "LoginResult",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/LoginResult.gd"
@@ -63,11 +68,12 @@ _global_script_class_icons={
 "ApiErrorWrapper": "",
 "EntityKey": "",
 "EntityTokenResponse": "",
+"GetPlayerCombinedInfoResultPayload": "",
 "LoginResult": "",
 "MTTC": "",
 "PlayFab": "",
 "PlayFabConstants": "",
-"RegisterPlayFabUserResult": ""
+"RegisterPlayFabUserResult": "",
 "UserAccountInfo": "",
 "UserTitleInfo": ""
 }
