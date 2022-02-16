@@ -60,6 +60,11 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/UserAccountInfo.gd"
 }, {
 "base": "Reference",
+"class": "UserOrigination",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/UserOrigination.gd"
+}, {
+"base": "Reference",
 "class": "UserTitleInfo",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/UserTitleInfo.gd"
@@ -75,6 +80,7 @@ _global_script_class_icons={
 "PlayFabConstants": "",
 "RegisterPlayFabUserResult": "",
 "UserAccountInfo": "",
+"UserOrigination": "",
 "UserTitleInfo": ""
 }
 
