@@ -2,7 +2,7 @@ extends Reference
 class_name EntityTokenResponse
 
 ## The entity id and type.
-var Entity#: EntityKey
+var Entity: EntityKey
 
 ## The token used to set X-EntityToken for all entity based API calls.
 var EntityToken: String

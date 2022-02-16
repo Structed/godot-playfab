@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/ApiErrorWrapper.gd"
 }, {
 "base": "Reference",
+"class": "EntityKey",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/EntityKey.gd"
+}, {
+"base": "Reference",
 "class": "EntityTokenResponse",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/EntityTokenResponse.gd"
@@ -46,6 +51,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ApiErrorWrapper": "",
+"EntityKey": "",
 "EntityTokenResponse": "",
 "LoginResult": "",
 "MTTC": "",
