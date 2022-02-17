@@ -4,7 +4,14 @@ extends VBoxContainer
 func _on_Login_pressed():
 	var email = $Email/Input.text
 	var password = $Password/Input.text
-	Global.play_fab.login_with_email(email, password, null, null)
+	
+	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
+	combined_info_request_params.show_all()
+	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
+	player_profile_view_constraints.show_all()
+	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
+	var tags = {}
+	Global.play_fab.login_with_email(email, password, tags, combined_info_request_params)
 	
 	if not Global.play_fab.is_connected("logged_in", self, "_on_logged_in"):
 		Global.play_fab.connect("logged_in", self, "_on_logged_in", [], CONNECT_ONESHOT)

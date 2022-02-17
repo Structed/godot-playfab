@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/EntityTokenResponse.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "GetPlayerCombinedInfoRequestParams",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoRequestParams.gd"
@@ -35,9 +35,18 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoResultPayload.gd"
 }, {
 "base": "Reference",
+"class": "JsonSerializable",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/JsonSerializable.gd"
+}, {
 "class": "LoginResult",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/LoginResult.gd"
+}, {
+"base": "JsonSerializable",
+"class": "LoginWithEmailAddressRequest",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/LoginWithEmailAddressRequest.gd"
 }, {
 "base": "Reference",
 "class": "MTTC",
@@ -54,7 +63,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFabConstants.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "PlayerProfileViewConstraints",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/PlayerProfileViewConstraints.gd"
@@ -85,7 +94,9 @@ _global_script_class_icons={
 "EntityTokenResponse": "",
 "GetPlayerCombinedInfoRequestParams": "",
 "GetPlayerCombinedInfoResultPayload": "",
+"JsonSerializable": "",
 "LoginResult": "",
+"LoginWithEmailAddressRequest": "",
 "MTTC": "",
 "PlayFab": "",
 "PlayFabConstants": "",

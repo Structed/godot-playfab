@@ -55,15 +55,22 @@ func register_email_password(username: String, email: String, password: String):
 	}
 	var result = _post(params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
 
-func login_with_email(email: String, password: String, custom_tags, info_request_parameters):
-	var params = {
-		"TitleId": _title_id,								# Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-		"Email": email,										# Email address for the account.
-		"Password": password,								# Password for the PlayFab account (6-100 characters)
-		"CustomTags": custom_tags,							# The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-		"InfoRequestParameters": info_request_parameters	# Flags for which pieces of info to return for the user.
-	}
-	var result = _post(params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
+func login_with_email(email: String, password: String, custom_tags: Dictionary, info_request_parameters: GetPlayerCombinedInfoRequestParams):
+	var request_params = LoginWithEmailAddressRequest.new()
+	request_params.TitleId = _title_id
+	request_params.Email = email
+	request_params.Password = password
+	request_params.CustomTags = custom_tags
+	request_params.InfoRequestParameters = info_request_parameters
+	
+#	var params = {
+#		"TitleId": _title_id,								# Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
+#		"Email": email,										# Email address for the account.
+#		"Password": password,								# Password for the PlayFab account (6-100 characters)
+#		"CustomTags": custom_tags,							# The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
+#		"InfoRequestParameters": info_params	# Flags for which pieces of info to return for the user.
+#	}
+	var result = _post(request_params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
 
 func _on_register_email_password(result: Dictionary):
 	var register_result = RegisterPlayFabUserResult.new()
@@ -81,8 +88,9 @@ func _on_login_with_email(result: Dictionary):
 	
 	emit_signal("logged_in", login_result)
 	
-func _post(body, path: String, callback: FuncRef):
-	var json = JSON.print(body)
+func _post(body: JsonSerializable, path: String, callback: FuncRef):
+	var dict = body.to_dict()
+	var json = JSON.print(dict)
 	var headers = ["Content-Type: application/json", "Content-Length: " + str(json.length())]
 	
 	while (_request_in_progress):

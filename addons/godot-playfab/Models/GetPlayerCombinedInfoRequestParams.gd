@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name GetPlayerCombinedInfoRequestParams
 
 # Whether to get character inventories. Defaults to false.

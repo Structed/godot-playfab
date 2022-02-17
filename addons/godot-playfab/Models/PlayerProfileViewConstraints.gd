@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name PlayerProfileViewConstraints
 
 # Whether to show player's avatar URL. Defaults to false
