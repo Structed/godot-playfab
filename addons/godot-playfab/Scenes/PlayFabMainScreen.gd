@@ -1,20 +1,33 @@
 tool
 extends Control
 
+var editor_resource_filesystem_cached
+
+func _ready():
+	# Needed, so can ater refresh the "FileSystem" panel of the Editor
+	editor_resource_filesystem_cached = EditorPlugin.new().get_editor_interface().get_resource_filesystem()
 
 func _on_SaveModel_pressed():
 	
-	if $VBoxContainer/ClassNameContainer/LineEdit.text.empty():
-		$ErrorPopupDialog/Label.text = "Please first enter a Class Name!"
-		$ErrorPopupDialog.popup_centered(Vector2(0,0))
+	if !guard_class_name_set():
 		return
 		
 	var file_dialog = $FileDialog
 	file_dialog.current_file = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
 	file_dialog.show()
 	file_dialog.connect("file_selected", self, "_on_file_selected", [], CONNECT_ONESHOT)
+
+
+func _on_save_direct_pressed():
 	
-	
+	if !guard_class_name_set():
+		return
+		
+	var file_name = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
+	var file_path = "res://addons/godot-playfab/Models/" + file_name
+	_on_file_selected(file_path)
+
+
 func _on_file_selected(file_path: String):
 	
 	var model = to_model($VBoxContainer/ClassNameContainer/LineEdit.text, $VBoxContainer/Input.text)
@@ -22,6 +35,20 @@ func _on_file_selected(file_path: String):
 	file.open(file_path, File.WRITE)
 	file.store_string(model)
 	file.close()
+	
+	# Refresh the "FileSystem" panel
+	editor_resource_filesystem_cached.scan()
+	
+	print("Saved model to file path: \"%s\"" % file_path)
+	
+
+func guard_class_name_set() -> bool:
+	if $VBoxContainer/ClassNameContainer/LineEdit.text.empty():
+		$ErrorPopupDialog/Label.text = "Please first enter a Class Name!"
+		$ErrorPopupDialog.popup_centered(Vector2(0,0))
+		return false
+		
+	return true
 
 
 static func to_model(object_name: String, input: String) -> String:

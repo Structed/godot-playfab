@@ -36,24 +36,14 @@ margin_right = 1024.0
 margin_bottom = 82.0
 text = "Convert Model Text to a model
 
-1. Paste text below
-2. Type in class name
+1. Type in class name
+2. Paste text below
 3. Click \"Save Model\""
 
-[node name="Input" type="TextEdit" parent="VBoxContainer"]
+[node name="ClassNameContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 94.0
 margin_right = 1024.0
-margin_bottom = 564.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ClassNameContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 576.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_bottom = 118.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -69,7 +59,7 @@ __meta__ = {
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/ClassNameContainer"]
 margin_left = 83.0
-margin_right = 935.0
+margin_right = 871.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -77,10 +67,26 @@ __meta__ = {
 }
 
 [node name="SaveModel" type="Button" parent="VBoxContainer/ClassNameContainer"]
-margin_left = 939.0
+margin_left = 875.0
+margin_right = 936.0
+margin_bottom = 24.0
+text = "Save As"
+
+[node name="ToolButton" type="Button" parent="VBoxContainer/ClassNameContainer"]
+margin_left = 940.0
 margin_right = 1024.0
 margin_bottom = 24.0
-text = "Save Model"
+text = "Save Direct"
+
+[node name="Input" type="TextEdit" parent="VBoxContainer"]
+margin_top = 130.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ErrorPopupDialog" type="PopupDialog" parent="."]
 margin_right = 354.0
@@ -100,3 +106,4 @@ align = 1
 valign = 1
 
 [connection signal="pressed" from="VBoxContainer/ClassNameContainer/SaveModel" to="." method="_on_SaveModel_pressed"]
+[connection signal="pressed" from="VBoxContainer/ClassNameContainer/ToolButton" to="." method="_on_save_direct_pressed"]
