@@ -1,7 +1,6 @@
 extends Reference
 class_name JsonSerializable
 
-var _type_mapping = {}
 
 func _get_type_for_property(property_name: String):
 	push_error("No mapping for property " + property_name)
