@@ -2,7 +2,6 @@ tool
 extends Control
 
 
-
 func _on_SaveModel_pressed():
 	
 	if $VBoxContainer/ClassNameContainer/LineEdit.text.empty():
@@ -54,7 +53,7 @@ static func to_model(object_name: String, input: String) -> String:
 			props.append(current_prop)
 			prop_line = 0
 		
-	var model = "extends Reference\nclass_name " + object_name + "\n\n"
+	var model = "extends JsonSerializable\nclass_name " + object_name + "\n\n"
 	for prop in props:
 		model += prop + "\n\n"
 	return model

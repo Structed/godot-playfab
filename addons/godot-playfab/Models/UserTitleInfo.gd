@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name UserTitleInfo
 
 # URL to the player's avatar.
@@ -17,7 +17,7 @@ var FirstLogin: String
 var LastLogin: String
 
 # source by which the user first joined the game, if known
-var Origination: UserOrigination
+var Origination: String #UserOrigination (enum)
 
 # Title player account entity for this user
 var TitlePlayerAccount: EntityKey
@@ -25,3 +25,12 @@ var TitlePlayerAccount: EntityKey
 # boolean indicating whether or not the user is currently banned for a title
 var isBanned: bool
 
+func _get_type_for_property(property_name: String) -> String:
+	match property_name:
+		"Origination":
+			return "UserOrigination"
+		"TitlePlayerAccount":
+			return "EntityKey"
+	
+	push_error("Could not find mapping for property: " + property_name)
+	return ._get_type_for_property(property_name)

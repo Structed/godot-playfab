@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name UserAccountInfo
 
 # User Android device information, if an Android device has been linked
@@ -64,3 +64,10 @@ var Username: String
 # User XBox account information, if a XBox account has been linked
 var XboxInfo#: UserXboxInfo
 
+func _get_type_for_property(property_name: String) -> String:
+	match property_name:
+		"TitleInfo":
+			return "UserTitleInfo"
+	
+	push_error("Could not find mapping for property: " + property_name)
+	return ._get_type_for_property(property_name)

@@ -58,5 +58,5 @@ func show_all():
 	GetUserReadOnlyData = true
 	GetUserVirtualCurrency = true
 	
-	ProfileConstraints = ProfileConstraints.new()
-	ProfileConstraints.show_all()
+#	ProfileConstraints = ProfileConstraints.new()
+#	ProfileConstraints.show_all()

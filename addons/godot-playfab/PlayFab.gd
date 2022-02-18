@@ -43,17 +43,17 @@ func _ready():
 	add_child(_http)
 	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
 
-func register_email_password(username: String, email: String, password: String):
-	var params = {
-		"TitleId": _title_id,
-		"DisplayName": username,
-		"Username": username,
-		"Email": email,
-		"Password": password,
-		"InfoRequestParameters": "", # TODO: Figure out what that is
-		"RequireBothUsernameAndEmail": "true"
-	}
-	var result = _post(params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
+func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
+	var request_params = RegisterPlayFabUserRequest.new()
+	request_params.TitleId = _title_id
+	request_params.DisplayName = username
+	request_params.Username = username
+	request_params.Email = email
+	request_params.Password = password
+	request_params.InfoRequestParameters = info_request_parameters
+	request_params.RequireBothUsernameAndEmail = true
+	
+	var result = _post(request_params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
 
 func login_with_email(email: String, password: String, custom_tags: Dictionary, info_request_parameters: GetPlayerCombinedInfoRequestParams):
 	var request_params = LoginWithEmailAddressRequest.new()
@@ -63,28 +63,17 @@ func login_with_email(email: String, password: String, custom_tags: Dictionary, 
 	request_params.CustomTags = custom_tags
 	request_params.InfoRequestParameters = info_request_parameters
 	
-#	var params = {
-#		"TitleId": _title_id,								# Unique identifier for the title, found in the Settings > Game Properties section of the PlayFab developer site when a title has been selected.
-#		"Email": email,										# Email address for the account.
-#		"Password": password,								# Password for the PlayFab account (6-100 characters)
-#		"CustomTags": custom_tags,							# The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-#		"InfoRequestParameters": info_params	# Flags for which pieces of info to return for the user.
-#	}
 	var result = _post(request_params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
 
 func _on_register_email_password(result: Dictionary):
 	var register_result = RegisterPlayFabUserResult.new()
-	var data = result["data"]
-	for key in data.keys():
-		register_result.set(key, data[key])
+	register_result.from_dict(result["data"], register_result)
 		
 	emit_signal("registered", register_result)
 	
 func _on_login_with_email(result: Dictionary):
 	var login_result = LoginResult.new()
-	var data = result["data"]
-	for key in data.keys():
-		login_result.set(key, data[key])
+	login_result.from_dict(result["data"], login_result)
 	
 	emit_signal("logged_in", login_result)
 	

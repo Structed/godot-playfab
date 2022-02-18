@@ -14,12 +14,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/ApiErrorWrapper.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "EntityKey",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/EntityKey.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "EntityTokenResponse",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/EntityTokenResponse.gd"
@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoRequestParams.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "GetPlayerCombinedInfoResultPayload",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoResultPayload.gd"
@@ -68,22 +68,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/PlayerProfileViewConstraints.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
+"class": "RegisterPlayFabUserRequest",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/RegisterPlayFabUserRequest.gd"
+}, {
+"base": "JsonSerializable",
 "class": "RegisterPlayFabUserResult",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "UserAccountInfo",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/UserAccountInfo.gd"
 }, {
-"base": "Reference",
-"class": "UserOrigination",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/UserOrigination.gd"
-}, {
-"base": "Reference",
+"base": "JsonSerializable",
 "class": "UserTitleInfo",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/UserTitleInfo.gd"
@@ -101,9 +101,9 @@ _global_script_class_icons={
 "PlayFab": "",
 "PlayFabConstants": "",
 "PlayerProfileViewConstraints": "",
+"RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
 "UserAccountInfo": "",
-"UserOrigination": "",
 "UserTitleInfo": ""
 }
 
