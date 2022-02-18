@@ -68,7 +68,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/PlayerProfileViewConstraints.gd"
 }, {
-"base": "Reference",
+"base": "JsonSerializable",
+"class": "RegisterPlayFabUserRequest",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/RegisterPlayFabUserRequest.gd"
+}, {
+"base": "JsonSerializable",
 "class": "RegisterPlayFabUserResult",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
@@ -96,6 +101,7 @@ _global_script_class_icons={
 "PlayFab": "",
 "PlayFabConstants": "",
 "PlayerProfileViewConstraints": "",
+"RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
 "UserAccountInfo": "",
 "UserTitleInfo": ""

@@ -43,17 +43,17 @@ func _ready():
 	add_child(_http)
 	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
 
-func register_email_password(username: String, email: String, password: String):
-	var params = {
-		"TitleId": _title_id,
-		"DisplayName": username,
-		"Username": username,
-		"Email": email,
-		"Password": password,
-		"InfoRequestParameters": "", # TODO: Figure out what that is
-		"RequireBothUsernameAndEmail": "true"
-	}
-	var result = _post(params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
+func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
+	var request_params = RegisterPlayFabUserRequest.new()
+	request_params.TitleId = _title_id
+	request_params.DisplayName = username
+	request_params.Username = username
+	request_params.Email = email
+	request_params.Password = password
+	request_params.InfoRequestParameters = info_request_parameters
+	request_params.RequireBothUsernameAndEmail = true
+	
+	var result = _post(request_params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
 
 func login_with_email(email: String, password: String, custom_tags: Dictionary, info_request_parameters: GetPlayerCombinedInfoRequestParams):
 	var request_params = LoginWithEmailAddressRequest.new()
@@ -67,9 +67,7 @@ func login_with_email(email: String, password: String, custom_tags: Dictionary, 
 
 func _on_register_email_password(result: Dictionary):
 	var register_result = RegisterPlayFabUserResult.new()
-	var data = result["data"]
-	for key in data.keys():
-		register_result.set(key, data[key])
+	register_result.from_dict(result["data"], register_result)
 		
 	emit_signal("registered", register_result)
 	

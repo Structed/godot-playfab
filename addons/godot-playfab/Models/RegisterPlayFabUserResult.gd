@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name RegisterPlayFabUserResult
 
 ## Each account must have a unique email address in the PlayFab service. Once created, the account may be associated with additional accounts (Steam, Facebook, Game Center, etc.), allowing for added social network lists and achievements systems.
@@ -17,3 +17,11 @@ var SettingsForUser#: UserSettings
 
 ## PlayFab unique user name.
 var Username: String
+
+func _get_type_for_property(property_name: String) -> String:
+	match property_name:
+		"EntityToken":
+			return "EntityTokenResponse"
+	
+	push_error("Could not find mapping for property: " + property_name)
+	return ._get_type_for_property(property_name)

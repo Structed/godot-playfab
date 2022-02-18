@@ -42,6 +42,7 @@ margin_left = 39.0
 margin_right = 239.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
+text = "User1@example.com"
 expand_to_text_length = true
 
 [node name="Password" type="HBoxContainer" parent="MarginContainer/Login"]
