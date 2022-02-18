@@ -26,3 +26,9 @@ Only now you will see a new setting: `PLayfab --> Title ID`
 * Got to [PlayFab](https://playfab.com), log in and copy your Title's ID
 * In your Godot editor, open Project Settings
 * Set the Title Id in `Playfab --> Title Id`
+
+
+## Demo
+![Demo](demo-scene.gif)
+
+You can use the included Demo scene setup in `Scenes` to see how `godot-playfab` can be used.
