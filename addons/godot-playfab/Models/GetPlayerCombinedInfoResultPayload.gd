@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name GetPlayerCombinedInfoResultPayload
 
 # Account information for the user. This is always retrieved.
@@ -40,3 +40,11 @@ var UserVirtualCurrency#: object
 # Dictionary of remaining times and timestamps for virtual cu
 var UserVirtualCurrencyRechargeTimes#: VirtualCurrencyRechargeTime
 
+
+func _get_type_for_property(property_name: String) -> String:
+	match property_name:
+		"AccountInfo":
+			return "UserAccountInfo"
+	
+	push_error("Could not find mapping for property: " + property_name)
+	return ._get_type_for_property(property_name)

@@ -1,4 +1,4 @@
-extends Reference
+extends JsonSerializable
 class_name EntityKey
 
 ## Combined entity type and ID structure which uniquely identifies a single entity.
