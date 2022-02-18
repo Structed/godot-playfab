@@ -17,7 +17,7 @@ var FirstLogin: String
 var LastLogin: String
 
 # source by which the user first joined the game, if known
-var Origination: UserOrigination
+var Origination: String #UserOrigination (enum)
 
 # Title player account entity for this user
 var TitlePlayerAccount: EntityKey
