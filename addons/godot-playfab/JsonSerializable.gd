@@ -6,6 +6,7 @@ func to_dict() -> Dictionary:
 	var dict = {}
 	var props = get_property_list()
 	
+	# Skipping the first 3 items because they are metadata we do not need
 	for i in range(3, props.size()):
 		var prop = props[i]
 		var name = prop["name"]
