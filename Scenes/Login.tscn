@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Login.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/LoggedIn.tscn" type="PackedScene" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -82,6 +83,16 @@ margin_bottom = 500.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
+
+[node name="LoggedIn" parent="MarginContainer/Login" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 304.0
+margin_right = 924.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer/Login" method="_on_Login_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer/Login" method="_on_Back_pressed"]

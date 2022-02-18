@@ -39,6 +39,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/JsonSerializable.gd"
 }, {
+"base": "Control",
+"class": "LoggedIn",
+"language": "GDScript",
+"path": "res://Scenes/LoggedIn.gd"
+}, {
+"base": "JsonSerializable",
 "class": "LoginResult",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/LoginResult.gd"
@@ -95,6 +101,7 @@ _global_script_class_icons={
 "GetPlayerCombinedInfoRequestParams": "",
 "GetPlayerCombinedInfoResultPayload": "",
 "JsonSerializable": "",
+"LoggedIn": "",
 "LoginResult": "",
 "LoginWithEmailAddressRequest": "",
 "MTTC": "",

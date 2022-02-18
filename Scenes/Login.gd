@@ -8,7 +8,7 @@ func _on_Login_pressed():
 	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
 	combined_info_request_params.show_all()
 	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
-	player_profile_view_constraints.show_all()
+	player_profile_view_constraints.ShowDisplayName
 	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 	var tags = {}
 	Global.play_fab.login_with_email(email, password, tags, combined_info_request_params)
@@ -22,6 +22,10 @@ func _on_Login_pressed():
 func _on_logged_in(login_result: LoginResult):
 	$Login.self_modulate = Color(0, 1, 0, 0.5)
 	$Output.bbcode_text = "Player with \"%s\" logged in successfully!" % login_result.PlayFabId
+
+	$LoggedIn.login_result = login_result
+	$LoggedIn.update()
+	$LoggedIn.show()
 	
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 	var text = "[b]%s[/b]\n\n" % api_error_wrapper.errorMessage
