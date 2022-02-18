@@ -9,7 +9,6 @@ func _on_Register_pressed():
 	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
 	combined_info_request_params.show_all()
 	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
-	player_profile_view_constraints.ShowDisplayName
 	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 	
 	Global.play_fab.register_email_password(username, email, password, combined_info_request_params)
