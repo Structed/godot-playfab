@@ -34,4 +34,4 @@ Only now you will see a new setting: `PLayfab --> Title ID`
 
 ## Maintainer Documentation
 
-You can use the included Demo scene setup in `Scenes` to see how `godot-playfab` can be used.
+See [Maintainer Documentation](docs/README.md).
