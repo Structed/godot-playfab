@@ -2,6 +2,8 @@ extends VBoxContainer
 
 
 func _on_Login_pressed():
+	$LoggedIn.hide()
+	
 	var email = $Email/Input.text
 	var password = $Password/Input.text
 	
@@ -20,7 +22,8 @@ func _on_Login_pressed():
 
 func _on_logged_in(login_result: LoginResult):
 	$Login.self_modulate = Color(0, 1, 0, 0.5)
-	$Output.bbcode_text = "Player with \"%s\" logged in successfully!" % login_result.PlayFabId
+#	$Output.bbcode_text = "Player with \"%s\" logged in successfully!" % login_result.PlayFabId
+	$Output.hide()
 
 	$LoggedIn.login_result = login_result
 	$LoggedIn.update()
@@ -37,6 +40,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 				text += "%s\n" % element
 			
 	$Login.self_modulate = Color(1, 0, 0, 0.5)
+	$Output.show()
 	$Output.bbcode_text = text	
 
 

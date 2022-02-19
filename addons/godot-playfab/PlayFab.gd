@@ -31,6 +31,8 @@ var _title_id
 var _base_uri = "playfabapi.com"
 var _emit_counter = 0
 
+var _session_ticket = ""
+
 
 func _init():
 	
@@ -84,16 +86,36 @@ func _on_login_with_email(result: Dictionary):
 	emit_signal("logged_in", login_result)
 	
 
-func _post(body: JsonSerializable, path: String, callback: FuncRef):
+func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var dict = body.to_dict()
-	var json = JSON.print(dict)
+	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
+	
+	
+func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
+	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
+	
+func dict_to_header_array(dict: Dictionary):
+	if dict.size() < 1:
+		return []
+	
+	var array = []
+	for key in dict.keys():
+		var value = "%s: %s" % [key, dict[key]]
+		array.append(value)
+		
+	return array
+
+func _http_request(request_method: int, body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
+	var json = JSON.print(body)
 	var headers = ["Content-Type: application/json", "Content-Length: " + str(json.length())]
+	headers.append_array(dict_to_header_array(additional_headers))
 	
 	while (_request_in_progress):
 		yield(_http.get_tree(), "idle_frame")
 	
 	_request_in_progress = true
-	var error = _http.request("%s%s" % [ _base_uri, path], headers, true, HTTPClient.METHOD_POST, json)
+	var request_uri = "%s%s" % [ _base_uri, path]
+	var error = _http.request(request_uri, headers, true, request_method, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 		return
@@ -106,10 +128,10 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef):
 	var response_body = args[3]
 	_request_in_progress = false
 	
-	var json_parse_result = JSON.parse(response_body.get_string_from_utf8())
-	print_debug("JSON Parse result: %s" % json_parse_result.result)
-	
-	
+	var response_body_string = response_body.get_string_from_utf8()
+	var json_parse_result = JSON.parse(response_body_string)
+	print_debug("JSON Parse result: %s" % JSON.print(json_parse_result.result, "\t"))
+		
 	if json_parse_result.error != OK:
 		emit_signal("json_parse_error", json_parse_result)
 		return
@@ -126,6 +148,18 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef):
 		emit_signal("server_error", path)
 		return
 
+
+func get_title_data(keys: Array, callback: FuncRef):
+	var data = {
+		"keys": keys
+	}
+	
+	var headers = {
+		"X-Authorization": _session_ticket
+	}
+	
+	_post_dict(data, "/Client/GetTitleData", callback, headers)
+	
 
 func _test_http(body, path: String):
 	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))
