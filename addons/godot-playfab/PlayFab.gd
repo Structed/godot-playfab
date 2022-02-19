@@ -149,6 +149,18 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		return
 
 
+func get_title_data(keys: Array, callback: FuncRef):
+	var data = {
+		"keys": keys
+	}
+	
+	var headers = {
+		"X-Authorization": _session_ticket
+	}
+	
+	_post_dict(data, "/Client/GetTitleData", callback, headers)
+	
+
 func _test_http(body, path: String):
 	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))
 	if error != OK:
