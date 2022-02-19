@@ -83,6 +83,19 @@ static func to_model(object_name: String, input: String) -> String:
 	var model = "extends JsonSerializable\nclass_name " + object_name + "\n\n"
 	for prop in props:
 		model += prop + "\n\n"
+	
+	# TODO: Find a way to generate the mapping for props automatically!
+	model += """
+
+
+func _get_type_for_property(property_name: String) -> String:
+	match property_name:
+		"<PROPERTY NAME>":
+			return "<PROPERTY TYPE>"
+	
+	push_error("Could not find mapping for property: " + property_name)
+	return ._get_type_for_property(property_name)
+"""
 	return model
 
 static func fix_type(type: String) -> String:
@@ -96,5 +109,4 @@ static func fix_type(type: String) -> String:
 			if type.ends_with("]"):
 				return "Array"
 			return type
-
 
