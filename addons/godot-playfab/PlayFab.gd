@@ -31,6 +31,7 @@ var _title_id
 var _base_uri = "playfabapi.com"
 var _emit_counter = 0
 
+
 func _init():
 	
 	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) && ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) != "":
@@ -38,10 +39,12 @@ func _init():
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
 	
+
 func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
 	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
+
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
 	var request_params = RegisterPlayFabUserRequest.new()
@@ -55,6 +58,7 @@ func register_email_password(username: String, email: String, password: String, 
 	
 	var result = _post(request_params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
 
+
 func login_with_email(email: String, password: String, custom_tags: Dictionary, info_request_parameters: GetPlayerCombinedInfoRequestParams):
 	var request_params = LoginWithEmailAddressRequest.new()
 	request_params.TitleId = _title_id
@@ -65,18 +69,21 @@ func login_with_email(email: String, password: String, custom_tags: Dictionary, 
 	
 	var result = _post(request_params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
 
+
 func _on_register_email_password(result: Dictionary):
 	var register_result = RegisterPlayFabUserResult.new()
 	register_result.from_dict(result["data"], register_result)
 		
 	emit_signal("registered", register_result)
 	
+
 func _on_login_with_email(result: Dictionary):
 	var login_result = LoginResult.new()
 	login_result.from_dict(result["data"], login_result)
 	
 	emit_signal("logged_in", login_result)
 	
+
 func _post(body: JsonSerializable, path: String, callback: FuncRef):
 	var dict = body.to_dict()
 	var json = JSON.print(dict)
@@ -118,6 +125,8 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef):
 	if response_code >= 500:
 		emit_signal("server_error", path)
 		return
+
+
 func _test_http(body, path: String):
 	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))
 	if error != OK:
