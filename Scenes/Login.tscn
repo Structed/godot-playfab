@@ -62,6 +62,7 @@ margin_left = 64.0
 margin_right = 264.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
+text = "Test123"
 secret = true
 
 [node name="Login" type="Button" parent="MarginContainer/Login"]
@@ -79,9 +80,9 @@ text = "Back"
 [node name="Output" type="RichTextLabel" parent="MarginContainer/Login"]
 margin_top = 104.0
 margin_right = 924.0
-margin_bottom = 500.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
 bbcode_enabled = true
 
 [node name="LoggedIn" parent="MarginContainer/Login" instance=ExtResource( 2 )]
