@@ -14,3 +14,6 @@ override.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Other ignores
+.idea/
