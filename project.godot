@@ -111,7 +111,7 @@ _global_script_class_icons={
 "LoggedIn": "",
 "LoginResult": "",
 "LoginWithEmailAddressRequest": "",
-"PlayFab": "",
+"PlayFab": "res://addons/godot-playfab/icon.png",
 "PlayFabConstants": "",
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
@@ -125,7 +125,7 @@ _global_script_class_icons={
 config/name="godot-playfab"
 run/main_scene="res://Scenes/Main.tscn"
 boot_splash/image="res://raw_assets/logo.png"
-config/icon="res://icon.png"
+config/icon="res://addons/godot-playfab/icon.png"
 
 [autoload]
 
