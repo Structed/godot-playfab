@@ -86,15 +86,16 @@ static func to_model(object_name: String, input: String) -> String:
 	
 	# TODO: Find a way to generate the mapping for props automatically!
 	model += """
-
-
 func _get_type_for_property(property_name: String) -> String:
 	match property_name:
-		"<PROPERTY NAME>":
-			return "<PROPERTY TYPE>"
+#		"<PROPERTY NAME>":
+#			return "<PROPERTY TYPE>"
+		_:
+			pass
 	
 	push_error("Could not find mapping for property: " + property_name)
 	return ._get_type_for_property(property_name)
+	
 """
 	return model
 
