@@ -13,7 +13,6 @@ func update():
 	$VBoxContainer/EntityToken/Edit.text = login_result.EntityToken.EntityToken
 	$VBoxContainer/EntityType/Edit.text = login_result.EntityToken.Entity.Type
 	$VBoxContainer/EntityId/Edit.text = login_result.EntityToken.Entity.Id
-	Global.play_fab._session_ticket = login_result.SessionTicket
 
 
 func _on_Button_pressed():

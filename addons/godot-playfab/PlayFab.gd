@@ -31,6 +31,7 @@ var _title_id
 var _base_uri = "playfabapi.com"
 var _emit_counter = 0
 
+var logged_in = false
 var _session_ticket = ""
 
 
@@ -46,6 +47,12 @@ func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
 	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
+	connect("logged_in", self, "_on_logged_in")
+	
+
+func _on_logged_in(login_result: LoginResult):
+	_session_ticket = login_result.SessionTicket # Setting SessionTicket for subsequent client requests
+	logged_in = true
 
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
