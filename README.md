@@ -11,7 +11,7 @@ I wanted to create an opinionated, "natural" Godot integration/SDK.
 Anyone could use the C# SDK right now or use any SDK with GDnative. But these SDKs are only generated SDKs, with a lot of duplicated models, which are nothing more than an API wrapper. However, I wan it to feel natural to the environment of Godot.
 
 So my plan is to not only create a GDScript-Native with more or less everything handcrafted,
-but also use Godot'S Signals and also provide in-editor tools to work with Godot.
+but also use Godot's Signals and also provide in-editor tools to work with Godot.
 
 
 ## Demo
