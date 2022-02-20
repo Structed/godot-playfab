@@ -111,7 +111,7 @@ _global_script_class_icons={
 "LoggedIn": "",
 "LoginResult": "",
 "LoginWithEmailAddressRequest": "",
-"PlayFab": "res://addons/godot-playfab/icon.png",
+"PlayFab": "res://addons/godot-playfab/icon_16x16.png",
 "PlayFabConstants": "",
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",

@@ -39,7 +39,7 @@ func get_plugin_name():
 
 
 func get_plugin_icon():
-	return get_editor_interface().get_base_control().get_icon("Node", "EditorIcons")
+	return load("res://addons/godot-playfab/icon_16x16.png")
 
 
 func add_custom_project_setting(name: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = "") -> void:

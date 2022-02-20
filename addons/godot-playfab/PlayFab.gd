@@ -1,5 +1,5 @@
 extends Node
-class_name PlayFab
+class_name PlayFab, "res://addons/godot-playfab/icon.png"
 
 
 ## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
