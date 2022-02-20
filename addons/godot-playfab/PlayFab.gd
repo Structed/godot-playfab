@@ -92,6 +92,15 @@ func _on_login_with_email(result: Dictionary):
 	
 	emit_signal("logged_in", login_result)
 	
+func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
+	if _session_ticket == "":
+		assert("Session ticket is empty. Login is required or the session ticket was not properly set")
+		return false
+	
+	additional_headers["X-Authorization"] = _session_ticket
+	var dict = body.to_dict()
+	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
+	return true
 
 func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var dict = body.to_dict()
