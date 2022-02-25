@@ -29,7 +29,6 @@ var _http: HTTPRequest
 var _request_in_progress = false
 var _title_id
 var _base_uri = "playfabapi.com"
-var _emit_counter = 0
 
 var logged_in = false
 var _session_ticket = ""
