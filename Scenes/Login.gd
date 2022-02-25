@@ -1,11 +1,11 @@
-extends VBoxContainer
-
+extends MarginContainer
 
 func _on_Login_pressed():
-	$LoggedIn.hide()
+	$Login.hide()
+	$TextureProgress.show()
 	
-	var email = $Email/Input.text
-	var password = $Password/Input.text
+	var email = $Login/Email/Input.text
+	var password = $Login/Password/Input.text
 	
 	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
 	combined_info_request_params.show_all()
@@ -21,13 +21,15 @@ func _on_Login_pressed():
 		Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
 
 func _on_logged_in(login_result: LoginResult):
-	$Login.self_modulate = Color(0, 1, 0, 0.5)
+	$Login.show()
+	$Login/Login.self_modulate = Color(0, 1, 0, 0.5)
 #	$Output.bbcode_text = "Player with \"%s\" logged in successfully!" % login_result.PlayFabId
-	$Output.hide()
+	$Login/Output.hide()
+	$TextureProgress.hide()
 
-	$LoggedIn.login_result = login_result
-	$LoggedIn.update()
-	$LoggedIn.show()
+	$Login/LoggedIn.login_result = login_result
+	$Login/LoggedIn.update()
+	$Login/LoggedIn.show()
 	
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 	var text = "[b]%s[/b]\n\n" % api_error_wrapper.errorMessage
@@ -39,10 +41,18 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 			for element in error_details[key]:
 				text += "%s\n" % element
 			
-	$Login.self_modulate = Color(1, 0, 0, 0.5)
-	$Output.show()
-	$Output.bbcode_text = text	
+	$Login/Login.self_modulate = Color(1, 0, 0, 0.5)
+	$Login/Output.show()
+	$Login/Output.bbcode_text = text	
 
 
 func _on_Back_pressed():
 	SceneManager.goto_scene("res://Scenes/Main.tscn")
+
+func _process(delta):
+	if $TextureProgress.visible:
+		if $TextureProgress.value >= $TextureProgress.max_value:
+			$TextureProgress.value = 0
+			
+		print_debug("Texture progress increment: %f" % $TextureProgress.value)
+		$TextureProgress.value += 1
