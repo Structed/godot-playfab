@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Login.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/LoggedIn.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Textures/round_metal.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/LoadingIndicator.tscn" type="PackedScene" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -25,15 +25,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureProgress" type="TextureProgress" parent="MarginContainer"]
+[node name="ProgressCenter" type="CenterContainer" parent="MarginContainer"]
 visible = false
 margin_right = 924.0
 margin_bottom = 500.0
-texture_progress = ExtResource( 3 )
-fill_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="TextureProgress" parent="MarginContainer/ProgressCenter" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 412.0
+margin_top = 200.0
+margin_right = 512.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 100, 100 )
 
 [node name="LoggedIn" parent="MarginContainer" instance=ExtResource( 2 )]
 visible = false

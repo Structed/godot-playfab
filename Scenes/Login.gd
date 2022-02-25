@@ -2,7 +2,7 @@ extends MarginContainer
 
 func _on_Login_pressed():
 	$Login.hide()
-	$TextureProgress.show()
+	_show_progess()
 	
 	var email = $Login/Email/Input.text
 	var password = $Login/Password/Input.text
@@ -19,11 +19,19 @@ func _on_Login_pressed():
 		
 	if not Global.play_fab.is_connected("api_error", self, "_on_api_error"):
 		Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
+		
+func _show_progess():
+	$ProgressCenter/TextureProgress.value = 0
+	$ProgressCenter.show()
+	
+func _hide_progess():
+	$ProgressCenter.hide()
+	
 
 func _on_logged_in(login_result: LoginResult):
 	$Login/Login.self_modulate = Color(0, 1, 0, 0.5)
 	$Login/Output.hide()
-	$TextureProgress.hide()
+	_hide_progess()
 
 	$LoggedIn.login_result = login_result
 	$LoggedIn.update()
@@ -48,12 +56,12 @@ func _on_Back_pressed():
 	SceneManager.goto_scene("res://Scenes/Main.tscn")
 
 func _process(delta):
-	if $TextureProgress.visible:
-		if $TextureProgress.value >= $TextureProgress.max_value:
-			$TextureProgress.value = 0
+	if $ProgressCenter.visible:
+		if $ProgressCenter/TextureProgress.value >= $ProgressCenter/TextureProgress.max_value:
+			$ProgressCenter/TextureProgress.value = 0
 			
-		print_debug("Texture progress increment: %f" % $TextureProgress.value)
-		$TextureProgress.value += 1
+		print_debug("Texture progress increment: %f" % $ProgressCenter/TextureProgress.value)
+		$ProgressCenter/TextureProgress.value += 1
 
 func _on_LoggedInBackButton_pressed():
 	$LoggedIn.hide()
