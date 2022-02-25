@@ -35,6 +35,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LoggedIn" parent="MarginContainer" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 924.0
+margin_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LoggedInBackButton" type="Button" parent="MarginContainer/LoggedIn"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+size_flags_horizontal = 3
+text = "Back"
+
 [node name="Login" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 924.0
 margin_bottom = 500.0
@@ -96,15 +113,6 @@ rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 
-[node name="LoggedIn" parent="MarginContainer/Login" instance=ExtResource( 2 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 304.0
-margin_right = 924.0
-margin_bottom = 500.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
+[connection signal="pressed" from="MarginContainer/LoggedIn/LoggedInBackButton" to="MarginContainer" method="_on_LoggedInBackButton_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer" method="_on_Login_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer" method="_on_Back_pressed"]

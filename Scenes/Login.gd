@@ -21,15 +21,13 @@ func _on_Login_pressed():
 		Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
 
 func _on_logged_in(login_result: LoginResult):
-	$Login.show()
 	$Login/Login.self_modulate = Color(0, 1, 0, 0.5)
-#	$Output.bbcode_text = "Player with \"%s\" logged in successfully!" % login_result.PlayFabId
 	$Login/Output.hide()
 	$TextureProgress.hide()
 
-	$Login/LoggedIn.login_result = login_result
-	$Login/LoggedIn.update()
-	$Login/LoggedIn.show()
+	$LoggedIn.login_result = login_result
+	$LoggedIn.update()
+	$LoggedIn.show()
 	
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 	var text = "[b]%s[/b]\n\n" % api_error_wrapper.errorMessage
@@ -56,3 +54,8 @@ func _process(delta):
 			
 		print_debug("Texture progress increment: %f" % $TextureProgress.value)
 		$TextureProgress.value += 1
+
+func _on_LoggedInBackButton_pressed():
+	$LoggedIn.hide()
+	$Login.show()
+	pass
