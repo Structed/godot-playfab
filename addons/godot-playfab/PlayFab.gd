@@ -33,6 +33,7 @@ var _base_uri = "playfabapi.com"
 var logged_in = false
 var _session_ticket = ""
 
+export(Resource) var playfab_config
 
 func _init():
 	
@@ -40,7 +41,20 @@ func _init():
 		_title_id = ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
+		
 	
+	load_config()
+
+var path = "user://playfab_config.tres"
+func load_config():
+	var resource = ResourceLoader.load(path) as PlayFabConfig
+	if resource == null:
+		resource = PlayFabConfig.new()
+		resource.title_id = _title_id
+	playfab_config = resource
+
+func save_config():
+	ResourceSaver.save(path, playfab_config)
 
 func _ready():
 	_http = HTTPRequest.new()
@@ -51,6 +65,8 @@ func _ready():
 
 func _on_logged_in(login_result: LoginResult):
 	_session_ticket = login_result.SessionTicket # Setting SessionTicket for subsequent client requests
+	(playfab_config as PlayFabConfig).session_ticket = login_result.SessionTicket
+	save_config()
 	logged_in = true
 
 
