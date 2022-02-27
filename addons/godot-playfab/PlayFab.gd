@@ -128,6 +128,7 @@ func _dict_to_header_array(dict: Dictionary):
 		
 	return array
 
+
 func _http_request(request_method: int, body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var json = JSON.print(body)
 	var headers = ["Content-Type: application/json", "Content-Length: " + str(json.length())]
@@ -174,6 +175,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 func client_get_title_data(request_data: GetTitleDataRequest, callback: FuncRef):
 	_post_with_session_auth(request_data, "/Client/GetTitleData", callback)
+
 
 func _test_http(body, path: String):
 	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))
