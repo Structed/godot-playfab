@@ -21,10 +21,12 @@ signal registered(RegisterPlayFabUserResult)
 ## @param login_result: LoginResult
 signal logged_in(login_result)
 
+
 var _http: HTTPRequest
 var _request_in_progress = false
 var _title_id: String
 var playfab_config
+
 
 func _init():
 	
@@ -33,7 +35,7 @@ func _init():
 		_load_config(_title_id)
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
-	
+
 
 func _load_config(title_id: String):
 	
@@ -46,8 +48,10 @@ func _load_config(title_id: String):
 		
 	playfab_config = resource
 
+
 func _save_config():
 	ResourceSaver.save(PlayFabConfig.CONFIG_LOAD_PATH, playfab_config)
+
 
 func _ready():
 	_http = HTTPRequest.new()
@@ -90,33 +94,37 @@ func _on_register_email_password(result: Dictionary):
 	register_result.from_dict(result["data"], register_result)
 		
 	emit_signal("registered", register_result)
-	
+
 
 func _on_login_with_email(result: Dictionary):
 	var login_result = LoginResult.new()
 	login_result.from_dict(result["data"], login_result)
 	
 	emit_signal("logged_in", login_result)
-	
+
+
 func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
 	var pfc = (playfab_config as PlayFabConfig)
 	if !pfc.is_logged_in():
 		push_error("Player is not logged in.")
 		return false
-	
+
+
 	additional_headers["X-Authorization"] = pfc.session_ticket
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
 
+
 func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
-	
-	
+
+
 func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
-	
+
+
 func _dict_to_header_array(dict: Dictionary):
 	if dict.size() < 1:
 		return []
