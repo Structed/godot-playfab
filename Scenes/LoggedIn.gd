@@ -18,7 +18,7 @@ func update():
 func _on_Button_pressed():
 	var request_data = GetTitleDataRequest.new()
 #	request_data.Keys.append("BarKey")	# Would only get the key "BarKey"
-	Global.play_fab.client_get_title_data(request_data, funcref(self, "_on_get_title_data"))
+	$PlayFab.client_get_title_data(request_data, funcref(self, "_on_get_title_data"))
 	
 
 func _on_get_title_data(response):

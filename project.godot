@@ -135,7 +135,6 @@ config/icon="res://addons/godot-playfab/icon.png"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
 SceneManager="*res://Scripts/SceneManager.gd"
 
 [editor_plugins]

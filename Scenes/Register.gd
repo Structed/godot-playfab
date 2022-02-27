@@ -11,13 +11,7 @@ func _on_Register_pressed():
 	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
 	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 	
-	Global.play_fab.register_email_password(username, email, password, combined_info_request_params)
-	
-	if !Global.play_fab.is_connected("registered", self, "_on_registered"):
-		Global.play_fab.connect("registered", self, "_on_registered", [], CONNECT_ONESHOT)
-
-	if !Global.play_fab.is_connected("api_error", self, "_on_api_error"):
-		Global.play_fab.connect("api_error", self, "_on_api_error", [], CONNECT_ONESHOT)
+	$PlayFab.register_email_password(username, email, password, combined_info_request_params)
 
 
 func _on_registered(result: RegisterPlayFabUserResult):
@@ -41,3 +35,4 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 
 func _on_Back_pressed():
 	SceneManager.goto_scene("res://Scenes/Main.tscn")
+
