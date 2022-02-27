@@ -55,7 +55,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 func _on_Back_pressed():
 	SceneManager.goto_scene("res://Scenes/Main.tscn")
 
-func _process(delta):
+func _process(_delta):
 	if $ProgressCenter.visible:
 		if $ProgressCenter/TextureProgress.value >= $ProgressCenter/TextureProgress.max_value:
 			$ProgressCenter/TextureProgress.value = 0
