@@ -28,8 +28,7 @@ signal logged_in(login_result)
 var _http: HTTPRequest
 var _request_in_progress = false
 var _title_id: String
-
-export(Resource) var playfab_config
+var playfab_config
 
 func _init():
 	
