@@ -6,11 +6,11 @@ class_name PlayFab, "res://addons/godot-playfab/icon.png"
 ## @param json_result: JSONResult
 signal json_parse_error(json_result)
 
-## Emitted when a PlayFab API error occurs. Will receive a LoginResult as parameter.
+## Emitted when a PlayFab API (HTTP status code 4xx) error occurs. Will receive a LoginResult as parameter.
 ## @param api_error_wrapper: ApiErrorWrapper
 signal api_error(api_error_wrapper)
 
-## Emitted, when a Server Error (code 500) occurs when querying PlayFab
+## Emitted when a Server Error (HTTP status code 5xx) occurs when querying PlayFab. Will receive the request path as parameter.
 ## @param path: String
 signal server_error(path)
 
