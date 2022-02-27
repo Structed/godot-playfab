@@ -20,7 +20,6 @@ func set_session_ticket(value: String):
 	
 
 func get_session_ticket() -> String:
-	guard_session_ticket_not_null_or_empty()
 	return session_ticket
 
 
@@ -30,11 +29,3 @@ func is_logged_in() -> bool:
 
 func is_not_logged_in() -> bool:
 	return session_ticket.empty()
-	
-
-func guard_session_ticket_not_null_or_empty() -> bool:
-	if session_ticket == null || session_ticket == "":
-		push_error("Session ticket is empty.")
-		return false
-	
-	return true
