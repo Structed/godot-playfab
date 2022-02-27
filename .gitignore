@@ -17,3 +17,4 @@ mono_crash.*.json
 
 # Other ignores
 .idea/
+exports/
