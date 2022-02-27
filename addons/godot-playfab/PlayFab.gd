@@ -14,10 +14,6 @@ signal api_error(api_error_wrapper)
 ## @param path: String
 signal server_error(path)
 
-## Emitted when a request succeeded
-## @param response: Dictionary - a dictionary of all the response parameters
-signal request_succeeded(response)
-
 ## Arguments: RegisterPlayFabUserResult
 signal registered(RegisterPlayFabUserResult)
 
