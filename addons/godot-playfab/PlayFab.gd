@@ -41,10 +41,14 @@ func _init():
 	
 
 func load_config(title_id: String):
-	var resource = ResourceLoader.load(PlayFabConfig.CONFIG_LOAD_PATH) as PlayFabConfig
-	if resource == null:
+	
+	var resource
+	if ResourceLoader.exists(PlayFabConfig.CONFIG_LOAD_PATH):
+		resource = ResourceLoader.load(PlayFabConfig.CONFIG_LOAD_PATH) as PlayFabConfig
+	else:
 		resource = PlayFabConfig.new()
 		resource.title_id = title_id
+		
 	playfab_config = resource
 
 func save_config():
