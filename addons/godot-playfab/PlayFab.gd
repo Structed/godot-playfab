@@ -30,12 +30,12 @@ func _init():
 	
 	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) && ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) != "":
 		_title_id = ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
-		load_config(_title_id)
+		_load_config(_title_id)
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
 	
 
-func load_config(title_id: String):
+func _load_config(title_id: String):
 	
 	var resource
 	if ResourceLoader.exists(PlayFabConfig.CONFIG_LOAD_PATH):
@@ -46,7 +46,7 @@ func load_config(title_id: String):
 		
 	playfab_config = resource
 
-func save_config():
+func _save_config():
 	ResourceSaver.save(PlayFabConfig.CONFIG_LOAD_PATH, playfab_config)
 
 func _ready():
@@ -58,7 +58,7 @@ func _ready():
 func _on_logged_in(login_result: LoginResult):
 	# Setting SessionTicket for subsequent client requests
 	(playfab_config as PlayFabConfig).session_ticket = login_result.SessionTicket
-	save_config()
+	_save_config()
 
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
@@ -117,7 +117,7 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_h
 func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
 	
-func dict_to_header_array(dict: Dictionary):
+func _dict_to_header_array(dict: Dictionary):
 	if dict.size() < 1:
 		return []
 	
@@ -131,7 +131,7 @@ func dict_to_header_array(dict: Dictionary):
 func _http_request(request_method: int, body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var json = JSON.print(body)
 	var headers = ["Content-Type: application/json", "Content-Length: " + str(json.length())]
-	headers.append_array(dict_to_header_array(additional_headers))
+	headers.append_array(_dict_to_header_array(additional_headers))
 	
 	while (_request_in_progress):
 		yield(_http.get_tree(), "idle_frame")
