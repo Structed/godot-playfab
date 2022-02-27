@@ -27,11 +27,7 @@ signal logged_in(login_result)
 
 var _http: HTTPRequest
 var _request_in_progress = false
-var _title_id
-var _base_uri = "playfabapi.com"
-
-var logged_in = false
-var _session_ticket = ""
+var _title_id: String
 
 export(Resource) var playfab_config
 
@@ -39,35 +35,31 @@ func _init():
 	
 	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) && ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) != "":
 		_title_id = ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
+		load_config(_title_id)
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
-		
 	
-	load_config()
 
-var path = "user://playfab_config.tres"
-func load_config():
-	var resource = ResourceLoader.load(path) as PlayFabConfig
+func load_config(title_id: String):
+	var resource = ResourceLoader.load(PlayFabConfig.CONFIG_LOAD_PATH) as PlayFabConfig
 	if resource == null:
 		resource = PlayFabConfig.new()
-		resource.title_id = _title_id
+		resource.title_id = title_id
 	playfab_config = resource
 
 func save_config():
-	ResourceSaver.save(path, playfab_config)
+	ResourceSaver.save(PlayFabConfig.CONFIG_LOAD_PATH, playfab_config)
 
 func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
-	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
 	connect("logged_in", self, "_on_logged_in")
 	
 
 func _on_logged_in(login_result: LoginResult):
-	_session_ticket = login_result.SessionTicket # Setting SessionTicket for subsequent client requests
+	# Setting SessionTicket for subsequent client requests
 	(playfab_config as PlayFabConfig).session_ticket = login_result.SessionTicket
 	save_config()
-	logged_in = true
 
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
@@ -108,11 +100,12 @@ func _on_login_with_email(result: Dictionary):
 	emit_signal("logged_in", login_result)
 	
 func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	if _session_ticket == "":
-		assert("Session ticket is empty. Login is required or the session ticket was not properly set")
+	var pfc = (playfab_config as PlayFabConfig)
+	if !pfc.is_logged_in():
+		push_error("Player is not logged in.")
 		return false
 	
-	additional_headers["X-Authorization"] = _session_ticket
+	additional_headers["X-Authorization"] = pfc.session_ticket
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -145,7 +138,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		yield(_http.get_tree(), "idle_frame")
 	
 	_request_in_progress = true
-	var request_uri = "%s%s" % [ _base_uri, path]
+	var request_uri = "%s%s" % [ (playfab_config as PlayFabConfig).api_url, path]
 	var error = _http.request(request_uri, headers, true, request_method, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
