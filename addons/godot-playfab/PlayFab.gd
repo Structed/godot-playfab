@@ -73,6 +73,16 @@ func login_with_email(email: String, password: String, custom_tags: Dictionary, 
 	var result = _post(request_params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
 
 
+func login_with_custom_id(custom_id: String, create_user: bool, info_request_parameters: GetPlayerCombinedInfoRequestParams):
+	var request_params = LoginWithCustomIdRequest.new()
+	request_params.TitleId = _title_id
+	request_params.CustomId = custom_id
+	request_params.CreateAccount = create_user
+	request_params.InfoRequestParameters = info_request_parameters
+	
+	var result = _post(request_params, "/Client/LoginWithCustomID", funcref(self, "_on_login_with_email"))
+
+
 func _on_register_email_password(result: Dictionary):
 	var register_result = RegisterPlayFabUserResult.new()
 	register_result.from_dict(result["data"], register_result)

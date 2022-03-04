@@ -13,7 +13,19 @@ func _on_Login_pressed():
 	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 	var tags = {}
 	$PlayFab.login_with_email(email, password, tags, combined_info_request_params)
-		
+
+
+func _on_AnonLogin_pressed():
+	$Login.hide()
+	_show_progess()
+	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
+	combined_info_request_params.show_all()
+	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
+	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
+	
+	$PlayFab.login_with_custom_id(UUID.v4(), true, combined_info_request_params)
+	
+
 func _show_progess():
 	$ProgressCenter/TextureProgress.value = 0
 	$ProgressCenter.show()
@@ -32,6 +44,8 @@ func _on_logged_in(login_result: LoginResult):
 	$LoggedIn.show()
 	
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
+	_hide_progess()
+	$Login.show()
 	var text = "[b]%s[/b]\n\n" % api_error_wrapper.errorMessage
 	var error_details = api_error_wrapper.errorDetails
 	
@@ -54,7 +68,6 @@ func _process(_delta):
 		if $ProgressCenter/TextureProgress.value >= $ProgressCenter/TextureProgress.max_value:
 			$ProgressCenter/TextureProgress.value = 0
 			
-		print_debug("Texture progress increment: %f" % $ProgressCenter/TextureProgress.value)
 		$ProgressCenter/TextureProgress.value += 1
 
 func _on_LoggedInBackButton_pressed():
