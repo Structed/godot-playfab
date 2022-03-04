@@ -99,10 +99,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "UUID",
 "language": "GDScript",
-"path": "res://addons/godot-playfab/Util/UUID.gd"
+"path": "res://addons/crypto_uuid_v4/uuid.gd"
 }, {
 "base": "JsonSerializable",
 "class": "UserAccountInfo",
