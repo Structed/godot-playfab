@@ -41,7 +41,6 @@ func _init():
 func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
-	add_child(playfab_config)
 	connect("logged_in", self, "_on_logged_in")
 	
 

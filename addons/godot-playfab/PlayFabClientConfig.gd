@@ -1,4 +1,4 @@
-extends Node
+extends Reference
 class_name PlayFabClientConfig, "res://addons/godot-playfab/icon.png"
 
 
@@ -19,10 +19,6 @@ func _init(title_id: String):
 	set_title_id(title_id)
 	_load_config()
 
-func _process(_delta):
-	if !initialized:
-		_load_config()
-
 
 func set_title_id(value: String):
 	title_id = value
@@ -40,11 +36,9 @@ func get_session_ticket() -> String:
 
 
 func is_logged_in() -> bool:
+	if !initialized:
+		_load_config()
 	return !session_ticket.empty()
-
-
-func is_not_logged_in() -> bool:
-	return session_ticket.empty()
 
 
 func _save_config():
