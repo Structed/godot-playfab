@@ -23,8 +23,13 @@ func _on_AnonLogin_pressed():
 	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
 	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 	
-	$PlayFab.login_with_custom_id(UUID.v4(), true, combined_info_request_params)
-	
+	if $PlayFab._playfab_client_config.login_type == PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID:
+		$PlayFab.login_with_custom_id($PlayFab._playfab_client_config.login_id, false, combined_info_request_params)
+	else:
+		$PlayFab._playfab_client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID
+		$PlayFab._playfab_client_config.login_id = UUID.v4()
+		$PlayFab.login_with_custom_id(UUID.v4(), true, combined_info_request_params)
+
 
 func _show_progess():
 	$ProgressCenter/TextureProgress.value = 0
