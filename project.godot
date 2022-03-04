@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
+"base": "Object",
+"class": "UUID",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Util/UUID.gd"
+}, {
 "base": "JsonSerializable",
 "class": "UserAccountInfo",
 "language": "GDScript",
@@ -122,6 +127,7 @@ _global_script_class_icons={
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
+"UUID": "",
 "UserAccountInfo": "",
 "UserTitleInfo": ""
 }
