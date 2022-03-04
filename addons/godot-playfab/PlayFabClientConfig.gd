@@ -2,7 +2,7 @@ extends Reference
 class_name PlayFabClientConfig, "res://addons/godot-playfab/icon.png"
 
 
-const CONFIG_LOAD_PATH = "user://playfab_config.cfg"
+const CONFIG_LOAD_PATH = "user://playfab_client_config.cfg"
 const SECTION_NAME = "PlayFab"
 
 var _config: ConfigFile
