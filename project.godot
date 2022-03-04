@@ -74,11 +74,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFabClientConfig.gd"
 }, {
-"base": "Resource",
-"class": "PlayFabConfig",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabConfig.gd"
-}, {
 "base": "Object",
 "class": "PlayFabConstants",
 "language": "GDScript",
@@ -123,7 +118,6 @@ _global_script_class_icons={
 "LoginWithEmailAddressRequest": "",
 "PlayFab": "res://addons/godot-playfab/icon.png",
 "PlayFabClientConfig": "res://addons/godot-playfab/icon.png",
-"PlayFabConfig": "res://addons/godot-playfab/icon.png",
 "PlayFabConstants": "",
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
