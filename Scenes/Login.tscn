@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Login.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/LoggedIn.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/LoadingIndicator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/godot-playfab/PlayFab.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -117,6 +118,11 @@ rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 
+[node name="PlayFab" type="Node" parent="MarginContainer"]
+script = ExtResource( 4 )
+
 [connection signal="pressed" from="MarginContainer/LoggedIn/LoggedInBackButton" to="MarginContainer" method="_on_LoggedInBackButton_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer" method="_on_Login_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer" method="_on_Back_pressed"]
+[connection signal="api_error" from="MarginContainer/PlayFab" to="MarginContainer" method="_on_api_error" flags=6]
+[connection signal="logged_in" from="MarginContainer/PlayFab" to="MarginContainer" method="_on_logged_in"]

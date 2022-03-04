@@ -6,17 +6,13 @@ class_name PlayFab, "res://addons/godot-playfab/icon.png"
 ## @param json_result: JSONResult
 signal json_parse_error(json_result)
 
-## Emitted when a PlayFab API error occurs. Will receive a LoginResult as parameter.
+## Emitted when a PlayFab API (HTTP status code 4xx) error occurs. Will receive a LoginResult as parameter.
 ## @param api_error_wrapper: ApiErrorWrapper
 signal api_error(api_error_wrapper)
 
-## Emitted, when a Server Error (code 500) occurs when querying PlayFab
+## Emitted when a Server Error (HTTP status code 5xx) occurs when querying PlayFab. Will receive the request path as parameter.
 ## @param path: String
 signal server_error(path)
-
-## Emitted when a request succeeded
-## @param response: Dictionary - a dictionary of all the response parameters
-signal request_succeeded(response)
 
 ## Arguments: RegisterPlayFabUserResult
 signal registered(RegisterPlayFabUserResult)
@@ -25,33 +21,32 @@ signal registered(RegisterPlayFabUserResult)
 ## @param login_result: LoginResult
 signal logged_in(login_result)
 
+
 var _http: HTTPRequest
 var _request_in_progress = false
-var _title_id
-var _base_uri = "playfabapi.com"
-
-var logged_in = false
-var _session_ticket = ""
+var _title_id: String
+var _playfab_client_config: PlayFabClientConfig
 
 
 func _init():
 	
 	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) && ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) != "":
 		_title_id = ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
+		_playfab_client_config = PlayFabClientConfig.new(_title_id)
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
-	
+
+
 
 func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
-	_base_uri = "https://%s.%s" % [ _title_id, _base_uri ]
 	connect("logged_in", self, "_on_logged_in")
 	
 
 func _on_logged_in(login_result: LoginResult):
-	_session_ticket = login_result.SessionTicket # Setting SessionTicket for subsequent client requests
-	logged_in = true
+	# Setting SessionTicket for subsequent client requests
+	_playfab_client_config.session_ticket = login_result.SessionTicket
 
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
@@ -83,33 +78,37 @@ func _on_register_email_password(result: Dictionary):
 	register_result.from_dict(result["data"], register_result)
 		
 	emit_signal("registered", register_result)
-	
+
 
 func _on_login_with_email(result: Dictionary):
 	var login_result = LoginResult.new()
 	login_result.from_dict(result["data"], login_result)
 	
 	emit_signal("logged_in", login_result)
-	
+
+
 func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	if _session_ticket == "":
-		assert("Session ticket is empty. Login is required or the session ticket was not properly set")
+	if !_playfab_client_config.is_logged_in():
+		push_error("Player is not logged in.")
 		return false
-	
-	additional_headers["X-Authorization"] = _session_ticket
+
+
+	additional_headers["X-Authorization"] = _playfab_client_config.session_ticket
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
 
+
 func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
-	
-	
+
+
 func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
-	
-func dict_to_header_array(dict: Dictionary):
+
+
+func _dict_to_header_array(dict: Dictionary):
 	if dict.size() < 1:
 		return []
 	
@@ -120,16 +119,17 @@ func dict_to_header_array(dict: Dictionary):
 		
 	return array
 
+
 func _http_request(request_method: int, body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	var json = JSON.print(body)
 	var headers = ["Content-Type: application/json", "Content-Length: " + str(json.length())]
-	headers.append_array(dict_to_header_array(additional_headers))
+	headers.append_array(_dict_to_header_array(additional_headers))
 	
 	while (_request_in_progress):
 		yield(_http.get_tree(), "idle_frame")
 	
 	_request_in_progress = true
-	var request_uri = "%s%s" % [ _base_uri, path]
+	var request_uri = "%s%s" % [ _playfab_client_config.api_url, path]
 	var error = _http.request(request_uri, headers, true, request_method, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
@@ -166,6 +166,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 func client_get_title_data(request_data: GetTitleDataRequest, callback: FuncRef):
 	_post_with_session_auth(request_data, "/Client/GetTitleData", callback)
+
 
 func _test_http(body, path: String):
 	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))

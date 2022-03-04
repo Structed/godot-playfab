@@ -24,12 +24,28 @@ You can use the included Demo scene setup in `Scenes` to see how `godot-playfab`
 * Copy the folder `/addons/godot-playfab` in your own project's `/addons/` directory
 * Enable the addon in your project settings
 
-Only now you will see a new setting: `PLayfab --> Title ID`
+Only now you will see a new setting: `Playfab --> Title ID`
 
 ### Setting the Title Id
 * Got to [PlayFab](https://playfab.com), log in and copy your Title's ID
 * In your Godot editor, open Project Settings
 * Set the Title Id in `Playfab --> Title Id`
+
+### Using `godot-playfab` in your Game
+First, you need to add a `PlayFab` node to your scene. When this is first used, it will create an encrypted `PlayFabConfig` file in `user://playfab_client_config.tres`. See the [File paths in Godot projects documentation](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html).
+
+This Config is used to store transient client data PlayFab needs to work across scenes, like the current PlayFab `Session Ticket`.
+
+#### Connecting Signals
+There are a few Signals that you can connect to:
+
+| Signal Name       | Purpose                                                                                                                                              |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| api_error         | Emitted when a PlayFab API (HTTP status code 4xx) error occurs. Will receive a LoginResult as parameter.<br><br>Use to handle validation errors etc. |
+| server_error      | Emitted when a Server Error (HTTP status code 5xx) occurs when querying PlayFab. Will receive the request path as parameter.                         |
+| json_parse_error  | Emitted when the returned JSON could not be properly parsed. This should generally not be needed to be connected.                                    |
+| registered        | Emitted when a new User is registered. You should only connect this in the Scene where you do Player Registrations.                                  |
+| logged_in         | Emitted when a Player successfully logs in.                                                                                                          |
 
 
 ## Maintainer Documentation
