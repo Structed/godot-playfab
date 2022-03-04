@@ -41,14 +41,13 @@ func _init():
 func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
+	add_child(playfab_config)
 	connect("logged_in", self, "_on_logged_in")
 	
 
 func _on_logged_in(login_result: LoginResult):
 	# Setting SessionTicket for subsequent client requests
-	login_result.PlayFabId
 	playfab_config.session_ticket = login_result.SessionTicket
-	playfab_config.save_config()
 
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
