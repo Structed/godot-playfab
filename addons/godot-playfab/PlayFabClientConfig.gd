@@ -14,6 +14,10 @@ var api_url
 var session_ticket = "" setget set_session_ticket,get_session_ticket
 var initialized = false
 var login_type = LoginType.LOGIN_NONE
+
+## User Identifier - Email, UUID etc. This is dependent on the Login Type
+## LOGIN_EMAIL - Email
+## LOGIN_CUSTOM_ID - UUID
 var login_id = "" setget set_login_id
 
 enum LoginType {
