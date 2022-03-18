@@ -13,6 +13,19 @@ var base_uri = "playfabapi.com"
 var api_url
 var session_ticket = "" setget set_session_ticket,get_session_ticket
 var initialized = false
+var login_type = LoginType.LOGIN_NONE
+
+## User Identifier - Email, UUID etc. This is dependent on the Login Type
+## LOGIN_EMAIL - Email
+## LOGIN_CUSTOM_ID - UUID
+var login_id = "" setget set_login_id
+
+enum LoginType {
+	LOGIN_NONE,
+	LOGIN_EMAIL,
+	LOGIN_CUSTOM_ID
+}
+
 
 func _init(title_id: String):
 	password = title_id
@@ -27,12 +40,19 @@ func set_title_id(value: String):
 
 func set_session_ticket(value: String):
 	session_ticket = value
-	_config.set_value(SECTION_NAME, "session_ticket", session_ticket)
 	_save_config()
 
 
 func get_session_ticket() -> String:
 	return session_ticket
+
+
+func set_login_id(value):
+	login_id = value
+
+
+func set_login_type(value):
+	login_type = value
 
 
 func is_logged_in() -> bool:
@@ -42,6 +62,10 @@ func is_logged_in() -> bool:
 
 
 func _save_config():
+	_config.set_value(SECTION_NAME, "session_ticket", session_ticket)
+	_config.set_value(SECTION_NAME, "login_id", login_id)
+	_config.set_value(SECTION_NAME, "login_type", login_type)
+	
 	_config.save_encrypted_pass(CONFIG_LOAD_PATH, password)
 
 
@@ -56,3 +80,5 @@ func _load_config():
 		
 	initialized = true
 	session_ticket = _config.get_value(SECTION_NAME, "session_ticket")
+	login_id = _config.get_value(SECTION_NAME, "login_id")
+	login_type = _config.get_value(SECTION_NAME, "login_type")

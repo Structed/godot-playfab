@@ -60,6 +60,11 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/LoginResult.gd"
 }, {
 "base": "JsonSerializable",
+"class": "LoginWithCustomIdRequest",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/LoginWithCustomIdRequest.gd"
+}, {
+"base": "JsonSerializable",
 "class": "LoginWithEmailAddressRequest",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/LoginWithEmailAddressRequest.gd"
@@ -94,10 +99,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
-"base": "Object",
+"base": "Reference",
 "class": "UUID",
 "language": "GDScript",
-"path": "res://addons/godot-playfab/Util/UUID.gd"
+"path": "res://addons/crypto_uuid_v4/uuid.gd"
 }, {
 "base": "JsonSerializable",
 "class": "UserAccountInfo",
@@ -120,6 +125,7 @@ _global_script_class_icons={
 "JsonSerializable": "",
 "LoggedIn": "",
 "LoginResult": "",
+"LoginWithCustomIdRequest": "",
 "LoginWithEmailAddressRequest": "",
 "PlayFab": "res://addons/godot-playfab/icon.png",
 "PlayFabClientConfig": "res://addons/godot-playfab/icon.png",
