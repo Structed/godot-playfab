@@ -1,22 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/LoggedIn.gd" type="Script" id=1]
-[ext_resource path="res://addons/godot-playfab/PlayFab.gd" type="Script" id=2]
+[ext_resource path="res://addons/godot-playfab/PlayFabEvent.gd" type="Script" id=2]
+[ext_resource path="res://addons/godot-playfab/PlayFabClient.gd" type="Script" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AccountPlayerId" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 1024.0
@@ -205,14 +200,47 @@ margin_right = 1024.0
 margin_bottom = 216.0
 text = "Test Request"
 
-[node name="Response" type="RichTextLabel" parent="VBoxContainer"]
+[node name="BatchTelemetryEventsButton" type="Button" parent="VBoxContainer"]
 margin_top = 220.0
+margin_right = 1024.0
+margin_bottom = 240.0
+text = "Batch Telemetry Events"
+
+[node name="BatchPlayStreamEventsButton" type="Button" parent="VBoxContainer"]
+margin_top = 244.0
+margin_right = 1024.0
+margin_bottom = 264.0
+text = "Batch PlayStream Events"
+
+[node name="WriteTelemetryDirectButton" type="Button" parent="VBoxContainer"]
+margin_top = 268.0
+margin_right = 1024.0
+margin_bottom = 288.0
+text = "Write Telemetry Event (direct)"
+
+[node name="WritePlayStreamDirectButton" type="Button" parent="VBoxContainer"]
+margin_top = 292.0
+margin_right = 1024.0
+margin_bottom = 312.0
+text = "Write PlayStream Event (direct)"
+
+[node name="Response" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 316.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayFab" type="Node" parent="."]
+[node name="PlayFabClient" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="PlayFabEvent" type="Node" parent="."]
 script = ExtResource( 2 )
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/BatchTelemetryEventsButton" to="." method="_on_BatchTelemetryEventsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/BatchPlayStreamEventsButton" to="." method="_on_BatchPlayStreamEventsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/WriteTelemetryDirectButton" to="." method="_on_WriteTelemetryDirectButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/WritePlayStreamDirectButton" to="." method="_on_WritePlayStreamDirectButton_pressed"]
+[connection signal="api_error" from="PlayFabClient" to="." method="_on_PlayFab_api_error"]
+[connection signal="api_error" from="PlayFabEvent" to="." method="_on_PlayFab_api_error"]

@@ -1,0 +1,2 @@
+extends AbstractJsonSerializableCollection
+class_name EventContentsCollection

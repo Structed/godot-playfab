@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "JsonSerializable",
+"class": "AbstractJsonSerializableCollection",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/AbstractJsonSerializableCollection.gd"
+}, {
 "base": "Reference",
 "class": "ApiErrorWrapper",
 "language": "GDScript",
@@ -23,6 +28,16 @@ _global_script_classes=[ {
 "class": "EntityTokenResponse",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/EntityTokenResponse.gd"
+}, {
+"base": "JsonSerializable",
+"class": "EventContents",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/EventContents.gd"
+}, {
+"base": "AbstractJsonSerializableCollection",
+"class": "EventContentsCollection",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/EventContentsCollection.gd"
 }, {
 "base": "JsonSerializable",
 "class": "GetPlayerCombinedInfoRequestParams",
@@ -74,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFab.gd"
 }, {
+"base": "PlayFab",
+"class": "PlayFabClient",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/PlayFabClient.gd"
+}, {
 "base": "Reference",
 "class": "PlayFabClientConfig",
 "language": "GDScript",
@@ -83,6 +103,11 @@ _global_script_classes=[ {
 "class": "PlayFabConstants",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFabConstants.gd"
+}, {
+"base": "PlayFab",
+"class": "PlayFabEvent",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/PlayFabEvent.gd"
 }, {
 "base": "JsonSerializable",
 "class": "PlayerProfileViewConstraints",
@@ -113,11 +138,19 @@ _global_script_classes=[ {
 "class": "UserTitleInfo",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/UserTitleInfo.gd"
+}, {
+"base": "JsonSerializable",
+"class": "WriteEventsRequest",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/WriteEventsRequest.gd"
 } ]
 _global_script_class_icons={
+"AbstractJsonSerializableCollection": "",
 "ApiErrorWrapper": "",
 "EntityKey": "",
 "EntityTokenResponse": "",
+"EventContents": "",
+"EventContentsCollection": "",
 "GetPlayerCombinedInfoRequestParams": "",
 "GetPlayerCombinedInfoResultPayload": "",
 "GetTitleDataRequest": "",
@@ -128,14 +161,17 @@ _global_script_class_icons={
 "LoginWithCustomIdRequest": "",
 "LoginWithEmailAddressRequest": "",
 "PlayFab": "res://addons/godot-playfab/icon.png",
+"PlayFabClient": "res://addons/godot-playfab/icon.png",
 "PlayFabClientConfig": "res://addons/godot-playfab/icon.png",
 "PlayFabConstants": "",
+"PlayFabEvent": "",
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
 "UUID": "",
 "UserAccountInfo": "",
-"UserTitleInfo": ""
+"UserTitleInfo": "",
+"WriteEventsRequest": ""
 }
 
 [application]

@@ -14,13 +14,29 @@ func to_dict() -> Dictionary:
 	# Skipping the first 3 items because they are metadata we do not need
 	for i in range(3, props.size()):
 		var prop = props[i]
-		var name = prop["name"]
-		var type = prop["type"]
+		var name = prop["name"] # The name of the property on the object. WIll be used to access its's value
+		var type = prop["type"]	# The godot built-in type (Array, Object etc)
 		
 		if (type == TYPE_OBJECT):
+			# Get the value of the property
 			var sub_prop = get(name)
-			dict[name] = sub_prop.to_dict()
+			if sub_prop == null:
+				# Actually set null if null
+				dict[name] = null
+			elif has_method("to_dict"):
+				# Handle recursive property
+				dict[name] = sub_prop.to_dict()
+			else:
+				# No to_dict method - likely an error!
+				print_debug("if this is not a native object, pelase implement a to_dict method!")
+				dict[name] = sub_prop
+#		elif type == TYPE_ARRAY:
+#			var sub_dict = []
+#			for element in prop:
+#				sub_dict.append(element)
+#			dict[name] = sub_dict
 		else:
+			# Get the value of the property
 			dict[name] = get(name)
 	
 	return dict
