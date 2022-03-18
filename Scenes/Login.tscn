@@ -104,22 +104,16 @@ margin_right = 924.0
 margin_bottom = 76.0
 text = "Login"
 
-[node name="AnonLogin" type="Button" parent="MarginContainer/Login"]
+[node name="Back" type="Button" parent="MarginContainer/Login"]
 margin_top = 80.0
 margin_right = 924.0
 margin_bottom = 100.0
-text = "Anonymous Login"
-
-[node name="Back" type="Button" parent="MarginContainer/Login"]
-margin_top = 104.0
-margin_right = 924.0
-margin_bottom = 124.0
 text = "Back"
 
 [node name="Output" type="RichTextLabel" parent="MarginContainer/Login"]
-margin_top = 128.0
+margin_top = 104.0
 margin_right = 924.0
-margin_bottom = 228.0
+margin_bottom = 204.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 bbcode_enabled = true
@@ -129,7 +123,6 @@ script = ExtResource( 4 )
 
 [connection signal="pressed" from="MarginContainer/LoggedIn/LoggedInBackButton" to="MarginContainer" method="_on_LoggedInBackButton_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer" method="_on_Login_pressed"]
-[connection signal="pressed" from="MarginContainer/Login/AnonLogin" to="MarginContainer" method="_on_AnonLogin_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer" method="_on_Back_pressed"]
-[connection signal="api_error" from="MarginContainer/PlayFab" to="MarginContainer" method="_on_api_error"]
+[connection signal="api_error" from="MarginContainer/PlayFab" to="MarginContainer" method="_on_api_error" flags=6]
 [connection signal="logged_in" from="MarginContainer/PlayFab" to="MarginContainer" method="_on_logged_in"]
