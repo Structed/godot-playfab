@@ -51,3 +51,7 @@ There are a few Signals that you can connect to:
 ## Maintainer Documentation
 
 See [Maintainer Documentation](docs/README.md).
+
+
+# Thanks
+Thanks to @lentsius-bark for the wonderful re-design of the logo and splash screen ❤
