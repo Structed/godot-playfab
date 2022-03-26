@@ -116,7 +116,15 @@ func _post_with_session_auth(body: JsonSerializable, path: String, callback: Fun
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
 
-
+# General request method for endpoints which require Entity-Token-Auth.
+# You should uset his to provide convenience methods for requests to specific resources.
+#
+# @visibility: internal
+# @param body: JsonSerializable						- A data model valid for the request to be made
+# @param path: String								- The request path, e.g. `/Client/GetTitleData`
+# @param callback: FuncRef							- A callback which will be called once teh request **succeeds**
+# @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
+# @ returns: bool									- False if the player is not logged in - true if the rquest was sent.
 func _post_with_entity_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
 	if !_playfab_client_config.is_logged_in():
 		push_error("Player is not logged in.")
