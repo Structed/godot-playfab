@@ -13,7 +13,7 @@ In order for you to be able to flexibly change those based on your needs whereve
 
 > If you use multiple `PlayFab` nodes, you may set these values independently
 
-Suppose you want to implement a logger of which sends Telemetry Events for debugging purposes, but also write general PlayStream events to react upon.
+Suppose you want to implement a logger of which sends Telemetry Events for debugging purposes. But you would also like to write general PlayStream events to react upon.
 You could then configure two different `PlayFab` objects with different batching configurations.
 
 ### Example:
