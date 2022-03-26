@@ -164,7 +164,7 @@ _global_script_class_icons={
 "PlayFabClient": "res://addons/godot-playfab/icon.png",
 "PlayFabClientConfig": "res://addons/godot-playfab/icon.png",
 "PlayFabConstants": "",
-"PlayFabEvent": "",
+"PlayFabEvent": "res://addons/godot-playfab/icon.png",
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
