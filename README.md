@@ -27,12 +27,12 @@ You can use the included Demo scene setup in `Scenes` to see how `godot-playfab`
 Only now you will see a new setting: `Playfab --> Title ID`
 
 ### Setting the Title Id
-* Got to [PlayFab](https://playfab.com), log in and copy your Title's ID
+* Go to [PlayFab](https://playfab.com), log in and copy your Title's ID
 * In your Godot editor, open Project Settings
 * Set the Title Id in `Playfab --> Title Id`
 
 ### Using `godot-playfab` in your Game
-First, you need to add a `PlayFab` node to your scene. When this is first used, it will create an encrypted `PlayFabConfig` file in `user://playfab_client_config.tres`. See the [File paths in Godot projects documentation](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html).
+First, you need to add a `PlayFabClient` node to your scene. When this is first used, it will create an encrypted `PlayFabConfig` file in `user://playfab_client_config.tres`. See the [File paths in Godot projects documentation](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html).
 
 This Config is used to store transient client data PlayFab needs to work across scenes, like the current PlayFab `Session Ticket`.
 
@@ -47,6 +47,8 @@ There are a few Signals that you can connect to:
 | registered        | Emitted when a new User is registered. You should only connect this in the Scene where you do Player Registrations.                                  |
 | logged_in         | Emitted when a Player successfully logs in.                                                                                                          |
 
+## Usage Guide & Examples
+See the [User Documentation](docs/user/README.md)
 
 ## Maintainer Documentation
 
