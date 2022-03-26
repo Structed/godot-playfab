@@ -54,4 +54,4 @@ See [Maintainer Documentation](docs/README.md).
 
 
 # Thanks
-Thanks to @lentsius-bark for the wonderful re-design of the logo and splash screen ❤
+Thanks to [lentsius-bark](https://github.com/lentsius-bark) for the wonderful re-design of the logo and splash screen ❤
