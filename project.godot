@@ -139,16 +139,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/UserTitleInfo.gd"
 }, {
-"base": "Reference",
-"class": "WAT",
-"language": "GDScript",
-"path": "res://addons/WAT/namespace.gd"
-}, {
-"base": "Node",
-"class": "WATTest",
-"language": "GDScript",
-"path": "res://addons/WAT/test/test.gd"
-}, {
 "base": "JsonSerializable",
 "class": "WriteEventsRequest",
 "language": "GDScript",
@@ -181,8 +171,6 @@ _global_script_class_icons={
 "UUID": "",
 "UserAccountInfo": "",
 "UserTitleInfo": "",
-"WAT": "",
-"WATTest": "",
 "WriteEventsRequest": ""
 }
 
@@ -211,7 +199,7 @@ SceneManager="*res://Scripts/SceneManager.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/WAT/plugin.cfg", "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg" )
 
 [physics]
 
