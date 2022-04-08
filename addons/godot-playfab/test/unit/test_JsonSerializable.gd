@@ -27,14 +27,6 @@ func test_to_dict_returns_dictionary():
 
 
 func generate_params__test_to_dict_returns_expected_dictionary():
-	var etr = EntityTokenResponse.new()
-	var ek = EntityKey.new()
-	ek.Id = "asdf"
-	ek.Type = EntityKey.ENTITY_TYPE_CHARACTER
-	etr.Entity = ek
-	etr.EntityToken = "test"
-	etr.TokenExpiration = "expiration"
-
 	return ParameterFactory.named_parameters(
 		# Parameter names
 		['actual', 'expected'],
@@ -49,23 +41,18 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 			],
 			[
 				# Sub-property serialization
-				etr,
+				JsonSerializableImpl.WithSetObjectProperty.new(),
 				{
-					"Entity": {
-						"Id": "asdf",
-						"Type": EntityKey.ENTITY_TYPE_CHARACTER
-					},
-					"EntityToken": "test",
-					"TokenExpiration": "expiration"
+					"sub_prop": {
+						"foo": "bar",
+					}
 				}
 			],
 			[
 				# All empty property values
-				EntityTokenResponse.new(),
+				JsonSerializableImpl.WithNotSetObjectProperty.new(),
 				{
-					"Entity": null,
-					"EntityToken": "",
-					"TokenExpiration": ""
+					"sub_prop": null
 				}
 			]
 		]
