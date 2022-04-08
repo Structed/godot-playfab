@@ -35,21 +35,18 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 	etr.EntityToken = "test"
 	etr.TokenExpiration = "expiration"
 
-	# Empty
-	var etr_rempty = EntityTokenResponse.new()
-
 	return ParameterFactory.named_parameters(
 		['actual', 'expected'],
 		[
 			[
-				model.to_dict(),
+				model,
 				{
 					"foo": "foo_value",
 					"bar": "bar_value"
 				}
 			],
 			[
-				etr.to_dict(),
+				etr,
 				{
 					"Entity": {
 						"Id": "asdf",
@@ -60,7 +57,7 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 				}
 			],
 			[
-				etr_rempty.to_dict(),
+				EntityTokenResponse.new(),
 				{
 					"Entity": null,
 					"EntityToken": "",
@@ -72,5 +69,5 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 
 
 func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params__test_to_dict_returns_expected_dictionary())):
-	var result = compare_deep(p.expected, p.actual)
+	var result = compare_deep(p.expected, p.actual.to_dict())
 	assert_true(result.are_equal)
