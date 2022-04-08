@@ -27,16 +27,37 @@ func test_to_dict_returns_dictionary():
 
 
 func generate_params__test_to_dict_returns_expected_dictionary():
-	var instance_model = JsonSerializableImpl.new()
+	var etr = EntityTokenResponse.new()
+	var ek = EntityKey.new()
+	ek.Id = "asdf"
+	ek.Type = EntityKey.ENTITY_TYPE_CHARACTER
+	etr.Entity = ek
+	etr.EntityToken = "test"
+	etr.TokenExpiration = "expiration"
+
 	return ParameterFactory.named_parameters(
 		['actual', 'expected'],
 		[
-			[model.to_dict(),
-			{
-				"foo": "foo_value",
-				"bar": "bar_value"
-			}
-		]])
+			[
+				model.to_dict(),
+				{
+					"foo": "foo_value",
+					"bar": "bar_value"
+				}
+			],
+			[
+				etr.to_dict(),
+				{
+					"Entity": {
+						"Id": "asdf",
+						"Type": EntityKey.ENTITY_TYPE_CHARACTER
+					},
+					"EntityToken": "test",
+					"TokenExpiration": "expiration"
+				}
+			]
+		]
+		)
 
 
 func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params__test_to_dict_returns_expected_dictionary())):
