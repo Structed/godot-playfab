@@ -24,12 +24,21 @@ func test_to_dict_returns_dictionary():
 	var dict = model.to_dict();
 	assert_true(dict is Dictionary)
 
-func test_to_dict_returns_expected_dictionary():
-	var actual = model.to_dict();
-	var expected = {
-		"foo": "foo_value",
-		"bar": "bar_value"
-	}
 
-	var result = compare_deep(expected, actual)
+
+func generate_params__test_to_dict_returns_expected_dictionary():
+	var instance_model = JsonSerializableImpl.new()
+	return ParameterFactory.named_parameters(
+		['actual', 'expected'],
+		[
+			[model.to_dict(),
+			{
+				"foo": "foo_value",
+				"bar": "bar_value"
+			}
+		]])
+
+
+func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params__test_to_dict_returns_expected_dictionary())):
+	var result = compare_deep(p.expected, p.actual)
 	assert_true(result.are_equal)
