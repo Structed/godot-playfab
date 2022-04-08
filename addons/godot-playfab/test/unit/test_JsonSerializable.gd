@@ -35,6 +35,9 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 	etr.EntityToken = "test"
 	etr.TokenExpiration = "expiration"
 
+	# Empty
+	var etr_rempty = EntityTokenResponse.new()
+
 	return ParameterFactory.named_parameters(
 		['actual', 'expected'],
 		[
@@ -54,6 +57,14 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 					},
 					"EntityToken": "test",
 					"TokenExpiration": "expiration"
+				}
+			],
+			[
+				etr_rempty.to_dict(),
+				{
+					"Entity": null,
+					"EntityToken": "",
+					"TokenExpiration": ""
 				}
 			]
 		]
