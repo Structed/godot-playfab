@@ -36,9 +36,11 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 	etr.TokenExpiration = "expiration"
 
 	return ParameterFactory.named_parameters(
+		# Parameter names
 		['actual', 'expected'],
 		[
 			[
+				# Just string values
 				model,
 				{
 					"foo": "foo_value",
@@ -46,6 +48,7 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 				}
 			],
 			[
+				# Sub-property serialization
 				etr,
 				{
 					"Entity": {
@@ -57,6 +60,7 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 				}
 			],
 			[
+				# All empty property values
 				EntityTokenResponse.new(),
 				{
 					"Entity": null,
