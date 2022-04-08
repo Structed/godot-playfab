@@ -28,8 +28,8 @@ func to_dict() -> Dictionary:
 				dict[name] = sub_prop.to_dict()
 			else:
 				# No to_dict method - likely an error!
-				print_debug("if this is not a native object, pelase implement a to_dict method!")
-				dict[name] = sub_prop
+				print_debug("If this is not a native object, pelase implement a to_dict method!")
+				dict[name] = sub_prop.get_class()
 		else:
 			# Get the value of the property
 			dict[name] = get(name)
