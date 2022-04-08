@@ -23,7 +23,7 @@ func to_dict() -> Dictionary:
 			if sub_prop == null:
 				# Actually set null if null
 				dict[name] = null
-			elif has_method("to_dict"):
+			elif sub_prop.has_method("to_dict"):
 				# Handle recursive property
 				dict[name] = sub_prop.to_dict()
 			else:
