@@ -25,7 +25,7 @@ func test_to_dict_returns_dictionary():
 	assert_true(dict is Dictionary)
 
 
-
+# Parameter generator function for `test_to_dict_returns_expected_dictionary`
 func generate_params__test_to_dict_returns_expected_dictionary():
 	return ParameterFactory.named_parameters(
 		# Parameter names
@@ -67,7 +67,7 @@ func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params
 func test_to_dictionary_serializes_native_objects_to_class_name():
 	var obj = JsonSerializableImpl.WithBuiltinObject.new();
 	var actual = obj.to_dict()
-	obj.node.free()	# Need to free, otehrwiese we'll be leaving an orphan
+	obj.node.free()	# Need to free, otherwise we'll be leaving an orphan
 
 	assert_eq("Node", actual.node)
 
