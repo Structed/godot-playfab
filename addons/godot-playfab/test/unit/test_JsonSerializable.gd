@@ -64,6 +64,60 @@ func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params
 	assert_true(result.are_equal)
 
 
+# Parameter generator function for `test_from_dict_returns_proper_instance`
+# func generate_params__test_from_dict_returns_proper_instance():
+# 	return ParameterFactory.named_parameters(
+# 		# Parameter names
+# 		['expected', 'actual'],
+# 		[
+# 			[
+# 				# All empty property values
+# 				JsonSerializableImpl.WithNotSetObjectProperty.new(),
+# 				{
+# 					"sub_prop": null
+# 				}
+# 			]
+# 		]
+# 		)
+
+
+func test_from_dict_with_just_strings_returns_proper_instance():
+	# Arrange
+	var dict = {
+		"foo": "1",
+		"bar": "2"
+	}
+	var actual = JsonSerializableImpl.new()
+	var expected = JsonSerializableImpl.new()
+	expected.foo = "1"
+	expected.bar = "2"
+
+	# Act
+	actual.from_dict(dict, actual)
+
+	# Assert
+	assert_eq(expected.foo, actual.foo)
+	assert_eq(expected.bar, actual.bar)
+
+
+# func test_from_dict_with_sub_property_returns_proper_instance():
+# 	# Arrange
+# 	var dict = {
+# 		"sub_prop": {
+# 			"foo": "1",
+# 		}
+# 	}
+# 	var actual = JsonSerializableImpl.WithSetObjectProperty.new()
+# 	var expected = JsonSerializableImpl.WithSetObjectProperty.new()
+# 	expected.sub_prop.foo = "2"
+
+# 	# Act
+# 	actual.from_dict(dict, actual)
+
+# 	# Assert
+# 	assert_eq(expected.foo, actual.foo)
+
+
 func test_to_dictionary_serializes_native_objects_to_class_name():
 	var obj = JsonSerializableImpl.WithBuiltinObject.new();
 	var error_string = "If 'Node' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable."
