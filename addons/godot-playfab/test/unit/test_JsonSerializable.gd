@@ -66,6 +66,8 @@ func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params
 
 func test_to_dictionary_serializes_native_objects_to_class_name():
 	var obj = JsonSerializableImpl.WithBuiltinObject.new();
+	var error_string = "If 'Node' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable."
+	print("Test is expected to push an error: %s" % error_string)
 	var actual = obj.to_dict()
 	obj.node.free()	# Need to free, otherwise we'll be leaving an orphan
 
