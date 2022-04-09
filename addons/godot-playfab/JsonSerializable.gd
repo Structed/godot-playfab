@@ -27,9 +27,11 @@ func to_dict() -> Dictionary:
 				# Handle recursive property
 				dict[name] = sub_prop.to_dict()
 			else:
+				var type_name = sub_prop.get_class()
 				# No to_dict method - likely an error!
-				print_debug("If this is not a native object, pelase implement a to_dict method!")
-				dict[name] = sub_prop.get_class()
+				# If it is a builtin class, however, a special handler needs to be iomplemented here.
+				push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
+				dict[name] = type_name
 		else:
 			# Get the value of the property
 			dict[name] = get(name)
