@@ -61,6 +61,10 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 			nested_instance.from_dict(data[key], nested_instance)
 			instance.set(key, nested_instance)
 
+
+# Instanciate a class by name
+# @param name: String - A class name
+# @returns Reference - The instance reference
 func get_class_instance(name: String) -> Reference:
 	var classes = ProjectSettings.get_setting("_global_script_classes")
 	for element in classes:
