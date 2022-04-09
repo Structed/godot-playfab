@@ -5,21 +5,21 @@ var foo: String = "foo_value"
 var bar: String = "bar_value"
 
 class WithNotSetObjectProperty:
-    extends JsonSerializable
+	extends JsonSerializable
 
-    var sub_prop: SubProp
+	var sub_prop: SubProp
 
 class WithSetObjectProperty:
-    extends JsonSerializable
+	extends JsonSerializable
 
-    var sub_prop: SubProp = SubProp.new()
+	var sub_prop: SubProp = SubProp.new()
 
 class SubProp:
-    extends JsonSerializable
+	extends JsonSerializable
 
-    var foo = "bar"
+	var foo = "bar"
 
 class WithBuiltinObject:
-    extends JsonSerializable
+	extends JsonSerializable
 
-    var node: Node = Node.new()
+	var node: Node = Node.new()
