@@ -1,11 +1,18 @@
 extends Reference
 class_name JsonSerializable
 
-
+# **VIRTUAL**
+#
+# Returns the type of a property of this class
+# Will **always** `push_error` and return an empty string in this base class! Should be overridden.
+# @param property_name: String - The name of the property to lookup a type for
+# @returns - The type's name
 func _get_type_for_property(property_name: String):
 	push_error("No mapping for property " + property_name)
 	return ""
 
+# Marshals an object - recursively - into a dictionary
+# @returns Dictionary - A Dcitionary representation of this object instance
 func to_dict() -> Dictionary:
 
 	var dict = {}
@@ -38,6 +45,10 @@ func to_dict() -> Dictionary:
 
 	return dict
 
+# Demarshals a Dictionary - recursively - into an object of a specific class instance.
+# @param data: Dictionary - The Dictionary to demarshal
+# @param instance: JsonSerializable: An instance of a class implementing JsonSerializable.
+# @returns void
 func from_dict(data: Dictionary, instance: JsonSerializable):
 
 	var props = instance.get_property_list()
@@ -62,7 +73,7 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 			instance.set(key, nested_instance)
 
 
-# Instanciate a class by name
+# Instantiate a class by name
 # @param name: String - A class name
 # @returns Reference - The instance reference
 func get_class_instance(name: String) -> Reference:
