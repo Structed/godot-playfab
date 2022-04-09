@@ -70,3 +70,16 @@ func test_to_dictionary_serializes_native_objects_to_class_name():
 	obj.node.free()	# Need to free, otehrwiese we'll be leaving an orphan
 
 	assert_eq("Node", actual.node)
+
+
+func test_get_class_instance_returns_instance_of_correct_type():
+	# Arrange
+	var js = JsonSerializable.new()
+
+	# Act
+	var instance: JsonSerializableImpl = js.get_class_instance("JsonSerializableImpl")
+
+	# Assert
+	assert_typeof(instance, TYPE_OBJECT)
+	assert_true("foo" in instance)
+	assert_true("bar" in instance)
