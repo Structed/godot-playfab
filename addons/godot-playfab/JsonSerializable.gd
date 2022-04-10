@@ -67,7 +67,7 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 		#if object data type
 			# Instantiate object
 			var type_name = instance._get_type_for_property(key)
-			var nested_instance = get_class_instance(type_name)
+			var nested_instance = instance.get_class_instance(type_name)
 			# fill properties
 			nested_instance.from_dict(data[key], nested_instance)
 			instance.set(key, nested_instance)
