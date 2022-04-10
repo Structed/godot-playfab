@@ -67,7 +67,12 @@ _global_script_classes=[ {
 "base": "JsonSerializable",
 "class": "JsonSerializableImpl",
 "language": "GDScript",
-"path": "res://addons/godot-playfab/test/unit/JsonSerializableImpl.gd"
+"path": "res://addons/godot-playfab/test/unit/TestModels/JsonSerializableImpl.gd"
+}, {
+"base": "JsonSerializable",
+"class": "JsonSerializableSubPropImpl",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/test/unit/TestModels/JsonSerializableSubPropImpl.gd"
 }, {
 "base": "Control",
 "class": "LoggedIn",
@@ -129,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
+"base": "JsonSerializable",
+"class": "SubProp",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/test/unit/TestModels/SubProp.gd"
+}, {
 "base": "Reference",
 "class": "UUID",
 "language": "GDScript",
@@ -162,6 +172,7 @@ _global_script_class_icons={
 "GetTitleDataResult": "",
 "JsonSerializable": "",
 "JsonSerializableImpl": "",
+"JsonSerializableSubPropImpl": "",
 "LoggedIn": "",
 "LoginResult": "",
 "LoginWithCustomIdRequest": "",
@@ -174,6 +185,7 @@ _global_script_class_icons={
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
+"SubProp": "",
 "UUID": "",
 "UserAccountInfo": "",
 "UserTitleInfo": "",

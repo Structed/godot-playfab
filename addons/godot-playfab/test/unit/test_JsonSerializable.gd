@@ -100,31 +100,34 @@ func test_from_dict_with_just_strings_returns_proper_instance():
 	assert_eq(expected.bar, actual.bar)
 
 
-# func test_from_dict_with_sub_property_returns_proper_instance():
-# 	# Arrange
-# 	var dict = {
-# 		"sub_prop": {
-# 			"foo": "1",
-# 		}
-# 	}
-# 	var actual = JsonSerializableImpl.WithSetObjectProperty.new()
-# 	var expected = JsonSerializableImpl.WithSetObjectProperty.new()
-# 	expected.sub_prop.foo = "2"
+func test_from_dict_with_sub_property_returns_proper_instance():
+	# Arrange
+	var dict = {
+		"sub_prop": {
+			"foo": "1",
+		}
+	}
+	var actual = JsonSerializableSubPropImpl.new()
 
-# 	# Act
-# 	actual.from_dict(dict, actual)
+	# Act
+	actual.from_dict(dict, actual)
 
-# 	# Assert
-# 	assert_eq(expected.foo, actual.foo)
+	# Assert
+	assert_true("foo" in actual.sub_prop)
+	assert_eq(actual.sub_prop.foo, "1")
 
 
 func test_to_dictionary_serializes_native_objects_to_class_name():
+	# Arrange
 	var obj = JsonSerializableImpl.WithBuiltinObject.new();
 	var error_string = "If 'Node' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable."
 	print("Test is expected to push an error: %s" % error_string)
+
+	# Act
 	var actual = obj.to_dict()
 	obj.node.free()	# Need to free, otherwise we'll be leaving an orphan
 
+	# Assert
 	assert_eq("Node", actual.node)
 
 
