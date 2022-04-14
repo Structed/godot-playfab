@@ -64,6 +64,20 @@ func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params
 	assert_true(result.are_equal)
 
 
+func test_to_dict_serializes_native_objects_to_class_name():
+	# Arrange
+	var obj = JsonSerializableImpl.WithBuiltinObject.new();
+	var error_string = "If 'Node' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable."
+	print("Test is expected to push an error: %s" % error_string)
+
+	# Act
+	var actual = obj.to_dict()
+	obj.node.free()	# Need to free, otherwise we'll be leaving an orphan
+
+	# Assert
+	assert_eq("Node", actual.node)
+
+
 func test_from_dict_with_just_strings_returns_proper_instance():
 	# Arrange
 	var dict = {
@@ -113,20 +127,6 @@ func test_from_dict_with_empty_values_returns_proper_instance():
 	# Assert
 	assert_true("sub_prop" in actual)
 	assert_null(actual.sub_prop)
-
-
-func test_to_dictionary_serializes_native_objects_to_class_name():
-	# Arrange
-	var obj = JsonSerializableImpl.WithBuiltinObject.new();
-	var error_string = "If 'Node' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable."
-	print("Test is expected to push an error: %s" % error_string)
-
-	# Act
-	var actual = obj.to_dict()
-	obj.node.free()	# Need to free, otherwise we'll be leaving an orphan
-
-	# Assert
-	assert_eq("Node", actual.node)
 
 
 func test_get_class_instance_returns_instance_of_correct_type():
