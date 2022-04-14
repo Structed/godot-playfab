@@ -63,6 +63,8 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 		# If basic data type - just set it
 		if type != TYPE_OBJECT:
 			instance.set(key, data[key])
+		elif data[key] == null:
+			instance.set(key, null)
 		else:
 			# If object data type, instantiate object
 			var type_name = instance._get_type_for_property(key)

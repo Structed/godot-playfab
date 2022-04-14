@@ -100,6 +100,21 @@ func test_from_dict_with_sub_property_returns_proper_instance():
 	assert_eq(actual.sub_prop.foo, "1")
 
 
+func test_from_dict_with_empty_values_returns_proper_instance():
+	var dict = {
+		"sub_prop": null
+	}
+
+	var actual = JsonSerializableSubPropImpl.new()
+
+	# Act
+	actual.from_dict(dict, actual)
+
+	# Assert
+	assert_true("sub_prop" in actual)
+	assert_null(actual.sub_prop)
+
+
 func test_to_dictionary_serializes_native_objects_to_class_name():
 	# Arrange
 	var obj = JsonSerializableImpl.WithBuiltinObject.new();
