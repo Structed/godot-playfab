@@ -64,23 +64,6 @@ func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params
 	assert_true(result.are_equal)
 
 
-# Parameter generator function for `test_from_dict_returns_proper_instance`
-# func generate_params__test_from_dict_returns_proper_instance():
-# 	return ParameterFactory.named_parameters(
-# 		# Parameter names
-# 		['expected', 'actual'],
-# 		[
-# 			[
-# 				# All empty property values
-# 				JsonSerializableImpl.WithNotSetObjectProperty.new(),
-# 				{
-# 					"sub_prop": null
-# 				}
-# 			]
-# 		]
-# 		)
-
-
 func test_from_dict_with_just_strings_returns_proper_instance():
 	# Arrange
 	var dict = {
