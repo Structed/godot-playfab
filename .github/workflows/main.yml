@@ -25,13 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Semver Extract
-        uses: terradatum/semver-action@v1
-        with:
-          version: v0.0.1
-
-      - run: echo "$(auto version)"
-
       - uses: croconut/godot-tester@v2.5
         with:
           # required
