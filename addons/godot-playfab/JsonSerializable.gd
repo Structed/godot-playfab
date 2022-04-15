@@ -1,11 +1,18 @@
 extends Reference
 class_name JsonSerializable
 
-
+# **VIRTUAL**
+#
+# Returns the type of a property of this class
+# Will **always** `push_error` and return an empty string in this base class! Should be overridden.
+# @param property_name: String - The name of the property to lookup a type for
+# @returns - The type's name
 func _get_type_for_property(property_name: String):
 	push_error("No mapping for property " + property_name)
 	return ""
 
+# Marshals an object - recursively - into a dictionary
+# @returns Dictionary - A Dcitionary representation of this object instance
 func to_dict() -> Dictionary:
 
 	var dict = {}
@@ -23,19 +30,25 @@ func to_dict() -> Dictionary:
 			if sub_prop == null:
 				# Actually set null if null
 				dict[name] = null
-			elif has_method("to_dict"):
+			elif sub_prop.has_method("to_dict"):
 				# Handle recursive property
 				dict[name] = sub_prop.to_dict()
 			else:
+				var type_name = sub_prop.get_class()
 				# No to_dict method - likely an error!
-				print_debug("if this is not a native object, pelase implement a to_dict method!")
-				dict[name] = sub_prop
+				# If it is a builtin class, however, a special handler needs to be iomplemented here.
+				push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
+				dict[name] = type_name
 		else:
 			# Get the value of the property
 			dict[name] = get(name)
 
 	return dict
 
+# Demarshals a Dictionary - recursively - into an object of a specific class instance.
+# @param data: Dictionary - The Dictionary to demarshal
+# @param instance: JsonSerializable: An instance of a class implementing JsonSerializable.
+# @returns void
 func from_dict(data: Dictionary, instance: JsonSerializable):
 
 	var props = instance.get_property_list()
@@ -50,15 +63,20 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 		# If basic data type - just set it
 		if type != TYPE_OBJECT:
 			instance.set(key, data[key])
+		elif data[key] == null:
+			instance.set(key, null)
 		else:
-		#if object data type
-			# Instantiate object
+			# If object data type, instantiate object
 			var type_name = instance._get_type_for_property(key)
-			var nested_instance = get_class_instance(type_name)
+			var nested_instance = instance.get_class_instance(type_name)
 			# fill properties
 			nested_instance.from_dict(data[key], nested_instance)
 			instance.set(key, nested_instance)
 
+
+# Instantiate a class by name
+# @param name: String - A class name
+# @returns Reference - The instance reference
 func get_class_instance(name: String) -> Reference:
 	var classes = ProjectSettings.get_setting("_global_script_classes")
 	for element in classes:

@@ -64,6 +64,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/JsonSerializable.gd"
 }, {
+"base": "JsonSerializable",
+"class": "JsonSerializableImpl",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/test/unit/TestModels/JsonSerializableImpl.gd"
+}, {
+"base": "JsonSerializable",
+"class": "JsonSerializableSubPropImpl",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/test/unit/TestModels/JsonSerializableSubPropImpl.gd"
+}, {
 "base": "Control",
 "class": "LoggedIn",
 "language": "GDScript",
@@ -124,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
+"base": "JsonSerializable",
+"class": "SubProp",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/test/unit/TestModels/SubProp.gd"
+}, {
 "base": "Reference",
 "class": "UUID",
 "language": "GDScript",
@@ -156,6 +171,8 @@ _global_script_class_icons={
 "GetTitleDataRequest": "",
 "GetTitleDataResult": "",
 "JsonSerializable": "",
+"JsonSerializableImpl": "",
+"JsonSerializableSubPropImpl": "",
 "LoggedIn": "",
 "LoginResult": "",
 "LoginWithCustomIdRequest": "",
@@ -168,11 +185,24 @@ _global_script_class_icons={
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
+"SubProp": "",
 "UUID": "",
 "UserAccountInfo": "",
 "UserTitleInfo": "",
 "WriteEventsRequest": ""
 }
+
+[WAT]
+
+Test_Directory="res://addons/godot-playfab/test/unit/"
+Results_Directory="res://addons/godot-playfab/test/"
+Test_Metadata_Directory="res://addons/godot-playfab/test/"
+Tags=PoolStringArray(  )
+Cache_Tests=false
+Window_Size=Vector2( 1280, 720 )
+Minimize_Window_When_Running_Tests=false
+Port=6008
+Display=8
 
 [application]
 
@@ -187,7 +217,7 @@ SceneManager="*res://Scripts/SceneManager.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg" )
 
 [physics]
 
