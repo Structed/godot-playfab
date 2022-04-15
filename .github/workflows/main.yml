@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: semver
-        uses: @terradatum/semver-action
+        uses: terradatum/semver-action
         with:
           version: v0.0.1
 
@@ -59,13 +59,13 @@ jobs:
           # and exits on test completion
           # ensure tests.tscn uses your modified plugin script and check yes for run on load
           # uses relative path from your godot project directory
-          #direct-scene: "test/alt_mode/tests.tscn" 
+          #direct-scene: "test/alt_mode/tests.tscn"
           # default is false, set true to count asserts instead of tests
-          assert-check: "true" 
-          # not checked by default, set to a number to limit the 
+          assert-check: "true"
+          # not checked by default, set to a number to limit the
           # maximum amount of failed tests for a passing test suite
-          max-fails: 0  
-          # to ensure all SCRIPT ERRORs dont contribute to your failure rate        
-          ignore-errors: "true" 
+          max-fails: 0
+          # to ensure all SCRIPT ERRORs dont contribute to your failure rate
+          ignore-errors: "true"
           # default is GUTs default: 'res://.gutconfig.json'; set this to load a different config file
-          config-file: "res://.gutconfig.json" 
+          config-file: "res://.gutconfig.json"
