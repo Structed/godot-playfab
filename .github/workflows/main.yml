@@ -28,7 +28,7 @@ jobs:
       - name: semver
         uses: @terradatum/semver-action
         with:
-        version: v0.0.1
+          version: v0.0.1
 
       - run: echo "$(auto version)"
 
