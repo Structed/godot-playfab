@@ -1,15 +1,34 @@
 extends Reference
 class_name PlayFabClientConfigLoader
 
+# Handles serialization/deserialization of a `PlayFabClientConfig` to `ConfigFile`
+
+
+# Whether to encrypt the config file
+# Will only work in Debug Mode
 const DEBUG_DO_NOT_ENCRYPT = false  # Only works on debug builds
+
+# Section to write key/value paris to
 const SECTION_NAME = "PlayFab"
 
+# **Accessibility: protected/virtual**
+# Path to load/save the ConfigFile from
+# Should only be overridden in tests or extending classes
 var _load_path = "user://playfab_client_config.cfg"
+
+# **Accessibility: private**
+# Holds the ConfigFile instance
 var _config: ConfigFile = ConfigFile.new()
-var _title_id: String
-var _errors = []
+
+# An errors array.
+# Will get filled if there are errors during loading of the ConfigFile
+var errors = []
 
 
+# Saves properties from @paramref `new_config`
+# to an encrypted ConfigFile
+# @param password: String - The password used to encrypt the ConfigFile
+# @param new_config: PlayFabClientConfig - Object to retrieve key/values from
 func save(password: String, new_config: PlayFabClientConfig):
 	_set_values(new_config)
 
@@ -19,6 +38,9 @@ func save(password: String, new_config: PlayFabClientConfig):
 		_config.save_encrypted_pass(_load_path, password)
 
 
+# Loads an encrypted ConfigFile from disk and returns a `PlayFabClientConfig`
+# with all properties set from values of ConfigFile
+# @paramref password: String - Password used for file enxryption
 func load(password: String) -> PlayFabClientConfig:
 	_config = ConfigFile.new()
 	var new_config = PlayFabClientConfig.new()
@@ -33,7 +55,7 @@ func load(password: String) -> PlayFabClientConfig:
 	if err != OK:
 		var error_message = "Config file didn't load. Error code: %f" % err
 		print_debug(error_message)
-		_errors.append(error_message)
+		errors.append(error_message)
 		return PlayFabClientConfig.new()
 
 	_get_values(new_config)
@@ -41,6 +63,8 @@ func load(password: String) -> PlayFabClientConfig:
 	return new_config
 
 
+# Sets all property values from @paramref `new_config`on `_config`
+# @param new_config: PlayFabClientConfig - object to get property values from
 func _set_values(new_config: PlayFabClientConfig):
 	var props = new_config.get_property_list()
 
@@ -49,6 +73,9 @@ func _set_values(new_config: PlayFabClientConfig):
 		_config.set_value(SECTION_NAME, name, new_config.get(name))
 
 
+# Retrieves all keys from ConfigFile and sets them
+# on the corresponding properties of @paramref `new_config`
+# @param new_config: PlayFabClientConfig - object to set properties on
 func _get_values(new_config: PlayFabClientConfig):
 	var props = new_config.get_property_list()
 
