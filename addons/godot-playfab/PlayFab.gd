@@ -25,17 +25,15 @@ signal logged_in(login_result)
 var _http: HTTPRequest
 var _request_in_progress = false
 var _title_id: String
-var _playfab_client_config: PlayFabClientConfig
+var _base_uri = "playfabapi.com"
 
 
 func _init():
 
 	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) && ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID) != "":
 		_title_id = ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
-		_playfab_client_config = PlayFabClientConfig.new(_title_id)
 	else:
 		push_error("Title Id was not set in ProjectSettings: %s" % PlayFabConstants.SETTING_PLAYFAB_TITLE_ID)
-
 
 
 func _ready():
@@ -44,11 +42,16 @@ func _ready():
 	connect("logged_in", self, "_on_logged_in")
 
 
+func _get_api_url() -> String:
+	return "https://%s.%s" % [ _title_id, _base_uri ]
+
+
 func _on_logged_in(login_result: LoginResult):
 	# Setting SessionTicket for subsequent client requests
-	_playfab_client_config.session_ticket = login_result.SessionTicket
-	_playfab_client_config.master_player_account_id = login_result.PlayFabId
-	_playfab_client_config.entity_token = login_result.EntityToken
+	PlayFabManager.client_config.session_ticket = login_result.SessionTicket
+	PlayFabManager.client_config.master_player_account_id = login_result.PlayFabId
+	PlayFabManager.client_config.entity_token = login_result.EntityToken
+	PlayFabManager.save_client_config()
 
 
 func register_email_password(username: String, email: String, password: String, info_request_parameters: GetPlayerCombinedInfoRequestParams):
@@ -65,8 +68,8 @@ func register_email_password(username: String, email: String, password: String, 
 
 
 func login_with_email(email: String, password: String, custom_tags: Dictionary, info_request_parameters: GetPlayerCombinedInfoRequestParams):
-	_playfab_client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_EMAIL
-	_playfab_client_config.login_id = email
+	PlayFabManager.client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_EMAIL
+	PlayFabManager.client_config.login_id = email
 
 	var request_params = LoginWithEmailAddressRequest.new()
 	request_params.TitleId = _title_id
@@ -79,8 +82,8 @@ func login_with_email(email: String, password: String, custom_tags: Dictionary, 
 
 
 func login_with_custom_id(custom_id: String, create_user: bool, info_request_parameters: GetPlayerCombinedInfoRequestParams):
-	_playfab_client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID
-	_playfab_client_config.login_id = custom_id
+	PlayFabManager.client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID
+	PlayFabManager.client_config.login_id = custom_id
 
 	var request_params = LoginWithCustomIdRequest.new()
 	request_params.TitleId = _title_id
@@ -106,12 +109,12 @@ func _on_login_with_email(result: Dictionary):
 
 
 func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	if !_playfab_client_config.is_logged_in():
+	if !PlayFabManager.client_config.is_logged_in():
 		push_error("Player is not logged in.")
 		return false
 
 
-	additional_headers["X-Authorization"] = _playfab_client_config.session_ticket
+	additional_headers["X-Authorization"] = PlayFabManager.client_config.session_ticket
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -126,12 +129,12 @@ func _post_with_session_auth(body: JsonSerializable, path: String, callback: Fun
 # @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
 # @ returns: bool									- False if the player is not logged in - true if the rquest was sent.
 func _post_with_entity_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	if !_playfab_client_config.is_logged_in():
+	if !PlayFabManager.client_config.is_logged_in():
 		push_error("Player is not logged in.")
 		return false
 
 
-	additional_headers["X-EntityToken"] = _playfab_client_config.entity_token.EntityToken
+	additional_headers["X-EntityToken"] = PlayFabManager.client_config.entity_token.EntityToken
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -168,7 +171,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		yield(_http.get_tree(), "idle_frame")
 
 	_request_in_progress = true
-	var request_uri = "%s%s" % [ _playfab_client_config.api_url, path]
+	var request_uri = "%s%s" % [ _get_api_url(), path]
 	var error = _http.request(request_uri, headers, true, request_method, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
