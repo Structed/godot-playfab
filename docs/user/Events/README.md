@@ -30,6 +30,7 @@ PlayStream events...
 * Can be worked with in the Data & Analytics features of PlayFab
 
 # Usage
-Instead of a `PlayFabClient` Node, drop a `PlayFabEvent` node in your scene!
+Instead of (or in addition to any) `PlayFabClient` Nodes, drop a `PlayFabEvent` node in your scene!
+You just need to make sure, a login was done before, so the EntityToken is available for Authentication
 
-Back: [User Documentation](../README.md) | Next: [Configuration for Events](Configuration.md) 
+Back: [User Documentation](../README.md) | Next: [Configuration for Events](Configuration.md)

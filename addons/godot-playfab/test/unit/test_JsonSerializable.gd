@@ -64,11 +64,13 @@ func test_to_dict_returns_expected_dictionary(p = use_parameters(generate_params
 	assert_true(result.are_equal)
 
 
+# TODO: likely, this is not a good test:
+# It tests for a behaviour that is not intended,
+# as users should not serialize native classes.
+# A debug_print() will warn users if they are serializiong native classes.
 func test_to_dict_serializes_native_objects_to_class_name():
 	# Arrange
 	var obj = JsonSerializableImpl.WithBuiltinObject.new();
-	var error_string = "If 'Node' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable."
-	print("Test is expected to push an error: %s" % error_string)
 
 	# Act
 	var actual = obj.to_dict()
