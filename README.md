@@ -1,5 +1,7 @@
 ![godot-playfab logo](addons/godot-playfab/icon.png)
 
+[![Build](https://github.com/structed/godot-playfab/actions/workflows/main.yml/badge.svg)](https://github.com/structed/godot-playfab/actions/workflows/main.yml)
+
 # godot-playfab
 is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://godotengine.org/). While it is very early, it is supposed to be two things:
 
