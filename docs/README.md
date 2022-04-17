@@ -1,6 +1,12 @@
 # Maintainer Documentation
 Read below information that is only needed by maintainers of the `godot-playfab` project - not by general users.
 
+## Setup
+In order to run integration tests, you need to set two Environment Variables for login credentials of an existing user:
+
+* `GODOT_PLAYFAB_TEST_USER`
+* `GODOT_PLAYFAB_TEST_PASSWORD`
+
 ## Using the Model Creator
 The Model Creator is a simple tool to allow you to quickly create models for PlayFab based on [PlayFab's REST API documentation](https://docs.microsoft.com/en-us/rest/api/playfab/admin/?view=playfab-rest).
 
@@ -28,10 +34,10 @@ In order for them to correctly serialize, you need to do the following steps:
     ````gdscript
     extends JsonSerializable
     class_name WriteEventsRequest
-    
+
     # Collection of events to write to PlayStream.
-    var Events: EventContentsCollection    
-    
+    var Events: EventContentsCollection
+
     func _init():
         Events = EventContentsCollection.new()
     ````
