@@ -14,6 +14,14 @@ var title_id: String
 # **Call `save_client_config()` after changing/updating it to persist.
 var client_config: PlayFabClientConfig
 
+# Represents the PlayFab Client API
+# https://docs.microsoft.com/en-us/rest/api/playfab/client/?view=playfab-rest
+var client : PlayFabClient = PlayFabClient.new()
+
+# Represents the PlayFab `Event` API
+# see https://docs.microsoft.com/en-us/rest/api/playfab/events/?view=playfab-rest
+var event: PlayFabEvent = PlayFabEvent.new()
+
 
 # Retrieves the `title_id` from `ProjectSettings`
 func _init():
@@ -25,6 +33,8 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(client)
+	add_child(event)
 	client_config = _client_config_loader.load(title_id)
 
 

@@ -4,6 +4,11 @@ class_name LoggedIn
 var login_result: LoginResult
 
 
+func _ready():
+	var _error = PlayFabManager.client.connect("api_error", self, "_on_PlayFab_api_error")
+	_error = PlayFabManager.event.connect("api_error", self, "_on_PlayFab_api_error")
+
+
 # Called when the node enters the scene tree for the first time.
 func update():
 	$VBoxContainer/AccountPlayerId/Edit.text = login_result.PlayFabId
@@ -18,7 +23,7 @@ func update():
 func _on_Button_pressed():
 	var request_data = GetTitleDataRequest.new()
 #	request_data.Keys.append("BarKey")	# Would only get the key "BarKey"
-	$PlayFabClient.get_title_data(request_data, funcref(self, "_on_get_title_data"))
+	PlayFabManager.client.get_title_data(request_data, funcref(self, "_on_get_title_data"))
 
 
 func _on_get_title_data(response):
@@ -33,7 +38,7 @@ func _on_BatchTelemetryEventsButton_pressed():
 		"Action": "_on_BatchTelemetryEventsButton_pressed"
 	}
 
-	$PlayFabEvent.batch_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.batch_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, funcref(self, "_on_write_events_request_completed"))
 
 
 func _on_BatchPlayStreamEventsButton_pressed():
@@ -41,7 +46,7 @@ func _on_BatchPlayStreamEventsButton_pressed():
 		"Action": "_on_BatchPlayStreamEventsButton_pressed"
 	}
 
-	$PlayFabEvent.batch_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.batch_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, funcref(self, "_on_write_events_request_completed"))
 
 
 func _on_write_events_request_completed(response):
@@ -53,7 +58,7 @@ func _on_WriteTelemetryDirectButton_pressed():
 		"Action": "_on_WriteTelemetryDirectButton_pressed"
 	}
 
-	$PlayFabEvent.write_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.write_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, funcref(self, "_on_write_events_request_completed"))
 
 
 func _on_WritePlayStreamDirectButton_pressed():
@@ -61,7 +66,7 @@ func _on_WritePlayStreamDirectButton_pressed():
 		"Action": "_on_WritePlayStreamDirectButton_pressed"
 	}
 
-	$PlayFabEvent.write_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.write_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, funcref(self, "_on_write_events_request_completed"))
 
 
 func _on_PlayFab_api_error(error: ApiErrorWrapper):
