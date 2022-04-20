@@ -1,0 +1,41 @@
+
+name: Release
+
+on:
+  # push:
+  #   branches:
+  #     - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  ## Sets environment variable
+  #GODOT_PLAYFAB_TEST_USER: ${{ github.run_id }}-${{ secrets.GODOT_PLAYFAB_TEST_USER }}
+  GODOT_PLAYFAB_TEST_USER: ${{ secrets.GODOT_PLAYFAB_TEST_USER }}
+  GODOT_PLAYFAB_TEST_PASSWORD: ${{ secrets.GODOT_PLAYFAB_TEST_PASSWORD }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Important to resolve GitVersion properly
+
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.13
+        with:
+          versionSpec: '5.x'
+
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.13
+        with:
+          useConfigFile: true
