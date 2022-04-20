@@ -18,6 +18,9 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
 
       - name: Checkout
@@ -39,3 +42,15 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.13
         with:
           useConfigFile: true
+
+      - uses: ncipollo/release-action@v1
+        with:
+          name: ${{ steps.gitversion.outputs.fullSemVer }}
+          draft: true
+          prerelease: true
+          artifacts: "release.tar.gz,foo/*.txt"
+          generateReleaseNotes: true
+          # bodyFile: "CHANGELOG.md"
+          replacesArtifacts: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
