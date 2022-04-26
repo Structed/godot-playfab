@@ -1,8 +1,18 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
 
+# IDE
+/.vscode
+
 # Exclude other addons
 /addons/godot-plugin-refresher  export-ignore
+
+
+# GUT
+/addons/gut                     export-ignore
+.gut_editor_config.json         export-ignore
+.gut_editor_shortcuts.cfg       export-ignore
+.gutconfig.json                 export-ignore
 
 # Project items
 /docs                           export-ignore
@@ -13,6 +23,11 @@ icon.png                        export-ignore
 icon.png.import                 export-ignore
 /Scenes                         export-ignore
 /Scripts                        export-ignore
+.editorconfig                   export-ignore
+*.gif                           export-ignore
+GitVersion.yml                  export-ignore
+/Textures                       export-ignore
+
 
 # Defautl repository stuff
 README.md                       export-ignore
