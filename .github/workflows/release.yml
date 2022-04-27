@@ -60,11 +60,12 @@ jobs:
           name: ${{ steps.gitversion.outputs.fullSemVer }}
           draft: true
           prerelease: true
+          artifacts: ""
           # artifacts: "godot-playfab-${{ steps.gitversion.outputs.fullSemVer }}.zip"
           # artifacts: "${{ steps.download.outputs.file_name }}"
           generateReleaseNotes: true
           # bodyFile: "CHANGELOG.md"
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit: ${{ github.ref }}
-          # tag: ${{ github.ref }}
+          # commit: ${{ github.ref }}
+          tag: ${{ github.ref }}
