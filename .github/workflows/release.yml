@@ -1,4 +1,3 @@
-
 name: Release
 
 on:
@@ -26,12 +25,12 @@ jobs:
 
       - uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '6.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+          dotnet-version: "6.x" # SDK Version to use; x will use the latest version of the 3.1 channel
 
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.13
         with:
-          versionSpec: '5.x'
+          versionSpec: "5.x"
 
       - name: Determine Version
         id: gitversion
