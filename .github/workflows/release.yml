@@ -66,4 +66,5 @@ jobs:
           # bodyFile: "CHANGELOG.md"
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
+          # commit: ${{ github.ref }}
+          tag: ${{ github.ref }}
