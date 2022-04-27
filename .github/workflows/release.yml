@@ -61,7 +61,7 @@ jobs:
           draft: true
           prerelease: true
           # artifacts: "godot-playfab-${{ steps.gitversion.outputs.fullSemVer }}.zip"
-          artifacts: ${{ steps.download.outputs.file_name }}
+          artifacts: "${{ steps.download.outputs.file_name }}"
           generateReleaseNotes: true
           # bodyFile: "CHANGELOG.md"
           replacesArtifacts: true
