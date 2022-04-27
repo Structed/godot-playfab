@@ -47,6 +47,13 @@ jobs:
         with:
           useConfigFile: true
 
+      - name: download
+        uses: HalfCoke/download2release@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOWNLOAD_URL: "https://github.com/Structed/godot-playfab/archive/${{ github.ref }}.zip"
+          FILE_NAME: "godot-playfab-${{ steps.gitversion.outputs.fullSemVer }}.zip"
+
       - uses: ncipollo/release-action@v1
         with:
           name: ${{ steps.gitversion.outputs.fullSemVer }}
