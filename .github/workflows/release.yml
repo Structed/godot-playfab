@@ -47,13 +47,13 @@ jobs:
         with:
           useConfigFile: true
 
-      - name: download
-        id: download
-        uses: HalfCoke/download2release@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOWNLOAD_URL: "https://github.com/Structed/godot-playfab/archive/${{ github.ref }}.zip"
-          FILE_NAME: "godot-playfab-${{ steps.gitversion.outputs.fullSemVer }}.zip"
+      # - name: download
+      #   id: download
+      #   uses: HalfCoke/download2release@v1
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     DOWNLOAD_URL: "https://github.com/Structed/godot-playfab/archive/${{ github.ref }}.zip"
+      #     FILE_NAME: "godot-playfab-${{ steps.gitversion.outputs.fullSemVer }}.zip"
 
       - uses: ncipollo/release-action@v1
         with:
@@ -61,7 +61,7 @@ jobs:
           draft: true
           prerelease: true
           # artifacts: "godot-playfab-${{ steps.gitversion.outputs.fullSemVer }}.zip"
-          artifacts: "${{ steps.download.outputs.file_name }}"
+          # artifacts: "${{ steps.download.outputs.file_name }}"
           generateReleaseNotes: true
           # bodyFile: "CHANGELOG.md"
           replacesArtifacts: true
