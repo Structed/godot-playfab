@@ -48,6 +48,7 @@ jobs:
           useConfigFile: true
 
       - name: download
+        id: download
         uses: HalfCoke/download2release@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
