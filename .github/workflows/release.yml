@@ -23,6 +23,15 @@ jobs:
         with:
           fetch-depth: 0 # Important to resolve GitVersion properly
 
+      - name: Display github.ref
+        run: echo "Ref ${{ github.ref }}"
+
+      - name: Display github.ref_name
+        run: echo "Ref Name ${{ github.ref_name }}"
+
+      - name: Display github.head_ref
+        run: echo "Head Ref Name ${{ github.head_ref }}"
+
       - uses: actions/setup-dotnet@v2
         with:
           dotnet-version: "6.x" # SDK Version to use; x will use the latest version of the 3.1 channel
