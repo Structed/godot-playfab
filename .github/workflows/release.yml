@@ -11,42 +11,19 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+
+      - name: substring-action
+        id: tag-id
+        uses: bhowell2/github-substring-action@v1.0.0
         with:
-          fetch-depth: 0 # Important to resolve GitVersion properly
-
-      - name: Display github.ref
-        run: echo "Ref ${{ github.ref }}"
-
-      - name: Display github.ref_name
-        run: echo "Ref Name ${{ github.ref_name }}"
-
-      - name: Display github.head_ref
-        run: echo "Head Ref Name ${{ github.head_ref }}"
-
-      - uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "6.x" # SDK Version to use; x will use the latest version of the 3.1 channel
-
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.13
-        with:
-          versionSpec: "5.x"
-
-      - name: Determine Version
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.13
-        with:
-          useConfigFile: true
+          value: ${{ github.ref }}
+          index_of_str: "refs/tags/"
 
       - uses: ncipollo/release-action@v1
         with:
-          name: ${{ steps.gitversion.outputs.fullSemVer }}
+          name: ${{ steps.tag-id.outputs.substring }}
           draft: true
           prerelease: true
           artifacts: ""
