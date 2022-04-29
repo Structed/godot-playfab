@@ -18,25 +18,22 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v3
+      - name: Set Version
+        run: |
+          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
-      - name: substring-action
-        id: tag-id
-        uses: bhowell2/github-substring-action@v1.0.0
-        with:
-          value: ${{ github.ref }}
-          index_of_str: "refs/tags/"
+      - uses: actions/checkout@v3
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: godot-playfab-${{ steps.tag-id.outputs.substring }}
+          name: godot-playfab-${{ env.version }}
           path: addons/godot-playfab/
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
 
       - uses: ncipollo/release-action@v1
         with:
-          name: ${{ steps.tag-id.outputs.substring }}
+          name: ${{ env.version }}
           draft: true
           prerelease: true
           artifacts: ""
@@ -50,10 +47,6 @@ jobs:
     needs: release
 
     steps:
-
-      - name: Set Version
-        run: |
-          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
       - name: Display structure of downloaded files
         run: ls -la
