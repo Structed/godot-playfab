@@ -36,7 +36,7 @@ jobs:
           name: ${{ env.version }}
           draft: true
           prerelease: true
-          artifacts: ""
+          artifacts: "godot-playfab-${{ env.version }}"
           generateReleaseNotes: true
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
