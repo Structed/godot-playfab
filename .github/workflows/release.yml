@@ -48,7 +48,7 @@ jobs:
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v3
         with:
-          name: godot-playfab-${{ env.version }}
+          name: ${{ env.version }}
 
       - name: Display structure of downloaded files
         run: ls -R
