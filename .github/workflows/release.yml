@@ -37,8 +37,8 @@ jobs:
           draft: true
           prerelease: true
           artifacts: ""
+          replacesArtifacts: false
           generateReleaseNotes: true
-          replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
 
