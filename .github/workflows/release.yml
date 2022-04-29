@@ -15,11 +15,6 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: true
-    #   matrix:
-    #     channel:
-    #       - windows
 
     steps:
 
@@ -40,6 +35,12 @@ jobs:
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
+
+  itch:
+    runs-on: ubuntu-latest
+    needs: release
+
+    steps:
 
       - name: Set Version
         run: |
