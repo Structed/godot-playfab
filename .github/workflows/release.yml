@@ -20,8 +20,6 @@ jobs:
       matrix:
         channel:
           - windows
-          - linux
-          - mac
 
     steps:
 
@@ -54,5 +52,5 @@ jobs:
           gameData: ./build/${{ matrix.template }}
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
-          buildChannel: ${{ matrix.channel }}
+          buildChannel: windows-mac-linux #${{ matrix.channel }}
           buildNumber: ${{ needs.version.outputs.version_hash }}
