@@ -197,10 +197,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="GetTitleDataButton" type="Button" parent="VBoxContainer"]
 margin_right = 1024.0
 margin_bottom = 20.0
-text = "Test Request"
+text = "Get Title Data"
 
 [node name="EventsPlayStream" type="Button" parent="VBoxContainer"]
 margin_top = 24.0
@@ -215,5 +215,5 @@ margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/GetTitleDataButton" to="." method="_on_GetTitleDataButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/EventsPlayStream" to="." method="_on_EventsPlayStream_pressed"]

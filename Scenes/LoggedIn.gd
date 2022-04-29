@@ -22,7 +22,7 @@ func update():
 		$VBoxContainer/LoginResultContainer.show()
 
 
-func _on_Button_pressed():
+func _on_GetTitleDataButton_pressed():
 	var request_data = GetTitleDataRequest.new()
 #	request_data.Keys.append("BarKey")	# Would only get the key "BarKey"
 	PlayFabManager.client.get_title_data(request_data, funcref(self, "_on_get_title_data"))
