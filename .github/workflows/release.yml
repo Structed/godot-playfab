@@ -15,11 +15,11 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        channel:
-          - windows
+    # strategy:
+    #   fail-fast: true
+    #   matrix:
+    #     channel:
+    #       - windows
 
     steps:
 
@@ -41,11 +41,16 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
 
+      - name: Set Version
+        run: |
+          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v2.0.8
         with:
           name: ${{ matrix.channel }}
           path: build/${{ matrix.channel }}
+
       - uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
@@ -53,4 +58,4 @@ jobs:
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: windows-mac-linux #${{ matrix.channel }}
-          buildNumber: ${{ needs.version.outputs.version_hash }}
+          buildNumber: ${{ env.version }}
