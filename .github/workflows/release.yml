@@ -72,7 +72,7 @@ jobs:
       - uses: KikimoraGames/itch-publish@v0.0.3
         with:
           butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
-          gameData: godot-playfab-${{ env.version }}
+          gameData: . #godot-playfab-${{ env.version }}
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: windows-mac-linux #${{ matrix.channel }}
