@@ -65,6 +65,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: godot-playfab-${{ env.version }}
+          path: addons/godot-playfab/
 
       - name: Display structure of downloaded files
         run: ls -R
