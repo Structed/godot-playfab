@@ -198,39 +198,18 @@ margin_right = 1024.0
 margin_bottom = 216.0
 text = "Test Request"
 
-[node name="BatchTelemetryEventsButton" type="Button" parent="VBoxContainer"]
+[node name="EventsPlayStream" type="Button" parent="VBoxContainer"]
 margin_top = 220.0
 margin_right = 1024.0
 margin_bottom = 240.0
-text = "Batch Telemetry Events"
-
-[node name="BatchPlayStreamEventsButton" type="Button" parent="VBoxContainer"]
-margin_top = 244.0
-margin_right = 1024.0
-margin_bottom = 264.0
-text = "Batch PlayStream Events"
-
-[node name="WriteTelemetryDirectButton" type="Button" parent="VBoxContainer"]
-margin_top = 268.0
-margin_right = 1024.0
-margin_bottom = 288.0
-text = "Write Telemetry Event (direct)"
-
-[node name="WritePlayStreamDirectButton" type="Button" parent="VBoxContainer"]
-margin_top = 292.0
-margin_right = 1024.0
-margin_bottom = 312.0
-text = "Write PlayStream Event (direct)"
+text = "Events & PlayStream API"
 
 [node name="Response" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 316.0
+margin_top = 244.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="VBoxContainer/BatchTelemetryEventsButton" to="." method="_on_BatchTelemetryEventsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/BatchPlayStreamEventsButton" to="." method="_on_BatchPlayStreamEventsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/WriteTelemetryDirectButton" to="." method="_on_WriteTelemetryDirectButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/WritePlayStreamDirectButton" to="." method="_on_WritePlayStreamDirectButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/EventsPlayStream" to="." method="_on_EventsPlayStream_pressed"]
