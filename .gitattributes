@@ -2,7 +2,7 @@
 * text=auto eol=lf
 
 # IDE
-/.vscode
+/.vscode                        export-ignore
 
 # Exclude other addons
 /addons/godot-plugin-refresher  export-ignore
