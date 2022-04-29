@@ -18,12 +18,24 @@ jobs:
 
     steps:
 
+      - uses: actions/checkout@v3
+
       - name: substring-action
         id: tag-id
         uses: bhowell2/github-substring-action@v1.0.0
         with:
           value: ${{ github.ref }}
           index_of_str: "refs/tags/"
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: godot-playfab-${{ steps.tag-id.outputs.substring }}
+          path: addons/godot-playfab/
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
 
       - uses: ncipollo/release-action@v1
         with:
@@ -46,10 +58,13 @@ jobs:
         run: |
           echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
+      - name: Display structure of downloaded files
+        run: ls -la
+
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ env.version }}
+          name: godot-playfab-${{ env.version }}
 
       - name: Display structure of downloaded files
         run: ls -R
