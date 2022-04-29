@@ -27,9 +27,6 @@ jobs:
           value: ${{ github.ref }}
           index_of_str: "refs/tags/"
 
-      - name: Display structure of downloaded files
-        run: ls -R
-
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
@@ -66,9 +63,6 @@ jobs:
         with:
           name: godot-playfab-${{ env.version }}
           path: addons/godot-playfab/
-
-      - name: Display structure of downloaded files
-        run: ls -R
 
       - uses: KikimoraGames/itch-publish@v0.0.3
         with:
