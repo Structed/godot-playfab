@@ -8,9 +8,20 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  ITCH_USERNAME: structed
+  ITCH_GAME_ID: godot-playfab
+
 jobs:
   release:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        channel:
+          - windows
+          - linux
+          - mac
 
     steps:
 
@@ -31,3 +42,17 @@ jobs:
           replacesArtifacts: true
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
+
+      # Using https://github.com/KikimoraGames/itch-publish
+      - uses: actions/download-artifact@v2.0.8
+        with:
+          name: ${{ matrix.channel }}
+          path: build/${{ matrix.channel }}
+      - uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
+          gameData: ./build/${{ matrix.template }}
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: ${{ matrix.channel }}
+          buildNumber: ${{ needs.version.outputs.version_hash }}
