@@ -53,9 +53,13 @@ func load(password: String) -> PlayFabClientConfig:
 
 	# If the file didn't load, ignore it.
 	if err != OK:
-		var error_message = "Config file didn't load. Error code: %f" % err
-		print_debug(error_message)
-		errors.append(error_message)
+		if err == ERR_FILE_NOT_FOUND:
+			print_debug("No config file found. After login, it will be created at \"%s\"." % _load_path)
+		else:
+			var error_message = "Config file didn't load. Error code: %f" % err
+			print_debug(error_message)
+			errors.append(error_message)
+
 		return PlayFabClientConfig.new()
 
 	_get_values(new_config)
