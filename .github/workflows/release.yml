@@ -16,15 +16,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version: ${{ steps.set_version.outputs.version }}
 
     steps:
 
       - name: Set Version
-        id: version
+        id: set_version
         run: |
           echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-          echo "::set-output name=version::${{ env.version }}"
+          echo "::set-output name=version::$version"
 
       - uses: actions/checkout@v3
 
