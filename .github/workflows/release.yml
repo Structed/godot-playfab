@@ -42,27 +42,47 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
 
-  itch:
+#  itch:
+#    runs-on: ubuntu-latest
+#    needs: release
+#
+#    steps:
+#
+#      - name: Set Version
+#        run: |
+#          echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+#
+#      # Using https://github.com/KikimoraGames/itch-publish
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: godot-playfab-${{ env.version }}
+#          path: addons/godot-playfab/
+#
+#      - uses: KikimoraGames/itch-publish@v0.0.3
+#        with:
+#          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
+#          gameData: .
+#          itchUsername: ${{env.ITCH_USERNAME}}
+#          itchGameId: ${{ env.ITCH_GAME_ID }}
+#          buildChannel: windows-mac-linux
+#          buildNumber: ${{ env.version }}
+
+  assetlib:
     runs-on: ubuntu-latest
     needs: release
-
+    name: Publish new version to asset lib
     steps:
 
       - name: Set Version
         run: |
           echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
-      # Using https://github.com/KikimoraGames/itch-publish
-      - uses: actions/download-artifact@v3
-        with:
-          name: godot-playfab-${{ env.version }}
-          path: addons/godot-playfab/
 
-      - uses: KikimoraGames/itch-publish@v0.0.3
+      - uses: actions/checkout@v3
+
+      - name: Godot Asset Lib
+        uses: actions/godot-asset-lib-action@v0.3.0
         with:
-          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
-          gameData: .
-          itchUsername: ${{env.ITCH_USERNAME}}
-          itchGameId: ${{ env.ITCH_GAME_ID }}
-          buildChannel: windows-mac-linux
-          buildNumber: ${{ env.version }}
+          username: structed
+          password: ${{ secrets.ASSET_STORE_PASSWORD }}
+          assetId: 5780
