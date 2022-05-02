@@ -20,7 +20,7 @@ jobs:
 
       - name: Set Version
         run: |
-          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+          echo "version=${GITHUB_REF/refs\/tags\//v}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
 
@@ -50,7 +50,7 @@ jobs:
 
       - name: Set Version
         run: |
-          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+          echo "version=${GITHUB_REF/refs\/tags\//v}" >> $GITHUB_ENV
 
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v3
