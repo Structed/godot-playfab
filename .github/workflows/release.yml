@@ -15,16 +15,12 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.version.outputs.version }}
 
     steps:
 
       - name: Set Version
-        id: version
         run: |
           echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-          echo "::set-output name=version::${{ env.version }}"
 
       - uses: actions/checkout@v3
 
@@ -34,15 +30,6 @@ jobs:
           name: godot-playfab-${{ env.version }}
           path: addons/godot-playfab/
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
-
-      # - run: mkdir -p path/to/artifact
-
-      # - run: echo ${{ env.version }} > VERSION
-
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: my-artifact
-      #     path: path/to/artifact/world.txt
 
       - uses: ncipollo/release-action@v1
         with:
@@ -63,7 +50,7 @@ jobs:
 
       - name: Set Version
         run: |
-          echo "version=${{needs.release.outputs.version}}" >> $GITHUB_ENV
+          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v3
