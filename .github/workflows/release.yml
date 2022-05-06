@@ -38,7 +38,7 @@ jobs:
         with:
           name: ${{ env.version }}
           draft: true
-          prerelease: true
+          prerelease: false
           artifacts: ""
           replacesArtifacts: false
           generateReleaseNotes: true
