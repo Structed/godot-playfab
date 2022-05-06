@@ -11,6 +11,9 @@ on:
 env:
   ITCH_USERNAME: structed
   ITCH_GAME_ID: godot-playfab
+  ASSET_LIB_USERNAME: structed
+  ASSET_LIB_PASSSWORD: ${{ secrets.ASSET_STORE_PASSWORD }}
+  ASSET_LIB_ASSET_ID: 1321
 
 jobs:
   release:
@@ -83,6 +86,6 @@ jobs:
       - name: Godot Asset Lib
         uses: deep-entertainment/godot-asset-lib-action@v0.4.0
         with:
-          username: structed
-          password: ${{ secrets.ASSET_STORE_PASSWORD }}
-          assetId: 1321
+          username: ${{ env.ASSET_LIB_USERNAME }}
+          password: ${{ env.ASSET_LIB_PASSSWORD }}
+          assetId: ${{ env.ASSET_LIB_ASSET_ID }}
