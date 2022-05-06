@@ -15,7 +15,7 @@ env:
   ASSET_LIB_PASSSWORD: ${{ secrets.ASSET_STORE_PASSWORD }}
   ASSET_LIB_ASSET_ID: 1321
 
-  VERSION: ${GITHUB_REF/refs\/tags\/v/}
+  VERSION: ${GITHUB_REF##*/}
 
 jobs:
   release:
