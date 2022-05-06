@@ -73,7 +73,7 @@ jobs:
   assetlib:
     runs-on: ubuntu-latest
     needs: release
-    name: Publish new version to asset lib
+    name: Godot AssetLib
     steps:
 
       - name: Set Version
