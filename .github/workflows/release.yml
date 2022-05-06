@@ -45,30 +45,30 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}
 
-#  itch:
-#    runs-on: ubuntu-latest
-#    needs: release
-#
-#    steps:
-#
-#      - name: Set Version
-#        run: |
-#          echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
-#
-#      # Using https://github.com/KikimoraGames/itch-publish
-#      - uses: actions/download-artifact@v3
-#        with:
-#          name: godot-playfab-${{ env.version }}
-#          path: addons/godot-playfab/
-#
-#      - uses: KikimoraGames/itch-publish@v0.0.3
-#        with:
-#          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
-#          gameData: .
-#          itchUsername: ${{env.ITCH_USERNAME}}
-#          itchGameId: ${{ env.ITCH_GAME_ID }}
-#          buildChannel: windows-mac-linux
-#          buildNumber: ${{ env.version }}
+  itch:
+    runs-on: ubuntu-latest
+    needs: release
+
+    steps:
+
+      - name: Set Version
+        run: |
+          echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
+      # Using https://github.com/KikimoraGames/itch-publish
+      - uses: actions/download-artifact@v3
+        with:
+          name: godot-playfab-${{ env.version }}
+          path: addons/godot-playfab/
+
+      - uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
+          gameData: .
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: windows-mac-linux
+          buildNumber: ${{ env.version }}
 
   assetlib:
     runs-on: ubuntu-latest
