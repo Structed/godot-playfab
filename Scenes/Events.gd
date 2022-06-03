@@ -42,7 +42,7 @@ func _on_WritePlayStreamDirectButton_pressed():
 
 
 func _on_write_events_request_completed(response):
-	$VBoxContainer/Response.text = JSON.print(response.data, "\t")
+	$VBoxContainer/VBoxContainer/HBoxContainer/Response.text = JSON.print(response.data, "\t")
 
 
 func _on_PlayFab_api_error(error: ApiErrorWrapper):
