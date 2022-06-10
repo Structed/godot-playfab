@@ -43,6 +43,18 @@ func test_to_dict_returns_array():
 
 	assert_true(dict is Array)
 
+func test_from_dict_returns_collection():
+
+	var data = [
+		{},
+		{}
+	]
+	var instance = AbstractJsonSerializableCollection.new()
+	instance.from_dict(data, instance);
+
+	assert_true(instance._Items is Array)
+	assert_eq(instance._Items.size(), 2)
+
 
 func test_from_dict_serializes_items():
 	var data = [
