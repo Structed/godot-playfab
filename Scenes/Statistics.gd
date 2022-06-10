@@ -47,3 +47,6 @@ func _on_update_statistics_request_completed(_result):
 
 func _on_PlayFab_api_error(error: ApiErrorWrapper):
 	print_debug(error.errorMessage)
+
+func _on_BackButton_pressed():
+	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
