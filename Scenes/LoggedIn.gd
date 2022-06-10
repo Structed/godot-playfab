@@ -45,4 +45,4 @@ func _on_RequestBuilder_pressed():
 
 
 func _on_StatisticsButton_pressed():
-	pass # Replace with function body.
+	SceneManager.goto_scene("res://Scenes/Statistics.tscn")
