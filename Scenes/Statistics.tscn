@@ -36,4 +36,11 @@ margin_right = 1024.0
 margin_bottom = 56.0
 text = "Stop waiting for Godot!"
 
+[node name="BackButton" type="Button" parent="."]
+margin_top = 60.0
+margin_right = 1024.0
+margin_bottom = 80.0
+text = "Back"
+
 [connection signal="pressed" from="StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
