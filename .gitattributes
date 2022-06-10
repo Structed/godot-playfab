@@ -21,6 +21,7 @@
 /Scenes                         export-ignore
 /Scripts                        export-ignore
 /Textures                       export-ignore
+.asset-template.json.hb         export-ignore
 project.godot                   export-ignore
 default_env.tres                export-ignore
 icon.png.import                 export-ignore
