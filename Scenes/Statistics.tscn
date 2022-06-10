@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Statistics.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Widgets/LoadingIndicator.tscn" type="PackedScene" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="Statistics" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Statistics"]
+margin_right = 1024.0
+margin_bottom = 14.0
+text = "How long can you wait for Godot?"
+
+[node name="LayoutHbox" type="HBoxContainer" parent="Statistics"]
+margin_top = 18.0
+margin_right = 1024.0
+margin_bottom = 32.0
+
+[node name="TimeLabel" type="Label" parent="Statistics/LayoutHbox"]
+margin_right = 94.0
+margin_bottom = 14.0
+text = "Waiting since: "
+
+[node name="ElapsedTimeLabel" type="Label" parent="Statistics/LayoutHbox"]
+margin_left = 98.0
+margin_right = 106.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="StopWaitingButton" type="Button" parent="Statistics"]
+margin_top = 36.0
+margin_right = 1024.0
+margin_bottom = 56.0
+text = "Stop waiting for Godot!"
+
+[node name="BackButton" type="Button" parent="Statistics"]
+margin_top = 60.0
+margin_right = 1024.0
+margin_bottom = 80.0
+text = "Back"
+
+[node name="LeaderboardVBox" type="VBoxContainer" parent="Statistics"]
+margin_top = 84.0
+margin_right = 1024.0
+margin_bottom = 98.0
+
+[node name="VersionHBox" type="HBoxContainer" parent="Statistics/LeaderboardVBox"]
+margin_right = 1024.0
+margin_bottom = 14.0
+
+[node name="LeaderboardVersionLabel" type="Label" parent="Statistics/LeaderboardVBox/VersionHBox"]
+margin_right = 140.0
+margin_bottom = 14.0
+text = "Leaderboard- Version:"
+
+[node name="LeaderboardVersion" type="Label" parent="Statistics/LeaderboardVBox/VersionHBox"]
+margin_left = 144.0
+margin_right = 168.0
+margin_bottom = 14.0
+text = "000"
+
+[node name="PlayerStatisticsVBox" type="VBoxContainer" parent="Statistics"]
+margin_top = 102.0
+margin_right = 1024.0
+margin_bottom = 102.0
+
+[node name="GetPlayerStatisticsButton" type="Button" parent="Statistics"]
+margin_top = 106.0
+margin_right = 1024.0
+margin_bottom = 126.0
+text = "Get Player Statistics"
+
+[node name="ProgressCenter" type="CenterContainer" parent="."]
+margin_top = 88.0
+margin_right = 1024.0
+margin_bottom = 188.0
+
+[node name="LoginIndicator" parent="ProgressCenter" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 462.0
+margin_right = 562.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+
+[connection signal="pressed" from="Statistics/StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
+[connection signal="pressed" from="Statistics/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Statistics/GetPlayerStatisticsButton" to="." method="_on_GetPlayerStatisticsButton_pressed"]
