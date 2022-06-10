@@ -51,3 +51,7 @@ func _on_MainMenuButton_pressed():
 
 func _on_LogoutButton_pressed():
 	emit_signal("logout")
+
+
+func _on_StatisticsButton_pressed():
+	pass # Replace with function body.
