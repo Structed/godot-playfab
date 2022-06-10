@@ -15,7 +15,7 @@
 .gutconfig.json                 export-ignore
 
 # Project items
-/addons/godot-playfab/tests     export-ignore
+/addons/godot-playfab/test     export-ignore
 /docs                           export-ignore
 /raw_assets                     export-ignore
 /Scenes                         export-ignore
