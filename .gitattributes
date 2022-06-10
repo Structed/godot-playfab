@@ -15,18 +15,18 @@
 .gutconfig.json                 export-ignore
 
 # Project items
+/addons/godot-playfab/tests     export-ignore
 /docs                           export-ignore
 /raw_assets                     export-ignore
-project.godot                   export-ignore
-default_env.tres                export-ignore
-icon.png                        export-ignore
-icon.png.import                 export-ignore
 /Scenes                         export-ignore
 /Scripts                        export-ignore
+/Textures                       export-ignore
+project.godot                   export-ignore
+default_env.tres                export-ignore
+icon.png.import                 export-ignore
 .editorconfig                   export-ignore
 *.gif                           export-ignore
 GitVersion.yml                  export-ignore
-/Textures                       export-ignore
 
 
 # Defautl repository stuff
