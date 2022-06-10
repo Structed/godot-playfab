@@ -35,16 +35,11 @@ func start():
 
 
 func _update_statistic(value: int):
-	var request_data = UpdatePlayerStatisticsRequest.new()
 	var statistic = StatisticUpdate.new()
-
 	statistic.StatisticName = "time_waiting"
 	statistic.Value = value
-	statistic.Version = 1	# Make sure to imncrement this for updates where rules changes the scores
-
-	request_data.Statistics = StatisticUpdateCollection.new()
-	request_data.Statistics.append(statistic)
-	PlayFabManager.client.update_player_statistic(request_data, funcref(self, "_on_update_statistics_request_completed"))
+	statistic.Version = 1
+	PlayFabManager.client.update_player_statistic(statistic, funcref(self, "_on_update_statistics_request_completed"))
 
 func _on_update_statistics_request_completed(_result):
 	print_debug("Completed sending stats")
