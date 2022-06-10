@@ -18,3 +18,7 @@ func update_player_statistic(statistic: StatisticUpdate, callback: FuncRef):
 
 func update_player_statistics(request_data: UpdatePlayerStatisticsRequest, callback: FuncRef):
 	_post_with_session_auth(request_data, "/Client/UpdatePlayerStatistics", callback)
+
+
+func get_leaderboard(request_data: GetLeaderboardRequest, callback: FuncRef):
+	_post_with_session_auth(request_data, "/Client/GetLeaderboard", callback)
