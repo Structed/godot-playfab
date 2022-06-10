@@ -8,5 +8,13 @@ func get_title_data(request_data: GetTitleDataRequest, callback: FuncRef):
 	_post_with_session_auth(request_data, "/Client/GetTitleData", callback)
 
 
-func update_player_statistic(request_data: UpdatePlayerStatisticsRequest, callback: FuncRef):
+func update_player_statistic(statistic: StatisticUpdate, callback: FuncRef):
+	var request_data = UpdatePlayerStatisticsRequest.new()
+	request_data.Statistics = StatisticUpdateCollection.new()
+	request_data.Statistics.append(statistic)
+
+	update_player_statistics(request_data, callback)
+
+
+func update_player_statistics(request_data: UpdatePlayerStatisticsRequest, callback: FuncRef):
 	_post_with_session_auth(request_data, "/Client/UpdatePlayerStatistics", callback)
