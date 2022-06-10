@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 const STATISTIC_NAME = "time_waiting"
-const STATISTIC_VERSION = 2
+const STATISTIC_VERSION = 10
 var row_item_node = preload("res://Scenes/Widgets/RowItem.tscn")
 var start_time: int
 var waiting = false
@@ -50,7 +50,8 @@ func get_leaderboard():
 	var request_data = GetLeaderboardRequest.new()
 	request_data.StatisticName = STATISTIC_NAME
 	request_data.Version = STATISTIC_VERSION
-	# request_data.UseSpecificVersion = true
+	request_data.MaxResultsCount = 10
+	request_data.UseSpecificVersion = true
 
 	PlayFabManager.client.get_leaderboard(request_data, funcref(self, "_on_get_leaderboard_request_completed"))
 
@@ -64,8 +65,9 @@ func _add_statistic_row(data: PlayerLeaderboardEntry):
 func _on_get_leaderboard_request_completed(result):
 	var leaderboard_result = GetLeaderboardResult.new()
 	leaderboard_result.from_dict(result["data"], leaderboard_result)
+	var items = leaderboard_result.Leaderboard._Items
 
-	for row in leaderboard_result.Leaderboard:
+	for row in leaderboard_result.Leaderboard._Items:
 		_add_statistic_row(row)
 
 func _on_update_statistics_request_completed(_result):
