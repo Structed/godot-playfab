@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+var row_item_node = preload("res://Scenes/Widgets/RowItem.tscn")
 var start_time: int
 var waiting = false
 
@@ -50,3 +51,11 @@ func _on_PlayFab_api_error(error: ApiErrorWrapper):
 
 func _on_BackButton_pressed():
 	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
+
+
+func get_statistic():
+	pass
+
+func add_statistic_row():
+		var _instance = row_item_node.instance()
+		get_tree().get_root().add_child(_instance)
