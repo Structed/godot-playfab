@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+const STATISTIC_NAME = "time_waiting"
+const STATISTIC_VERSION = 2
 var row_item_node = preload("res://Scenes/Widgets/RowItem.tscn")
 var start_time: int
 var waiting = false
@@ -9,6 +11,7 @@ var waiting = false
 func _ready():
 	start()
 	var _error = PlayFabManager.client.connect("api_error", self, "_on_PlayFab_api_error")
+	get_leaderboard()
 
 
 func _process(_delta):
@@ -37,14 +40,36 @@ func start():
 
 func _update_statistic(value: int):
 	var statistic = StatisticUpdate.new()
-	statistic.StatisticName = "time_waiting"
+	statistic.StatisticName = STATISTIC_NAME
 	statistic.Value = value
-	statistic.Version = 1
+	statistic.Version = STATISTIC_VERSION
 	PlayFabManager.client.update_player_statistic(statistic, funcref(self, "_on_update_statistics_request_completed"))
+
+
+func get_leaderboard():
+	var request_data = GetLeaderboardRequest.new()
+	request_data.StatisticName = STATISTIC_NAME
+	request_data.Version = STATISTIC_VERSION
+	# request_data.UseSpecificVersion = true
+
+	PlayFabManager.client.get_leaderboard(request_data, funcref(self, "_on_get_leaderboard_request_completed"))
+
+func _add_statistic_row(data: PlayerLeaderboardEntry):
+		var _instance = row_item_node.instance()
+		_instance.get_node("Rank").text = data.Position
+		_instance.get_node("Name").text = data.DisplayName
+		_instance.get_node("Score").text = data.StatValue
+		$LeaderboardVBox.add_child(_instance)
+
+func _on_get_leaderboard_request_completed(result):
+	var leaderboard_result = GetLeaderboardResult.new()
+	leaderboard_result.from_dict(result["data"], leaderboard_result)
+
+	for row in leaderboard_result.Leaderboard:
+		_add_statistic_row(row)
 
 func _on_update_statistics_request_completed(_result):
 	print_debug("Completed sending stats")
-
 
 func _on_PlayFab_api_error(error: ApiErrorWrapper):
 	print_debug(error.errorMessage)
@@ -53,9 +78,4 @@ func _on_BackButton_pressed():
 	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
 
 
-func get_statistic():
-	pass
 
-func add_statistic_row():
-		var _instance = row_item_node.instance()
-		get_tree().get_root().add_child(_instance)
