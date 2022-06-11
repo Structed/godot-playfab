@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/Statistics.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Widgets/RowItem.tscn" type="PackedScene" id=2]
 
 [node name="Statistics" type="VBoxContainer"]
 anchor_right = 1.0
@@ -46,13 +45,7 @@ text = "Back"
 [node name="LeaderboardVBox" type="VBoxContainer" parent="."]
 margin_top = 84.0
 margin_right = 1024.0
-margin_bottom = 98.0
-
-[node name="RowItem" parent="LeaderboardVBox" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1024.0
-margin_bottom = 14.0
+margin_bottom = 84.0
 
 [connection signal="pressed" from="StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
