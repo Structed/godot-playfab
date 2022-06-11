@@ -11,6 +11,14 @@ var waiting = false
 func _ready():
 	start()
 	var _error = PlayFabManager.client.connect("api_error", self, "_on_PlayFab_api_error")
+
+	# Add header row
+	var _instance = row_item_node.instance()
+	_instance.get_node("Rank").text = "Rank"
+	_instance.get_node("Name").text = "PlayerName"
+	_instance.get_node("Score").text = "Score"
+	$LeaderboardVBox.add_child(_instance)
+
 	get_leaderboard()
 
 
@@ -57,7 +65,7 @@ func get_leaderboard():
 
 func _add_statistic_row(data: PlayerLeaderboardEntry):
 		var _instance = row_item_node.instance()
-		_instance.get_node("Rank").text = str(data.Position)
+		_instance.get_node("Rank").text = str(data.Position + 1)
 		_instance.get_node("Name").text = data.DisplayName
 		_instance.get_node("Score").text = str(data.StatValue)
 		$LeaderboardVBox.add_child(_instance)
