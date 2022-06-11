@@ -57,15 +57,14 @@ func get_leaderboard():
 
 func _add_statistic_row(data: PlayerLeaderboardEntry):
 		var _instance = row_item_node.instance()
-		_instance.get_node("Rank").text = data.Position
+		_instance.get_node("Rank").text = str(data.Position)
 		_instance.get_node("Name").text = data.DisplayName
-		_instance.get_node("Score").text = data.StatValue
+		_instance.get_node("Score").text = str(data.StatValue)
 		$LeaderboardVBox.add_child(_instance)
 
 func _on_get_leaderboard_request_completed(result):
 	var leaderboard_result = GetLeaderboardResult.new()
 	leaderboard_result.from_dict(result["data"], leaderboard_result)
-	var items = leaderboard_result.Leaderboard._Items
 
 	for row in leaderboard_result.Leaderboard._Items:
 		_add_statistic_row(row)
