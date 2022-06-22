@@ -21,6 +21,8 @@ signal registered(RegisterPlayFabUserResult)
 ## @param login_result: LoginResult
 signal logged_in(login_result)
 
+enum AUTH_TYPE {SESSION_TICKET, ENTITY_TOKEN}
+
 
 var _http: HTTPRequest
 var _request_in_progress = false
@@ -109,12 +111,7 @@ func _on_login_with_email(result: Dictionary):
 
 
 func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	if !PlayFabManager.client_config.is_logged_in():
-		push_error("Player is not logged in.")
-		return false
-
-
-	additional_headers["X-Authorization"] = PlayFabManager.client_config.session_ticket
+	_get_auth_headers(additional_headers, AUTH_TYPE.SESSION_TICKET)
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -129,12 +126,7 @@ func _post_with_session_auth(body: JsonSerializable, path: String, callback: Fun
 # @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
 # @ returns: bool									- False if the player is not logged in - true if the rquest was sent.
 func _post_with_entity_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	if !PlayFabManager.client_config.is_logged_in():
-		push_error("Player is not logged in.")
-		return false
-
-
-	additional_headers["X-EntityToken"] = PlayFabManager.client_config.entity_token.EntityToken
+	_get_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -147,6 +139,18 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_h
 
 func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
+
+
+func _get_auth_headers(additional_headers: Dictionary, auth_type):
+	if !PlayFabManager.client_config.is_logged_in():
+		push_error("Player is not logged in.")
+		return false
+
+	if auth_type == AUTH_TYPE.SESSION_TICKET:
+		additional_headers["X-Authorization"] = PlayFabManager.client_config.session_ticket
+	else:
+		additional_headers["X-EntityToken"] = PlayFabManager.client_config.entity_token.EntityToken
+	return
 
 
 func _dict_to_header_array(dict: Dictionary):
