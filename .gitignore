@@ -6,6 +6,7 @@
 export.cfg
 export_presets.cfg
 override.cfg
+.vscode/settings.json
 
 # Imported translations (automatically generated from CSV files)
 *.translation
