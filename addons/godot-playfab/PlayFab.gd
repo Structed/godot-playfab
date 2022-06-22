@@ -126,7 +126,7 @@ func _post_with_session_auth(body: JsonSerializable, path: String, callback: Fun
 # @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
 # @ returns: bool									- False if the player is not logged in - true if the rquest was sent.
 func _post_with_entity_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	_get_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
+	_add_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -141,7 +141,7 @@ func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_he
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
 
 
-func _get_auth_headers(additional_headers: Dictionary, auth_type):
+func _add_auth_headers(additional_headers: Dictionary, auth_type):
 	if !PlayFabManager.client_config.is_logged_in():
 		push_error("Player is not logged in.")
 		return false
