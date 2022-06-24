@@ -1,5 +1,5 @@
 # Connecting Signals
-There are a few Signals that you can connect to:
+There are a few Signals that you can & should connect to:
 
 | Signal Name       | Purpose                                                                                                                                              |
 |-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -9,4 +9,4 @@ There are a few Signals that you can connect to:
 | registered        | Emitted when a new User is registered. You should only connect this in the Scene where you do Player Registrations.                                  |
 | logged_in         | Emitted when a Player successfully logs in.                                                                                                          |
 
-Back: [Using `godot-playfab` in your Game](usage.md) | Next: [Events](Events/README.md)
+Back: [Basic Requests](basic-requests.md) | Next: [Events](Events/README.md)

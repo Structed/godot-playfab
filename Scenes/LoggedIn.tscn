@@ -208,8 +208,14 @@ margin_right = 1024.0
 margin_bottom = 44.0
 text = "Events & PlayStream API"
 
-[node name="Response" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RequestBuilder" type="Button" parent="VBoxContainer"]
 margin_top = 48.0
+margin_right = 1024.0
+margin_bottom = 68.0
+text = "Request Builder"
+
+[node name="Response" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 72.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -217,3 +223,4 @@ size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/GetTitleDataButton" to="." method="_on_GetTitleDataButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/EventsPlayStream" to="." method="_on_EventsPlayStream_pressed"]
+[connection signal="pressed" from="VBoxContainer/RequestBuilder" to="." method="_on_RequestBuilder_pressed"]

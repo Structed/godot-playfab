@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="Line" type="HBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="Key" type="LineEdit" parent="."]
+margin_right = 510.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Key"
+
+[node name="Value" type="LineEdit" parent="."]
+margin_left = 514.0
+margin_right = 1024.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Value"
