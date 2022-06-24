@@ -143,10 +143,28 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_h
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 
 
+# General (POST) request method for endpoints which require Authentication.
+# You should use this to provide custom requests by passing parameters as a Dictionary.
+#
+# @visibility: internal
+# @param body: Dictionary							- A Dictionary representing the request body
+# @param path: String								- The request path, e.g. `/Client/GetTitleData`
+# @param callback: FuncRef							- A callback which will be called once the request **succeeds**
+# @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
 func _post_dict_auth(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_add_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
 
+
+# General (POST) request method for endpoints which **DO NOT** require Authentication.
+# However, you can add auth parameters yourself via appropriate headers.
+# You should use this to provide custom requests by passing parameters as a Dictionary.
+#
+# @visibility: internal
+# @param body: Dictionary							- A Dictionary representing the request body
+# @param path: String								- The request path, e.g. `/Client/GetTitleData`
+# @param callback: FuncRef							- A callback which will be called once the request **succeeds**
+# @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
 func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
 
@@ -156,6 +174,7 @@ func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_he
 # @visibility: internal
 # @param additional_headers: Dictionary				- Authentication headers will be appended to this Dictionary
 # @param auth_type: PlayFab.AUTH_TYPE				- One of `PlayFab.AUTH_TYPE`
+# @return bool:										- Whethr the player is authenticated. True if authenticated.
 func _add_auth_headers(additional_headers: Dictionary, auth_type) -> bool:
 	if !PlayFabManager.client_config.is_logged_in():
 		push_error("Player is not logged in.")
