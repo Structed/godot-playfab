@@ -10,12 +10,10 @@ func _on_AddLineButton_pressed():
 
 
 func _on_SubmitButton_pressed():
-	# if ($TableContainer.get_child_count() < 1):
-	# 	return	# Nothing to do here!
-
 	var path = $HBoxContainer/PathInput.text
 	if path == "":
-		push_error("No path set")
+		$Response.text = "Please specify a path!"
+		return
 
 	var body_dict = {}
 
