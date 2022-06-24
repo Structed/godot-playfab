@@ -23,5 +23,7 @@ See the [File paths in Godot projects documentation](https://docs.godotengine.or
 
 This Config is used to store transient client data PlayFab needs to work across scenes, like the current PlayFab `Session Ticket`.
 
+# Example Project
+Clone the full repo for a full example poject where you can find out how different features are implemented and how you can make more sophisticated calls!
 
 Back: [User Documentation](README.md) | Next: [Using `godot-playfab` in your Game](usage.md)
