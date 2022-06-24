@@ -43,4 +43,13 @@ margin_right = 1024.0
 margin_bottom = 76.0
 text = "Submit"
 
+
+[node name="BackButton" type="Button" parent="."]
+margin_top = 580.0
+margin_right = 1024.0
+margin_bottom = 600.0
+text = "Back"
+
 [connection signal="pressed" from="AddLineButton" to="." method="_on_AddLineButton_pressed"]
+[connection signal="pressed" from="SubmitButton" to="." method="_on_SubmitButton_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
