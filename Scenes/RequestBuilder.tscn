@@ -43,6 +43,12 @@ margin_right = 1024.0
 margin_bottom = 76.0
 text = "Submit"
 
+[node name="Response" type="RichTextLabel" parent="."]
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 576.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="BackButton" type="Button" parent="."]
 margin_top = 580.0
