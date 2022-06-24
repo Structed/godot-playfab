@@ -35,7 +35,7 @@ margin_bottom = 28.0
 margin_top = 32.0
 margin_right = 1024.0
 margin_bottom = 52.0
-text = "Add Line"
+text = "Add Body Parameter Line"
 
 [node name="SubmitButton" type="Button" parent="."]
 margin_top = 56.0
