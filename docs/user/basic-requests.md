@@ -11,11 +11,11 @@ This requires the ability to write "generic" requests, where you can easily spec
 
 | API Name                  | Description    |
 |---------------------------|----------------|
-| `PlayFab._post_dict_auth` | Takes a Dictionary as request body parameters. Will work on APIs that require authentication. You need to specify which Authentication type should be used (SessionTicket or EntityToken) |
-| `PlayFab._post_dict`      | Takes a Dictionary as request body parameters. Will only work on APIs that do not require authentication. There is likely not a lot of reasons why you would need this method, as there are no requests that do not require authentication - except authentication calls. |
+| `PlayFab.post_dict_auth` | Takes a Dictionary as request body parameters. Will work on APIs that require authentication. You need to specify which Authentication type should be used (SessionTicket or EntityToken) |
+| `PlayFab.post_dict`      | Takes a Dictionary as request body parameters. Will only work on APIs that do not require authentication. There is likely not a lot of reasons why you would need this method, as there are no requests that do not require authentication - except authentication calls. |
 
 ## Examples
-### `PlayFab._post_dict_auth`
+### `PlayFab.post_dict_auth`
 
     func GetTitleData():
         var dict = {
@@ -23,13 +23,13 @@ This requires the ability to write "generic" requests, where you can easily spec
         		"BarKey"
         	]
         }
-        
-        PlayFabManager.client._post_dict_auth(
+
+        PlayFabManager.client.post_dict_auth(
         dict,
         "/Client/GetTitleData",
         PlayFab.AUTH_TYPE.SESSION_TICKET,
         funcref(self, "_on_get_title_data"))
-        
+
     func _on_get_title_data(response):
 	    print_debug(JSON.print(response.data, "\t"))
 
