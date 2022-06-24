@@ -14,4 +14,4 @@ You can use an arbitrary number of `PlayFabClient` nodes. Each will get their co
 # Working with Events
 See [Events](Events/README.md)
 
-Back: [Initial Setup](initial-setup.md) | Next: [Connecting Signals](connecting-signals.md)
+Back: [Initial Setup](initial-setup.md) | Next: [Basic Requests](basic-requests.md)
