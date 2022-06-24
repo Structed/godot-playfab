@@ -38,3 +38,7 @@ func _on_PlayFab_api_error(error: ApiErrorWrapper):
 
 func _on_EventsPlayStream_pressed():
 	SceneManager.goto_scene("res://Scenes/Events.tscn")
+
+
+func _on_RequestBuilder_pressed():
+	SceneManager.goto_scene("res://Scenes/RequestBuilder.tscn")

@@ -1,0 +1,24 @@
+[gd_scene format=2]
+
+[node name="Line" type="HBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="Key" type="LineEdit" parent="."]
+margin_right = 508.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Value" type="LineEdit" parent="."]
+margin_left = 512.0
+margin_right = 1020.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="."]
+margin_left = 1024.0
+margin_right = 1024.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( -26, -58 )
