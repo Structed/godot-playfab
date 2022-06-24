@@ -94,7 +94,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/LoginWithEmailAddressRequest.gd"
 }, {
-"base": "Node",
+"base": "PlayFabHttp",
 "class": "PlayFab",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFab.gd"
@@ -123,6 +123,11 @@ _global_script_classes=[ {
 "class": "PlayFabEvent",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/PlayFabEvent.gd"
+}, {
+"base": "Node",
+"class": "PlayFabHttp",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/PlayFabHttp.gd"
 }, {
 "base": "JsonSerializable",
 "class": "PlayerProfileViewConstraints",
@@ -188,6 +193,7 @@ _global_script_class_icons={
 "PlayFabClientConfigLoader": "",
 "PlayFabConstants": "",
 "PlayFabEvent": "res://addons/godot-playfab/icon.png",
+"PlayFabHttp": "res://addons/godot-playfab/icon.png",
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
@@ -225,6 +231,10 @@ PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg" )
+
+[global]
+
+reload=false
 
 [physics]
 
