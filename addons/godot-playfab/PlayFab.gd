@@ -111,22 +111,28 @@ func _on_login_with_email(result: Dictionary):
 
 
 func _post_with_session_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	_get_auth_headers(additional_headers, AUTH_TYPE.SESSION_TICKET)
+	var result = _add_auth_headers(additional_headers, AUTH_TYPE.SESSION_TICKET)
+	if !result:
+		return false
+
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
 
 # General request method for endpoints which require Entity-Token-Auth.
-# You should uset his to provide convenience methods for requests to specific resources.
+# You should use this to provide convenience methods for requests to specific resources.
 #
 # @visibility: internal
 # @param body: JsonSerializable						- A data model valid for the request to be made
 # @param path: String								- The request path, e.g. `/Client/GetTitleData`
-# @param callback: FuncRef							- A callback which will be called once teh request **succeeds**
+# @param callback: FuncRef							- A callback which will be called once the request **succeeds**
 # @param additional_headers: Dictionary (optional)	- Additional headers to be sent with the request
-# @ returns: bool									- False if the player is not logged in - true if the rquest was sent.
+# @ returns: bool									- False if the player is not logged in - true if the request was sent.
 func _post_with_entity_auth(body: JsonSerializable, path: String, callback: FuncRef, additional_headers: Dictionary = {}) -> bool:
-	_add_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
+	var result = _add_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
+	if !result:
+		return false
+
 	var dict = body.to_dict()
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 	return true
@@ -137,20 +143,32 @@ func _post(body: JsonSerializable, path: String, callback: FuncRef, additional_h
 	_http_request(HTTPClient.METHOD_POST, dict, path, callback, additional_headers)
 
 
+func _post_dict_auth(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
+	_add_auth_headers(additional_headers, AUTH_TYPE.ENTITY_TOKEN)
+	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
+
 func _post_dict(body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
 	_http_request(HTTPClient.METHOD_POST, body, path, callback, additional_headers)
 
 
-func _add_auth_headers(additional_headers: Dictionary, auth_type):
+# Adds PlayFab specific authentication headers depending on the `auth_type` provided.
+#
+# @visibility: internal
+# @param additional_headers: Dictionary				- Authentication headers will be appended to this Dictionary
+# @param auth_type: PlayFab.AUTH_TYPE				- One of `PlayFab.AUTH_TYPE`
+func _add_auth_headers(additional_headers: Dictionary, auth_type) -> bool:
 	if !PlayFabManager.client_config.is_logged_in():
 		push_error("Player is not logged in.")
 		return false
 
 	if auth_type == AUTH_TYPE.SESSION_TICKET:
 		additional_headers["X-Authorization"] = PlayFabManager.client_config.session_ticket
-	else:
+	elif auth_type == AUTH_TYPE.ENTITY_TOKEN:
 		additional_headers["X-EntityToken"] = PlayFabManager.client_config.entity_token.EntityToken
-	return
+	else:
+		push_error("auth_type \"" + auth_type + "\" is invalid")
+
+	return true
 
 
 func _dict_to_header_array(dict: Dictionary):
