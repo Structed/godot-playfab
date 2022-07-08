@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 
 const STATISTIC_NAME = "time_waiting"
 var row_item_node = preload("res://Scenes/Widgets/RowItem.tscn")
@@ -16,7 +16,7 @@ func _ready():
 	_instance.get_node("Rank").text = "Rank"
 	_instance.get_node("Name").text = "PlayerName"
 	_instance.get_node("Score").text = "Score"
-	$LeaderboardVBox.add_child(_instance)
+	$Statistics/LeaderboardVBox.add_child(_instance)
 
 	_show_progess()
 
@@ -28,13 +28,19 @@ func _ready():
 
 func _process(_delta):
 	if (waiting):
-		$LayoutHbox/ElapsedTimeLabel.text = str(get_elapsed_time())
+		$Statistics/LayoutHbox/ElapsedTimeLabel.text = str(get_elapsed_time())
+
+	if $ProgressCenter.visible:
+		if $ProgressCenter/TextureProgress.value >= $ProgressCenter/TextureProgress.max_value:
+			$ProgressCenter/TextureProgress.value = 0
+
+		$ProgressCenter/TextureProgress.value += 1
 
 
 func _on_StopWaitingButton_pressed():
 	if (waiting):
 		waiting = false
-		$StopWaitingButton.text = "Start waiting for Godot!"
+		$Statistics/StopWaitingButton.text = "Start waiting for Godot!"
 		_update_statistic(get_elapsed_time())
 	else:
 		start()
@@ -47,7 +53,7 @@ func get_elapsed_time() -> int:
 func start():
 	start_time = OS.get_unix_time()
 	waiting = true
-	$StopWaitingButton.text = "Stop waiting for Godot!"
+	$Statistics/StopWaitingButton.text = "Stop waiting for Godot!"
 
 
 func _update_statistic(value: int):
@@ -73,7 +79,7 @@ func _add_statistic_row(data: PlayerLeaderboardEntry):
 		_instance.get_node("Rank").text = str(data.Position + 1)
 		_instance.get_node("Name").text = data.DisplayName
 		_instance.get_node("Score").text = str(data.StatValue)
-		$LeaderboardVBox.add_child(_instance)
+		$Statistics/LeaderboardVBox.add_child(_instance)
 
 func _on_get_leaderboard_request_completed(result):
 	var leaderboard_result = GetLeaderboardResult.new()
@@ -99,16 +105,16 @@ func _on_get_player_statistic_version(result):
 	get_player_statistic_versions_result.from_dict(result["data"], get_player_statistic_versions_result)
 	version = get_player_statistic_versions_result.StatisticVersions.get_latest_version()
 
-	_hide_progess()
-	_show_progess()
 	get_leaderboard()
 
 
 	print_debug(get_player_statistic_versions_result)
 
 func _show_progess():
+	$Statistics.hide()
 	$ProgressCenter/TextureProgress.value = 0
 	$ProgressCenter.show()
 
 func _hide_progess():
 	$ProgressCenter.hide()
+	$Statistics.show()
