@@ -65,6 +65,16 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoResultPayload.gd"
 }, {
 "base": "JsonSerializable",
+"class": "GetPlayerStatisticVersionsRequest",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/Statistic/GetPlayerStatisticVersionsRequest.gd"
+}, {
+"base": "JsonSerializable",
+"class": "GetPlayerStatisticVersionsResult",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/Statistic/GetPlayerStatisticVersionsResult.gd"
+}, {
+"base": "JsonSerializable",
 "class": "GetTitleDataRequest",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/GetTitleDataRequest.gd"
