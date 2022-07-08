@@ -51,6 +51,7 @@ func _update_statistic(value: int):
 	statistic.StatisticName = STATISTIC_NAME
 	statistic.Value = value
 	statistic.Version = STATISTIC_VERSION
+	# API sends data in the context of the player, so PlayFab know which player sent the request!
 	PlayFabManager.client.update_player_statistic(statistic, funcref(self, "_on_update_statistics_request_completed"))
 
 
