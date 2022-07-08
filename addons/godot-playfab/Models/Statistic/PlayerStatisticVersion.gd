@@ -17,9 +17,10 @@ var ScheduledDeactivationTime: String
 var StatisticName: String
 
 # version of the statistic
-var Version: float
+var Version: int
 
 
+# @visibility: private
 func _get_type_for_property(property_name: String) -> String:
 	match property_name:
 #		"<PROPERTY NAME>":
