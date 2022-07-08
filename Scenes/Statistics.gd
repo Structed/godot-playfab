@@ -18,8 +18,13 @@ func _ready():
 	_instance.get_node("Score").text = "Score"
 	$LeaderboardVBox.add_child(_instance)
 
-	_on_GetPlayerStatisticVersionsButton_pressed()
 	_show_progess()
+
+	# Set version
+	var request_data = GetPlayerStatisticVersionsRequest.new()
+	request_data.StatisticName = STATISTIC_NAME
+	PlayFabManager.client.get_player_statistic_version(request_data, funcref(self, "_on_get_player_statistic_version"))
+
 
 func _process(_delta):
 	if (waiting):
@@ -89,18 +94,10 @@ func _on_BackButton_pressed():
 	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
 
 
-func _on_GetPlayerStatisticVersionsButton_pressed():
-	var request_data = GetPlayerStatisticVersionsRequest.new()
-	request_data.StatisticName = STATISTIC_NAME
-	PlayFabManager.client.get_player_statistic_version(request_data, funcref(self, "_on_get_player_statistic_version"))
-
 func _on_get_player_statistic_version(result):
 	var get_player_statistic_versions_result = GetPlayerStatisticVersionsResult.new()
 	get_player_statistic_versions_result.from_dict(result["data"], get_player_statistic_versions_result)
-
-	for element in get_player_statistic_versions_result.StatisticVersions._Items:
-		if element.Version > version:
-			version = element.Version
+	version = get_player_statistic_versions_result.StatisticVersions.get_latest_version()
 
 	_hide_progess()
 	_show_progess()
