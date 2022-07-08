@@ -1,11 +1,10 @@
 extends VBoxContainer
 
 const STATISTIC_NAME = "time_waiting"
-const STATISTIC_VERSION = 10
 var row_item_node = preload("res://Scenes/Widgets/RowItem.tscn")
 var start_time: int
 var waiting = false
-
+var version = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,8 +18,8 @@ func _ready():
 	_instance.get_node("Score").text = "Score"
 	$LeaderboardVBox.add_child(_instance)
 
-	get_leaderboard()
-
+	_on_GetPlayerStatisticVersionsButton_pressed()
+	_show_progess()
 
 func _process(_delta):
 	if (waiting):
@@ -50,7 +49,7 @@ func _update_statistic(value: int):
 	var statistic = StatisticUpdate.new()
 	statistic.StatisticName = STATISTIC_NAME
 	statistic.Value = value
-	statistic.Version = STATISTIC_VERSION
+	statistic.Version = version
 	# API sends data in the context of the player, so PlayFab know which player sent the request!
 	PlayFabManager.client.update_player_statistic(statistic, funcref(self, "_on_update_statistics_request_completed"))
 
@@ -58,7 +57,7 @@ func _update_statistic(value: int):
 func get_leaderboard():
 	var request_data = GetLeaderboardRequest.new()
 	request_data.StatisticName = STATISTIC_NAME
-	request_data.Version = STATISTIC_VERSION
+	request_data.Version = version
 	request_data.MaxResultsCount = 10
 	request_data.UseSpecificVersion = true
 
@@ -78,6 +77,8 @@ func _on_get_leaderboard_request_completed(result):
 	for row in leaderboard_result.Leaderboard._Items:
 		_add_statistic_row(row)
 
+	_hide_progess()
+
 func _on_update_statistics_request_completed(_result):
 	print_debug("Completed sending stats")
 
@@ -88,4 +89,29 @@ func _on_BackButton_pressed():
 	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
 
 
+func _on_GetPlayerStatisticVersionsButton_pressed():
+	var request_data = GetPlayerStatisticVersionsRequest.new()
+	request_data.StatisticName = STATISTIC_NAME
+	PlayFabManager.client.get_player_statistic_version(request_data, funcref(self, "_on_get_player_statistic_version"))
 
+func _on_get_player_statistic_version(result):
+	var get_player_statistic_versions_result = GetPlayerStatisticVersionsResult.new()
+	get_player_statistic_versions_result.from_dict(result["data"], get_player_statistic_versions_result)
+
+	for element in get_player_statistic_versions_result.StatisticVersions._Items:
+		if element.Version > version:
+			version = element.Version
+
+	_hide_progess()
+	_show_progess()
+	get_leaderboard()
+
+
+	print_debug(get_player_statistic_versions_result)
+
+func _show_progess():
+	$ProgressCenter/TextureProgress.value = 0
+	$ProgressCenter.show()
+
+func _hide_progess():
+	$ProgressCenter.hide()

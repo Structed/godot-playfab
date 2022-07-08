@@ -170,6 +170,16 @@ _global_script_classes=[ {
 "path": "res://addons/godot-playfab/Models/PlayerProfileViewConstraints.gd"
 }, {
 "base": "JsonSerializable",
+"class": "PlayerStatisticVersion",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/Statistic/PlayerStatisticVersion.gd"
+}, {
+"base": "AbstractJsonSerializableCollection",
+"class": "PlayerStatisticVersionCollection",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Models/Statistic/PlayerStatisticVersionCollection.gd"
+}, {
+"base": "JsonSerializable",
 "class": "RegisterPlayFabUserRequest",
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserRequest.gd"
@@ -236,6 +246,8 @@ _global_script_class_icons={
 "GetLeaderboardResult": "",
 "GetPlayerCombinedInfoRequestParams": "",
 "GetPlayerCombinedInfoResultPayload": "",
+"GetPlayerStatisticVersionsRequest": "",
+"GetPlayerStatisticVersionsResult": "",
 "GetTitleDataRequest": "",
 "GetTitleDataResult": "",
 "JsonSerializable": "",
@@ -255,6 +267,8 @@ _global_script_class_icons={
 "PlayerLeaderboardEntry": "",
 "PlayerLeaderboardEntryCollection": "",
 "PlayerProfileViewConstraints": "",
+"PlayerStatisticVersion": "",
+"PlayerStatisticVersionCollection": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
 "StatisticUpdate": "",

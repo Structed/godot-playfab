@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Statistics.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/LoadingIndicator.tscn" type="PackedScene" id=2]
 
 [node name="Statistics" type="VBoxContainer"]
 anchor_right = 1.0
@@ -36,16 +37,37 @@ margin_right = 1024.0
 margin_bottom = 56.0
 text = "Stop waiting for Godot!"
 
-[node name="BackButton" type="Button" parent="."]
+[node name="GetPlayerStatisticVersionsButton" type="Button" parent="."]
 margin_top = 60.0
 margin_right = 1024.0
 margin_bottom = 80.0
+text = "Get Player Statistic Versions"
+
+[node name="BackButton" type="Button" parent="."]
+margin_top = 84.0
+margin_right = 1024.0
+margin_bottom = 104.0
 text = "Back"
 
 [node name="LeaderboardVBox" type="VBoxContainer" parent="."]
-margin_top = 84.0
+margin_top = 108.0
 margin_right = 1024.0
-margin_bottom = 84.0
+margin_bottom = 108.0
+
+[node name="ProgressCenter" type="CenterContainer" parent="."]
+visible = false
+margin_top = 112.0
+margin_right = 1024.0
+margin_bottom = 212.0
+
+[node name="TextureProgress" parent="ProgressCenter" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 462.0
+margin_right = 562.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
 
 [connection signal="pressed" from="StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
+[connection signal="pressed" from="GetPlayerStatisticVersionsButton" to="." method="_on_GetPlayerStatisticVersionsButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
