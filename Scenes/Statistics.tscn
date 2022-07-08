@@ -37,22 +37,16 @@ margin_right = 1024.0
 margin_bottom = 56.0
 text = "Stop waiting for Godot!"
 
-[node name="GetPlayerStatisticVersionsButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="."]
 margin_top = 60.0
 margin_right = 1024.0
 margin_bottom = 80.0
-text = "Get Player Statistic Versions"
-
-[node name="BackButton" type="Button" parent="."]
-margin_top = 84.0
-margin_right = 1024.0
-margin_bottom = 104.0
 text = "Back"
 
 [node name="LeaderboardVBox" type="VBoxContainer" parent="."]
-margin_top = 108.0
+margin_top = 84.0
 margin_right = 1024.0
-margin_bottom = 108.0
+margin_bottom = 84.0
 
 [node name="ProgressCenter" type="CenterContainer" parent="."]
 visible = false
@@ -69,5 +63,4 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 
 [connection signal="pressed" from="StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
-[connection signal="pressed" from="GetPlayerStatisticVersionsButton" to="." method="_on_GetPlayerStatisticVersionsButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
