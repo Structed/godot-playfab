@@ -1,58 +1,63 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Statistics.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/LoadingIndicator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Widgets/LoadingIndicator.tscn" type="PackedScene" id=2]
 
-[node name="Statistics" type="VBoxContainer"]
+[node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Statistics" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Statistics"]
 margin_right = 1024.0
 margin_bottom = 14.0
 text = "How long can you wait for Godot?"
 
-[node name="LayoutHbox" type="HBoxContainer" parent="."]
+[node name="LayoutHbox" type="HBoxContainer" parent="Statistics"]
 margin_top = 18.0
 margin_right = 1024.0
 margin_bottom = 32.0
 
-[node name="TimeLabel" type="Label" parent="LayoutHbox"]
+[node name="TimeLabel" type="Label" parent="Statistics/LayoutHbox"]
 margin_right = 94.0
 margin_bottom = 14.0
 text = "Waiting since: "
 
-[node name="ElapsedTimeLabel" type="Label" parent="LayoutHbox"]
+[node name="ElapsedTimeLabel" type="Label" parent="Statistics/LayoutHbox"]
 margin_left = 98.0
 margin_right = 106.0
 margin_bottom = 14.0
 text = "0"
 
-[node name="StopWaitingButton" type="Button" parent="."]
+[node name="StopWaitingButton" type="Button" parent="Statistics"]
 margin_top = 36.0
 margin_right = 1024.0
 margin_bottom = 56.0
 text = "Stop waiting for Godot!"
 
-[node name="BackButton" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="Statistics"]
 margin_top = 60.0
 margin_right = 1024.0
 margin_bottom = 80.0
 text = "Back"
 
-[node name="LeaderboardVBox" type="VBoxContainer" parent="."]
+[node name="LeaderboardVBox" type="VBoxContainer" parent="Statistics"]
 margin_top = 84.0
 margin_right = 1024.0
 margin_bottom = 84.0
 
 [node name="ProgressCenter" type="CenterContainer" parent="."]
-visible = false
-margin_top = 112.0
+margin_top = 88.0
 margin_right = 1024.0
-margin_bottom = 212.0
+margin_bottom = 188.0
 
 [node name="TextureProgress" parent="ProgressCenter" instance=ExtResource( 2 )]
 anchor_right = 0.0
@@ -62,5 +67,5 @@ margin_right = 562.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 
-[connection signal="pressed" from="StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
-[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Statistics/StopWaitingButton" to="Statistics" method="_on_StopWaitingButton_pressed"]
+[connection signal="pressed" from="Statistics/BackButton" to="." method="_on_BackButton_pressed"]
