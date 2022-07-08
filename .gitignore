@@ -24,3 +24,4 @@ exports/
 
 # GUT - Godot Unit Test
 /addons/godot-playfab/test/results.xml
+.vscode/settings.json
