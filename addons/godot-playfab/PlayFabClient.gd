@@ -38,3 +38,11 @@ func update_player_statistics(request_data: UpdatePlayerStatisticsRequest, callb
 # @param callback: FuncRef
 func get_leaderboard(request_data: GetLeaderboardRequest, callback: FuncRef):
 	_post_with_session_auth(request_data, "/Client/GetLeaderboard", callback)
+
+
+# Retrieves the information on the available versions of the specified statistic.
+# REST API Docs: https://docs.microsoft.com/en-us/rest/api/playfab/client/player-data-management/get-player-statistic-versions?view=playfab-rest
+# @param request_data: GetPlayerStatisticVersionsRequest
+# @param callback: FuncRef
+func get_player_statistic_version(request_data: GetPlayerStatisticVersionsRequest, callback: FuncRef):
+	_post_with_session_auth(request_data, "/Client/GetPlayerStatisticVersions", callback)
