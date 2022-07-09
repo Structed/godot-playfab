@@ -102,8 +102,6 @@ func _on_get_player_statistic_version(result):
 	get_leaderboard()
 
 
-	print_debug(get_player_statistic_versions_result)
-
 func _show_progess():
 	$Statistics.hide()
 	$ProgressCenter/LoginIndicator.show()
