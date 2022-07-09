@@ -30,12 +30,6 @@ func _process(_delta):
 	if (waiting):
 		$Statistics/LayoutHbox/ElapsedTimeLabel.text = str(get_elapsed_time())
 
-	if $ProgressCenter.visible:
-		if $ProgressCenter/TextureProgress.value >= $ProgressCenter/TextureProgress.max_value:
-			$ProgressCenter/TextureProgress.value = 0
-
-		$ProgressCenter/TextureProgress.value += 1
-
 
 func _on_StopWaitingButton_pressed():
 	if (waiting):
@@ -112,9 +106,8 @@ func _on_get_player_statistic_version(result):
 
 func _show_progess():
 	$Statistics.hide()
-	$ProgressCenter/TextureProgress.value = 0
-	$ProgressCenter.show()
+	$ProgressCenter/LoginIndicator.show()
 
 func _hide_progess():
-	$ProgressCenter.hide()
+	$ProgressCenter/LoginIndicator.hide()
 	$Statistics.show()

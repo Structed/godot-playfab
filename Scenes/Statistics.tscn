@@ -59,7 +59,8 @@ margin_top = 88.0
 margin_right = 1024.0
 margin_bottom = 188.0
 
-[node name="TextureProgress" parent="ProgressCenter" instance=ExtResource( 2 )]
+[node name="LoginIndicator" parent="ProgressCenter" instance=ExtResource( 2 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 462.0
