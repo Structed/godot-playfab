@@ -36,11 +36,10 @@ func _on_AnonLogin_pressed():
 
 
 func _show_progess():
-	$ProgressCenter/TextureProgress.value = 0
-	$ProgressCenter.show()
+	$ProgressCenter/LoadingIndicator.show()
 
 func _hide_progess():
-	$ProgressCenter.hide()
+	$ProgressCenter/LoadingIndicator.hide()
 
 
 func _on_logged_in(login_result: LoginResult):
@@ -72,12 +71,6 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 func _on_Back_pressed():
 	SceneManager.goto_scene("res://Scenes/Main.tscn")
 
-func _process(_delta):
-	if $ProgressCenter.visible:
-		if $ProgressCenter/TextureProgress.value >= $ProgressCenter/TextureProgress.max_value:
-			$ProgressCenter/TextureProgress.value = 0
-
-		$ProgressCenter/TextureProgress.value += 1
 
 func _on_LoggedInBackButton_pressed():
 	$LoggedIn.hide()
