@@ -44,3 +44,28 @@ func test_to_dict_returns_array():
 	assert_true(dict is Array)
 
 
+func test_from_dict_serializes_items():
+	var data = [
+		{
+			"foo": "bar1",
+			"bar": 1
+		},
+		{
+			"foo": "bar2",
+			"bar": 2
+		}
+
+	]
+
+	var instance = TestCollection.new()
+	instance.from_dict(data, instance);
+
+	assert_true("foo" in instance._Items[0])
+	assert_true("bar" in instance._Items[0])
+	assert_eq(instance._Items[0].foo, "bar1")
+	assert_eq(instance._Items[0].bar, 1)
+
+	assert_true("foo" in instance._Items[1])
+	assert_true("bar" in instance._Items[1])
+	assert_eq(instance._Items[1].foo, "bar2")
+	assert_eq(instance._Items[1].bar, 2)

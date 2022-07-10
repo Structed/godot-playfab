@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/test/unit/TestModels/SubProp.gd"
 }, {
+"base": "AbstractJsonSerializableCollection",
+"class": "TestCollection",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/test/unit/TestModels/TestCollection.gd"
+}, {
 "base": "Reference",
 "class": "UUID",
 "language": "GDScript",
@@ -198,6 +203,7 @@ _global_script_class_icons={
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
 "SubProp": "",
+"TestCollection": "",
 "UUID": "",
 "UserAccountInfo": "",
 "UserTitleInfo": "",

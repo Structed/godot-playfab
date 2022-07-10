@@ -44,7 +44,8 @@ func generate_params__test_to_dict_returns_expected_dictionary():
 				JsonSerializableImpl.WithSetObjectProperty.new(),
 				{
 					"sub_prop": {
-						"foo": "bar",
+						"foo": "foo_value",
+						"bar": 0
 					}
 				}
 			],
