@@ -6,6 +6,18 @@ class_name AbstractJsonSerializableCollection
 # Holds the items
 var _Items: Array
 
+# Specifies the type of the items in _Items. Must inherit JsonSerializable
+# @example: Given a collection `StoreItemCollection`, by comvention, it would be a collection of `StoreItem`.
+# Thus, in the extending class you would add a constructor initialization like so:
+# ```
+# extends AbstractJsonSerializableCollection
+# class_name StoreItemCollection
+#
+# func _init():
+#     _item_type = StoreItem
+# ```
+#
+var _item_type
 
 # Appends an element at the end of the array (alias of push_back).
 func append(item: JsonSerializable):
@@ -36,8 +48,10 @@ func to_dict() -> Dictionary:
 
 
 # Rehydrates a collection and appropriate sub-objects from a Dictionary, recursively
-func from_dict(data: Dictionary, instance: JsonSerializable):
+func from_dict(data, instance: JsonSerializable):
 	var index = 0
 	for item in data:
-		_Items.append(.from_dict(item, instance))
+		var nested_instance = _item_type.new()
+		nested_instance.from_dict(item, nested_instance)
+		_Items.append(nested_instance)
 		index += 1

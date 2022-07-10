@@ -23,12 +23,21 @@ Some Request models have properties, which are arrays of Objects.
 
 <div style="color: indianred">If the elements in this array will be custom classes in Godot, serialization of them will <b><u>fail</u></b>!</div>
 
-In order for them to correctly serialize, you need to do the following steps:
+In order for them to correctly (de-)serialize, you need to do the following steps:
 
-1. Create a new Class, inheriting from `AbstractJsonSerializableCollection`. It does not need to carry any further implementation. Example:
+1. Create a new Class, inheriting from `AbstractJsonSerializableCollection`.
+
+    It is important, to also add a type hint for the type of the items.
+    This type hint needs to be initialized on construction (`_init()`).
+
+    ### Example:
+    Given you want to create a collection for items of type `StatisticUpdate`, this is how your class should look like:
     ````gdscript
     extends AbstractJsonSerializableCollection
     class_name EventContentsCollection
+
+    func _init():
+        _item_type = EventContents
     ````
 2. Instead of an `Array`, the property should use the newly created collection class. See the `Events` property below:
     ````gdscript
