@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Login.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/LoggedIn.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/LoadingIndicator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Widgets/LoadingIndicator.tscn" type="PackedScene" id=3]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -26,11 +26,11 @@ __meta__ = {
 }
 
 [node name="ProgressCenter" type="CenterContainer" parent="MarginContainer"]
-visible = false
 margin_right = 924.0
 margin_bottom = 500.0
 
-[node name="TextureProgress" parent="MarginContainer/ProgressCenter" instance=ExtResource( 3 )]
+[node name="LoadingIndicator" parent="MarginContainer/ProgressCenter" instance=ExtResource( 3 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 412.0
