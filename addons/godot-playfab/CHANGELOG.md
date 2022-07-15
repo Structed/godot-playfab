@@ -19,7 +19,3 @@
 * use calculate version ([bf0d538](https://github.com/Structed/godot-playfab/commit/bf0d5388dc042da87697c7e041ab085b84c39f21))
 * version for itch build ([9baade6](https://github.com/Structed/godot-playfab/commit/9baade6e20aedf8e096cce57260165dd93649b24))
 * version of mathieudutour/github-tag-action ([5304ba4](https://github.com/Structed/godot-playfab/commit/5304ba46ea552c6cf30aecf3718b1984f9dd876d))
-
-
-
-
