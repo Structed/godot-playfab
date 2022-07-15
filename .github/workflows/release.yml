@@ -100,7 +100,7 @@ jobs:
         if: steps.create_version.outputs.new_version != ''
 
   itch:
-    if: "github.event.head_commit.message == 'chore: storing version and changelog'"
+    if: "github.ref == 'refs/heads/main' && github.event.head_commit.message == 'chore: storing version and changelog'"
     runs-on: ubuntu-latest
     needs: release
 
