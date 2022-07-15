@@ -1,3 +1,12 @@
+### [0.0.7-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.7-develop.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* version for itch build ([9baade6](https://github.com/Structed/godot-playfab/commit/9baade6e20aedf8e096cce57260165dd93649b24))
+
+
+
 ### [0.0.6-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.6-develop.0) (2022-07-15)
 
 
