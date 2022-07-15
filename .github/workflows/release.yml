@@ -84,9 +84,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: godot-playfab-${{ env.version }}
+          name: godot-playfab-${{ steps.create_version.outputs.new_tag }}
           path: addons/godot-playfab/
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+        if: steps.create_version.outputs.new_version != ''
 
       - uses: ncipollo/release-action@v1
         with:
