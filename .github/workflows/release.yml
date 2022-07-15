@@ -131,23 +131,23 @@ jobs:
           buildChannel: windows-mac-linux
           buildNumber: ${{ steps.create_version.outputs.previous_tag }}
 
-  # assetlib:
-  #   if: "github.event.head_commit.message == 'chore: storing version and changelog'"
-  #   runs-on: ubuntu-latest
-  #   needs: release
-  #   name: Godot AssetLib
-  #   steps:
+  assetlib:
+    if: "github.ref == 'refs/heads/main' && github.event.head_commit.message == 'chore: storing version and changelog'"
+    runs-on: ubuntu-latest
+    needs: release
+    name: Godot AssetLib
+    steps:
 
-  #     - name: Set Version
-  #       run: |
-  #         echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - name: Set Version
+        run: |
+          echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
 
-  #     - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-  #     - name: Godot Asset Lib
-  #       uses: deep-entertainment/godot-asset-lib-action@v0.4.0
-  #       with:
-  #         username: ${{ env.ASSET_LIB_USERNAME }}
-  #         password: ${{ env.ASSET_LIB_PASSSWORD }}
-  #         assetId: ${{ env.ASSET_LIB_ASSET_ID }}
+      - name: Godot Asset Lib
+        uses: deep-entertainment/godot-asset-lib-action@v0.4.0
+        with:
+          username: ${{ env.ASSET_LIB_USERNAME }}
+          password: ${{ env.ASSET_LIB_PASSSWORD }}
+          assetId: ${{ env.ASSET_LIB_ASSET_ID }}
