@@ -5,10 +5,7 @@ on:
   push:
     branches:
       - 'develop'
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - 'develop'
+      - 'main'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
