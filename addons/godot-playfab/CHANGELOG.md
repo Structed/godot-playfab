@@ -1,3 +1,12 @@
+### [0.0.8-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.8-develop.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* upload of artifact with proper version ([ad83470](https://github.com/Structed/godot-playfab/commit/ad834707812a16c322688551e6d8c8abc83fb634))
+
+
+
 ### [0.0.7-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.7-develop.0) (2022-07-15)
 
 
