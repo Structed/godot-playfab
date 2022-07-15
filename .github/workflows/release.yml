@@ -29,14 +29,14 @@ jobs:
           - uses: actions/checkout@v3
             with:
               fetch-depth: 0
-              token: ${{ secrets.GITHUB_TOKEN }}
+              token: ${{ secrets.PAT }}
 
           - name: Calculate version
             id: calculate_version
             uses: mathieudutour/github-tag-action@v5.6
             with:
               tag_prefix: ""
-              github_token: ${{ secrets.GITHUB_TOKEN }}
+              github_token: ${{ secrets.PAT }}
               dry_run: true
               default_bump: false
           # - name: "Write changelog"
@@ -52,6 +52,7 @@ jobs:
             run: |
               sed -i -re 's/version=".+$/version="${{ steps.calculate_version.outputs.new_version }}"/gi' addons/godot-playfab/plugin.cfg
             if: steps.calculate_version.outputs.new_version != ''
+
           - name: "Commit"
             uses: EndBug/add-and-commit@v7.2.1
             with:
