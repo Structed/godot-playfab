@@ -1,3 +1,12 @@
+### [0.0.7-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.7-develop.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* use calculate version ([bf0d538](https://github.com/Structed/godot-playfab/commit/bf0d5388dc042da87697c7e041ab085b84c39f21))
+
+
+
 ### [0.0.6-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.6-develop.0) (2022-07-15)
 
 
