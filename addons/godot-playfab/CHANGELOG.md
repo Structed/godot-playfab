@@ -1,3 +1,12 @@
+### [0.0.7-develop.0](https://github.com/Structed/godot-playfab/compare/0.0.5...0.0.7-develop.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* dry run (do not create a tag) if not on main ([dbb3a68](https://github.com/Structed/godot-playfab/commit/dbb3a6806a335d8e1b2e952bdaca3a6f6fa9c258))
+
+
+
 ### [0.0.6-develop.0](https://github.com/Structed/godot-playfab/compare/0.0.5...0.0.6-develop.0) (2022-07-15)
 
 
