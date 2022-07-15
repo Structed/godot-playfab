@@ -1,3 +1,13 @@
+### [0.0.6-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.6-develop.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* enable itch ([c416eff](https://github.com/Structed/godot-playfab/commit/c416effbc14ac0a729184ff661e2db501258092a))
+* version of mathieudutour/github-tag-action ([5304ba4](https://github.com/Structed/godot-playfab/commit/5304ba46ea552c6cf30aecf3718b1984f9dd876d))
+
+
+
 ### [0.0.5-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.5-develop.0) (2022-07-15)
 
 
@@ -12,7 +22,3 @@
 * reset version ([f20d4d1](https://github.com/Structed/godot-playfab/commit/f20d4d10073054fc6c8abc19fcb23e8abd9ac713))
 * reset version ([7cafbf2](https://github.com/Structed/godot-playfab/commit/7cafbf250e4cee4930c04566e92a430c47231c42))
 * test again ([c07672d](https://github.com/Structed/godot-playfab/commit/c07672df773a3144c392005f7511bf218dca5ed1))
-
-
-
-
