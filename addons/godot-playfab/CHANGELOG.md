@@ -1,3 +1,12 @@
+### [0.0.6-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.6-develop.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* run asset lib release only on main ([f9d0f1e](https://github.com/Structed/godot-playfab/commit/f9d0f1e59bd67f029ac8f6f3946442b0565a95a5))
+
+
+
 ### [0.0.5-develop.0](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.5-develop.0) (2022-07-15)
 
 
@@ -16,7 +25,3 @@
 * test again ([c07672d](https://github.com/Structed/godot-playfab/commit/c07672df773a3144c392005f7511bf218dca5ed1))
 * use calculate version ([bf0d538](https://github.com/Structed/godot-playfab/commit/bf0d5388dc042da87697c7e041ab085b84c39f21))
 * version of mathieudutour/github-tag-action ([5304ba4](https://github.com/Structed/godot-playfab/commit/5304ba46ea552c6cf30aecf3718b1984f9dd876d))
-
-
-
-
