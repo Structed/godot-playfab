@@ -107,10 +107,6 @@ jobs:
 
     steps:
 
-      - name: Set Version
-        run: |
-          echo "version=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-
       - name: Calculate version
         id: calculate_version
         uses: mathieudutour/github-tag-action@v6.0
@@ -123,7 +119,7 @@ jobs:
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v3
         with:
-          name: godot-playfab-${{ env.version }}
+          name: godot-playfab-${{ steps.create_version.outputs.previous_tag }}
           path: addons/godot-playfab/
 
       - uses: KikimoraGames/itch-publish@v0.0.3
@@ -133,7 +129,7 @@ jobs:
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: windows-mac-linux
-          buildNumber: ${{ env.version }}
+          buildNumber: ${{ steps.create_version.outputs.previous_tag }}
 
   # assetlib:
   #   if: "github.event.head_commit.message == 'chore: storing version and changelog'"
