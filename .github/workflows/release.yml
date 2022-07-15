@@ -119,7 +119,7 @@ jobs:
       # Using https://github.com/KikimoraGames/itch-publish
       - uses: actions/download-artifact@v3
         with:
-          name: godot-playfab-${{ steps.create_version.outputs.previous_tag }}
+          name: godot-playfab-${{ steps.calculate_version.outputs.previous_tag }}
           path: addons/godot-playfab/
 
       - uses: KikimoraGames/itch-publish@v0.0.3
@@ -129,7 +129,7 @@ jobs:
           itchUsername: ${{env.ITCH_USERNAME}}
           itchGameId: ${{ env.ITCH_GAME_ID }}
           buildChannel: windows-mac-linux
-          buildNumber: ${{ steps.create_version.outputs.previous_tag }}
+          buildNumber: ${{ steps.calculate_version.outputs.previous_tag }}
 
   assetlib:
     if: "github.ref == 'refs/heads/main' && github.event.head_commit.message == 'chore: storing version and changelog'"
