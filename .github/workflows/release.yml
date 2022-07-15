@@ -51,7 +51,7 @@ jobs:
           - name: "Update version in plugin.cfg"
             run: |
               sed -i -re 's/version=".+$/version="${{ steps.calculate_version.outputs.new_version }}"/gi' addons/godot-playfab/plugin.cfg
-            if: inputs.updatePluginCfg && steps.calculate_version.outputs.new_version != ''
+            if: steps.calculate_version.outputs.new_version != ''
           - name: "Commit"
             uses: EndBug/add-and-commit@v7.2.1
             with:
