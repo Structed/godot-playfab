@@ -45,7 +45,7 @@ jobs:
                   CHANGELOG=$(cat addons/godot-playfab/CHANGELOG.md)
               fi
               echo -e "${{steps.calculate_version.outputs.changelog}}\n\n${CHANGELOG}" > addons/godot-playfab/CHANGELOG.md
-            if: steps.calculate_version.outputs.new_version != ''
+            if: github.ref == 'refs/heads/main' && steps.calculate_version.outputs.new_version != ''
 
           - name: "Update version in plugin.cfg"
             run: |
