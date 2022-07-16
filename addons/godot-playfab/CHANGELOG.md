@@ -1,3 +1,59 @@
+### [0.0.12](https://github.com/Structed/godot-playfab/compare/0.0.11...0.0.12) (2022-07-16)
+
+
+### Bug Fixes
+
+* try version AssetLib HandleBars ([e0148fb](https://github.com/Structed/godot-playfab/commit/e0148fb9f6c6c7d83d4f77d8fcc539c998b5d8eb))
+
+
+
+### [0.0.11](https://github.com/Structed/godot-playfab/compare/0.0.10...0.0.11) (2022-07-16)
+
+
+### Bug Fixes
+
+* accidentially committed failing yaml ([9e21f7d](https://github.com/Structed/godot-playfab/commit/9e21f7d463d8a95aeb0ad254c4a5ea20bbc01cd4))
+
+
+
+### [0.0.10](https://github.com/Structed/godot-playfab/compare/0.0.9...0.0.10) (2022-07-16)
+
+
+### Bug Fixes
+
+* step name in HB ([2e0baa5](https://github.com/Structed/godot-playfab/commit/2e0baa5e406d407f0e318132d57bd660110f267c))
+* update ([82496a3](https://github.com/Structed/godot-playfab/commit/82496a3b5d8e8932e7e10dfc7825bab5c6a626c4))
+
+
+
+### [0.0.9](https://github.com/Structed/godot-playfab/compare/0.0.8...0.0.9) (2022-07-16)
+
+
+### Bug Fixes
+
+* version ion Handlebars for AssetLib ([83b2401](https://github.com/Structed/godot-playfab/commit/83b2401a9cd31eb116191222a7cca485c5aa888f))
+
+
+
+### [0.0.8](https://github.com/Structed/godot-playfab/compare/0.0.7...0.0.8) (2022-07-16)
+
+
+### Bug Fixes
+
+* handlebars template for AssetLib export ([ff1bda7](https://github.com/Structed/godot-playfab/commit/ff1bda72acf82eadf2f4c562d44889c7c6400e95))
+
+
+
+### [0.0.7](https://github.com/Structed/godot-playfab/compare/0.0.6...0.0.7) (2022-07-16)
+
+
+### Bug Fixes
+
+* only run on branch main ([61d5a3a](https://github.com/Structed/godot-playfab/commit/61d5a3a008c6d0a0cb63a97485d5164e690d1986))
+* run main workflow on main and develop ([956e328](https://github.com/Structed/godot-playfab/commit/956e328c9948c96cd16af661fea6828316091ceb))
+
+
+
 ### [0.0.6](https://github.com/Structed/godot-playfab/compare/0.0.5...0.0.6) (2022-07-15)
 
 

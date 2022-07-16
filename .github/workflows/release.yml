@@ -58,6 +58,7 @@ jobs:
             if: steps.calculate_version.outputs.new_version != ''
 
   release:
+      # Create release only after the version was bumped and release notes added:
     if: "github.event.head_commit.message == 'chore: storing version and changelog'"
     runs-on: ubuntu-latest
 
@@ -119,14 +120,14 @@ jobs:
           name: godot-playfab-${{ steps.calculate_version.outputs.previous_tag }}
           path: addons/godot-playfab/
 
-      - uses: KikimoraGames/itch-publish@v0.0.3
-        with:
-          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
-          gameData: .
-          itchUsername: ${{env.ITCH_USERNAME}}
-          itchGameId: ${{ env.ITCH_GAME_ID }}
-          buildChannel: windows-mac-linux
-          buildNumber: ${{ steps.calculate_version.outputs.previous_tag }}
+#      - uses: KikimoraGames/itch-publish@v0.0.3
+#        with:
+#          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
+#          gameData: .
+#          itchUsername: ${{env.ITCH_USERNAME}}
+#          itchGameId: ${{ env.ITCH_GAME_ID }}
+#          buildChannel: windows-mac-linux
+#          buildNumber: ${{ steps.calculate_version.outputs.previous_tag }}
 
   assetlib:
     if: "github.ref == 'refs/heads/main' && github.event.head_commit.message == 'chore: storing version and changelog'"
@@ -136,6 +137,19 @@ jobs:
     steps:
 
       - uses: actions/checkout@v3
+
+      -   name: Calculate version
+          id: calculate_version
+          uses: mathieudutour/github-tag-action@v6.0
+          with:
+              tag_prefix: "v"
+              github_token: ${{ secrets.PAT }}
+              dry_run: true
+              default_bump: false
+
+      - name: Set Version
+        run: |
+            echo "version=${{ steps.calculate_version.outputs.previous_tag }}" >> $GITHUB_ENV
 
       - name: Godot Asset Lib
         uses: deep-entertainment/godot-asset-lib-action@v0.4.0
