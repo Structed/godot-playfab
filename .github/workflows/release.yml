@@ -89,7 +89,7 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           name: ${{ steps.create_version.outputs.new_tag }}
-          draft: true
+          draft: false
           prerelease: ${{ github.ref_name != 'main' }}
           artifacts: ""
           replacesArtifacts: false
