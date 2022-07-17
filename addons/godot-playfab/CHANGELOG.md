@@ -1,3 +1,12 @@
+### [0.0.13](https://github.com/Structed/godot-playfab/compare/0.0.12...0.0.13) (2022-07-17)
+
+
+### Bug Fixes
+
+* re-enable itch release ([3309664](https://github.com/Structed/godot-playfab/commit/3309664429bb1cbfe93ec67527c2ce0a360806d0))
+
+
+
 ### [0.0.12](https://github.com/Structed/godot-playfab/compare/0.0.11...0.0.12) (2022-07-16)
 
 
