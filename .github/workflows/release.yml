@@ -120,14 +120,14 @@ jobs:
           name: godot-playfab-${{ steps.calculate_version.outputs.previous_tag }}
           path: addons/godot-playfab/
 
-#      - uses: KikimoraGames/itch-publish@v0.0.3
-#        with:
-#          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
-#          gameData: .
-#          itchUsername: ${{env.ITCH_USERNAME}}
-#          itchGameId: ${{ env.ITCH_GAME_ID }}
-#          buildChannel: windows-mac-linux
-#          buildNumber: ${{ steps.calculate_version.outputs.previous_tag }}
+      - uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.GODOT_PLAYFAB_ITCHIO_SECRET}}
+          gameData: .
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: windows-mac-linux
+          buildNumber: ${{ steps.calculate_version.outputs.previous_tag }}
 
   assetlib:
     if: "github.ref == 'refs/heads/main' && github.event.head_commit.message == 'chore: storing version and changelog'"
