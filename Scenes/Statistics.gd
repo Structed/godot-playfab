@@ -98,6 +98,7 @@ func _on_get_player_statistic_version(result):
 	var get_player_statistic_versions_result = GetPlayerStatisticVersionsResult.new()
 	get_player_statistic_versions_result.from_dict(result["data"], get_player_statistic_versions_result)
 	version = get_player_statistic_versions_result.StatisticVersions.get_latest_version()
+	$Statistics/LeaderboardVBox/VersionHBox/LeaderboardVersion.text = String(version)
 
 	get_leaderboard()
 

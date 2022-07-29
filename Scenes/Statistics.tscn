@@ -52,7 +52,33 @@ text = "Back"
 [node name="LeaderboardVBox" type="VBoxContainer" parent="Statistics"]
 margin_top = 84.0
 margin_right = 1024.0
-margin_bottom = 84.0
+margin_bottom = 98.0
+
+[node name="VersionHBox" type="HBoxContainer" parent="Statistics/LeaderboardVBox"]
+margin_right = 1024.0
+margin_bottom = 14.0
+
+[node name="LeaderboardVersionLabel" type="Label" parent="Statistics/LeaderboardVBox/VersionHBox"]
+margin_right = 140.0
+margin_bottom = 14.0
+text = "Leaderboard- Version:"
+
+[node name="LeaderboardVersion" type="Label" parent="Statistics/LeaderboardVBox/VersionHBox"]
+margin_left = 144.0
+margin_right = 168.0
+margin_bottom = 14.0
+text = "000"
+
+[node name="PlayerStatisticsVBox" type="VBoxContainer" parent="Statistics"]
+margin_top = 102.0
+margin_right = 1024.0
+margin_bottom = 102.0
+
+[node name="GetPlayerStatisticsButton" type="Button" parent="Statistics"]
+margin_top = 106.0
+margin_right = 1024.0
+margin_bottom = 126.0
+text = "Get Player Statistics"
 
 [node name="ProgressCenter" type="CenterContainer" parent="."]
 margin_top = 88.0
