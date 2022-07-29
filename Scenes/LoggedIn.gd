@@ -42,3 +42,7 @@ func _on_EventsPlayStream_pressed():
 
 func _on_RequestBuilder_pressed():
 	SceneManager.goto_scene("res://Scenes/RequestBuilder.tscn")
+
+
+func _on_StatisticsButton_pressed():
+	SceneManager.goto_scene("res://Scenes/Statistics.tscn")
