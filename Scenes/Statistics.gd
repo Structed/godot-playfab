@@ -103,6 +103,19 @@ func _on_get_player_statistic_version(result):
 	get_leaderboard()
 
 
+func _on_GetPlayerStatisticsButton_pressed():
+	var request_data = GetPlayerStatisticsRequest.new()
+	#request_data.StatisticNames = [ STATISTIC_NAME ]
+
+	PlayFabManager.client.get_player_statistics(request_data, funcref(self, "_on_get_player_statistics_request_completed"))
+
+
+func _on_get_player_statistics_request_completed(result):
+	var get_player_statistics_result = GetPlayerStatisticsResult.new()
+	get_player_statistics_result.from_dict(result["data"], get_player_statistics_result)
+
+
+
 func _show_progess():
 	$Statistics.hide()
 	$ProgressCenter/LoginIndicator.show()
