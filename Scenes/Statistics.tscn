@@ -94,5 +94,5 @@ margin_right = 562.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 
-[connection signal="pressed" from="Statistics/StopWaitingButton" to="Statistics" method="_on_StopWaitingButton_pressed"]
+[connection signal="pressed" from="Statistics/StopWaitingButton" to="." method="_on_StopWaitingButton_pressed"]
 [connection signal="pressed" from="Statistics/BackButton" to="." method="_on_BackButton_pressed"]
