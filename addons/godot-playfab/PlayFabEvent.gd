@@ -82,38 +82,14 @@ func _assemble_event(event_name: String, payload: Dictionary, callback: FuncRef,
 	event.Name = event_name
 	event.EventNamespace = event_namespace
 	event.Payload = payload
-	event.OriginalTimestamp = _get_date_time_string_utc()
-	
+	event.OriginalTimestamp = DateTimeHelper.get_date_time_string_utc()
+
 	# Event can also have an Entity, which is a type/id combo.
 	# If omitted, the event will be sent in the "current" Entity's context
 	# Usually, this means `title_player_account`, as you are logged in with it in a client.
 
 	return event
 
-
-# Returns a ISO 8601 formatted DateTime string, including second fractions (ms)
-# Example: # 2022-10-21T12:01:23.6761898Z
-# 
-# @Visibility: Private
-func _get_date_time_string_utc() -> String:
-	var unix_time_stamp = OS.get_unix_time()
-	var datetime_dict = OS.get_datetime_from_unix_time(unix_time_stamp)
-	
-	var total_milliseconds_since_epoch = OS.get_system_time_msecs()
-	var length = (total_milliseconds_since_epoch as String).length()
-	var msecs = (total_milliseconds_since_epoch as String).right(length - 3)
-
-	var datetime = "%s-%s-%sT%s:%s:%s.%sZ" % [
-		datetime_dict["year"],
-		(datetime_dict["month"] as String).pad_zeros(2),
-		(datetime_dict["day"] as String).pad_zeros(2),
-		(datetime_dict["hour"] as String).pad_zeros(2),
-		(datetime_dict["minute"] as String).pad_zeros(2),
-		(datetime_dict["second"] as String).pad_zeros(2),
-		msecs
-	]
-	
-	return datetime # 2022-10-21T12:01:23.6761898Z
 
 # Tiggers batch flush if comfigured treshold is met
 # @Visivbility: Private
