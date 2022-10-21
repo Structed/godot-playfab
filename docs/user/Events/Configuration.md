@@ -7,6 +7,7 @@ In order for you to be able to flexibly change those based on your needs whereve
 |---------------------|-----------------------------|---------------------------------------------------------------------------------------------------|
 | Event Batch Size    | event_batch_size            | Determines how many events are batched before they are sent automatically                         |
 | Event Batch Timeout | event_batch_timeout_seconds | Determines after how many seconds the batch will be flushed - disregarding the current batch size |
+| Use Local Time      | use_local_time              | Defines whether local time is set on the event (true), or server time should be used (false)      |
 
 ## Considerations
 > If your game crashes while having batched, unsent events, these will be lost!

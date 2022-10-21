@@ -17,6 +17,10 @@ export(int) var event_batch_size = 5
 # Defines the wait time (in seconds) until batches are flushed
 export(int) var event_batch_timeout_seconds = 10
 
+# Defines whether local time is set on the event (true),
+# or server time should be used (false)
+export(bool) var use_local_time = true
+
 
 var playstream_event_batch = EventContentsCollection.new()
 var telemetry_event_batch = EventContentsCollection.new()
@@ -82,6 +86,10 @@ func _assemble_event(event_name: String, payload: Dictionary, callback: FuncRef,
 	event.Name = event_name
 	event.EventNamespace = event_namespace
 	event.Payload = payload
+	
+	if use_local_time:
+		event.OriginalTimestamp = DateTimeHelper.get_date_time_string_utc()
+
 	# Event can also have an Entity, which is a type/id combo.
 	# If omitted, the event will be sent in the "current" Entity's context
 	# Usually, this means `title_player_account`, as you are logged in with it in a client.
