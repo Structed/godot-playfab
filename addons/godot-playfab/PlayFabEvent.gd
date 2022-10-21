@@ -18,7 +18,7 @@ export(int) var event_batch_size = 5
 export(int) var event_batch_timeout_seconds = 10
 
 # Defines whether the local time will be used for event ingestion,
-# rather than the tiem being set upon receiving the event at the remote
+# rather than the time being set upon receiving the event at the remote
 # PlayFab service.
 export(bool) var use_local_time = true
 

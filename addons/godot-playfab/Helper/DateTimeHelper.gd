@@ -2,7 +2,7 @@ extends Reference
 class_name DateTimeHelper
 
 # Returns a ISO 8601 formatted DateTime string, including second fractions (ms)
-# Example: # 2022-10-21T12:01:23.6761898Z
+# Example: 2022-10-21T12:01:23.6761898Z
 #
 # @returns: int - A ISO 8601 Date Time String (UTC)
 static func get_date_time_string_utc() -> String:
@@ -15,7 +15,7 @@ static func get_date_time_string_utc() -> String:
 
 
 # Returns a ISO 8601 formatted DateTime string, including second fractions (ms)
-# Example: # 2022-10-21T12:01:23.6761898Z
+# Example: 2022-10-21T12:01:23.6761898Z
 #
 # @param unix_timestamp: int - Typically from `OS.get_unix_time()`
 # @param total_milliseconds_since_epoch: int - Typically from `OS.get_system_time_msecs()`
