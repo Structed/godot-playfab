@@ -105,11 +105,11 @@ func _get_date_time_string_utc() -> String:
 
 	var datetime = "%s-%s-%sT%s:%s:%s.%sZ" % [
 		datetime_dict["year"],
-		datetime_dict["month"],
-		datetime_dict["day"],
-		datetime_dict["hour"],
-		datetime_dict["minute"],
-		datetime_dict["second"],
+		(datetime_dict["month"] as String).pad_zeros(2),
+		(datetime_dict["day"] as String).pad_zeros(2),
+		(datetime_dict["hour"] as String).pad_zeros(2),
+		(datetime_dict["minute"] as String).pad_zeros(2),
+		(datetime_dict["second"] as String).pad_zeros(2),
 		msecs
 	]
 	
