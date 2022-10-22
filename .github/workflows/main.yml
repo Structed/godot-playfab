@@ -38,7 +38,7 @@ jobs:
           # required
           version: "3.5"
           # the type of release of godot that the tests should be run with
-          release_type: "beta2"
+          release_type: "stable"
           is-mono: "false"
           # the folder with your projects.godot file in it
           path: "."
