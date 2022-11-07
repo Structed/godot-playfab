@@ -1,3 +1,20 @@
+## [0.1.0](https://github.com/Structed/godot-playfab/compare/0.0.6...0.1.0) (2022-11-07)
+
+
+### Features
+
+* **pencil:** 65 timestamp of events ([#66](https://github.com/Structed/godot-playfab/issues/66)) ([34d0be7](https://github.com/Structed/godot-playfab/commit/34d0be7e9babb685b8ce9398a3ed5398f3be5a5f))
+* **pencil:** 72 add discord shield ([#73](https://github.com/Structed/godot-playfab/issues/73)) ([5e666ba](https://github.com/Structed/godot-playfab/commit/5e666ba07ca8736644208c0be5cbadf561d63321))
+
+
+### Bug Fixes
+
+* **pencil:** Add missing icon.png.import ([97f9589](https://github.com/Structed/godot-playfab/commit/97f958986b0c69d76ce16664b42749e1a1f683b5))
+* **pencil:** Add test step for Gopdot 3.4.4 ([#70](https://github.com/Structed/godot-playfab/issues/70)) ([7135bfe](https://github.com/Structed/godot-playfab/commit/7135bfe9bc1628572c38451aa773e0ecd3258839))
+* **pencil:** Use Godot 3.5 stable ([#69](https://github.com/Structed/godot-playfab/issues/69)) ([74d06cc](https://github.com/Structed/godot-playfab/commit/74d06ccedb246d64a7be1493050baaaebb98dd0a))
+
+
+
 ### [0.0.5](https://github.com/Structed/godot-playfab/compare/v0.0.4...0.0.5) (2022-07-17)
 
 
