@@ -16,6 +16,10 @@ Anyone could use the C# SDK right now or use any SDK with GDnative. But these SD
 So my plan is to not only create a GDScript-Native with more or less everything handcrafted,
 but also use Godot's Signals and also provide in-editor tools to work with Godot.
 
+# Need Help? Found a Bug? Have an idea for a feature?
+Don't hesitate and [join our Discord](https://discord.gg/7K7q2YuNXe)! Everyone is welcome and we're looking forward to hearing from you!
+Or create an [issue](/issues) directly in the repo. All your input is **very much appreciated**!
+
 
 ## Demo
 ![Demo](demo-scene.gif)
@@ -36,7 +40,6 @@ See the [User Documentation](docs/user/README.md)
 
 ## Maintainer Documentation
 See [Maintainer Documentation](docs/README.md).
-
 
 # Thanks
 Thanks to [lentsius-bark](https://github.com/lentsius-bark) for the wonderful re-design of the logo and splash screen ❤
