@@ -6,8 +6,8 @@ class_name AbstractJsonSerializableCollection
 # Holds the items
 var _Items: Array
 
-# Specifies the type of the items in _Items. Must inherit JsonSerializable
-# @example: Given a collection `StoreItemCollection`, by comvention, it would be a collection of `StoreItem`.
+# Specifies the type of the items in `_Items`, which in turn must inherit JsonSerializable.
+# @example: Given a collection `StoreItemCollection`, by convention, `_Items` would be a collection of `StoreItem`.
 # Thus, in the extending class you would add a constructor initialization like so:
 # ```
 # extends AbstractJsonSerializableCollection
