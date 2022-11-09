@@ -32,7 +32,7 @@ This requires the ability to write "generic" requests, where you can easily spec
 
 ```
 
-Check out the [ScenesRequestBuilder.tscn](/Scenes/ScenesRequestBuilder.tscn) in the Scenes folder
+Check out the [ScenesRequestBuilder.tscn](/Scenes/RequestBuilder.tscn) in the Scenes folder
 
 
 
