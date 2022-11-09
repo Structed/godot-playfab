@@ -50,3 +50,5 @@ In order for them to correctly (de-)serialize, you need to do the following step
     func _init():
         Events = EventContentsCollection.new()
     ````
+
+> ⚠️ Please be advised: Failure to implement this properly will lead to issues when deserializing!

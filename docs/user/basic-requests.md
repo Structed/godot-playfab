@@ -17,21 +17,23 @@ This requires the ability to write "generic" requests, where you can easily spec
 ## Examples
 ### `PlayFab.post_dict_auth`
 
-    func GetTitleData():
-        var dict = {
-        	"keys": [
-        		"BarKey"
-        	]
-        }
+```gdscript
+func GetTitleData():
+    var dict = {
+        "keys": [
+            "BarKey"
+        ]
+    }
 
-        PlayFabManager.client.post_dict_auth(
-        dict,
-        "/Client/GetTitleData",
-        PlayFab.AUTH_TYPE.SESSION_TICKET,
-        funcref(self, "_on_get_title_data"))
+    PlayFabManager.client.post_dict_auth(dict,"/Client/GetTitleData", PlayFab.AUTH_TYPE.SESSION_TICKET, funcref(self, "_on_get_title_data"))
 
-    func _on_get_title_data(response):
-	    print_debug(JSON.print(response.data, "\t"))
+func _on_get_title_data(response):
+    print_debug(JSON.print(response.data, "\t"))
+
+```
+
+Check out the [RequestBuilder.gd](/Scenes/RequestBuilder.gd) in the Scenes folder
+
 
 
 Back: [Initial Setup](usage.md) | Next: [Connecting Signals](connecting-signals.md)

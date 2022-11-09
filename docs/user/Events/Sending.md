@@ -68,3 +68,5 @@ Write a PlayStream Event:
 ````gdscript
 $PlayFabEvent.write_title_player_playstream_event(event_name, payload, funcref(self, callback))
 ````
+
+Back: [Configuration for Events](Configuration.md) | Next: [Flushing Events](Flushing.md)

@@ -1,4 +1,11 @@
-# Events - PlayStream & Telemetry
+# Events
+
+## Events Documentation Page Index
+1. [Configuration](Configuration.md)
+2. [Sending Events](Sending.md)
+3. [Flushing Events](Flushing.md)
+
+## PlayStream & Telemetry
 > See the [Official Documentation](https://docs.microsoft.com/en-us/gaming/playfab/features/automation/playstream-events/)
 
 PlayStream and Telemetry events are - from a integration perspective - the same.
