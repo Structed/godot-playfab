@@ -34,4 +34,4 @@ Sending small PlayStream events, we don't really care when/if they are being sen
 | Event Batch Size    | 5 (default)  |
 | Event Batch Timeout | 10 (default) |
 
-Back: [Events - PlayStream & Telemetry](README.md) | Next: [Flushing Events](Flushing.md)
+Back: [Events - PlayStream & Telemetry](README.md) | Next: [Sending Events](Sending.md)
