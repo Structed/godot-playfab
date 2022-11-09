@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 func _ready():
-	var _error = PlayFabManager.client.connect("api_error", self, "_on_PlayFab_api_error")
+	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
 	_error = PlayFabManager.client.connect("logged_in", self, "_on_logged_in")
 
 
