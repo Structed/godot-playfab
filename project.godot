@@ -248,6 +248,10 @@ enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/
 
 reload=false
 
+[gui]
+
+theme/custom="res://Assets/playfab_theme.tres"
+
 [physics]
 
 common/enable_pause_aware_picking=true
