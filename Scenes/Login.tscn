@@ -62,63 +62,63 @@ margin_bottom = 500.0
 
 [node name="Email" type="HBoxContainer" parent="MarginContainer/Login"]
 margin_right = 924.0
-margin_bottom = 24.0
+margin_bottom = 31.0
 
 [node name="Label" type="Label" parent="MarginContainer/Login/Email"]
 margin_top = 5.0
-margin_right = 35.0
-margin_bottom = 19.0
+margin_right = 46.0
+margin_bottom = 26.0
 text = "Email"
 
 [node name="Input" type="LineEdit" parent="MarginContainer/Login/Email"]
-margin_left = 39.0
-margin_right = 239.0
-margin_bottom = 24.0
+margin_left = 50.0
+margin_right = 250.0
+margin_bottom = 31.0
 rect_min_size = Vector2( 200, 0 )
 text = "User1@example.com"
 expand_to_text_length = true
 
 [node name="Password" type="HBoxContainer" parent="MarginContainer/Login"]
-margin_top = 28.0
+margin_top = 35.0
 margin_right = 924.0
-margin_bottom = 52.0
+margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="MarginContainer/Login/Password"]
 margin_top = 5.0
-margin_right = 60.0
-margin_bottom = 19.0
+margin_right = 80.0
+margin_bottom = 26.0
 text = "Password"
 
 [node name="Input" type="LineEdit" parent="MarginContainer/Login/Password"]
-margin_left = 64.0
-margin_right = 264.0
-margin_bottom = 24.0
+margin_left = 84.0
+margin_right = 284.0
+margin_bottom = 31.0
 rect_min_size = Vector2( 200, 0 )
 text = "Test123"
 secret = true
 
 [node name="Login" type="Button" parent="MarginContainer/Login"]
-margin_top = 56.0
+margin_top = 70.0
 margin_right = 924.0
-margin_bottom = 76.0
+margin_bottom = 97.0
 text = "Login"
 
 [node name="AnonLogin" type="Button" parent="MarginContainer/Login"]
-margin_top = 80.0
+margin_top = 101.0
 margin_right = 924.0
-margin_bottom = 100.0
+margin_bottom = 128.0
 text = "Anonymous Login"
 
 [node name="Back" type="Button" parent="MarginContainer/Login"]
-margin_top = 104.0
+margin_top = 132.0
 margin_right = 924.0
-margin_bottom = 124.0
+margin_bottom = 159.0
 text = "Back"
 
 [node name="Output" type="RichTextLabel" parent="MarginContainer/Login"]
-margin_top = 128.0
+margin_top = 163.0
 margin_right = 924.0
-margin_bottom = 228.0
+margin_bottom = 263.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 bbcode_enabled = true
