@@ -242,7 +242,7 @@ PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg" )
 
 [global]
 
@@ -251,10 +251,6 @@ reload=false
 [gui]
 
 theme/custom="res://Assets/playfab_theme.tres"
-
-[mono]
-
-project/assembly_name="godot-playfab"
 
 [physics]
 
