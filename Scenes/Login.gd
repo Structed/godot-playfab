@@ -1,5 +1,6 @@
 extends MarginContainer
 
+var isAnonLogin
 
 func _ready():
 	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
@@ -9,10 +10,11 @@ func _ready():
 func _on_Login_pressed():
 	$Login.hide()
 	_show_progess()
-
+	
+	isAnonLogin = false
 	var email = $Login/Email/Input.text
 	var password = $Login/Password/Input.text
-
+	
 	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
 	combined_info_request_params.show_all()
 	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
@@ -22,6 +24,7 @@ func _on_Login_pressed():
 
 
 func _on_AnonLogin_pressed():
+	isAnonLogin = true
 	$Login.hide()
 	_show_progess()
 	var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
@@ -43,7 +46,10 @@ func _hide_progess():
 
 
 func _on_logged_in(login_result: LoginResult):
-	$Login/Login.self_modulate = Color(0, 1, 0, 0.5)
+	if isAnonLogin == false:
+		$Login/Login.self_modulate = Color(0, 1, 0, 0.5)
+	else:
+		$Login/AnonLogin.self_modulate = Color(0, 1, 0, 0.5)
 	$Login/Output.hide()
 	_hide_progess()
 
