@@ -7,7 +7,32 @@ const color_red = Color(1, 0, 0, 0.5)
 func _ready():
 	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
 	_error = PlayFabManager.client.connect("logged_in", self, "_on_logged_in")
-	update_login_button_states()
+	_error = $LoggedIn.connect("logout", self, "_on_LogoutButton_pressed")	
+
+	$Login/StayLoggedInCheckbox.pressed = PlayFabManager.client_config.stay_logged_in
+
+	# It is best practice, to refresh the login every time, as the `SessionTicket` is only valid for 24 hours.
+	# Spceifically, with "Anonymous Logins" this makes sense.
+	# However, regular PlayFab logins can't just be implicitly logged in without\
+	# storing the user's credentials, which you SHOULD NOT do!
+	if PlayFabManager.client_config.stay_logged_in && PlayFabManager.client_config.is_logged_in():
+		$Login.hide()
+		
+		if PlayFabManager.client_config.login_type == PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID:
+			_on_AnonLogin_pressed()
+		else:
+			remember_login()
+			
+			
+# Skips login and uses the saved SessionTicket/EntityToken
+func remember_login():
+	var login_result = LoginResult.new()
+	login_result.EntityToken = PlayFabManager.client_config.entity_token
+	login_result.SessionTicket = PlayFabManager.client_config.session_ticket
+	login_result.LastLoginTime = PlayFabManager.client_config.login_timestamp
+	login_result.PlayFabId = PlayFabManager.client_config.master_player_account_id
+
+	_on_logged_in(null)
 
 
 func update_login_button_states():
@@ -90,7 +115,13 @@ func _on_Back_pressed():
 	SceneManager.goto_scene("res://Scenes/Main.tscn")
 
 
-func _on_LoggedInBackButton_pressed():
+func _on_LogoutButton_pressed():
+	PlayFabManager.forget_login()
 	$LoggedIn.hide()
 	update_login_button_states()
 	$Login.show()
+
+
+func _on_StayLoggedInCheckbox_pressed():
+	# Persist, whether user should be automatically logged in
+	PlayFabManager.client_config.stay_logged_in = $Login/StayLoggedInCheckbox.pressed

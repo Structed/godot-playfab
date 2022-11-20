@@ -41,3 +41,14 @@ func _ready():
 # Saves the client config to a file
 func save_client_config():
 	_client_config_loader.save(title_id, client_config)
+
+
+# Forgets the login
+func forget_login():
+	_client_config_loader.clear(title_id)
+	reload()
+
+
+# Reloads the config
+func reload():
+	client_config = _client_config_loader.load(title_id)
