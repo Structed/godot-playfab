@@ -1,3 +1,23 @@
+## [0.2.0](https://github.com/Structed/godot-playfab/compare/0.1.0...0.2.0) (2022-11-21)
+
+
+### Features
+
+* **pencil:** Add Default Theme ([#64](https://github.com/Structed/godot-playfab/issues/64)) ([72bce50](https://github.com/Structed/godot-playfab/commit/72bce508cb3ff08a4dc5fddab35c2d82b301ef4c))
+
+
+### Bug Fixes
+
+* **pencil:** 55 update documentation ([#78](https://github.com/Structed/godot-playfab/issues/78)) ([161dd26](https://github.com/Structed/godot-playfab/commit/161dd2666e63f05cde49afc77623c976a462eb4e))
+* **pencil:** Added missing  in  to specify . Otherwise, deserialization would fail. ([e2d73c1](https://github.com/Structed/godot-playfab/commit/e2d73c10bd5c07f5920278c2a7a2087cb89c139e))
+* **pencil:** Anonymous Login button does not turn green after successful anonymous login [#81](https://github.com/Structed/godot-playfab/issues/81) ([#82](https://github.com/Structed/godot-playfab/issues/82)) ([090dc2c](https://github.com/Structed/godot-playfab/commit/090dc2c61f6b8c2413de0b1f2afbd7db5dfa69ed))
+* **pencil:** fix code docs ([47223ef](https://github.com/Structed/godot-playfab/commit/47223ef624efcb6e83af3ac85e8f76fb737844c8))
+* **pencil:** Fix demo scene file ([a2a244f](https://github.com/Structed/godot-playfab/commit/a2a244f3ef1741cc08f49688196607ad6b982400))
+* **pencil:** Login with incorrect credentials stalls the demo [#76](https://github.com/Structed/godot-playfab/issues/76) ([#77](https://github.com/Structed/godot-playfab/issues/77)) ([b4f25fb](https://github.com/Structed/godot-playfab/commit/b4f25fb05d35463ea8bf8d974a6b8a3dccd85f38))
+* **pencil:** Update demo scene gif ([#80](https://github.com/Structed/godot-playfab/issues/80)) ([71c4b15](https://github.com/Structed/godot-playfab/commit/71c4b157babbaf037a6981ec5caca0955e702caf))
+
+
+
 ## [0.1.0](https://github.com/Structed/godot-playfab/compare/0.0.6...0.1.0) (2022-11-07)
 
 
