@@ -26,6 +26,9 @@ var login_timestamp = 0
 
 enum LoginType { LOGIN_NONE, LOGIN_EMAIL, LOGIN_CUSTOM_ID }
 
+# Whether the user should stay logged in
+var stay_logged_in = false
+
 
 # Checks whether the account is considered logged in
 func is_logged_in() -> bool:

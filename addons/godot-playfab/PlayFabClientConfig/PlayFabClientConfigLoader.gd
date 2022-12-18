@@ -31,7 +31,12 @@ var errors = []
 # @param new_config: PlayFabClientConfig - Object to retrieve key/values from
 func save(password: String, new_config: PlayFabClientConfig):
 	_set_values(new_config)
+	_save(password)
+	
 
+# Actual file system save logic
+# @param password: String - The password used to encrypt the ConfigFile
+func _save(password: String):
 	if OS.is_debug_build() && DEBUG_DO_NOT_ENCRYPT:
 		_config.save(_load_path)
 	else:
@@ -65,6 +70,13 @@ func load(password: String) -> PlayFabClientConfig:
 	_get_values(new_config)
 
 	return new_config
+
+
+# Clears the config\
+# @param password: String - The password used to encrypt the ConfigFile
+func clear(password: String):
+	_config.clear()
+	_save(password)
 
 
 # Sets all property values from @paramref `new_config`on `_config`

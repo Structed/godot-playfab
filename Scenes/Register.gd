@@ -2,7 +2,7 @@ extends VBoxContainer
 
 
 func _ready():
-	var _error = PlayFabManager.client.connect("api_error", self, "_on_PlayFab_api_error")
+	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
 	_error = PlayFabManager.client.connect("registered", self, "_on_registered")
 
 

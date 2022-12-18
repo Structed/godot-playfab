@@ -2,6 +2,7 @@ extends Control
 class_name LoggedIn
 
 var login_result: LoginResult
+signal logout
 
 
 func _ready():
@@ -42,3 +43,11 @@ func _on_EventsPlayStream_pressed():
 
 func _on_RequestBuilder_pressed():
 	SceneManager.goto_scene("res://Scenes/RequestBuilder.tscn")
+
+
+func _on_MainMenuButton_pressed():
+	SceneManager.goto_scene("res://Scenes/Main.tscn")
+
+
+func _on_LogoutButton_pressed():
+	emit_signal("logout")
