@@ -14,36 +14,42 @@ anchor_bottom = 1.0
 
 [node name="BatchTelemetryEventsButton" type="Button" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 20.0
+margin_bottom = 27.0
 text = "Batch Telemetry Events"
 
 [node name="BatchPlayStreamEventsButton" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
+margin_top = 31.0
 margin_right = 1024.0
-margin_bottom = 44.0
+margin_bottom = 58.0
 text = "Batch PlayStream Events"
 
 [node name="WriteTelemetryDirectButton" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 62.0
 margin_right = 1024.0
-margin_bottom = 68.0
+margin_bottom = 89.0
 text = "Write Telemetry Event (direct)"
 
 [node name="WritePlayStreamDirectButton" type="Button" parent="VBoxContainer"]
-margin_top = 72.0
+margin_top = 93.0
 margin_right = 1024.0
-margin_bottom = 92.0
+margin_bottom = 120.0
 text = "Write PlayStream Event (direct)"
 
 [node name="Response" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 96.0
+margin_top = 124.0
 margin_right = 1024.0
-margin_bottom = 576.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="OpenPlayStreamButton" type="Button" parent="VBoxContainer"]
+margin_top = 542.0
+margin_right = 1024.0
+margin_bottom = 569.0
+text = "Open PlaySteam"
+
 [node name="BackButton" type="Button" parent="VBoxContainer"]
-margin_top = 580.0
+margin_top = 573.0
 margin_right = 1024.0
 margin_bottom = 600.0
 text = "Back"
@@ -52,4 +58,5 @@ text = "Back"
 [connection signal="pressed" from="VBoxContainer/BatchPlayStreamEventsButton" to="." method="_on_BatchPlayStreamEventsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/WriteTelemetryDirectButton" to="." method="_on_WriteTelemetryDirectButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/WritePlayStreamDirectButton" to="." method="_on_WritePlayStreamDirectButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/OpenPlayStreamButton" to="." method="_on_OpenPlayStreamButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
