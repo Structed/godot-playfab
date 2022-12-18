@@ -14,7 +14,7 @@ func _on_BatchTelemetryEventsButton_pressed():
 		"Action": "_on_BatchTelemetryEventsButton_pressed"
 	}
 
-	PlayFabManager.event.batch_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.batch_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload)
 
 
 func _on_BatchPlayStreamEventsButton_pressed():
@@ -22,7 +22,7 @@ func _on_BatchPlayStreamEventsButton_pressed():
 		"Action": "_on_BatchPlayStreamEventsButton_pressed"
 	}
 
-	PlayFabManager.event.batch_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.batch_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload)
 
 
 func _on_WriteTelemetryDirectButton_pressed():
@@ -30,7 +30,7 @@ func _on_WriteTelemetryDirectButton_pressed():
 		"Action": "_on_WriteTelemetryDirectButton_pressed"
 	}
 
-	PlayFabManager.event.write_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.write_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload)
 
 
 func _on_WritePlayStreamDirectButton_pressed():
@@ -38,7 +38,7 @@ func _on_WritePlayStreamDirectButton_pressed():
 		"Action": "_on_WritePlayStreamDirectButton_pressed"
 	}
 
-	PlayFabManager.event.write_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, funcref(self, "_on_write_events_request_completed"))
+	PlayFabManager.event.write_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload)
 
 
 func _on_write_events_request_completed(response):
@@ -51,3 +51,7 @@ func _on_PlayFab_api_error(error: ApiErrorWrapper):
 
 func _on_BackButton_pressed():
 	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
+
+
+func _on_OpenPlayStreamButton_pressed():
+	OS.shell_open("https://developer.playfab.com/en-us/" + PlayFabManager.title_id + "/dashboard/monitoring/playstream")
