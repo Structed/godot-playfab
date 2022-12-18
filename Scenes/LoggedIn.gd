@@ -51,3 +51,8 @@ func _on_MainMenuButton_pressed():
 
 func _on_LogoutButton_pressed():
 	emit_signal("logout")
+
+
+func _on_TestButton_pressed():
+	SceneManager.goto_scene("res://Scenes/Test.tscn")
+	

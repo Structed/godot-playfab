@@ -199,42 +199,49 @@ __meta__ = {
 
 [node name="GetTitleDataButton" type="Button" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 20.0
+margin_bottom = 27.0
 text = "Get Title Data"
 
 [node name="EventsPlayStream" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
+margin_top = 31.0
 margin_right = 1024.0
-margin_bottom = 44.0
+margin_bottom = 58.0
 text = "Events & PlayStream API"
 
 [node name="RequestBuilder" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 62.0
 margin_right = 1024.0
-margin_bottom = 68.0
+margin_bottom = 89.0
 text = "Request Builder"
 
 [node name="Response" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 72.0
+margin_top = 93.0
 margin_right = 1024.0
-margin_bottom = 600.0
+margin_bottom = 507.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MainMenuButton" type="Button" parent="VBoxContainer"]
-margin_top = 542.0
+margin_top = 511.0
 margin_right = 1024.0
-margin_bottom = 569.0
+margin_bottom = 538.0
 text = "Back to Main Menu"
 
 [node name="LogoutButton" type="Button" parent="VBoxContainer"]
+margin_top = 542.0
+margin_right = 1024.0
+margin_bottom = 569.0
+text = "Logout"
+
+[node name="TestButton" type="Button" parent="VBoxContainer"]
 margin_top = 573.0
 margin_right = 1024.0
 margin_bottom = 600.0
-text = "Logout"
+text = "Test"
 
 [connection signal="pressed" from="VBoxContainer/GetTitleDataButton" to="." method="_on_GetTitleDataButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/EventsPlayStream" to="." method="_on_EventsPlayStream_pressed"]
 [connection signal="pressed" from="VBoxContainer/RequestBuilder" to="." method="_on_RequestBuilder_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/LogoutButton" to="." method="_on_LogoutButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
