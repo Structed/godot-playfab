@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
 }, {
+"base": "Reference",
+"class": "SafeTimer",
+"language": "GDScript",
+"path": "res://addons/godot-playfab/Helper/SafeTimer.gd"
+}, {
 "base": "JsonSerializable",
 "class": "SubProp",
 "language": "GDScript",
@@ -208,6 +213,7 @@ _global_script_class_icons={
 "PlayerProfileViewConstraints": "",
 "RegisterPlayFabUserRequest": "",
 "RegisterPlayFabUserResult": "",
+"SafeTimer": "",
 "SubProp": "",
 "TestCollection": "",
 "UUID": "",
