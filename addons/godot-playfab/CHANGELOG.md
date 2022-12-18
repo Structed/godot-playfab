@@ -1,3 +1,17 @@
+## [0.3.0](https://github.com/Structed/godot-playfab/compare/0.2.0...0.3.0) (2022-12-18)
+
+
+### Features
+
+* **pencil:** Add response compression (gzip) ([#87](https://github.com/Structed/godot-playfab/issues/87)) ([248972c](https://github.com/Structed/godot-playfab/commit/248972cdaf9891e5fd8a3308471831967ee00c9c))
+
+
+### Bug Fixes
+
+* **pencil:** Do not require callbacks for Events API ([#90](https://github.com/Structed/godot-playfab/issues/90)) ([71d0a92](https://github.com/Structed/godot-playfab/commit/71d0a929938428af305c2b2e9eb01a2a800f7153))
+
+
+
 ## [0.2.0](https://github.com/Structed/godot-playfab/compare/0.1.0...0.2.0) (2022-11-21)
 
 
