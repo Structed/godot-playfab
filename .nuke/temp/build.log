@@ -1,0 +1,94 @@
+09:23:29.375 | V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+09:23:29.406 | V |                      | InjectParameterValues.OnBuildCreated (100)
+09:23:29.413 | V |                      | HandleShellCompletion.OnBuildCreated (75)
+09:23:29.835 | V |                      | GenerateBuildServerConfigurations.OnBuildCreated (50)
+09:23:29.836 | V |                      | InvokeBuildServerConfigurationGeneration.OnBuildCreated (45)
+09:23:29.847 | V |                      | UpdateNotification.OnBuildCreated (10)
+09:23:29.848 | V |                      | UnsetVisualStudioEnvironmentVariables.OnBuildCreated (0)
+09:23:29.848 | V |                      | HandleVisualStudioDebugging.OnBuildCreated (0)
+09:23:29.849 | V |                      | HandleSingleFileExecution.OnBuildCreated (-50)
+09:23:29.850 | V |                      | EventInvoker.OnBuildCreated (-3.4028235E+38)
+09:23:29.863 | V |                      | HandleHelpRequests.OnBuildInitialized (5)
+09:23:29.863 | V |                      | Telemetry.OnBuildInitialized (0)
+09:23:31.425 | V |                      | Sending BuildStarted telemetry event ...
+09:23:31.429 | V |                      |   build_components         = 
+09:23:31.429 | V |                      |   build_type               = Project
+09:23:31.429 | V |                      |   compile_time             = 12
+09:23:31.429 | V |                      |   config_generators        = 
+09:23:31.429 | V |                      |   host                     = Terminal
+09:23:31.429 | V |                      |   num_custom_components    = 0
+09:23:31.429 | V |                      |   num_custom_extensions    = 0
+09:23:31.429 | V |                      |   num_partitioned_targets  = 0
+09:23:31.429 | V |                      |   num_secrets              = 0
+09:23:31.429 | V |                      |   num_targets              = 3
+09:23:31.429 | V |                      |   os_architecture          = X64
+09:23:31.430 | V |                      |   os_platform              = Windows
+09:23:31.430 | V |                      |   repo_branch              = <null>
+09:23:31.430 | V |                      |   repo_commit              = 2067dd
+09:23:31.430 | V |                      |   repo_provider            = GitHub
+09:23:31.430 | V |                      |   repo_url                 = 7be178
+09:23:31.430 | V |                      |   target_framework         = .NETCoreApp,Version=v6.0
+09:23:31.430 | V |                      |   version_dotnet_sdk       = 7.0.101
+09:23:31.430 | V |                      |   version_nuke_common      = 6.3.0
+09:23:31.430 | V |                      |   version_nuke_global_tool = 6.3.0
+09:23:31.708 | V |                      | InjectNonParameterValues.OnBuildInitialized (-100)
+09:23:31.708 | V |                      | EventInvoker.OnBuildInitialized (-3.4028235E+38)
+09:23:31.716 | V | Restore              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+09:23:31.716 | V | Restore              | Telemetry.OnTargetSucceeded (0)
+09:23:31.832 | V | Restore              | Sending TargetSucceeded telemetry event ...
+09:23:31.832 | V | Restore              |   build_components         = 
+09:23:31.832 | V | Restore              |   build_type               = Project
+09:23:31.832 | V | Restore              |   compile_time             = 13
+09:23:31.832 | V | Restore              |   config_generators        = 
+09:23:31.832 | V | Restore              |   host                     = Terminal
+09:23:31.832 | V | Restore              |   num_custom_components    = 0
+09:23:31.832 | V | Restore              |   num_custom_extensions    = 0
+09:23:31.832 | V | Restore              |   num_partitioned_targets  = 0
+09:23:31.832 | V | Restore              |   num_secrets              = 0
+09:23:31.832 | V | Restore              |   num_targets              = 3
+09:23:31.832 | V | Restore              |   os_architecture          = X64
+09:23:31.832 | V | Restore              |   os_platform              = Windows
+09:23:31.832 | V | Restore              |   repo_branch              = <null>
+09:23:31.832 | V | Restore              |   repo_commit              = 2067dd
+09:23:31.832 | V | Restore              |   repo_provider            = GitHub
+09:23:31.832 | V | Restore              |   repo_url                 = 7be178
+09:23:31.832 | V | Restore              |   target_current_partition = 1
+09:23:31.832 | V | Restore              |   target_duration          = 0
+09:23:31.832 | V | Restore              |   target_framework         = .NETCoreApp,Version=v6.0
+09:23:31.832 | V | Restore              |   target_name              = Restore
+09:23:31.832 | V | Restore              |   target_total_partitions  = 1
+09:23:31.832 | V | Restore              |   version_dotnet_sdk       = 7.0.101
+09:23:31.832 | V | Restore              |   version_nuke_common      = 6.3.0
+09:23:31.832 | V | Restore              |   version_nuke_global_tool = 6.3.0
+09:23:31.879 | V | Restore              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+09:23:31.881 | V | Compile              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+09:23:31.881 | V | Compile              | Telemetry.OnTargetSucceeded (0)
+09:23:31.997 | V | Compile              | Sending TargetSucceeded telemetry event ...
+09:23:31.997 | V | Compile              |   build_components         = 
+09:23:31.997 | V | Compile              |   build_type               = Project
+09:23:31.997 | V | Compile              |   compile_time             = 13
+09:23:31.997 | V | Compile              |   config_generators        = 
+09:23:31.997 | V | Compile              |   host                     = Terminal
+09:23:31.997 | V | Compile              |   num_custom_components    = 0
+09:23:31.997 | V | Compile              |   num_custom_extensions    = 0
+09:23:31.997 | V | Compile              |   num_partitioned_targets  = 0
+09:23:31.997 | V | Compile              |   num_secrets              = 0
+09:23:31.997 | V | Compile              |   num_targets              = 3
+09:23:31.997 | V | Compile              |   os_architecture          = X64
+09:23:31.998 | V | Compile              |   os_platform              = Windows
+09:23:31.998 | V | Compile              |   repo_branch              = <null>
+09:23:31.998 | V | Compile              |   repo_commit              = 2067dd
+09:23:31.998 | V | Compile              |   repo_provider            = GitHub
+09:23:31.998 | V | Compile              |   repo_url                 = 7be178
+09:23:31.998 | V | Compile              |   target_current_partition = 1
+09:23:31.998 | V | Compile              |   target_duration          = 0
+09:23:31.998 | V | Compile              |   target_framework         = .NETCoreApp,Version=v6.0
+09:23:31.998 | V | Compile              |   target_name              = Compile
+09:23:31.998 | V | Compile              |   target_total_partitions  = 1
+09:23:31.998 | V | Compile              |   version_dotnet_sdk       = 7.0.101
+09:23:31.998 | V | Compile              |   version_nuke_common      = 6.3.0
+09:23:31.998 | V | Compile              |   version_nuke_global_tool = 6.3.0
+09:23:32.048 | V | Compile              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+09:23:32.055 | V |                      | UpdateNotification.OnBuildFinished (10)
+09:23:32.055 | V |                      | SerializeBuildServerState.OnBuildFinished (0)
+09:23:32.055 | V |                      | EventInvoker.OnBuildFinished (-3.4028235E+38)

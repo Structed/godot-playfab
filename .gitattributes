@@ -22,3 +22,5 @@ demo-scene.gif                  export-ignore # Showing off the demo scene.
 GitVersion.yml                  export-ignore
 /.github                        export-ignore
 .asset-template.json.hb         export-ignore # Template for AssetLib publishing
+/.nuke                          export-ignore # Nuke build config
+/.build                         export-ignore # Nuke Build project

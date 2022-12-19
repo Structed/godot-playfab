@@ -1,0 +1,94 @@
+V |                      | ArgumentsFromParametersFile.OnBuildCreated (150)
+V |                      | InjectParameterValues.OnBuildCreated (100)
+V |                      | HandleShellCompletion.OnBuildCreated (75)
+V |                      | GenerateBuildServerConfigurations.OnBuildCreated (50)
+V |                      | InvokeBuildServerConfigurationGeneration.OnBuildCreated (45)
+V |                      | UpdateNotification.OnBuildCreated (10)
+V |                      | UnsetVisualStudioEnvironmentVariables.OnBuildCreated (0)
+V |                      | HandleVisualStudioDebugging.OnBuildCreated (0)
+V |                      | HandleSingleFileExecution.OnBuildCreated (-50)
+V |                      | EventInvoker.OnBuildCreated (-3.4028235E+38)
+V |                      | HandleHelpRequests.OnBuildInitialized (5)
+V |                      | Telemetry.OnBuildInitialized (0)
+V |                      | Sending BuildStarted telemetry event ...
+V |                      |   build_components         = 
+V |                      |   build_type               = Project
+V |                      |   compile_time             = 12
+V |                      |   config_generators        = 
+V |                      |   host                     = Terminal
+V |                      |   num_custom_components    = 0
+V |                      |   num_custom_extensions    = 0
+V |                      |   num_partitioned_targets  = 0
+V |                      |   num_secrets              = 0
+V |                      |   num_targets              = 3
+V |                      |   os_architecture          = X64
+V |                      |   os_platform              = Windows
+V |                      |   repo_branch              = <null>
+V |                      |   repo_commit              = 2067dd
+V |                      |   repo_provider            = GitHub
+V |                      |   repo_url                 = 7be178
+V |                      |   target_framework         = .NETCoreApp,Version=v6.0
+V |                      |   version_dotnet_sdk       = 7.0.101
+V |                      |   version_nuke_common      = 6.3.0
+V |                      |   version_nuke_global_tool = 6.3.0
+V |                      | InjectNonParameterValues.OnBuildInitialized (-100)
+V |                      | EventInvoker.OnBuildInitialized (-3.4028235E+38)
+V | Restore              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+V | Restore              | Telemetry.OnTargetSucceeded (0)
+V | Restore              | Sending TargetSucceeded telemetry event ...
+V | Restore              |   build_components         = 
+V | Restore              |   build_type               = Project
+V | Restore              |   compile_time             = 13
+V | Restore              |   config_generators        = 
+V | Restore              |   host                     = Terminal
+V | Restore              |   num_custom_components    = 0
+V | Restore              |   num_custom_extensions    = 0
+V | Restore              |   num_partitioned_targets  = 0
+V | Restore              |   num_secrets              = 0
+V | Restore              |   num_targets              = 3
+V | Restore              |   os_architecture          = X64
+V | Restore              |   os_platform              = Windows
+V | Restore              |   repo_branch              = <null>
+V | Restore              |   repo_commit              = 2067dd
+V | Restore              |   repo_provider            = GitHub
+V | Restore              |   repo_url                 = 7be178
+V | Restore              |   target_current_partition = 1
+V | Restore              |   target_duration          = 0
+V | Restore              |   target_framework         = .NETCoreApp,Version=v6.0
+V | Restore              |   target_name              = Restore
+V | Restore              |   target_total_partitions  = 1
+V | Restore              |   version_dotnet_sdk       = 7.0.101
+V | Restore              |   version_nuke_common      = 6.3.0
+V | Restore              |   version_nuke_global_tool = 6.3.0
+V | Restore              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V | Compile              | EventInvoker.OnTargetRunning (-3.4028235E+38)
+V | Compile              | Telemetry.OnTargetSucceeded (0)
+V | Compile              | Sending TargetSucceeded telemetry event ...
+V | Compile              |   build_components         = 
+V | Compile              |   build_type               = Project
+V | Compile              |   compile_time             = 13
+V | Compile              |   config_generators        = 
+V | Compile              |   host                     = Terminal
+V | Compile              |   num_custom_components    = 0
+V | Compile              |   num_custom_extensions    = 0
+V | Compile              |   num_partitioned_targets  = 0
+V | Compile              |   num_secrets              = 0
+V | Compile              |   num_targets              = 3
+V | Compile              |   os_architecture          = X64
+V | Compile              |   os_platform              = Windows
+V | Compile              |   repo_branch              = <null>
+V | Compile              |   repo_commit              = 2067dd
+V | Compile              |   repo_provider            = GitHub
+V | Compile              |   repo_url                 = 7be178
+V | Compile              |   target_current_partition = 1
+V | Compile              |   target_duration          = 0
+V | Compile              |   target_framework         = .NETCoreApp,Version=v6.0
+V | Compile              |   target_name              = Compile
+V | Compile              |   target_total_partitions  = 1
+V | Compile              |   version_dotnet_sdk       = 7.0.101
+V | Compile              |   version_nuke_common      = 6.3.0
+V | Compile              |   version_nuke_global_tool = 6.3.0
+V | Compile              | EventInvoker.OnTargetSucceeded (-3.4028235E+38)
+V |                      | UpdateNotification.OnBuildFinished (10)
+V |                      | SerializeBuildServerState.OnBuildFinished (0)
+V |                      | EventInvoker.OnBuildFinished (-3.4028235E+38)
