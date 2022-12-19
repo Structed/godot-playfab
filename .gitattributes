@@ -7,32 +7,18 @@
 # Exclude other addons
 /addons/godot-plugin-refresher  export-ignore
 
-
-# GUT
+# GUT - Godot Unit Test Framework
 /addons/gut                     export-ignore
 .gut_editor_config.json         export-ignore
 .gut_editor_shortcuts.cfg       export-ignore
 .gutconfig.json                 export-ignore
 
 # Project items
-/addons/godot-playfab/test     export-ignore
-/docs                           export-ignore
-/raw_assets                     export-ignore
-/Scenes                         export-ignore
-/Scripts                        export-ignore
-/Textures                       export-ignore
-.asset-template.json.hb         export-ignore
-project.godot                   export-ignore
-default_env.tres                export-ignore
-icon.png.import                 export-ignore
-.editorconfig                   export-ignore
-*.gif                           export-ignore
+/addons/godot-playfab/test      export-ignore # Test project
+/raw_assets                     export-ignore # This is where I keep my raw assets
+demo-scene.gif                  export-ignore # Showing off the demo scene.
+
+# CI/CD
 GitVersion.yml                  export-ignore
-
-
-# Defautl repository stuff
-README.md                       export-ignore
-LICENSE                         export-ignore
 /.github                        export-ignore
-/.gitattributes                 export-ignore
-/.gitignore                     export-ignore
+.asset-template.json.hb         export-ignore # Template for AssetLib publishing
