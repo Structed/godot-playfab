@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'custom-versioning-rules'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,14 +35,13 @@ jobs:
               github_token: ${{ secrets.PAT }}
               dry_run: true
               default_bump: false
-              custom_release_rules:
-                  - "<keyword>:<release_type>:<changelog_section>"
-                  - "fix:patch:Bug Fixes"
-                  - "hotfix:patch:Bug Fixes"
-                  - "feature:minor:Features"
-                  - "change:minor:Changes"
-                  - "breaking:major:Breaking Changes"
-                  - "major:major:Major Changes"
+              custom_release_rules: |
+                  fix:patch:Bug Fixes
+                  hotfix:patch:Bug Fixes
+                  feature:minor:Features
+                  change:minor:Changes
+                  breaking:major:Breaking Changes
+                  major:major:Major Changes
 
           - name: "Write changelog"
             run: |
