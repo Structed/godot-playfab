@@ -36,12 +36,12 @@ jobs:
               dry_run: true
               default_bump: false
               custom_release_rules: |
-                  fix:patch:Bug Fixes
-                  hotfix:patch:Bug Fixes
-                  feature:minor:Features
-                  change:minor:Changes
-                  breaking:major:Breaking Changes
-                  major:major:Major Changes
+                  fix:patch:Bug Fixes,
+                  hotfix:patch:Bug Fixes,
+                  feature:minor:Features,
+                  change:minor:Changes,
+                  breaking:major:Breaking Changes,
+                  major:major:Major Changes,
 
           - name: "Write changelog"
             run: |
