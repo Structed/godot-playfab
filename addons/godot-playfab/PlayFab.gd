@@ -22,6 +22,7 @@ func _init():
 
 
 func _ready():
+	super._ready()
 	connect("logged_in",Callable(self,"_on_logged_in"))
 
 
