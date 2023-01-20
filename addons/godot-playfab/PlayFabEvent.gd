@@ -122,7 +122,7 @@ func _assemble_event(event_name: String, payload: Dictionary, event_namespace = 
 	event.Payload = payload
 
 	if use_local_time:
-		event.OriginalTimestamp = DateTimeHelper.get_date_time_string_utc()
+		event.OriginalTimestamp = Time.get_datetime_string_from_system(true) # Use UTC
 
 	# Event can also have an Entity, which is a type/id combo.
 	# If omitted, the event will be sent in the "current" Entity's context
