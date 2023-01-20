@@ -114,7 +114,7 @@ func batch_title_player_playstream_event(event_name: String, payload: Dictionary
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: FuncRef (= nulloptional) - A callback, providing a Dictionary containing the Event ID.
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
-func _assemble_event(event_name: String, payload: Dictionary, callback: FuncRef = null, event_namespace = "custom.%s" % _title_id) -> EventContents:
+func _assemble_event(event_name: String, payload: Dictionary, event_namespace = "custom.%s" % _title_id) -> EventContents:
 	var event = EventContents.new()
 	event.Name = event_name
 	event.EventNamespace = event_namespace
