@@ -1,4 +1,4 @@
-extends TextureProgress
+extends TextureProgressBar
 
 func _process(_delta):
 	if visible:

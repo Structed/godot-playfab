@@ -6,224 +6,16 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "JsonSerializable",
-"class": "AbstractJsonSerializableCollection",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/AbstractJsonSerializableCollection.gd"
-}, {
-"base": "Reference",
-"class": "ApiErrorWrapper",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/ApiErrorWrapper.gd"
-}, {
-"base": "Reference",
-"class": "DateTimeHelper",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Helper/DateTimeHelper.gd"
-}, {
-"base": "JsonSerializable",
-"class": "EntityKey",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/EntityKey.gd"
-}, {
-"base": "JsonSerializable",
-"class": "EntityTokenResponse",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/EntityTokenResponse.gd"
-}, {
-"base": "JsonSerializable",
-"class": "EventContents",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/EventContents.gd"
-}, {
-"base": "AbstractJsonSerializableCollection",
-"class": "EventContentsCollection",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/EventContentsCollection.gd"
-}, {
-"base": "JsonSerializable",
-"class": "GetPlayerCombinedInfoRequestParams",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoRequestParams.gd"
-}, {
-"base": "JsonSerializable",
-"class": "GetPlayerCombinedInfoResultPayload",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/GetPlayerCombinedInfoResultPayload.gd"
-}, {
-"base": "JsonSerializable",
-"class": "GetTitleDataRequest",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/GetTitleDataRequest.gd"
-}, {
-"base": "JsonSerializable",
-"class": "GetTitleDataResult",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/GetTitleDataResult.gd"
-}, {
-"base": "Reference",
-"class": "JsonSerializable",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/JsonSerializable.gd"
-}, {
-"base": "JsonSerializable",
-"class": "JsonSerializableImpl",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/test/unit/TestModels/JsonSerializableImpl.gd"
-}, {
-"base": "JsonSerializable",
-"class": "JsonSerializableSubPropImpl",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/test/unit/TestModels/JsonSerializableSubPropImpl.gd"
-}, {
-"base": "Control",
-"class": "LoggedIn",
-"language": "GDScript",
-"path": "res://Scenes/LoggedIn.gd"
-}, {
-"base": "JsonSerializable",
-"class": "LoginResult",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/LoginResult.gd"
-}, {
-"base": "JsonSerializable",
-"class": "LoginWithCustomIdRequest",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/LoginWithCustomIdRequest.gd"
-}, {
-"base": "JsonSerializable",
-"class": "LoginWithEmailAddressRequest",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/LoginWithEmailAddressRequest.gd"
-}, {
-"base": "PlayFabHttp",
-"class": "PlayFab",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFab.gd"
-}, {
-"base": "PlayFab",
-"class": "PlayFabClient",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabClient.gd"
-}, {
-"base": "Reference",
-"class": "PlayFabClientConfig",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabClientConfig/PlayFabClientConfig.gd"
-}, {
-"base": "Reference",
-"class": "PlayFabClientConfigLoader",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabClientConfig/PlayFabClientConfigLoader.gd"
-}, {
-"base": "Object",
-"class": "PlayFabConstants",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabConstants.gd"
-}, {
-"base": "PlayFab",
-"class": "PlayFabEvent",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabEvent.gd"
-}, {
-"base": "Node",
-"class": "PlayFabHttp",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/PlayFabHttp.gd"
-}, {
-"base": "JsonSerializable",
-"class": "PlayerProfileViewConstraints",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/PlayerProfileViewConstraints.gd"
-}, {
-"base": "JsonSerializable",
-"class": "RegisterPlayFabUserRequest",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/RegisterPlayFabUserRequest.gd"
-}, {
-"base": "JsonSerializable",
-"class": "RegisterPlayFabUserResult",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/RegisterPlayFabUserResult.gd"
-}, {
-"base": "JsonSerializable",
-"class": "SubProp",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/test/unit/TestModels/SubProp.gd"
-}, {
-"base": "AbstractJsonSerializableCollection",
-"class": "TestCollection",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/test/unit/TestModels/TestCollection.gd"
-}, {
-"base": "Reference",
-"class": "UUID",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/lib/crypto_uuid_v4/uuid.gd"
-}, {
-"base": "JsonSerializable",
-"class": "UserAccountInfo",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/UserAccountInfo.gd"
-}, {
-"base": "JsonSerializable",
-"class": "UserTitleInfo",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/UserTitleInfo.gd"
-}, {
-"base": "JsonSerializable",
-"class": "WriteEventsRequest",
-"language": "GDScript",
-"path": "res://addons/godot-playfab/Models/WriteEventsRequest.gd"
-} ]
-_global_script_class_icons={
-"AbstractJsonSerializableCollection": "",
-"ApiErrorWrapper": "",
-"DateTimeHelper": "",
-"EntityKey": "",
-"EntityTokenResponse": "",
-"EventContents": "",
-"EventContentsCollection": "",
-"GetPlayerCombinedInfoRequestParams": "",
-"GetPlayerCombinedInfoResultPayload": "",
-"GetTitleDataRequest": "",
-"GetTitleDataResult": "",
-"JsonSerializable": "",
-"JsonSerializableImpl": "",
-"JsonSerializableSubPropImpl": "",
-"LoggedIn": "",
-"LoginResult": "",
-"LoginWithCustomIdRequest": "",
-"LoginWithEmailAddressRequest": "",
-"PlayFab": "res://addons/godot-playfab/icon.png",
-"PlayFabClient": "res://addons/godot-playfab/icon.png",
-"PlayFabClientConfig": "res://addons/godot-playfab/icon.png",
-"PlayFabClientConfigLoader": "",
-"PlayFabConstants": "",
-"PlayFabEvent": "res://addons/godot-playfab/icon.png",
-"PlayFabHttp": "res://addons/godot-playfab/icon.png",
-"PlayerProfileViewConstraints": "",
-"RegisterPlayFabUserRequest": "",
-"RegisterPlayFabUserResult": "",
-"SubProp": "",
-"TestCollection": "",
-"UUID": "",
-"UserAccountInfo": "",
-"UserTitleInfo": "",
-"WriteEventsRequest": ""
-}
+config_version=5
 
 [WAT]
 
 Test_Directory="res://addons/godot-playfab/test/unit/"
 Results_Directory="res://addons/godot-playfab/test/"
 Test_Metadata_Directory="res://addons/godot-playfab/test/"
-Tags=PoolStringArray(  )
+Tags=PackedStringArray()
 Cache_Tests=false
-Window_Size=Vector2( 1280, 720 )
+Window_Size=Vector2(1280, 720)
 Minimize_Window_When_Running_Tests=false
 Port=6008
 Display=8
@@ -232,6 +24,7 @@ Display=8
 
 config/name="godot-playfab"
 run/main_scene="res://Scenes/Main.tscn"
+config/features=PackedStringArray("4.0")
 boot_splash/image="res://raw_assets/SplashScreen.png"
 config/icon="res://addons/godot-playfab/icon.png"
 
@@ -242,7 +35,7 @@ PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg" )
+enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
 [global]
 

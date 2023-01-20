@@ -5,7 +5,7 @@ var key_value_line_edit_scene = preload("res://Scenes/Widgets/KeyValueLineEdit.t
 
 
 func _on_AddLineButton_pressed():
-	var kvl = key_value_line_edit_scene.instance()
+	var kvl = key_value_line_edit_scene.instantiate()
 	$TableContainer.add_child(kvl)
 
 
@@ -23,11 +23,11 @@ func _on_SubmitButton_pressed():
 
 		body_dict[key] = value
 
-	PlayFabManager.client.post_dict_auth(body_dict, path, PlayFab.AUTH_TYPE.SESSION_TICKET, funcref(self, "_on_get_response"))
+	PlayFabManager.client.post_dict_auth(body_dict, path, PlayFab.AUTH_TYPE.SESSION_TICKET, Callable(self, "_on_get_response"))
 
 
 func _on_get_response(response):
-	$Response.text = JSON.print(response.data, "\t")
+	$Response.text = JSON.stringify(response.data, "\t")
 
 
 func _on_BackButton_pressed():

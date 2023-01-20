@@ -5,11 +5,11 @@ const color_white = Color(1, 1, 1, 1)
 const color_red = Color(1, 0, 0, 0.5)
 
 func _ready():
-	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
-	_error = PlayFabManager.client.connect("logged_in", self, "_on_logged_in")
-	_error = $LoggedIn.connect("logout", self, "_on_LogoutButton_pressed")	
+	var _error = PlayFabManager.client.connect("api_error",Callable(self,"_on_api_error"))
+	_error = PlayFabManager.client.connect("logged_in",Callable(self,"_on_logged_in"))
+	_error = $LoggedIn.connect("logout",Callable(self,"_on_LogoutButton_pressed"))
 
-	$Login/StayLoggedInCheckbox.pressed = PlayFabManager.client_config.stay_logged_in
+	$Login/StayLoggedInCheckbox.button_pressed = PlayFabManager.client_config.stay_logged_in
 
 	# It is best practice, to refresh the login every time, as the `SessionTicket` is only valid for 24 hours.
 	# Spceifically, with "Anonymous Logins" this makes sense.
@@ -17,13 +17,13 @@ func _ready():
 	# storing the user's credentials, which you SHOULD NOT do!
 	if PlayFabManager.client_config.stay_logged_in && PlayFabManager.client_config.is_logged_in():
 		$Login.hide()
-		
+
 		if PlayFabManager.client_config.login_type == PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID:
 			_on_AnonLogin_pressed()
 		else:
 			remember_login()
-			
-			
+
+
 # Skips login and uses the saved SessionTicket/EntityToken
 func remember_login():
 	var login_result = LoginResult.new()
@@ -108,7 +108,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 
 	$Login/Login.self_modulate = color_red
 	$Login/Output.show()
-	$Login/Output.bbcode_text = text
+	$Login/Output.text = text
 
 
 func _on_Back_pressed():
@@ -122,6 +122,6 @@ func _on_LogoutButton_pressed():
 	$Login.show()
 
 
-func _on_StayLoggedInCheckbox_pressed():
+func _on_stay_logged_in_checkbox_toggled(button_pressed):
 	# Persist, whether user should be automatically logged in
-	PlayFabManager.client_config.stay_logged_in = $Login/StayLoggedInCheckbox.pressed
+	PlayFabManager.client_config.stay_logged_in = button_pressed

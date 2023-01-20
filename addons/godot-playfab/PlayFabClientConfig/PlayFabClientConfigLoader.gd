@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name PlayFabClientConfigLoader
 
 # Handles serialization/deserialization of a `PlayFabClientConfig` to `ConfigFile`
@@ -6,13 +6,13 @@ class_name PlayFabClientConfigLoader
 
 # Whether to encrypt the config file
 # Will only work in Debug Mode
-const DEBUG_DO_NOT_ENCRYPT = false  # Only works on debug builds
+const DEBUG_DO_NOT_ENCRYPT = false  # Only works checked debug builds
 
 # Section to write key/value paris to
 const SECTION_NAME = "PlayFab"
 
 # **Accessibility: protected/virtual**
-# Path to load/save the ConfigFile from
+# Path3D to load/save the ConfigFile from
 # Should only be overridden in tests or extending classes
 var _load_path = "user://playfab_client_config.cfg"
 
@@ -79,7 +79,7 @@ func clear(password: String):
 	_save(password)
 
 
-# Sets all property values from @paramref `new_config`on `_config`
+# Sets all property values from @paramref `new_config`checked `_config`
 # @param new_config: PlayFabClientConfig - object to get property values from
 func _set_values(new_config: PlayFabClientConfig):
 	var props = new_config.get_property_list()
@@ -90,8 +90,8 @@ func _set_values(new_config: PlayFabClientConfig):
 
 
 # Retrieves all keys from ConfigFile and sets them
-# on the corresponding properties of @paramref `new_config`
-# @param new_config: PlayFabClientConfig - object to set properties on
+# checked the corresponding properties of @paramref `new_config`
+# @param new_config: PlayFabClientConfig - object to set properties checked
 func _get_values(new_config: PlayFabClientConfig):
 	var props = new_config.get_property_list()
 

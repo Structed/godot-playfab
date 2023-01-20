@@ -1,5 +1,7 @@
+@icon("res://addons/godot-playfab/icon.png")
+
 extends Node
-class_name PlayFabHttp, "res://addons/godot-playfab/icon.png"
+class_name PlayFabHttp
 
 
 ## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
@@ -44,9 +46,9 @@ func _get_api_url() -> String:
 	return "https://%s.%s" % [ _title_id, _base_uri ]
 
 
-func _http_request(request_method: int, body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
-	var json = JSON.print(body)
-	#print_debug(JSON.print(body, "\t"))
+func _http_request(request_method: int, body: Dictionary, path: String, callback: Callable, additional_headers: Dictionary = {}):
+	var json = JSON.stringify(body)
+	#print_debug(JSON.stringify(body, "\t"))
 	var headers = [
 		"Content-Type: application/json",
 		"Content-Length: " + str(json.length()),
@@ -58,55 +60,43 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	headers.append_array(_dict_to_header_array(additional_headers))
 
 	while (_request_in_progress):
-		yield(_http.get_tree(), "idle_frame")
+		await _http.get_tree().process_frame
 
 	_request_in_progress = true
 	var request_uri = "%s%s" % [ _get_api_url(), path]
-	var error = _http.request(request_uri, headers, true, request_method, json)
+	var error = _http.request(request_uri, headers, request_method, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 		return
 
-	var args = yield(_http, "request_completed")
+	var args = await _http.request_completed
 	# TODO: Perhaps build response object?
-	var response_result = args[0]
-	var response_code = args[1]
-	var response_headers = args[2]
-	var response_body = args[3]
+	var response_result = args[0] as int
+	var response_code = args[1] as int
+	var response_headers = args[2] as PackedStringArray
+	var response_body = args[3] as PackedByteArray
 	_request_in_progress = false
 
-	var has_gzip_accept_header = false
-	if Engine.get_version_info().hex >= 0x030500: # Godot 3.5 or higher
-		if response_headers.find("Content-Encoding: gzip") != -1:
-			has_gzip_accept_header = true
-	else:
-		for header in response_headers:
-			if "Content-Encoding: gzip" in header:
-				print("set geader")
-				has_gzip_accept_header = true
+	var response_body_string = response_body.get_string_from_utf8()
+	var test_json_conv = JSON.new()
+	var parse_error = test_json_conv.parse(response_body_string)
+	var json_parse_result = test_json_conv.data
+	#print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result, "\t"))
 
-	var response_body_decompressed = response_body
-	if has_gzip_accept_header:
-		response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, File.COMPRESSION_GZIP)
-
-	var response_body_string = response_body_decompressed.get_string_from_utf8()
-	var json_parse_result = JSON.parse(response_body_string)
-	#print_debug("JSON Parse result: %s" % JSON.print(json_parse_result.result, "\t"))
-
-	if json_parse_result.error != OK:
+	if parse_error != OK:
 		emit_signal("json_parse_error", json_parse_result)
 		return
 	if response_code >= 200 and response_code < 400:
 		if callback != null:
 			if callback.is_valid():
-				callback.call_func(json_parse_result.result)
+				callback.call(json_parse_result)
 			else:
-				push_error("Response calback " + callback.function + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
 		return
 	elif response_code >= 400:
 		var apiErrorWrapper = ApiErrorWrapper.new()
-		for key in json_parse_result.result.keys():
-			apiErrorWrapper.set(key, json_parse_result.result[key])
+		for key in json_parse_result.keys():
+			apiErrorWrapper.set(key, json_parse_result[key])
 		emit_signal("api_error", apiErrorWrapper)
 		return
 	if response_code >= 500:
@@ -115,6 +105,6 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 
 func _test_http(body, path: String):
-	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))
+	var error = _http.request("https://httpbin.org/post", [], HTTPClient.METHOD_POST, JSON.stringify(body))
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
