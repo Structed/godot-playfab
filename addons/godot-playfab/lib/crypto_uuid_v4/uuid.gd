@@ -76,7 +76,7 @@ func is_equal(object) -> bool:
 		return true
 
 	# Build string representation (if needed) and compare
-	if not _string:
+	if typeof(_string) != TYPE_STRING:
 		_string = format(_data)
 	return _string == str(object)
 
@@ -96,19 +96,20 @@ static func v4bin() -> PackedByteArray:
 		# Fallback for HTML5 export
 		if OS.has_feature("JavaScript"):
 			# Rely checked browser's Crypto object if available
-			var output = JavaScript.eval("window.crypto.getRandomValues(new Uint8Array(16));")
+			var output = JavaScriptBridge.eval("window.crypto.getRandomValues(new Uint8Array(16));")
 			if output is PackedByteArray and output.size() == 16:
 				data = output
 
-		if not data:
+		if data == null:
 			# Generate weak random values
 			# ONLY when Crypto is not provided by the browser
-			randomize()
+			var random = RandomNumberGenerator.new()
+			random.randomize()
 			data = PackedByteArray([
-				_randb(), _randb(), _randb(), _randb(),
-				_randb(), _randb(), _randb(), _randb(),
-				_randb(), _randb(), _randb(), _randb(),
-				_randb(), _randb(), _randb(), _randb()
+				_randb(random), _randb(random), _randb(random), _randb(random),
+				_randb(random), _randb(random), _randb(random), _randb(random),
+				_randb(random), _randb(random), _randb(random), _randb(random),
+				_randb(random), _randb(random), _randb(random), _randb(random)
 			])
 
 	else:
@@ -126,8 +127,8 @@ static func format(data: PackedByteArray) -> String:
 
 
 # Private helper func
-static func _randb() -> int:
-	return randi() % 0x100
+static func _randb(random: RandomNumberGenerator) -> int:
+	return random.randi() % 0x100
 
 
 static func _hex_byte(text: String, offset: int) -> int:
