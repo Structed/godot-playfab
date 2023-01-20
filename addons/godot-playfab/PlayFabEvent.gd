@@ -148,7 +148,7 @@ func _flush_playstream_event_batch():
 
 	var request = WriteEventsRequest.new()
 	request.Events = playstream_event_batch
-	event_playstream_write_events(request, funcref(self, "_on_playstream_batch_flush"))
+	event_playstream_write_events(request, Callable(self, "_on_playstream_batch_flush"))
 	playstream_event_batch.clear()
 	print_debug("Flushed playstream batch")
 
@@ -162,7 +162,7 @@ func _flush_telemetry_event_batch():
 
 	var request = WriteEventsRequest.new()
 	request.Events = telemetry_event_batch
-	event_telemetry_write_events(request, funcref(self, "_on_telemetry_batch_flush"))
+	event_telemetry_write_events(request, Callable(self, "_on_telemetry_batch_flush"))
 	telemetry_event_batch.clear()
 	print_debug("Flushed telemetry batch")
 
