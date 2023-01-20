@@ -1,5 +1,7 @@
+@icon("res://addons/godot-playfab/icon.png")
+
 extends Node
-class_name PlayFabHttp, "res://addons/godot-playfab/icon.png"
+class_name PlayFabHttp
 
 
 ## Emitted when a JSON parse error occurs. Will receive a JSONResult as parameter.
@@ -69,10 +71,10 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 	var args = await _http.request_completed
 	# TODO: Perhaps build response object?
-	var response_result = args[0]
-	var response_code = args[1]
-	var response_headers = args[2]
-	var response_body = args[3]
+	var response_result = args[0] as int
+	var response_code = args[1] as int
+	var response_headers = args[2] as PackedStringArray
+	var response_body = args[3] as PackedByteArray
 	_request_in_progress = false
 
 	var has_gzip_accept_header = false
@@ -87,7 +89,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 	var response_body_decompressed = response_body
 	if has_gzip_accept_header:
-		response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, File.COMPRESSION_GZIP)
+		response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, FileAccess.COMPRESSION_GZIP)
 
 	var response_body_string = response_body_decompressed.get_string_from_utf8()
 	var test_json_conv = JSON.new()
@@ -101,9 +103,9 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	if response_code >= 200 and response_code < 400:
 		if callback != null:
 			if callback.is_valid():
-				callback.call_func(json_parse_result.result)
+				callback.call(json_parse_result.result)
 			else:
-				push_error("Response calback " + callback.function + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
 		return
 	elif response_code >= 400:
 		var apiErrorWrapper = ApiErrorWrapper.new()

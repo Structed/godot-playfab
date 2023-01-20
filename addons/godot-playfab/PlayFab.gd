@@ -1,5 +1,7 @@
+@icon("res://addons/godot-playfab/icon.png")
+
 extends PlayFabHttp
-class_name PlayFab, "res://addons/godot-playfab/icon.png"
+class_name PlayFab
 
 ## Arguments: RegisterPlayFabUserResult
 signal registered(RegisterPlayFabUserResult)
@@ -41,7 +43,7 @@ func register_email_password(username: String, email: String, password: String, 
 	request_params.InfoRequestParameters = info_request_parameters
 	request_params.RequireBothUsernameAndEmail = true
 
-	var result = _post(request_params, "/Client/RegisterPlayFabUser", funcref(self, "_on_register_email_password"))
+	var result = _post(request_params, "/Client/RegisterPlayFabUser", Callable(self, "_on_register_email_password"))
 
 
 func login_with_email(email: String, password: String, custom_tags: Dictionary, info_request_parameters: GetPlayerCombinedInfoRequestParams):
@@ -55,7 +57,7 @@ func login_with_email(email: String, password: String, custom_tags: Dictionary, 
 	request_params.CustomTags = custom_tags
 	request_params.InfoRequestParameters = info_request_parameters
 
-	var result = _post(request_params, "/Client/LoginWithEmailAddress", funcref(self, "_on_login_with_email"))
+	var result = _post(request_params, "/Client/LoginWithEmailAddress", Callable(self, "_on_login_with_email"))
 
 
 func login_with_custom_id(custom_id: String, create_user: bool, info_request_parameters: GetPlayerCombinedInfoRequestParams):
@@ -68,7 +70,7 @@ func login_with_custom_id(custom_id: String, create_user: bool, info_request_par
 	request_params.CreateAccount = create_user
 	request_params.InfoRequestParameters = info_request_parameters
 
-	var result = _post(request_params, "/Client/LoginWithCustomID", funcref(self, "_on_login_with_email"))
+	var result = _post(request_params, "/Client/LoginWithCustomID", Callable(self, "_on_login_with_email"))
 
 
 func _on_register_email_password(result: Dictionary):

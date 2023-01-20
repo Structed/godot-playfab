@@ -1,6 +1,7 @@
-extends PlayFab
-class_name PlayFabEvent, "res://addons/godot-playfab/icon.png"
+@icon("res://addons/godot-playfab/icon.png")
 
+extends PlayFab
+class_name PlayFabEvent
 
 
 # Emitted when the PlayStream Event batch was flushed

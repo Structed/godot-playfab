@@ -1,5 +1,7 @@
+@icon("res://addons/godot-playfab/icon.png")
+
 extends PlayFab
-class_name PlayFabClient, "res://addons/godot-playfab/icon.png"
+class_name PlayFabClient
 
 # Retrieves the key-value store of custom title settings
 # @param request_data: GetTitleDataRequest

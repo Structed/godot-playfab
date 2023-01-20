@@ -1,5 +1,7 @@
+@icon("res://addons/godot-playfab/icon.png")
+
 extends RefCounted
-class_name PlayFabClientConfig, "res://addons/godot-playfab/icon.png"
+class_name PlayFabClientConfig
 
 # Timeout for the sesion token
 const TOKEN_TIMEOUT = 23 * 3600
