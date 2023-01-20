@@ -5,11 +5,11 @@ const color_white = Color(1, 1, 1, 1)
 const color_red = Color(1, 0, 0, 0.5)
 
 func _ready():
-	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
-	_error = PlayFabManager.client.connect("logged_in", self, "_on_logged_in")
-	_error = $LoggedIn.connect("logout", self, "_on_LogoutButton_pressed")	
+	var _error = PlayFabManager.client.connect("api_error",Callable(self,"_on_api_error"))
+	_error = PlayFabManager.client.connect("logged_in",Callable(self,"_on_logged_in"))
+	_error = $LoggedIn.connect("logout",Callable(self,"_on_LogoutButton_pressed"))	
 
-	$Login/StayLoggedInCheckbox.pressed = PlayFabManager.client_config.stay_logged_in
+	$Login/StayLoggedInCheckbox.button_pressed = PlayFabManager.client_config.stay_logged_in
 
 	# It is best practice, to refresh the login every time, as the `SessionTicket` is only valid for 24 hours.
 	# Spceifically, with "Anonymous Logins" this makes sense.
@@ -108,7 +108,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 
 	$Login/Login.self_modulate = color_red
 	$Login/Output.show()
-	$Login/Output.bbcode_text = text
+	$Login/Output.text = text
 
 
 func _on_Back_pressed():

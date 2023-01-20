@@ -60,7 +60,7 @@ func test_is_logged_in_returns_true_if_login_token_expired_returns_false():
 
 func test_is_login_token_expired_returns_false_if_token_within_threshold():
 	# Arrange
-	config.login_timestamp = OS.get_unix_time() - 60
+	config.login_timestamp = Time.get_unix_time_from_system() - 60
 
 	# Act
 	var is_expired = config.is_login_token_expired()
@@ -71,7 +71,7 @@ func test_is_login_token_expired_returns_false_if_token_within_threshold():
 
 func test_is_login_token_expired_returns_true_if_above_threshold():
 	# Arrange
-	config.login_timestamp = OS.get_unix_time() + PlayFabClientConfig.TOKEN_TIMEOUT + 1
+	config.login_timestamp = Time.get_unix_time_from_system() + PlayFabClientConfig.TOKEN_TIMEOUT + 1
 
 	# Act
 	var is_expired = config.is_login_token_expired()
@@ -98,7 +98,7 @@ func test__set_session_ticket_updates_login_timestamp():
 	# Arrange / Act
 	config.session_ticket = "<SESSION TICKET>"
 
-	var expected = OS.get_unix_time()
+	var expected = Time.get_unix_time_from_system()
 	var actual = config.login_timestamp
 
 	# Assert

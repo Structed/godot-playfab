@@ -1,7 +1,7 @@
-tool
-extends WindowDialog
+@tool
+extends Window
 
-onready var _ctrls = {
+@onready var _ctrls = {
 	run_all = $Layout/CRunAll/ShortcutButton,
 	rerun = $Layout/CRerun/ShortcutButton,
 	run_current = $Layout/CRunCurrent/ShortcutButton,
@@ -14,8 +14,8 @@ onready var _ctrls = {
 func _ready():
 	for key in _ctrls:
 		var sc_button = _ctrls[key]
-		sc_button.connect('start_edit', self, '_on_edit_start', [sc_button])
-		sc_button.connect('end_edit', self, '_on_edit_end')
+		sc_button.connect('start_edit',Callable(self,'_on_edit_start').bind(sc_button))
+		sc_button.connect('end_edit',Callable(self,'_on_edit_end'))
 
 # ------------
 # Events
@@ -93,7 +93,7 @@ func save_shortcuts(path):
 
 
 func load_shortcuts(path):
-	var emptyShortcut = ShortCut.new()
+	var emptyShortcut = Shortcut.new()
 	var f = ConfigFile.new()
 	f.load(path)
 	

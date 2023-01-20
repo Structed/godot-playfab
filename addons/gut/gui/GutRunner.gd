@@ -32,7 +32,7 @@ func _setup_gut():
 
 
 func _write_results():
-	# bbcode_text appears to be empty.  I'm not 100% sure why.  Until that is
+	# text appears to be empty.  I'm not 100% sure why.  Until that is
 	# figured out we have to just get the text which stinks.
 	var content = _gut.get_gui().get_text_box().text
 

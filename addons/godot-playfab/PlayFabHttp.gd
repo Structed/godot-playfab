@@ -44,9 +44,9 @@ func _get_api_url() -> String:
 	return "https://%s.%s" % [ _title_id, _base_uri ]
 
 
-func _http_request(request_method: int, body: Dictionary, path: String, callback: FuncRef, additional_headers: Dictionary = {}):
-	var json = JSON.print(body)
-	#print_debug(JSON.print(body, "\t"))
+func _http_request(request_method: int, body: Dictionary, path: String, callback: Callable, additional_headers: Dictionary = {}):
+	var json = JSON.stringify(body)
+	#print_debug(JSON.stringify(body, "\t"))
 	var headers = [
 		"Content-Type: application/json",
 		"Content-Length: " + str(json.length()),
@@ -58,7 +58,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	headers.append_array(_dict_to_header_array(additional_headers))
 
 	while (_request_in_progress):
-		yield(_http.get_tree(), "idle_frame")
+		await _http.get_tree().idle_frame
 
 	_request_in_progress = true
 	var request_uri = "%s%s" % [ _get_api_url(), path]
@@ -67,7 +67,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		push_error("An error occurred in the HTTP request.")
 		return
 
-	var args = yield(_http, "request_completed")
+	var args = await _http.request_completed
 	# TODO: Perhaps build response object?
 	var response_result = args[0]
 	var response_code = args[1]
@@ -90,8 +90,10 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, File.COMPRESSION_GZIP)
 
 	var response_body_string = response_body_decompressed.get_string_from_utf8()
-	var json_parse_result = JSON.parse(response_body_string)
-	#print_debug("JSON Parse result: %s" % JSON.print(json_parse_result.result, "\t"))
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(response_body_string)
+	var json_parse_result = test_json_conv.get_data()
+	#print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result.result, "\t"))
 
 	if json_parse_result.error != OK:
 		emit_signal("json_parse_error", json_parse_result)
@@ -115,6 +117,6 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 
 func _test_http(body, path: String):
-	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.print(body))
+	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.stringify(body))
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")

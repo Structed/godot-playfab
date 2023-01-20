@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name JsonSerializable
 
 # **VIRTUAL**
@@ -21,7 +21,7 @@ func to_dict() -> Dictionary:
 	# Skipping the first 3 items because they are metadata we do not need
 	for i in range(3, props.size()):
 		var prop = props[i]
-		var name = prop["name"] # The name of the property on the object. WIll be used to access its's value
+		var name = prop["name"] # The name of the property checked the object. WIll be used to access its's value
 		var type = prop["type"]	# The godot built-in type (Array, Object etc)
 
 		if (type == TYPE_OBJECT):
@@ -77,8 +77,8 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 
 # Instantiate a class by name
 # @param name: String - A class name
-# @returns Reference - The instance reference
-func get_class_instance(name: String) -> Reference:
+# @returns RefCounted - The instance reference
+func get_class_instance(name: String) -> RefCounted:
 	var classes = ProjectSettings.get_setting("_global_script_classes")
 	for element in classes:
 		if element["class"] == name:

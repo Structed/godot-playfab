@@ -15,8 +15,8 @@ func before_all():
 func test_login__emits_logged_in_signal_and_returns_LoginResult():
 	# Arrange
 	var pf_client = PlayFabClient.new()
-	pf_client.connect("logged_in", self, "_on_logged_in")
-	pf_client.connect("api_error", self, "_on_api_error")
+	pf_client.connect("logged_in",Callable(self,"_on_logged_in"))
+	pf_client.connect("api_error",Callable(self,"_on_api_error"))
 	add_child_autofree(pf_client)
 
 	# Act
@@ -24,7 +24,7 @@ func test_login__emits_logged_in_signal_and_returns_LoginResult():
 
 	# wait for pf_client to emit the signal 'logged_in'
 	# or 5 seconds, whichever comes first.
-	yield(yield_to(pf_client, 'logged_in', 5), YIELD)
+	await yield_to(pf_client, 'logged_in', 5).YIELD
 
 	# Assert
 	assert_signal_emitted(pf_client, 'logged_in', 'Maybe it did, maybe it didnt, but we still got here.')

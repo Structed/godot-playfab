@@ -5,9 +5,9 @@
 [node name="ShortcutButton" type="Control"]
 anchor_right = 0.123
 anchor_bottom = 0.04
-margin_right = -0.952003
-margin_bottom = 0.999998
-rect_min_size = Vector2( 125, 25 )
+offset_right = -0.952003
+offset_bottom = 0.999998
+minimum_size = Vector2( 125, 25 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -21,17 +21,17 @@ __meta__ = {
 }
 
 [node name="lblShortcut" type="Label" parent="Layout"]
-margin_right = 41.0
-margin_bottom = 25.0
+offset_right = 41.0
+offset_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 align = 1
 valign = 1
 
 [node name="SetButton" type="Button" parent="Layout"]
-margin_left = 45.0
-margin_right = 77.0
-margin_bottom = 25.0
+offset_left = 45.0
+offset_right = 77.0
+offset_bottom = 25.0
 text = "Set"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,9 +39,9 @@ __meta__ = {
 
 [node name="SaveButton" type="Button" parent="Layout"]
 visible = false
-margin_left = 209.0
-margin_right = 250.0
-margin_bottom = 48.0
+offset_left = 209.0
+offset_right = 250.0
+offset_bottom = 48.0
 text = "Save"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -49,18 +49,18 @@ __meta__ = {
 
 [node name="CancelButton" type="Button" parent="Layout"]
 visible = false
-margin_left = 209.0
-margin_right = 250.0
-margin_bottom = 48.0
+offset_left = 209.0
+offset_right = 250.0
+offset_bottom = 48.0
 text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ClearButton" type="Button" parent="Layout"]
-margin_left = 81.0
-margin_right = 125.0
-margin_bottom = 25.0
+offset_left = 81.0
+offset_right = 125.0
+offset_bottom = 25.0
 text = "Clear"
 
 [connection signal="pressed" from="Layout/SetButton" to="." method="_on_SetButton_pressed"]

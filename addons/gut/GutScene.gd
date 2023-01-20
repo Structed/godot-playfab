@@ -1,38 +1,38 @@
 extends Panel
 
-onready var _script_list = $ScriptsList
-onready var _nav = {
-	prev = $Navigation/Previous,
-	next = $Navigation/Next,
-	run = $Navigation/Run,
-	current_script = $Navigation/CurrentScript,
-	run_single = $Navigation/RunSingleScript
+@onready var _script_list = $ScriptsList
+@onready var _nav = {
+	prev = $Node3D/Previous,
+	next = $Node3D/Next,
+	run = $Node3D/Run,
+	current_script = $Node3D/CurrentScript,
+	run_single = $Node3D/RunSingleScript
 }
-onready var _progress = {
+@onready var _progress = {
 	script = $ScriptProgress,
 	script_xy = $ScriptProgress/xy,
 	test = $TestProgress,
 	test_xy = $TestProgress/xy
 }
-onready var _summary = {
+@onready var _summary = {
 	failing = $Summary/Failing,
 	passing = $Summary/Passing,
 	fail_count = 0,
 	pass_count = 0
 }
 
-onready var _extras = $ExtraOptions
-onready var _ignore_pauses = $ExtraOptions/IgnorePause
-onready var _continue_button = $Continue/Continue
-onready var _text_box = $TextDisplay/RichTextLabel
+@onready var _extras = $ExtraOptions
+@onready var _ignore_pauses = $ExtraOptions/IgnorePause
+@onready var _continue_button = $Continue/Continue
+@onready var _text_box = $TextDisplay/RichTextLabel
 
-onready var _titlebar = {
+@onready var _titlebar = {
 	bar = $TitleBar,
 	time = $TitleBar/Time,
 	label = $TitleBar/Title
 }
 
-onready var _user_files = $UserFileViewer
+@onready var _user_files = $UserFileViewer
 
 var _mouse = {
 	down = false,
@@ -80,7 +80,7 @@ func elapsed_time_as_str():
 
 func _process(_delta):
 	if(_is_running):
-		_time = OS.get_ticks_msec() - _start_time
+		_time = Time.get_ticks_msec() - _start_time
 		_titlebar.time.set_text(str('Time: ', elapsed_time_as_str()))
 
 func _draw(): # needs get_size()
@@ -90,9 +90,9 @@ func _draw(): # needs get_size()
 	var line_space = 3
 	var grab_line_color = Color(.4, .4, .4)
 	for i in range(1, 10):
-		var x = rect_size - Vector2(i * line_space, grab_margin)
-		var y = rect_size - Vector2(grab_margin, i * line_space)
-		draw_line(x, y, grab_line_color, 1, true)
+		var x = size - Vector2(i * line_space, grab_margin)
+		var y = size - Vector2(grab_margin, i * line_space)
+		draw_line(x,y,grab_line_color,1)
 
 func _on_Maximize_draw():
 	# draw the maximize square thing.
@@ -113,7 +113,7 @@ func _on_ShowExtras_draw():
 	var width = 2
 	for i in range(3):
 		var y = start_y + pad * i
-		btn.draw_line(Vector2(start_x, y), Vector2(btn.get_size().x - start_x, y), color, width, true)
+		btn.draw_line(Vector2(start_x, y),Vector2(btn.get_size().x - start_x, y),color,width)
 
 # ####################
 # GUI Events
@@ -181,9 +181,9 @@ func _input(event):
 
 	if(_mouse.in_handle):
 		if(event is InputEventMouseMotion and _mouse.down):
-			var new_size = rect_size + event.position - _mouse.down_pos
+			var new_size = size + event.position - _mouse.down_pos
 			var new_mouse_down_pos = event.position
-			rect_size = new_size
+			size = new_size
 			_mouse.down_pos = new_mouse_down_pos
 			_pre_maximize_rect = get_rect()
 
@@ -208,20 +208,20 @@ func _on_Maximize_pressed():
 	if(get_rect() == _pre_maximize_rect):
 		maximize()
 	else:
-		rect_size = _pre_maximize_rect.size
-		rect_position = _pre_maximize_rect.position
+		size = _pre_maximize_rect.size
+		position = _pre_maximize_rect.position
 # ####################
 # Private
 # ####################
 func _run_mode(is_running=true):
 	if(is_running):
-		_start_time = OS.get_ticks_msec()
+		_start_time = Time.get_ticks_msec()
 		_time = 0.0
 		clear_summary()
 	_is_running = is_running
 
 	_hide_scripts()
-	var ctrls = $Navigation.get_children()
+	var ctrls = $Node3D.get_children()
 	for i in range(ctrls.size()):
 		ctrls[i].disabled = is_running
 
@@ -230,7 +230,7 @@ func _select_script(index):
 	var max_len = 50
 	if(text.length() > max_len):
 		text = '...' + text.right(text.length() - (max_len - 5))
-	$Navigation/CurrentScript.set_text(text)
+	$Node3D/CurrentScript.set_text(text)
 	_script_list.select(index)
 	_update_controls()
 
@@ -296,7 +296,7 @@ func set_log_level(value):
 	$LogLevelSlider.value = new_value
 
 func set_ignore_pause(should):
-	_ignore_pauses.pressed = should
+	_ignore_pauses.button_pressed = should
 
 func get_ignore_pause():
 	return _ignore_pauses.pressed
@@ -363,15 +363,15 @@ func clear_summary():
 func maximize():
 	if(is_inside_tree()):
 		var vp_size_offset = get_viewport().size
-		rect_size = vp_size_offset / get_scale()
+		size = vp_size_offset / get_scale()
 		set_position(Vector2(0, 0))
 
 func clear_text():
-	_text_box.bbcode_text = ''
+	_text_box.text = ''
 
 func scroll_to_bottom():
 	pass
-	#_text_box.cursor_set_line(_gui.get_text_box().get_line_count())
+	#_text_box.set_caret_line(_gui.get_text_box().get_line_count())
 
 func _set_font_size_for_rtl(rtl, new_size):
 	if(rtl.get('custom_fonts/normal_font') != null):
@@ -395,8 +395,8 @@ func _set_font(rtl, font_name, custom_name):
 	if(font_name == null):
 		rtl.set('custom_fonts/' + custom_name, null)
 	else:
-		var dyn_font = DynamicFont.new()
-		var font_data = DynamicFontData.new()
+		var dyn_font = FontFile.new()
+		var font_data = FontFile.new()
 		font_data.font_path = 'res://addons/gut/fonts/' + font_name + '.ttf'
 		font_data.antialiased = true
 		dyn_font.font_data = font_data

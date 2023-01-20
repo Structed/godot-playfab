@@ -6,7 +6,7 @@ signal logout
 
 
 func _ready():
-	var _error = PlayFabManager.client.connect("api_error", self, "_on_PlayFab_api_error")
+	var _error = PlayFabManager.client.connect("api_error",Callable(self,"_on_PlayFab_api_error"))
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,7 +30,7 @@ func _on_GetTitleDataButton_pressed():
 
 
 func _on_get_title_data(response):
-	$VBoxContainer/Response.text = JSON.print(response.data, "\t")
+	$VBoxContainer/Response.text = JSON.stringify(response.data, "\t")
 
 
 func _on_PlayFab_api_error(error: ApiErrorWrapper):

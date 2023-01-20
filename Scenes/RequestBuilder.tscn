@@ -8,52 +8,52 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 24.0
+offset_right = 1024.0
+offset_bottom = 24.0
 
 [node name="PathLabel" type="Label" parent="HBoxContainer"]
-margin_top = 5.0
-margin_right = 32.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 32.0
+offset_bottom = 19.0
 size_flags_vertical = 6
-text = "Path:"
+text = "Path3D:"
 
 [node name="PathInput" type="LineEdit" parent="HBoxContainer"]
-margin_left = 36.0
-margin_right = 1024.0
-margin_bottom = 24.0
+offset_left = 36.0
+offset_right = 1024.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 placeholder_text = "/Client/GetTitleData"
 
 [node name="TableContainer" type="VBoxContainer" parent="."]
-margin_top = 28.0
-margin_right = 1024.0
-margin_bottom = 28.0
+offset_top = 28.0
+offset_right = 1024.0
+offset_bottom = 28.0
 
 [node name="AddLineButton" type="Button" parent="."]
-margin_top = 32.0
-margin_right = 1024.0
-margin_bottom = 52.0
+offset_top = 32.0
+offset_right = 1024.0
+offset_bottom = 52.0
 text = "Add Body Parameter Line"
 
 [node name="SubmitButton" type="Button" parent="."]
-margin_top = 56.0
-margin_right = 1024.0
-margin_bottom = 76.0
+offset_top = 56.0
+offset_right = 1024.0
+offset_bottom = 76.0
 text = "Submit"
 
 [node name="Response" type="RichTextLabel" parent="."]
-margin_top = 80.0
-margin_right = 1024.0
-margin_bottom = 576.0
+offset_top = 80.0
+offset_right = 1024.0
+offset_bottom = 576.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BackButton" type="Button" parent="."]
-margin_top = 580.0
-margin_right = 1024.0
-margin_bottom = 600.0
+offset_top = 580.0
+offset_right = 1024.0
+offset_bottom = 600.0
 text = "Back"
 
 [connection signal="pressed" from="AddLineButton" to="." method="_on_AddLineButton_pressed"]

@@ -23,17 +23,17 @@ func goto_scene(path):
 
 
 func _deferred_goto_scene(path):
-	# It is now safe to remove the current scene
+	# It is now safe to remove_at the current scene
 	current_scene.free()
 
 	# Load the new scene.
 	var s = ResourceLoader.load(path)
 
 	# Instance the new scene.
-	current_scene = s.instance()
+	current_scene = s.instantiate()
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
 
-	# Optionally, to make it compatible with the SceneTree.change_scene() API.
+	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().set_current_scene(current_scene)

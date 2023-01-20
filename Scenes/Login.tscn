@@ -11,10 +11,10 @@ anchor_bottom = 1.0
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 50.0
-margin_top = 50.0
-margin_right = -50.0
-margin_bottom = -50.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource( 1 )
@@ -23,98 +23,98 @@ __meta__ = {
 }
 
 [node name="ProgressCenter" type="CenterContainer" parent="MarginContainer"]
-margin_right = 924.0
-margin_bottom = 500.0
+offset_right = 924.0
+offset_bottom = 500.0
 
 [node name="LoadingIndicator" parent="MarginContainer/ProgressCenter" instance=ExtResource( 3 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 412.0
-margin_top = 200.0
-margin_right = 512.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 100, 100 )
+offset_left = 412.0
+offset_top = 200.0
+offset_right = 512.0
+offset_bottom = 300.0
+minimum_size = Vector2( 100, 100 )
 
 [node name="LoggedIn" parent="MarginContainer" instance=ExtResource( 2 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 924.0
-margin_bottom = 500.0
+offset_right = 924.0
+offset_bottom = 500.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Login" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 924.0
-margin_bottom = 500.0
+offset_right = 924.0
+offset_bottom = 500.0
 
 [node name="Email" type="HBoxContainer" parent="MarginContainer/Login"]
-margin_right = 924.0
-margin_bottom = 24.0
+offset_right = 924.0
+offset_bottom = 24.0
 
 [node name="Label" type="Label" parent="MarginContainer/Login/Email"]
-margin_top = 5.0
-margin_right = 35.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 19.0
 text = "Email"
 
 [node name="Input" type="LineEdit" parent="MarginContainer/Login/Email"]
-margin_left = 39.0
-margin_right = 239.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 200, 0 )
+offset_left = 39.0
+offset_right = 239.0
+offset_bottom = 24.0
+minimum_size = Vector2( 200, 0 )
 text = "User1@example.com"
 expand_to_text_length = true
 
 [node name="Password" type="HBoxContainer" parent="MarginContainer/Login"]
-margin_top = 28.0
-margin_right = 924.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 924.0
+offset_bottom = 52.0
 
 [node name="Label" type="Label" parent="MarginContainer/Login/Password"]
-margin_top = 5.0
-margin_right = 60.0
-margin_bottom = 19.0
+offset_top = 5.0
+offset_right = 60.0
+offset_bottom = 19.0
 text = "Password"
 
 [node name="Input" type="LineEdit" parent="MarginContainer/Login/Password"]
-margin_left = 64.0
-margin_right = 264.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 200, 0 )
+offset_left = 64.0
+offset_right = 264.0
+offset_bottom = 24.0
+minimum_size = Vector2( 200, 0 )
 text = "Test123"
 secret = true
 
 [node name="StayLoggedInCheckbox" type="CheckBox" parent="MarginContainer/Login"]
-margin_top = 70.0
-margin_right = 924.0
-margin_bottom = 99.0
+offset_top = 70.0
+offset_right = 924.0
+offset_bottom = 99.0
 text = "Stay logged in"
 
 [node name="Login" type="Button" parent="MarginContainer/Login"]
-margin_top = 56.0
-margin_right = 924.0
-margin_bottom = 76.0
+offset_top = 56.0
+offset_right = 924.0
+offset_bottom = 76.0
 text = "Login"
 
 [node name="AnonLogin" type="Button" parent="MarginContainer/Login"]
-margin_top = 80.0
-margin_right = 924.0
-margin_bottom = 100.0
+offset_top = 80.0
+offset_right = 924.0
+offset_bottom = 100.0
 text = "Anonymous Login"
 
 [node name="Back" type="Button" parent="MarginContainer/Login"]
-margin_top = 104.0
-margin_right = 924.0
-margin_bottom = 124.0
+offset_top = 104.0
+offset_right = 924.0
+offset_bottom = 124.0
 text = "Back"
 
 [node name="Output" type="RichTextLabel" parent="MarginContainer/Login"]
-margin_top = 128.0
-margin_right = 924.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 0, 100 )
+offset_top = 128.0
+offset_right = 924.0
+offset_bottom = 228.0
+minimum_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 

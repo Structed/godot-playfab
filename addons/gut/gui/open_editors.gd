@@ -13,7 +13,7 @@ signal editor_changed
 # Requires reference to the ScriptEditor instance.
 func _init(script_edtitor):
 	_script_editor = script_edtitor
-	_script_editor.connect("editor_script_changed", self, '_on_editor_script_changed')
+	_script_editor.connect("editor_script_changed",Callable(self,'_on_editor_script_changed'))
 	_scan_script_editor()
 
 
@@ -44,7 +44,7 @@ func _find_focused_editor():
 
 	while(idx < _text_edits.size() and focused == null):
 		if(!_text_edits[idx].get_ref()):
-			_text_edits.remove(idx)
+			_text_edits.remove_at(idx)
 		elif(_text_edits[idx].get_ref().has_focus()):
 			focused = _text_edits[idx].get_ref()
 		else:

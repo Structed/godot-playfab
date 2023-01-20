@@ -5,7 +5,7 @@ var key_value_line_edit_scene = preload("res://Scenes/Widgets/KeyValueLineEdit.t
 
 
 func _on_AddLineButton_pressed():
-	var kvl = key_value_line_edit_scene.instance()
+	var kvl = key_value_line_edit_scene.instantiate()
 	$TableContainer.add_child(kvl)
 
 
@@ -27,7 +27,7 @@ func _on_SubmitButton_pressed():
 
 
 func _on_get_response(response):
-	$Response.text = JSON.print(response.data, "\t")
+	$Response.text = JSON.stringify(response.data, "\t")
 
 
 func _on_BackButton_pressed():

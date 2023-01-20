@@ -2,8 +2,8 @@ extends VBoxContainer
 
 
 func _ready():
-	var _error = PlayFabManager.client.connect("api_error", self, "_on_api_error")
-	_error = PlayFabManager.client.connect("registered", self, "_on_registered")
+	var _error = PlayFabManager.client.connect("api_error",Callable(self,"_on_api_error"))
+	_error = PlayFabManager.client.connect("registered",Callable(self,"_on_registered"))
 
 
 func _on_Register_pressed():
@@ -21,7 +21,7 @@ func _on_Register_pressed():
 
 func _on_registered(result: RegisterPlayFabUserResult):
 	$Register.self_modulate = Color(0, 1, 0, 0.5)
-	$Output.bbcode_text = "[color=green]Registration for \"%s\" succeeded!" % result.Username
+	$Output.text = "[color=green]Registration for \"%s\" succeeded!" % result.Username
 
 
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
@@ -34,7 +34,7 @@ func _on_api_error(api_error_wrapper: ApiErrorWrapper):
 			for element in error_details[key]:
 				text += "%s\n" % element
 
-	$Output.bbcode_text = text
+	$Output.text = text
 	$Register.self_modulate = Color(1, 0, 0, 0.5)
 
 

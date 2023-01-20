@@ -1,7 +1,7 @@
 var return_val = null
 var stub_target = null
 var target_subpath = null
-# the parameter values to match method call on.
+# the parameter values to match method call checked.
 var parameters = null
 var stub_method = null
 var call_super = false
@@ -10,7 +10,7 @@ var parameter_defaults = null
 
 const NOT_SET = '|_1_this_is_not_set_1_|'
 
-func _init(target=null, method=null, subpath=null):
+func _init(target=null,method=null,subpath=null):
 	stub_target = target
 	stub_method = method
 	target_subpath = subpath
@@ -32,7 +32,7 @@ func when_passed(p1=NOT_SET,p2=NOT_SET,p3=NOT_SET,p4=NOT_SET,p5=NOT_SET,p6=NOT_S
 	var idx = 0
 	while(idx < parameters.size()):
 		if(str(parameters[idx]) == NOT_SET):
-			parameters.remove(idx)
+			parameters.remove_at(idx)
 		else:
 			idx += 1
 	return self
