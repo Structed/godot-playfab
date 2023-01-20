@@ -12,7 +12,7 @@ func _get_type_for_property(property_name: String):
 	return ""
 
 # Marshals an object - recursively - into a dictionary
-# @returns Dictionary - A Dcitionary representation of this object instance
+# @returns Dictionary - A Dictionary representation of this object instance
 func to_dict() -> Dictionary:
 
 	var dict = {}
