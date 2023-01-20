@@ -1,4 +1,4 @@
-extends Reference
+extends RefCounted
 class_name JsonSerializable
 
 # **VIRTUAL**
@@ -12,7 +12,7 @@ func _get_type_for_property(property_name: String):
 	return ""
 
 # Marshals an object - recursively - into a dictionary
-# @returns Dictionary - A Dcitionary representation of this object instance
+# @returns Dictionary - A Dictionary representation of this object instance
 func to_dict() -> Dictionary:
 
 	var dict = {}
@@ -21,8 +21,12 @@ func to_dict() -> Dictionary:
 	# Skipping the first 3 items because they are metadata we do not need
 	for i in range(3, props.size()):
 		var prop = props[i]
-		var name = prop["name"] # The name of the property on the object. WIll be used to access its's value
+		var name = prop["name"] # The name of the property on the object. Will be used to access its's value
 		var type = prop["type"]	# The godot built-in type (Array, Object etc)
+		
+		# If it's not PROPERTY_USAGE_SCRIPT_VARIABLE, it's not an actual property
+		if (prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE) != PROPERTY_USAGE_SCRIPT_VARIABLE:
+			continue
 
 		if (type == TYPE_OBJECT):
 			# Get the value of the property
@@ -77,9 +81,11 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 
 # Instantiate a class by name
 # @param name: String - A class name
-# @returns Reference - The instance reference
-func get_class_instance(name: String) -> Reference:
-	var classes = ProjectSettings.get_setting("_global_script_classes")
+# @returns RefCounted - The instance reference
+func get_class_instance(name: String):
+	var config = ConfigFile.new()
+	config.load("res://.godot/global_script_class_cache.cfg")
+	var classes = config.get_value('', 'list', [])
 	for element in classes:
 		if element["class"] == name:
 			return load(element["path"]).new()
