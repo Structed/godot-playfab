@@ -79,7 +79,7 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 # @param name: String - A class name
 # @returns RefCounted - The instance reference
 func get_class_instance(name: String) -> RefCounted:
-	var classes = ProjectSettings.get_setting("_global_script_classes")
+	var classes = ClassDB.get_class_list()
 	for element in classes:
 		if element["class"] == name:
 			return load(element["path"]).new()
