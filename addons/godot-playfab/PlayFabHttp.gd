@@ -77,33 +77,19 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	var response_body = args[3] as PackedByteArray
 	_request_in_progress = false
 
-	var has_gzip_accept_header = false
-	if Engine.get_version_info().hex >= 0x030500: # Godot 3.5 or higher
-		if response_headers.find("Content-Encoding: gzip") != -1:
-			has_gzip_accept_header = true
-	else:
-		for header in response_headers:
-			if "Content-Encoding: gzip" in header:
-				print("set geader")
-				has_gzip_accept_header = true
-
-	var response_body_decompressed = response_body
-	if has_gzip_accept_header:
-		response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, FileAccess.COMPRESSION_GZIP)
-
-	var response_body_string = response_body_decompressed.get_string_from_utf8()
+	var response_body_string = response_body.get_string_from_utf8()
 	var test_json_conv = JSON.new()
-	test_json_conv.parse(response_body_string)
-	var json_parse_result = test_json_conv.get_data()
+	var parse_error = test_json_conv.parse(response_body_string)
+	var json_parse_result = test_json_conv.data
 	#print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result.result, "\t"))
 
-	if json_parse_result.error != OK:
+	if parse_error != OK:
 		emit_signal("json_parse_error", json_parse_result)
 		return
 	if response_code >= 200 and response_code < 400:
 		if callback != null:
 			if callback.is_valid():
-				callback.call(json_parse_result.result)
+				callback.call(json_parse_result)
 			else:
 				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
 		return
