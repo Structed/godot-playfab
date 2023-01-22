@@ -1,3 +1,22 @@
+### [0.3.2](https://github.com/Structed/godot-playfab/compare/0.3.1...0.3.2) (2023-01-22)
+
+
+### Bug Fixes
+
+* .editorconfig ([79300cf](https://github.com/Structed/godot-playfab/commit/79300cf1764472a87d0d9ea68b7cb631b7406106))
+* PlayFabEvent._assemble_event() did not properly accept the  parameter ([#95](https://github.com/Structed/godot-playfab/issues/95)) ([1ad4e3f](https://github.com/Structed/godot-playfab/commit/1ad4e3f89c85816256239dd760d0b3017a604239))
+
+
+### Continuous Integration
+
+* fix whitespace ([f4d53df](https://github.com/Structed/godot-playfab/commit/f4d53dfa03cc32f8e439705a77740412073b7a1b))
+* fix yaml ([10f9fb9](https://github.com/Structed/godot-playfab/commit/10f9fb97afbfb9a07ad0d32fc9ca8772d1f5208c))
+* remove unused env variable ([f991a2b](https://github.com/Structed/godot-playfab/commit/f991a2bd500e5c6c3aa03acfc576480477b5011f))
+* updated/upgraded workflows ([3ffab3a](https://github.com/Structed/godot-playfab/commit/3ffab3a7acbc09230e9f47aac0d35a3323505aa6))
+* using PAT again ([3a42d0f](https://github.com/Structed/godot-playfab/commit/3a42d0ff781e1fc364a0b3d130efcc9296d4fe40))
+
+
+
 ## [0.3.0](https://github.com/Structed/godot-playfab/compare/0.2.0...0.3.0) (2022-12-18)
 
 
