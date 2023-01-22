@@ -79,11 +79,12 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 # @param name: String - A class name
 # @returns RefCounted - The instance reference
 func get_class_instance(name: String) -> RefCounted:
-	var classes = ClassDB.get_class_list()
-	for element in classes:
-		if element["class"] == name:
-			return load(element["path"]).new()
-
+	var class_list = ClassDB.get_class_list()
+	var json = var_to_str(class_list)
+	var has = class_list.has(name)
+	var exists = ClassDB.class_exists(name)
+	if ClassDB.can_instantiate(name):
+		return ClassDB.instantiate(name)
 
 	push_error("Class \"" + name + "\" could not be found")
 	return null
