@@ -12,12 +12,11 @@ permissions:
     contents: write
 
 env:
-  ADDON_NAME: godot-playfab
-  ITCH_USERNAME: structed
-  ITCH_GAME_ID: godot-playfab
-  ASSET_LIB_USERNAME: structed
-  ASSET_LIB_PASSSWORD: ${{ secrets.ASSET_STORE_PASSWORD }}
-  ASSET_LIB_ASSET_ID: 1321
+    ADDON_NAME: godot-playfab
+    ITCH_USERNAME: structed
+    ITCH_GAME_ID: godot-playfab
+    ASSET_LIB_USERNAME: structed
+    ASSET_LIB_ASSET_ID: 1321
 
 jobs:
     prerelease:
