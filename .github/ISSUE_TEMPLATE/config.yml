@@ -1,0 +1,10 @@
+﻿blank_issues_enabled: false
+
+contact_links:
+  - name: Feature Requests
+    url: https://github.com/Structed/godot-playfab/discussions
+    about: Please submit feature proposals on the Discussions, not as an issue. This way, we can discuss the feature before you start working on it.
+
+  - name: Have questions?
+    url: https://discord.gg/7K7q2YuNXe
+    about: Join our Discord server and engage with the community!
