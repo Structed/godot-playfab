@@ -1,3 +1,12 @@
+### [0.3.3](https://github.com/Structed/godot-playfab/compare/0.3.2...0.3.3) (2023-01-23)
+
+
+### Bug Fixes
+
+* Do not assume GZip compressed response. ([#99](https://github.com/Structed/godot-playfab/issues/99)) ([1110d8e](https://github.com/Structed/godot-playfab/commit/1110d8e750ad41d337beb65dd181562998a37371))
+
+
+
 ### [0.3.2](https://github.com/Structed/godot-playfab/compare/0.3.1...0.3.2) (2023-01-22)
 
 
