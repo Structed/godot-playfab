@@ -91,11 +91,14 @@ jobs:
                   if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
               if: steps.create_version.outputs.new_version != ''
 
-            - uses: ncipollo/release-action@v1
+            - name: Create Release
+              uses: ncipollo/release-action@v1.12.0
               with:
                   name: ${{ steps.create_version.outputs.new_tag }}
+                  body: ${{ steps.calculate_version.outputs.changelog }}
                   draft: false
                   prerelease: ${{ github.ref_name != 'main' }}
+                  latest: ${{ github.ref_name != 'main' }}
                   artifacts: ""
                   replacesArtifacts: false
                   generateReleaseNotes: true
