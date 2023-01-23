@@ -75,7 +75,13 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	var response_body = args[3]
 	_request_in_progress = false
 
-	var response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, File.COMPRESSION_GZIP)
+	var has_gzip_accept_header = false
+	if response_headers.find("Content-Encoding: gzip") != -1:
+		has_gzip_accept_header = true
+
+	var response_body_decompressed = response_body
+	if has_gzip_accept_header:
+		response_body_decompressed = response_body.decompress_dynamic(_response_compression_max_output_bytes, File.COMPRESSION_GZIP)
 
 	var response_body_string = response_body_decompressed.get_string_from_utf8()
 	var json_parse_result = JSON.parse(response_body_string)
