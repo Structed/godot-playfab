@@ -33,10 +33,11 @@ jobs:
       - uses: actions/checkout@v3
 
       # Run Godot Tests with GUT (https://github.com/bitwes/Gut)
-      - uses: croconut/godot-tester@v2.5
+      - name: Run Godot 3.4.4 Tests
+        uses: croconut/godot-tester@v2.5
         with:
           # required
-          version: "3.4.4"
+          version: "3.5"
           # the type of release of godot that the tests should be run with
           release_type: "stable"
           is-mono: "false"
@@ -71,11 +72,11 @@ jobs:
           # default is GUTs default: 'res://.gutconfig.json'; set this to load a different config file
           config-file: "res://.gutconfig.json"
 
-
-      - uses: croconut/godot-tester@v2.5
+      - name: Run Godot 3.4.4 Tests
+        uses: croconut/godot-tester@v2.5
         with:
           # required
-          version: "3.5"
+          version: "3.4.4"
           # the type of release of godot that the tests should be run with
           release_type: "stable"
           is-mono: "false"
