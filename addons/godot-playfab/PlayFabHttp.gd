@@ -76,8 +76,14 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	_request_in_progress = false
 
 	var has_gzip_accept_header = false
-	if response_headers.find("Content-Encoding: gzip") != -1:
-		has_gzip_accept_header = true
+	if Engine.get_version_info().hex >= 0x030500: # Godot 3.5 or higher
+		if response_headers.find("Content-Encoding: gzip") != -1:
+			has_gzip_accept_header = true
+	else:
+		for header in response_headers:
+			if "Content-Encoding: gzip" in header:
+				print("set geader")
+				has_gzip_accept_header = true
 
 	var response_body_decompressed = response_body
 	if has_gzip_accept_header:
