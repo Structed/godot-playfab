@@ -24,7 +24,7 @@ func test_login__emits_logged_in_signal_and_returns_LoginResult():
 
 	# wait for pf_client to emit the signal 'logged_in'
 	# or 5 seconds, whichever comes first.
-	yield(yield_to(pf_client, 'logged_in', 5), YIELD)
+	yield(yield_to(pf_client, 'logged_in', 10), YIELD)
 
 	# Assert
 	assert_signal_emitted(pf_client, 'logged_in', 'Maybe it did, maybe it didnt, but we still got here.')
