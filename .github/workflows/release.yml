@@ -65,7 +65,7 @@ jobs:
               with:
                   message: 'Release preparation: storing Version and Changelog'
                   push: true
-              if: steps.calculate_version.outputs.new_version != ''
+              if: github.ref == 'refs/heads/main' && steps.calculate_version.outputs.new_version != ''
 
     release:
         # Create release only after the version was bumped and release notes added:
