@@ -81,7 +81,7 @@ jobs:
 
             - name: Create version
               id: create_version
-              uses: mathieudutour/github-tag-action@v6.0
+              uses: mathieudutour/github-tag-action@v6.1
               with:
                   tag_prefix: ""
                   dry_run: ${{ github.ref_name != 'main' }}
@@ -120,7 +120,7 @@ jobs:
 
             - name: Calculate version
               id: calculate_version
-              uses: mathieudutour/github-tag-action@v6.0
+              uses: mathieudutour/github-tag-action@v6.1
               with:
                   tag_prefix: "v"
                   github_token: ${{ secrets.PAT }}
@@ -153,7 +153,7 @@ jobs:
 
             -   name: Calculate version
                 id: calculate_version
-                uses: mathieudutour/github-tag-action@v6.0
+                uses: mathieudutour/github-tag-action@v6.1
                 with:
                     tag_prefix: "v"
                     github_token: ${{ secrets.PAT }}
