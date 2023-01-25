@@ -1,3 +1,19 @@
+### [0.3.4](https://github.com/Structed/godot-playfab/compare/0.3.3...0.3.4) (2023-01-25)
+
+
+### Bug Fixes
+
+* Implementation to check for GZip Accept-Encoding header  ([#101](https://github.com/Structed/godot-playfab/issues/101)) ([d4c1f15](https://github.com/Structed/godot-playfab/commit/d4c1f15c2d99c75028e159004cebdb75b02416e8))
+
+
+### Continuous Integration
+
+* enable release job on  branch ([e90d587](https://github.com/Structed/godot-playfab/commit/e90d5873dfb771e64b6629307244f4e46078292c))
+* fix step name when using changelog output ([39269b5](https://github.com/Structed/godot-playfab/commit/39269b54b5a4fb880de9f5391c44edaae0a2bdb9))
+* USe release notes from  and also create prereleases ([3e7b942](https://github.com/Structed/godot-playfab/commit/3e7b942e5428d8bda80edaa5eec320a33e53f2b7))
+
+
+
 ### [0.3.3](https://github.com/Structed/godot-playfab/compare/0.3.2...0.3.3) (2023-01-23)
 
 
