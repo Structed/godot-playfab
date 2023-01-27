@@ -35,7 +35,7 @@ PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg")
 
 [global]
 
