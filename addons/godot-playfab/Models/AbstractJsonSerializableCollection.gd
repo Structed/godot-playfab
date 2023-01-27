@@ -40,7 +40,7 @@ func clear():
 # @returns Array: An array of all the Dictionaries, marshaled from objects inheriting from `JsonSerializable`
 func to_dict():
 	var index = 0
-	var dict = []	# Actually, Array of items! It's called dict to keep rthe API compatible with JsonSerializable
+	var dict = []	# Actually, Array of items! It's called dict to keep the API compatible with JsonSerializable
 	for item in _Items:
 		dict.append((item as JsonSerializable).to_dict())
 		index += 1
