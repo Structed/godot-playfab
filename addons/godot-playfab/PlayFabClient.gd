@@ -3,6 +3,9 @@
 extends PlayFab
 class_name PlayFabClient
 
+func _ready():
+	super._ready()
+
 # Retrieves the key-value store of custom title settings
 # @param request_data: GetTitleDataRequest
 # @param callback: Callable

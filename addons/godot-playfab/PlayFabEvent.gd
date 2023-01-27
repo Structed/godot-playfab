@@ -27,6 +27,8 @@ var playstream_event_batch = EventContentsCollection.new()
 var telemetry_event_batch = EventContentsCollection.new()
 
 func _ready():
+	super._ready()
+	
 	var timer = Timer.new()
 	timer.process_mode = Timer.TIMER_PROCESS_IDLE
 	timer.wait_time = event_batch_timeout_seconds
