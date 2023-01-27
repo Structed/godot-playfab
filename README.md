@@ -9,6 +9,9 @@ is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://
 1. A GDscript-native SDK to Azure PlayFab
 2. A Godot Editor integration to administer your game
 
+> **Note:**
+>   If you feel like experimenting with Godot 4, you can use a [prerelease version of godot-playfab for Godot 4!](https://github.com/Structed/godot-playfab/tree/godot4)
+
 ## Motivation
 I wanted to create an opinionated, "natural" Godot integration/SDK.
 Anyone could use the C# SDK right now or use any SDK with GDnative. But these SDKs are only generated SDKs, with a lot of duplicated models, which are nothing more than an API wrapper. However, I wan it to feel natural to the environment of Godot.
