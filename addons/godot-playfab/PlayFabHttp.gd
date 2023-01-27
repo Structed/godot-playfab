@@ -81,7 +81,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	var test_json_conv = JSON.new()
 	var parse_error = test_json_conv.parse(response_body_string)
 	var json_parse_result = test_json_conv.data
-	print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result, "\t"))
+	#print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result, "\t"))
 
 	if parse_error != OK:
 		emit_signal("json_parse_error", json_parse_result)
