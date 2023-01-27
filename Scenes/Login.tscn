@@ -87,7 +87,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
 
-[connection signal="pressed" from="MarginContainer/Login/StayLoggedInCheckbox" to="MarginContainer" method="_on_StayLoggedInCheckbox_pressed"]
+[connection signal="toggled" from="MarginContainer/Login/StayLoggedInCheckbox" to="MarginContainer" method="_on_stay_logged_in_checkbox_toggled"]
 [connection signal="pressed" from="MarginContainer/Login/Login" to="MarginContainer" method="_on_Login_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/AnonLogin" to="MarginContainer" method="_on_AnonLogin_pressed"]
 [connection signal="pressed" from="MarginContainer/Login/Back" to="MarginContainer" method="_on_Back_pressed"]
