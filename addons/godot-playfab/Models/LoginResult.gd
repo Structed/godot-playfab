@@ -8,7 +8,7 @@ var EntityToken: EntityTokenResponse
 var InfoResultPayload: GetPlayerCombinedInfoResultPayload
 
 ## The time of this user's previous login. If there was no previous login, then it's DateTime.MinValue
-var LastLoginTime: String
+var LastLoginTime: float
 
 ## True if the account was newly created checked this login.
 var NewlyCreated: bool
