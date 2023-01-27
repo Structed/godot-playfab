@@ -3,7 +3,11 @@
 [![CI](https://github.com/structed/godot-playfab/workflows/CI/badge.svg?branch=main)](https://github.com/Structed/godot-playfab/actions/workflows/main.yml)
 [![Discord](https://img.shields.io/discord/1020665079668166677?color=rgb%2888%2C%20101%2C%20242%29&label=Discord&logo=discord)](https://discord.gg/7K7q2YuNXe)
 
-# godot-playfab
+
+> **Warning**
+> Please be aware, this is a prerelease branch for Godot 4. It might not be working, Unit Tests are not being run and there might be a lot of bugs. ⚠️
+
+# godot-playfab - for Godot 4!
 is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://godotengine.org/). While it is very early, it is supposed to be two things:
 
 1. A GDscript-native SDK to Azure PlayFab
