@@ -60,7 +60,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	headers.append_array(_dict_to_header_array(additional_headers))
 
 	while (_request_in_progress):
-		await _http.get_tree().idle_frame
+		await _http.get_tree().process_frame
 
 	_request_in_progress = true
 	var request_uri = "%s%s" % [ _get_api_url(), path]
