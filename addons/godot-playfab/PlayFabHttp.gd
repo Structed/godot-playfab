@@ -81,7 +81,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	var test_json_conv = JSON.new()
 	var parse_error = test_json_conv.parse(response_body_string)
 	var json_parse_result = test_json_conv.data
-	#print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result.result, "\t"))
+	print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result, "\t"))
 
 	if parse_error != OK:
 		emit_signal("json_parse_error", json_parse_result)
@@ -95,8 +95,8 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		return
 	elif response_code >= 400:
 		var apiErrorWrapper = ApiErrorWrapper.new()
-		for key in json_parse_result.result.keys():
-			apiErrorWrapper.set(key, json_parse_result.result[key])
+		for key in json_parse_result.keys():
+			apiErrorWrapper.set(key, json_parse_result[key])
 		emit_signal("api_error", apiErrorWrapper)
 		return
 	if response_code >= 500:
