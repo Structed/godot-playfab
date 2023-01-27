@@ -33,10 +33,6 @@ config/icon="res://addons/godot-playfab/icon.png"
 SceneManager="*res://Scripts/SceneManager.gd"
 PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 
-[editor]
-
-export/convert_text_resources_to_binary=true
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/gut/plugin.cfg")
