@@ -23,7 +23,7 @@ func _on_SubmitButton_pressed():
 
 		body_dict[key] = value
 
-	PlayFabManager.client.post_dict_auth(body_dict, path, PlayFab.AUTH_TYPE.SESSION_TICKET, funcref(self, "_on_get_response"))
+	PlayFabManager.client.post_dict_auth(body_dict, path, PlayFab.AUTH_TYPE.SESSION_TICKET, Callable(self, "_on_get_response"))
 
 
 func _on_get_response(response):
