@@ -78,13 +78,14 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 # Instantiate a class by name
 # @param name: String - A class name
 # @returns RefCounted - The instance reference
-func get_class_instance(name: String) -> RefCounted:
-	var class_list = ClassDB.get_class_list()
-	var json = var_to_str(class_list)
-	var has = class_list.has(name)
-	var exists = ClassDB.class_exists(name)
-	if ClassDB.can_instantiate(name):
-		return ClassDB.instantiate(name)
+func get_class_instance(name: String):
+	var config = ConfigFile.new()
+	config.load("res://.godot/global_script_class_cache.cfg")
+	var classes = config.get_value('', 'list', [])
+	for element in classes:
+		if element["class"] == name:
+			return load(element["path"]).new()
+
 
 	push_error("Class \"" + name + "\" could not be found")
 	return null
