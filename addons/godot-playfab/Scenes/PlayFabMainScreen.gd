@@ -31,11 +31,9 @@ func _on_save_direct_pressed():
 func _on_file_selected(file_path: String):
 	
 	var model = to_model($VBoxContainer/ClassNameContainer/LineEdit.text, $VBoxContainer/Input.text)
-	var file = File.new()
-	file.open(file_path, File.WRITE)
+	var file = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(model)
-	file.close()
-	
+
 	# Refresh the "FileSystem" panel
 	editor_resource_filesystem_cached.scan()
 	
