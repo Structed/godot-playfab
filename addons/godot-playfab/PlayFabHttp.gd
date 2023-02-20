@@ -64,7 +64,7 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 	_request_in_progress = true
 	var request_uri = "%s%s" % [ _get_api_url(), path]
-	var error = _http.request(request_uri, headers, true, request_method, json)
+	var error = _http.request(request_uri, headers, request_method, json)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 		return
@@ -105,6 +105,6 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 
 func _test_http(body, path: String):
-	var error = _http.request("https://httpbin.org/post", [], true, HTTPClient.METHOD_POST, JSON.stringify(body))
+	var error = _http.request("https://httpbin.org/post", [], HTTPClient.METHOD_POST, JSON.stringify(body))
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
