@@ -23,6 +23,10 @@ func to_dict() -> Dictionary:
 		var prop = props[i]
 		var name = prop["name"] # The name of the property on the object. Will be used to access its's value
 		var type = prop["type"]	# The godot built-in type (Array, Object etc)
+		
+		# If it's not PROPERTY_USAGE_SCRIPT_VARIABLE, it's not an actual property
+		if (prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE) != PROPERTY_USAGE_SCRIPT_VARIABLE:
+			continue
 
 		if (type == TYPE_OBJECT):
 			# Get the value of the property
