@@ -1,13 +1,18 @@
-extends "res://addons/gut/test.gd"
+# GdUnit generated TestSuite
+class_name PlayFabClientConfigTest
+extends GdUnitTestSuite
+@warning_ignore('unused_parameter')
+@warning_ignore('return_value_discarded')
+
+# TestSuite generated from
+const __source = 'res://addons/godot-playfab/PlayFabClientConfig/PlayFabClientConfig.gd'
+
 
 var config: PlayFabClientConfig
 
-
-func before_each():
+func before_test():
 	config = PlayFabClientConfig.new()
 
-
-# is_logged_in() Tests
 
 
 func test_is_logged_in_returns_true_if_session_ticket_exists():
@@ -18,7 +23,7 @@ func test_is_logged_in_returns_true_if_session_ticket_exists():
 	var is_logged_in = config.is_logged_in()
 
 	# Assert
-	assert_true(is_logged_in)
+	assert_bool(is_logged_in).is_true()
 
 
 func test_is_logged_in_returns_false_if_session_ticket_is_empty():
@@ -29,7 +34,7 @@ func test_is_logged_in_returns_false_if_session_ticket_is_empty():
 	var is_logged_in = config.is_logged_in()
 
 	# Assert
-	assert_false(is_logged_in)
+	assert_bool(is_logged_in).is_false()
 
 
 func test_is_logged_in_returns_false_if_login_token_expired_returns_true():
@@ -41,7 +46,7 @@ func test_is_logged_in_returns_false_if_login_token_expired_returns_true():
 	var is_logged_in = config.is_logged_in()
 
 	# Assert
-	assert_false(is_logged_in)
+	assert_bool(is_logged_in).is_false()
 
 
 func test_is_logged_in_returns_true_if_login_token_expired_returns_false():
@@ -52,11 +57,10 @@ func test_is_logged_in_returns_true_if_login_token_expired_returns_false():
 	var is_logged_in = config.is_logged_in()
 
 	# Assert
-	assert_true(is_logged_in)
+	assert_bool(is_logged_in).is_true()
 
 
-## is_login_token_expired() Tests
-
+# is_login_token_expired() Tests
 
 func test_is_login_token_expired_returns_false_if_token_within_threshold():
 	# Arrange
@@ -66,7 +70,7 @@ func test_is_login_token_expired_returns_false_if_token_within_threshold():
 	var is_expired = config.is_login_token_expired()
 
 	# Assert
-	assert_false(is_expired)
+	assert_bool(is_expired).is_false()
 
 
 func test_is_login_token_expired_returns_true_if_above_threshold():
@@ -77,7 +81,7 @@ func test_is_login_token_expired_returns_true_if_above_threshold():
 	var is_expired = config.is_login_token_expired()
 
 	# Assert
-	assert_true(is_expired)
+	assert_bool(is_expired).is_true()
 
 
 func test_is_login_token_expired_returns_true_if_negative():
@@ -88,11 +92,10 @@ func test_is_login_token_expired_returns_true_if_negative():
 	var is_expired = config.is_login_token_expired()
 
 	# Assert
-	assert_true(is_expired)
+	assert_bool(is_expired).is_true()
 
 
 # _set_session_ticket() Tests
-
 
 func test__set_session_ticket_updates_login_timestamp():
 	# Arrange / Act
@@ -102,4 +105,4 @@ func test__set_session_ticket_updates_login_timestamp():
 	var actual = config.login_timestamp
 
 	# Assert
-	assert_almost_eq(actual, expected, 1)
+	assert_float(actual).is_between(expected - 1, expected + 1)
