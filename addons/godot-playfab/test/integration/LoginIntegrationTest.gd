@@ -29,7 +29,7 @@ func test_login__emits_logged_in_signal_and_returns_LoginResult(timeout=1):
 	var pf_client = auto_free(PlayFabClient.new())
 	pf_client.connect("logged_in",Callable(self,"_on_logged_in"))
 	pf_client.connect("api_error",Callable(self,"_on_api_error"))
-	
+
 	# Add to tree so _ready() gets called on PlayFabClient
 	add_child(pf_client)
 
@@ -42,7 +42,7 @@ func test_login__emits_logged_in_signal_and_returns_LoginResult(timeout=1):
 
 	# Assert
 #	assert_signal_emitted(pf_client, 'logged_in', 'Maybe it did, maybe it didnt, but we still got here.')
-	var result = await assert_signal(pf_client).wait_until(5000).is_emitted("logged_in")
+	await assert_signal(pf_client).wait_until(5000).is_emitted("logged_in")
 
 
 func _on_logged_in(login_result: LoginResult):
@@ -54,7 +54,7 @@ func _on_logged_in(login_result: LoginResult):
 	assert_str(login_result.PlayFabId).is_equal("BC894B06364B0093")
 	assert_str(login_result.SessionTicket).is_not_empty()
 	assert_object(login_result.TreatmentAssignment).is_class("Dictionary")
-	
+
 #	assert_not_null(login_result.EntityToken)
 #	assert_not_null(login_result.InfoResultPayload)
 #	assert_ne("", login_result.LastLoginTime)
