@@ -6,12 +6,12 @@ name: Reusable workflow to run tests for multiple Godot 3 Versions
 on:
   workflow_call:
     inputs:
-      - godot-version:
-          required: true
-          type: string
-      - test-dir:
-          required: true
-          type: string
+      godot-version:
+        required: true
+        type: string
+      test-dir:
+        required: true
+        type: string
     secrets: inherit
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
