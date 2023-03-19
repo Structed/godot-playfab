@@ -14,6 +14,10 @@ on:
         type: string
     secrets: inherit
 
+env:
+  GODOT_PLAYFAB_TEST_USER: ${{ secrets.GODOT_PLAYFAB_TEST_USER }}
+  GODOT_PLAYFAB_TEST_PASSWORD: ${{ secrets.GODOT_PLAYFAB_TEST_PASSWORD }}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
