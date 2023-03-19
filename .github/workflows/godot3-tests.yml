@@ -12,11 +12,13 @@ on:
       test-dir:
         required: true
         type: string
-    secrets: inherit
+    secrets:
+      test-user: ${{ secrets.GODOT_PLAYFAB_TEST_USER }}
+      test-password: ${{ secrets.GODOT_PLAYFAB_TEST_PASSWORD }}
 
 env:
-  GODOT_PLAYFAB_TEST_USER: ${{ secrets.GODOT_PLAYFAB_TEST_USER }}
-  GODOT_PLAYFAB_TEST_PASSWORD: ${{ secrets.GODOT_PLAYFAB_TEST_PASSWORD }}
+  GODOT_PLAYFAB_TEST_USER: ${{ secrets.test-user }}
+  GODOT_PLAYFAB_TEST_PASSWORD: ${{ secrets.test-password }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

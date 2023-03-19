@@ -37,7 +37,9 @@ jobs:
         with:
           godot-version: "3.5.1"
           test-dir: 'res://addons/${{env.ADDON_NAME}}/test'
-        secrets: inherit
+        secrets:
+          test-user: ${{ secrets.GODOT_PLAYFAB_TEST_USER }}
+          test-password: ${{ secrets.GODOT_PLAYFAB_TEST_PASSWORD }}
 
       - name: Run Godot 3.4.4 Tests
         uses: ./.github/workflows/godot3-tests.yml
