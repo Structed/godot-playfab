@@ -33,14 +33,14 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Run Godot 3.5.1 Tests
-        uses: .github/workflows/godot3-tests.yml
+        uses: ./.github/workflows/godot3-tests.yml
         with:
           godot-version: "3.5.1"
           test-dir: 'res://addons/${{env.ADDON_NAME}}/test'
         secrets: inherit
 
       - name: Run Godot 3.4.4 Tests
-        uses: .github/workflows/godot3-tests.yml
+        uses: ./.github/workflows/godot3-tests.yml
         with:
           godot-version: "3.4.4"
           test-dir: 'res://addons/${{env.ADDON_NAME}}/test'
