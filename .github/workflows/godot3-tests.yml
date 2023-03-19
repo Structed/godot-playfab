@@ -24,7 +24,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      #- uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # Run Godot Tests with GUT (https://github.com/bitwes/Gut)
       - name: Run Godot 3.4.4 ${{ inputs.godot-version }} Tests
