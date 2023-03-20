@@ -4,13 +4,13 @@ name: CI
 on:
   push:
     branches:
-      - develop
-      - main
+      - godot3-develop
+      - godot3
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - develop
-      - main
+      - godot3-develop
+      - godot3
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Run Godot Tests with GUT (https://github.com/bitwes/Gut)
-      - name: Run Godot 3.4.4 Tests
+      - name: Run Godot 3.5 Tests
         uses: croconut/godot-tester@v2.5
         with:
           # required
@@ -67,7 +67,7 @@ jobs:
           # not checked by default, set to a number to limit the
           # maximum amount of failed tests for a passing test suite
           max-fails: 0
-          # to ensure all SCRIPT ERRORs dont contribute to your failure rate
+          # to ensure all SCRIPT ERRORS dont contribute to your failure rate
           ignore-errors: "true"
           # default is GUTs default: 'res://.gutconfig.json'; set this to load a different config file
           config-file: "res://.gutconfig.json"
@@ -106,7 +106,7 @@ jobs:
           # not checked by default, set to a number to limit the
           # maximum amount of failed tests for a passing test suite
           max-fails: 0
-          # to ensure all SCRIPT ERRORs dont contribute to your failure rate
+          # to ensure all SCRIPT ERRORS dont contribute to your failure rate
           ignore-errors: "true"
           # default is GUTs default: 'res://.gutconfig.json'; set this to load a different config file
           config-file: "res://.gutconfig.json"
