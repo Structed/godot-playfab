@@ -1,4 +1,4 @@
-name: Release
+name: Release Godot 3
 
 on:
   push:
@@ -17,7 +17,7 @@ env:
   ITCH_USERNAME: structed
   ITCH_GAME_ID: godot-playfab
   ASSET_LIB_USERNAME: structed
-  ASSET_LIB_ASSET_ID: 7458
+  ASSET_LIB_ASSET_ID: 1756
 
 jobs:
   prerelease:
