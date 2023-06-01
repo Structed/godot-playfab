@@ -4,14 +4,11 @@ name: CI
 on:
   push:
     branches:
-      - develop
-      - main
-      - !godot4
+      - godot3
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - develop
-      - main
+      - godot3
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

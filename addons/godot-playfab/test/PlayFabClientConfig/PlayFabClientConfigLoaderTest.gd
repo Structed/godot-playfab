@@ -9,10 +9,10 @@ const __source = 'res://addons/godot-playfab/PlayFabClientConfig/PlayFabClientCo
 
 
 var path = "res://addons/godot-playfab/temp/test_playfab_client_config.cfg"
-var directory : DirAccess
 
-func after_test():
-	directory.remove_at(path)
+#func after_test():
+#	var directory := DirAccess.open(path)
+#	directory.remove(path)
 	
 
 # DISABLED - as it is broken in CI! See https://github.com/Structed/godot-playfab/issues/36

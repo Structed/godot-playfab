@@ -30,7 +30,7 @@ func _on_WriteTelemetryDirectButton_pressed():
 		"Action": "_on_WriteTelemetryDirectButton_pressed"
 	}
 
-	PlayFabManager.event.write_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload)
+	PlayFabManager.event.write_title_player_telemetry_event(EVENT_NAME_TELEMETRY, payload, Callable(self, "_on_write_events_request_completed"))
 
 
 func _on_WritePlayStreamDirectButton_pressed():
@@ -38,7 +38,7 @@ func _on_WritePlayStreamDirectButton_pressed():
 		"Action": "_on_WritePlayStreamDirectButton_pressed"
 	}
 
-	PlayFabManager.event.write_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload)
+	PlayFabManager.event.write_title_player_playstream_event(EVENT_NAME_PLAYSTREAM, payload, Callable(self, "_on_write_events_request_completed"))
 
 
 func _on_write_events_request_completed(response):

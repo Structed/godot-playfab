@@ -3,10 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - main
-      - master
-      - develop
-      - godot4
+      - godot3
 
     # Allows you to run this workflow manually from the Actions tab
     workflow_dispatch:
@@ -19,7 +16,7 @@ env:
     ITCH_USERNAME: structed
     ITCH_GAME_ID: godot-playfab
     ASSET_LIB_USERNAME: structed
-    ASSET_LIB_ASSET_ID: 1321
+    ASSET_LIB_ASSET_ID: 7458
 
 jobs:
     prerelease:
@@ -44,6 +41,7 @@ jobs:
                   github_token: ${{ secrets.PAT }}
                   dry_run: true
                   default_bump: false
+                  release_branches: godot3
                   custom_release_rules: |
                       "fix:patch:Bug Fixes,hotfix:patch:Bug Fixes,feature:minor:Features,change:minor:Changes,breaking:major:Breaking Changes,major:major:Major Changes"
 
@@ -89,6 +87,7 @@ jobs:
                   dry_run: ${{ github.ref_name != 'main' }}
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   default_bump: false
+                  release_branches: godot3
 
             - name: Upload artifact
               uses: actions/upload-artifact@v3
@@ -128,6 +127,7 @@ jobs:
                   github_token: ${{ secrets.PAT }}
                   dry_run: true
                   default_bump: false
+                  release_branches: godot3
 
             # Using https://github.com/KikimoraGames/itch-publish
             - uses: actions/download-artifact@v3
