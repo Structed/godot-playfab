@@ -1,3 +1,42 @@
+## [1.0.0](https://github.com/Structed/godot-playfab/compare/0.3.4...1.0.0) (2023-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** Update for Godot 4 stable
+
+Upgraded to Godot 4. Thanks to: @MikeSchulze for GDUnit his GH Action workflow examples - https://github.com/MikeSchulze/gdUnit4 @bitbrain for his GH Action workflow examples in https://github.com/bitbrain/beehave
+
+fix(example): Update Events demo scene for Godot 4
+fix(example): crash issue on writing telemetry events
+ci(pipeline): workflow_dispatch to be in correct indent level
+ci(pipeline): Update GDUnit4 actions
+ci(pipeline): Run unit tests on Godot 4.02 & 4.0.3
+ci(pipeline): Separate Godot 4 & 3 branches
+ci(pipeline): Separate Godot 4 workflows
+ci(pipeline): set new asset ID for new Asset in AssetLib
+ci(pipeline): Exclude LoginIntegrationTest (broken)
+ci(pipeline): Removed defunct & unused plugin refresher
+test(pipeline): Switch test framework to GDUnit4
+docs(readme): Added users of godot-playfab to README.md
+docs(license)Updated licenses
+
+### Features
+
+* **core:** Godot 4 upgrade ([0d39b88](https://github.com/Structed/godot-playfab/commit/0d39b88faab532aced5259fbe2af8ca119636425))
+
+
+### Changes
+
+* add note note to highlight Godot4 prerelease availability ([fef9a1d](https://github.com/Structed/godot-playfab/commit/fef9a1d3344c7beb7f1305551df477b9e17d2971))
+
+
+### Continuous Integration
+
+* bump mathieudutour/github-tag-action to v6.1 ([7491b16](https://github.com/Structed/godot-playfab/commit/7491b16eb92adfacb9882004378d183f2e38877b))
+
+
+
 ### [0.3.4](https://github.com/Structed/godot-playfab/compare/0.3.3...0.3.4) (2023-01-25)
 
 
