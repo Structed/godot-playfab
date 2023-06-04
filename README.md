@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/structed/godot-playfab/workflows/CI/badge.svg?branch=main)](https://github.com/Structed/godot-playfab/actions/workflows/main.yml)
 [![Discord](https://img.shields.io/discord/1020665079668166677?color=rgb%2888%2C%20101%2C%20242%29&label=Discord&logo=discord)](https://discord.gg/7K7q2YuNXe)
+> ⚠️This is the Godot 3.x version of `godot-playfab`. For the Godot 4.x version, please see the [main branch](https://github.com/structed/godot-playfab/main).
 
 # godot-playfab
 is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://godotengine.org/). While it is very early, it is supposed to be two things:
