@@ -7,12 +7,15 @@
 # godot-playfab
 is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://godotengine.org/). While it is very early, it is supposed to be two things:
 
-1. A GDscript-native SDK to Azure PlayFab
+1. A GDScript-native SDK to Azure PlayFab
 2. A Godot Editor integration to administer your game
+
+> **Note:**
+>   Looking for the Godot 4 version? ➡️ [godot-playfab for Godot 4!](https://github.com/Structed/godot-playfab/tree/godot4)
 
 ## Motivation
 I wanted to create an opinionated, "natural" Godot integration/SDK.
-Anyone could use the C# SDK right now or use any SDK with GDnative. But these SDKs are only generated SDKs, with a lot of duplicated models, which are nothing more than an API wrapper. However, I wan it to feel natural to the environment of Godot.
+Anyone could use the C# SDK right now or use any SDK with GDNative. But these SDKs are only generated SDKs, with a lot of duplicated models, which are nothing more than an API wrapper. However, I wan it to feel natural to the environment of Godot.
 
 So my plan is to not only create a GDScript-Native with more or less everything handcrafted,
 but also use Godot's Signals and also provide in-editor tools to work with Godot.
