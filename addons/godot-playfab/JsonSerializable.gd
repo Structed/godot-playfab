@@ -19,7 +19,7 @@ func to_dict() -> Dictionary:
 	var props = get_property_list()
 
 	# Skipping the first 3 items because they are metadata we do not need
-	for i in range(3, props.size()):
+	for i in range(0, props.size()):
 		var prop = props[i]
 		var name = prop["name"] # The name of the property on the object. Will be used to access its's value
 		var type = prop["type"]	# The godot built-in type (Array, Object etc)
