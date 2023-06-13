@@ -1,3 +1,12 @@
+### [1.0.1](https://github.com/Structed/godot-playfab/compare/1.0.0...1.0.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* **serializer:** hardcoded ignoring of first 3 items of properties on to be serialized object ([#118](https://github.com/Structed/godot-playfab/issues/118)) ([0da7b4d](https://github.com/Structed/godot-playfab/commit/0da7b4d380eaa092006fee2093c436d4814c8503))
+
+
+
 ## [1.0.0](https://github.com/Structed/godot-playfab/compare/0.3.4...1.0.0) (2023-06-03)
 
 
