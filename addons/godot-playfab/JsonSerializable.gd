@@ -19,13 +19,13 @@ func to_dict() -> Dictionary:
 	var props = get_property_list()
 
 	# Skipping the first 3 items because they are metadata we do not need
-	for i in range(3, props.size()):
-		var prop = props[i]
+	for prop in props:
 		var name = prop["name"] # The name of the property on the object. Will be used to access its's value
 		var type = prop["type"]	# The godot built-in type (Array, Object etc)
+		var usage = prop["usage"]	# is a combination of PropertyUsageFlags.
 		
-		# If it's not PROPERTY_USAGE_SCRIPT_VARIABLE, it's not an actual property
-		if (prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE) != PROPERTY_USAGE_SCRIPT_VARIABLE:
+		# If it's not PROPERTY_USAGE_SCRIPT_VARIABLE, it's not an actual property and we can ignore it
+		if (usage & PROPERTY_USAGE_SCRIPT_VARIABLE) != PROPERTY_USAGE_SCRIPT_VARIABLE:
 			continue
 
 		if (type == TYPE_OBJECT):
