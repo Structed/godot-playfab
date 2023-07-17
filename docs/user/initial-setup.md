@@ -6,14 +6,22 @@ Grab the latest stable release from either the [Godot Asset Library](https://god
 
 ## Enabling the addon
 * Copy the folder `/addons/godot-playfab` in your own project's `/addons/` directory
-* In the Plugins tab of your Godot project's Project Settings, "godot-playfab" should now show up. Enable it.
+* In the `Plugins` tab of your Godot project's Project Settings, `"`godot-playfab`"` should now show up. Enable it.
 
-If you close and re-open Project Settings, the General tab will now have a "PlayFab" option at the bottom of the left-hand sidebar. 
+If you close and re-open Project Settings, the General tab will now have a "PlayFab" option at the bottom of the left-hand sidebar.
 
 ## Setting the Title Id
 * Go to [PlayFab](https://playfab.com), log in and copy your Title's ID
 * In your Godot editor, open Project Settings
+* Enable "Advanced Settings" on the top right
 * Set the Title Id in `Playfab --> Title Id`
+
+> ⚠️ If you cannot find the setting, just add it yourself!
+> * Key: `playfab/title_id`
+> * In the platform dropdown menu, select `(All)`
+> * In the type dropdown menu, select `String`
+> * Last, click the `Add` button
+> After you added the setting, you can set the Title ID as described above.
 
 ## Adding the `PlayFabManager` singleton AutoLoad
 In the "Autoload" tab of your project's Project Settings, add `res://addons/godot-playfab/PlayFabManager.gd` as an autoload path. Its Node Name should automatically be filled in as `PlayFabManager` (you should manually enter that if it does not auto-fill).
