@@ -14,6 +14,8 @@ func _init():
 
 
 func _enter_tree():
+	add_autoload_singleton("PlayFabManager", "res://addons/godot-playfab/PlayFabManager.gd")
+
 	main_panel_instance = MainPanel.instantiate()
 	# Add the main panel to the editor's main viewport.
 	get_editor_interface().get_editor_main_screen().add_child(main_panel_instance)
@@ -22,6 +24,8 @@ func _enter_tree():
 
 
 func _exit_tree():
+	remove_autoload_singleton("PlayFabManager")
+
 	if main_panel_instance:
 		main_panel_instance.queue_free()
 

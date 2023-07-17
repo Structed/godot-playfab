@@ -23,11 +23,6 @@ If you close and re-open Project Settings, the General tab will now have a "Play
 > * Last, click the `Add` button
 > After you added the setting, you can set the Title ID as described above.
 
-## Adding the `PlayFabManager` singleton AutoLoad
-In the "Autoload" tab of your project's Project Settings, add `res://addons/godot-playfab/PlayFabManager.gd` as an autoload path. Its Node Name should automatically be filled in as `PlayFabManager` (you should manually enter that if it does not auto-fill).
-> godot-playfab relies on the exact name `PlayFabManager`!
-
-
 # Configuration
 On autoload of the `PlayFabManager`, an encrypted `PlayFab Client Config` file will be created in `user://playfab_client_config.tres`.
 See the [File paths in Godot projects documentation](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html).
