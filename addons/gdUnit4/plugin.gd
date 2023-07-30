@@ -32,6 +32,9 @@ func _enter_tree():
 	add_child(_server_node)
 	_fixup_node_inspector()
 	prints("Loading GdUnit4 Plugin success")
+	if GdUnitSettings.is_update_notification_enabled():
+		var update_tool = load("res://addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn").instantiate()
+		Engine.get_main_loop().root.call_deferred("add_child", update_tool)
 
 
 func _exit_tree():
@@ -47,4 +50,5 @@ func _exit_tree():
 	GdUnitTools.dispose_all()
 	if Engine.has_meta("GdUnitEditorPlugin"):
 		Engine.remove_meta("GdUnitEditorPlugin")
-	prints("Unload GdUnit4 Plugin success")
+	if Engine.get_version_info().hex < 0x40100 or Engine.get_version_info().hex > 0x40101:
+		prints("Unload GdUnit4 Plugin success")
