@@ -1,20 +1,17 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://d4l3rp8rs8ctk"]
 
 [node name="Line" type="HBoxContainer"]
 offset_right = 1024.0
 offset_bottom = 24.0
 
 [node name="Key" type="LineEdit" parent="."]
-offset_right = 510.0
-offset_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 placeholder_text = "Key"
 
 [node name="Value" type="LineEdit" parent="."]
-offset_left = 514.0
-offset_right = 1024.0
-offset_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 placeholder_text = "Value"
