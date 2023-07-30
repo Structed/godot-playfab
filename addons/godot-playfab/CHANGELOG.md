@@ -1,3 +1,18 @@
+## [1.1.0](https://github.com/Structed/godot-playfab/compare/1.0.1...1.1.0) (2023-07-30)
+
+
+### Features
+
+* **platform:** Upgrade to Godot 4.1 ([#121](https://github.com/Structed/godot-playfab/issues/121)) ([42c2af4](https://github.com/Structed/godot-playfab/commit/42c2af43ac5c7e71ef27095530f66aafe9b4f5da))
+* **setup:** add programmatic autoload in PlayFabEditor plugin script ([#120](https://github.com/Structed/godot-playfab/issues/120)) ([d34d7fe](https://github.com/Structed/godot-playfab/commit/d34d7fe9875765e0132b411d93fc6018d5b4e9e4))
+
+
+### Bug Fixes
+
+* add description on how to add Title ID ([69b09b1](https://github.com/Structed/godot-playfab/commit/69b09b15f8e513d6a8161aa654d232486f442c47))
+
+
+
 ### [1.0.1](https://github.com/Structed/godot-playfab/compare/1.0.0...1.0.1) (2023-06-13)
 
 
