@@ -73,14 +73,16 @@ func _on_AnonLogin_pressed():
 	var player_profile_view_constraints = PlayerProfileViewConstraints.new()
 	combined_info_request_params.ProfileConstraints = player_profile_view_constraints
 
+	# If a player has had logged in before, even if anonymous, re-use that login
 	if PlayFabManager.client_config.login_type == PlayFabClientConfig.LoginType.LOGIN_CUSTOM_ID:
 		PlayFabManager.client.login_with_custom_id(PlayFabManager.client_config.login_id, false, combined_info_request_params)
 	else:
-		PlayFabManager.client.login_with_custom_id(UUID.v4(), true, combined_info_request_params)
+		PlayFabManager.client.login_anonymous()
 
 
 func _show_progess():
 	$ProgressCenter/LoadingIndicator.show()
+
 
 func _hide_progess():
 	$ProgressCenter/LoadingIndicator.hide()
