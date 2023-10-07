@@ -27,7 +27,10 @@ If you close and re-open Project Settings, the General tab will now have a "Play
 > * Last, click the `Add` button
 > After you added the setting, you can set the Title ID as described above.
 
+Next: [Using `godot-playfab` in your Game](usage.md)
+
 # Configuration
+This is only for information. No action is required.
 On autoload of the `PlayFabManager`, an encrypted `PlayFab Client Config` file will be created in `user://playfab_client_config.tres`.
 See the [File paths in Godot projects documentation](https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html).
 
