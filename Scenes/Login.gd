@@ -12,7 +12,7 @@ func _ready():
 	$Login/StayLoggedInCheckbox.button_pressed = PlayFabManager.client_config.stay_logged_in
 
 	# It is best practice, to refresh the login every time, as the `SessionTicket` is only valid for 24 hours.
-	# Spceifically, with "Anonymous Logins" this makes sense.
+	# Spcifically, with "Anonymous Logins" this makes sense.
 	# However, regular PlayFab logins can't just be implicitly logged in without\
 	# storing the user's credentials, which you SHOULD NOT do!
 	if PlayFabManager.client_config.stay_logged_in && PlayFabManager.client_config.is_logged_in():
