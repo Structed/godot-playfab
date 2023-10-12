@@ -1,3 +1,12 @@
+## [1.2.0](https://github.com/Structed/godot-playfab/compare/1.1.0...1.2.0) (2023-10-12)
+
+
+### Features
+
+* **Auth:** Anonymous login ([#126](https://github.com/Structed/godot-playfab/issues/126)) ([d3339b1](https://github.com/Structed/godot-playfab/commit/d3339b1ddd01508a89c3b5593277f738c27fe264))
+
+
+
 ## [1.1.0](https://github.com/Structed/godot-playfab/compare/1.0.1...1.1.0) (2023-07-30)
 
 
