@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://wwvhjjuojn77"]
 
-[ext_resource path="res://Textures/round_metal.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Widgets/LoadingIndicator.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://c6h5mtp1aod6p" path="res://Textures/round_metal.png" id="1"]
+[ext_resource type="Script" path="res://Scenes/Widgets/LoadingIndicator.gd" id="2"]
 
-[node name="LoadingIndicator" type="TextureProgress"]
+[node name="LoadingIndicator" type="TextureProgressBar"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture_progress = ExtResource( 1 )
 fill_mode = 4
 nine_patch_stretch = true
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_progress = ExtResource("1")
+script = ExtResource("2")

@@ -1,3 +1,75 @@
+## [1.2.0](https://github.com/Structed/godot-playfab/compare/1.1.0...1.2.0) (2023-10-12)
+
+
+### Features
+
+* **Auth:** Anonymous login ([#126](https://github.com/Structed/godot-playfab/issues/126)) ([d3339b1](https://github.com/Structed/godot-playfab/commit/d3339b1ddd01508a89c3b5593277f738c27fe264))
+
+
+
+## [1.1.0](https://github.com/Structed/godot-playfab/compare/1.0.1...1.1.0) (2023-07-30)
+
+
+### Features
+
+* **platform:** Upgrade to Godot 4.1 ([#121](https://github.com/Structed/godot-playfab/issues/121)) ([42c2af4](https://github.com/Structed/godot-playfab/commit/42c2af43ac5c7e71ef27095530f66aafe9b4f5da))
+* **setup:** add programmatic autoload in PlayFabEditor plugin script ([#120](https://github.com/Structed/godot-playfab/issues/120)) ([d34d7fe](https://github.com/Structed/godot-playfab/commit/d34d7fe9875765e0132b411d93fc6018d5b4e9e4))
+
+
+### Bug Fixes
+
+* add description on how to add Title ID ([69b09b1](https://github.com/Structed/godot-playfab/commit/69b09b15f8e513d6a8161aa654d232486f442c47))
+
+
+
+### [1.0.1](https://github.com/Structed/godot-playfab/compare/1.0.0...1.0.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* **serializer:** hardcoded ignoring of first 3 items of properties on to be serialized object ([#118](https://github.com/Structed/godot-playfab/issues/118)) ([0da7b4d](https://github.com/Structed/godot-playfab/commit/0da7b4d380eaa092006fee2093c436d4814c8503))
+
+
+
+## [1.0.0](https://github.com/Structed/godot-playfab/compare/0.3.4...1.0.0) (2023-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** Update for Godot 4 stable
+
+Upgraded to Godot 4. Thanks to: @MikeSchulze for GDUnit his GH Action workflow examples - https://github.com/MikeSchulze/gdUnit4 @bitbrain for his GH Action workflow examples in https://github.com/bitbrain/beehave
+
+fix(example): Update Events demo scene for Godot 4
+fix(example): crash issue on writing telemetry events
+ci(pipeline): workflow_dispatch to be in correct indent level
+ci(pipeline): Update GDUnit4 actions
+ci(pipeline): Run unit tests on Godot 4.02 & 4.0.3
+ci(pipeline): Separate Godot 4 & 3 branches
+ci(pipeline): Separate Godot 4 workflows
+ci(pipeline): set new asset ID for new Asset in AssetLib
+ci(pipeline): Exclude LoginIntegrationTest (broken)
+ci(pipeline): Removed defunct & unused plugin refresher
+test(pipeline): Switch test framework to GDUnit4
+docs(readme): Added users of godot-playfab to README.md
+docs(license)Updated licenses
+
+### Features
+
+* **core:** Godot 4 upgrade ([0d39b88](https://github.com/Structed/godot-playfab/commit/0d39b88faab532aced5259fbe2af8ca119636425))
+
+
+### Changes
+
+* add note note to highlight Godot4 prerelease availability ([fef9a1d](https://github.com/Structed/godot-playfab/commit/fef9a1d3344c7beb7f1305551df477b9e17d2971))
+
+
+### Continuous Integration
+
+* bump mathieudutour/github-tag-action to v6.1 ([7491b16](https://github.com/Structed/godot-playfab/commit/7491b16eb92adfacb9882004378d183f2e38877b))
+
+
+
 ### [0.3.4](https://github.com/Structed/godot-playfab/compare/0.3.3...0.3.4) (2023-01-25)
 
 

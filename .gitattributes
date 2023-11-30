@@ -8,7 +8,7 @@
 /addons/godot-plugin-refresher  export-ignore
 
 # GUT - Godot Unit Test Framework
-/addons/gut                     export-ignore
+/addons/gdUnit4                 export-ignore
 .gut_editor_config.json         export-ignore
 .gut_editor_shortcuts.cfg       export-ignore
 .gutconfig.json                 export-ignore

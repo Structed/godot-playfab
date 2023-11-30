@@ -1,39 +1,28 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://5fda86xbwxbu"]
 
-[ext_resource path="res://addons/godot-playfab/Scenes/PlayFabMainScreen.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://addons/godot-playfab/Scenes/PlayFabMainScreen.gd" id="2"]
 
 [node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("2")
 
 [node name="FileDialog" type="FileDialog" parent="."]
-margin_right = 400.0
-margin_bottom = 300.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-window_title = "Save Model"
-resizable = true
-filters = PoolStringArray( "*.gd" )
+filters = PackedStringArray("*.gd")
 show_hidden_files = true
-current_dir = "res://addons/godot-playfab/Models"
-current_path = "res://addons/godot-playfab/Models/"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 12
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 82.0
+layout_mode = 2
 text = "Convert Model Text to a model
 
 1. Type in class name
@@ -41,69 +30,42 @@ text = "Convert Model Text to a model
 3. Click \"Save Model\""
 
 [node name="ClassNameContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 94.0
-margin_right = 1024.0
-margin_bottom = 118.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/ClassNameContainer"]
-margin_top = 5.0
-margin_right = 79.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "Class Name:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/ClassNameContainer"]
-margin_left = 83.0
-margin_right = 871.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SaveModel" type="Button" parent="VBoxContainer/ClassNameContainer"]
-margin_left = 875.0
-margin_right = 936.0
-margin_bottom = 24.0
+layout_mode = 2
 text = "Save As"
 
-[node name="ToolButton" type="Button" parent="VBoxContainer/ClassNameContainer"]
-margin_left = 940.0
-margin_right = 1024.0
-margin_bottom = 24.0
+[node name="Button" type="Button" parent="VBoxContainer/ClassNameContainer"]
+layout_mode = 2
 text = "Save Direct"
 
 [node name="Input" type="TextEdit" parent="VBoxContainer"]
-margin_top = 130.0
-margin_right = 1024.0
-margin_bottom = 600.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="ErrorPopupDialog" type="PopupDialog" parent="."]
-margin_right = 354.0
-margin_bottom = 76.0
+[node name="ErrorPopupDialog" type="Popup" parent="."]
 
 [node name="Label" type="Label" parent="ErrorPopupDialog"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -177.0
-margin_top = -38.0
-margin_right = 177.0
-margin_bottom = 38.0
+offset_left = -177.0
+offset_top = -38.0
+offset_right = 177.0
+offset_bottom = 38.0
 text = "Please first enter a class name!"
-align = 1
-valign = 1
 
 [connection signal="pressed" from="VBoxContainer/ClassNameContainer/SaveModel" to="." method="_on_SaveModel_pressed"]
-[connection signal="pressed" from="VBoxContainer/ClassNameContainer/ToolButton" to="." method="_on_save_direct_pressed"]
+[connection signal="pressed" from="VBoxContainer/ClassNameContainer/Button" to="." method="_on_save_direct_pressed"]

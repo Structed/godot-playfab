@@ -22,5 +22,8 @@ Folder.DotSettings.user
 
 exports/
 
-# GUT - Godot Unit Test
-/addons/godot-playfab/test/results.xml
+# GDUnit4
+/addons/gdUnit4/GdUnitRunner.cfg
+
+
+[Ee]xport/

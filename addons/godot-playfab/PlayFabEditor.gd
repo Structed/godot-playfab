@@ -1,11 +1,11 @@
-tool
+@tool
 extends EditorPlugin
 
 const MainPanel = preload("res://addons/godot-playfab/Scenes/PlayFabMainScreen.tscn")
 
 var main_panel_instance
 
-func _init() -> void:
+func _init():
 
 	add_custom_project_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID, "", TYPE_STRING, PROPERTY_HINT_PLACEHOLDER_TEXT, "Retieve from PlayFab Game Manager")
 
@@ -14,31 +14,35 @@ func _init() -> void:
 
 
 func _enter_tree():
-	main_panel_instance = MainPanel.instance()
+	add_autoload_singleton("PlayFabManager", "res://addons/godot-playfab/PlayFabManager.gd")
+
+	main_panel_instance = MainPanel.instantiate()
 	# Add the main panel to the editor's main viewport.
-	get_editor_interface().get_editor_viewport().add_child(main_panel_instance)
+	get_editor_interface().get_editor_main_screen().add_child(main_panel_instance)
 	# Hide the main panel. Very much required.
-	make_visible(false)
+	_make_visible(false)
 
 
 func _exit_tree():
+	remove_autoload_singleton("PlayFabManager")
+
 	if main_panel_instance:
 		main_panel_instance.queue_free()
 
-func has_main_screen():
+func _has_main_screen():
 	return true
 
 
-func make_visible(visible):
+func _make_visible(visible):
 	if main_panel_instance:
 		main_panel_instance.visible = visible
 
 
-func get_plugin_name():
+func _get_plugin_name():
 	return "PlayFab"
 
 
-func get_plugin_icon():
+func _get_plugin_icon():
 	return load("res://addons/godot-playfab/icon_16x16.png")
 
 

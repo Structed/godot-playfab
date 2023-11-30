@@ -1,217 +1,112 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c3fgnwtggvmq3"]
 
-[ext_resource path="res://Scenes/LoggedIn.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Scenes/LoggedIn.gd" id="1"]
 
 [node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="LoginResultContainer" type="VBoxContainer" parent="VBoxContainer"]
 visible = false
-margin_right = 1024.0
-margin_bottom = 192.0
+layout_mode = 2
 
 [node name="AccountPlayerId" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_right = 1024.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/AccountPlayerId"]
-margin_top = 5.0
-margin_right = 263.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.PlayFabId (Account Player Id)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/AccountPlayerId"]
-margin_left = 267.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TitlePlayerId" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_top = 28.0
-margin_right = 1024.0
-margin_bottom = 52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/TitlePlayerId"]
-margin_top = 5.0
-margin_right = 566.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.InfoResultPayload.AccountInfo.TitleInfo.TitlePlayerAccount.Id(Title Player Id)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/TitlePlayerId"]
-margin_left = 570.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TitlePlayerName" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_top = 56.0
-margin_right = 1024.0
-margin_bottom = 80.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/TitlePlayerName"]
-margin_top = 5.0
-margin_right = 544.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName (Title Player Name)"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/TitlePlayerName"]
-margin_left = 548.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SessionTicket" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_top = 84.0
-margin_right = 1024.0
-margin_bottom = 108.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/SessionTicket"]
-margin_top = 5.0
-margin_right = 165.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.SessionTicket"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/SessionTicket"]
-margin_left = 169.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EntityToken" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_top = 112.0
-margin_right = 1024.0
-margin_bottom = 136.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/EntityToken"]
-margin_top = 5.0
-margin_right = 230.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.EntityToken.EntityToken"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/EntityToken"]
-margin_left = 234.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EntityType" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_top = 140.0
-margin_right = 1024.0
-margin_bottom = 164.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/EntityType"]
-margin_top = 5.0
-margin_right = 226.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.EntityToken.Entity.Type"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/EntityType"]
-margin_left = 230.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="EntityId" type="HBoxContainer" parent="VBoxContainer/LoginResultContainer"]
-margin_top = 168.0
-margin_right = 1024.0
-margin_bottom = 192.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LoginResultContainer/EntityId"]
-margin_top = 5.0
-margin_right = 209.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "login_result.EntityToken.Entity.Id"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Edit" type="LineEdit" parent="VBoxContainer/LoginResultContainer/EntityId"]
-margin_left = 213.0
-margin_right = 1024.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GetTitleDataButton" type="Button" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 20.0
+layout_mode = 2
 text = "Get Title Data"
 
 [node name="EventsPlayStream" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 1024.0
-margin_bottom = 44.0
+layout_mode = 2
 text = "Events & PlayStream API"
 
 [node name="RequestBuilder" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
-margin_right = 1024.0
-margin_bottom = 68.0
+layout_mode = 2
 text = "Request Builder"
 
 [node name="StatisticsButton" type="Button" parent="VBoxContainer"]
@@ -221,22 +116,16 @@ margin_bottom = 68.0
 text = "Statistics/Leaderboards"
 
 [node name="Response" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 72.0
-margin_right = 1024.0
-margin_bottom = 600.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MainMenuButton" type="Button" parent="VBoxContainer"]
-margin_top = 542.0
-margin_right = 1024.0
-margin_bottom = 569.0
+layout_mode = 2
 text = "Back to Main Menu"
 
 [node name="LogoutButton" type="Button" parent="VBoxContainer"]
-margin_top = 573.0
-margin_right = 1024.0
-margin_bottom = 600.0
+layout_mode = 2
 text = "Logout"
 
 [connection signal="pressed" from="VBoxContainer/GetTitleDataButton" to="." method="_on_GetTitleDataButton_pressed"]
