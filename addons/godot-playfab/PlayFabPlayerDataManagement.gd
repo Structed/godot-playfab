@@ -1,5 +1,7 @@
+@icon("res://addons/godot-playfab/icon.png")
+
 extends PlayFab
-class_name PlayFabPlayerDataManagement, "res://addons/godot-playfab/icon.png"
+class_name PlayFabPlayerDataManagement
 
 
 # Retrieves the indicated statistics (current version and values for all statistics, if none are specified), for the local player.
@@ -9,6 +11,6 @@ class_name PlayFabPlayerDataManagement, "res://addons/godot-playfab/icon.png"
 # API Version: 220704
 #
 # @param request_data: GetPlayerStatisticVersionsRequest
-# @param callback: FuncRef
-func get_player_statistics(request_data: GetPlayerStatisticsRequest, callback: FuncRef):
+# @param callback: Callable
+func get_player_statistics(request_data: GetPlayerStatisticsRequest, callback: Callable):
 	_post_with_session_auth(request_data, "/Client/GetPlayerStatistics", callback)

@@ -20,7 +20,7 @@ func _get_type_for_property(property_name: String) -> String:
 			return "StatisticNameVersionsCollection"
 		_:
 			pass
-
-	push_error("Could not find mapping for property: " + property_name)
-	return ._get_type_for_property(property_name)
+	
+	# call the parent method that will print an error and return an empty String
+	return super._get_type_for_property(property_name)
 
