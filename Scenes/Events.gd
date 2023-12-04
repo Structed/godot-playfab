@@ -50,7 +50,7 @@ func _on_PlayFab_api_error(error: ApiErrorWrapper):
 
 
 func _on_BackButton_pressed():
-	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
+	SceneManager.goto_scene("res://Scenes/Login.tscn")
 
 
 func _on_OpenPlayStreamButton_pressed():
