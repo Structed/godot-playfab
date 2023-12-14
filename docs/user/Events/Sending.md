@@ -35,6 +35,8 @@ var event_name = "title_player_event"
 var callback = "_on_write_events_request_completed"
 ```
 
+> :warning: **event_name** must be non-empty and contain only alphanumeric letters, dash(-), and underscore(_).
+
 ## Batched Send
 > **Note**
 >
