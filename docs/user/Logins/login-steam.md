@@ -65,13 +65,19 @@ The code below works only with [GodotSteam](https://godotsteam.com/) (Extension 
 :warning: Don't forget to replace **YOUR_STEAM_APP_ID** by a valid String
 
 ```gdscript
+    var authSessionTicket : Dictionary
+
     func _ready() -> void:
         _connect_to_signals()
     
-        var authSessionTicket : String = _initialize_steam()
-        if !authSessionTicket.is_empty():
-            _login_with_steam(authSessionTicket)
+        var authSessionTicketString : String = _initialize_steam()
+        if !authSessionTicketString.is_empty():
+            _login_with_steam(authSessionTicketString)
     
+    func _exit_tree() -> void:
+        if authSessionTicket.size() > 0:
+            Steam.cancelAuthTicket(authSessionTicket.id)
+        
     # Connect to PlayFab signals and Steam Authentification signal
     func _connect_to_signals() -> void:
         PlayFabManager.client.logged_in.connect(_on_logged_in)
@@ -88,7 +94,7 @@ The code below works only with [GodotSteam](https://godotsteam.com/) (Extension 
     
         var init_response: Dictionary = Steam.steamInitEx(false)
         if init_response.status == 0:
-            var authSessionTicket : Dictionary = Steam.getAuthSessionTicket()
+            authSessionTicket = Steam.getAuthSessionTicket()
     
             # Convert the buffer into a String with hexadecimal
             var steam_auth_ticket : String = ""
