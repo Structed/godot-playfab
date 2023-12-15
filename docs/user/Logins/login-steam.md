@@ -81,9 +81,10 @@ The code below works only with [GodotSteam](https://godotsteam.com/) (Extension 
     
     # Initialize Steam, retrieve a Steam authentification ticket and convert it into a String for PlayFab
     func _initialize_steam() -> String:
-        # Remove OS.set_environement before exporting and shipping because Steam is already aware
-        OS.set_environment("SteamAppId", YOUR_STEAM_APP_ID)
-        OS.set_environment("SteamGameId", YOUR_STEAM_APP_ID)
+        # Remove OS.set_environement before exporting and shipping because Steam is already aware of it
+        if OS.has_feature("editor"):
+            OS.set_environment("SteamAppId", YOUR_STEAM_APP_ID)
+            OS.set_environment("SteamGameId", YOUR_STEAM_APP_ID)
     
         var init_response: Dictionary = Steam.steamInitEx(false)
         if init_response.status == 0:
