@@ -1,5 +1,14 @@
 # Login with Steam
 
+## Summary
+
+1. [Prerequisites](#prerequisites)
+2. [Setup](#setup)
+3. [API](#api)
+4. [Examples](#examples)
+
+---
+
 ## Prerequisites
 
 Before beginning, you should have:
@@ -44,7 +53,7 @@ The [PlayFab](/addons/godot-playfab/PlayFab.gd) Node class implements the login 
 
 ---
 
-## Example
+## Examples
 
 To call this method, you can use the [PlayFabManager](/addons/godot-playfab/PlayFabManager.gd) like below.
 
@@ -52,85 +61,6 @@ To call this method, you can use the [PlayFabManager](/addons/godot-playfab/Play
     PlayFabManager.client.login_with_steam(steam_auth_ticket, is_auth_ticket_for_api, create_account, info_request_parameter)
 ```
 
----
+<br />
 
-## Example using [GodotSteam](https://godotsteam.com/)
-
-The code below works only with [GodotSteam](https://godotsteam.com/) (Extension that wraps [SteamSDK](https://partner.steamgames.com/downloads/list) for Godot).
-
-![Login Steam Godot Installation](/docs/images/login-steam-godot-installation.png)
-
-### Code
-
-:warning: Don't forget to replace **YOUR_STEAM_APP_ID** by a valid String
-
-```gdscript
-    var authSessionTicket : Dictionary
-
-    func _ready() -> void:
-        _connect_to_signals()
-    
-        var authSessionTicketString : String = _initialize_steam()
-        if !authSessionTicketString.is_empty():
-            _login_with_steam(authSessionTicketString)
-    
-    func _exit_tree() -> void:
-        if authSessionTicket.size() > 0:
-            Steam.cancelAuthTicket(authSessionTicket.id)
-        
-    # Connect to PlayFab signals and Steam Authentification signal
-    func _connect_to_signals() -> void:
-        PlayFabManager.client.logged_in.connect(_on_logged_in)
-        PlayFabManager.client.api_error.connect(_on_api_error)
-        PlayFabManager.client.server_error.connect(_on_server_error)
-        Steam.get_auth_session_ticket_response.connect(_on_get_auth_session_ticket_response)
-    
-    # Initialize Steam, retrieve a Steam authentification ticket and convert it into a String for PlayFab
-    func _initialize_steam() -> String:
-        # Remove OS.set_environement before exporting and shipping because Steam is already aware of it
-        if OS.has_feature("editor"):
-            OS.set_environment("SteamAppId", YOUR_STEAM_APP_ID)
-            OS.set_environment("SteamGameId", YOUR_STEAM_APP_ID)
-    
-        var init_response: Dictionary = Steam.steamInitEx(false)
-        if init_response.status == 0:
-            authSessionTicket = Steam.getAuthSessionTicket()
-    
-            # Convert the buffer into a String with hexadecimal
-            var steam_auth_ticket : String = ""
-            for number in authSessionTicket.buffer:
-                steam_auth_ticket += "%02X" % number # %X convert a number into hexadecimal with uppercase letters | 02 means two letters at least otherwise put 0
-            return steam_auth_ticket
-        else:
-            printerr("Initialize Steam failed with response %s" % init_response)
-            return ""
-    
-    # Create default parameters and login into PlayFab with Steam authentification ticket
-    func _login_with_steam(steam_auth_ticket: String) -> void:
-        var combined_info_request_params = GetPlayerCombinedInfoRequestParams.new()
-        combined_info_request_params.show_all()
-        var player_profile_view_constraints = PlayerProfileViewConstraints.new()
-        combined_info_request_params.ProfileConstraints = player_profile_view_constraints
-        PlayFabManager.client.login_with_steam(steam_auth_ticket, false, true, combined_info_request_params)
-    
-    func _on_logged_in(login_result: LoginResult) -> void:
-        print("Playfab Login: " + str(login_result))
-    
-    func _on_api_error(error_wrapper: ApiErrorWrapper) -> void:
-        print("Playfab API Error: " + error_wrapper.errorMessage)
-    
-    func _on_server_error(error_wrapper: ApiErrorWrapper) -> void:
-        print("Playfab Server Error: " + error_wrapper.errorMessage)
-    
-    func _on_get_auth_session_ticket_response(this_auth_ticket: int, result: int) -> void:
-        print("Auth Session Ticket (%s) return with result %s" % [this_auth_ticket, result])
-```
-
-### :warning: Troubleshooting
-
-They are many possibles errors, the most commons are:
-- Steam is not launched on your device
-- Steam App Id is not correct
-- Steam add-ons is not enabled in the PlayFab Title
-
-If you still have an error, check the debugger or [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/)
+> :information_desk_person: A more advanced example using GodotSteam is also available [here](/docs/user/logins/login-steam-godotsteam.md).
