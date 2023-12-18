@@ -63,4 +63,4 @@ To call this method, you can use the [PlayFabManager](/addons/godot-playfab/Play
 
 <br />
 
-> :information_desk_person: A more advanced example using GodotSteam is also available [here](/docs/user/logins/login-steam-godotsteam.md).
+> :information_desk_person: A more advanced example using GodotSteam is also available [here](/docs/user/Logins/login-steam-godotsteam.md).
