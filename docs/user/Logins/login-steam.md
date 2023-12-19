@@ -12,10 +12,10 @@
 ## Prerequisites
 
 Before beginning, you should have:
-- A Playfab Title
+- A PlayFab Title
 - A Steam App Id
 - A Steam Publish Web API Key
-    - Follow [Creating a Publisher Web API Key](https://partner.steamgames.com/doc/webapi_overview/auth#create_publisher_key) in the Steamworkds documentation in order to generate it.
+    - Follow [Creating a Publisher Web API Key](https://partner.steamgames.com/doc/webapi_overview/auth#create_publisher_key) in the Steamworks documentation in order to generate it.
 
 ---
 
@@ -49,7 +49,7 @@ The [PlayFab](/addons/godot-playfab/PlayFab.gd) Node class implements the login 
 - **steam_auth_ticket**: String that contains the steam authentification ticket in hexadecimal
 - **is_auth_ticket_for_api**: True if the authentification ticket was generated for an API, false otherwise
 - **create_account**: True if you want that it create a player account for your title
-- **info_request_parameters**: Flags for which pièce of info to return for the user 
+- **info_request_parameters**: Flags for which piece of info to return for the user 
 
 ---
 

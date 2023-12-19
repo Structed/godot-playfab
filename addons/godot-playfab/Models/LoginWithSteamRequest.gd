@@ -19,8 +19,8 @@ var InfoRequestParameters: GetPlayerCombinedInfoRequestParams
 # Player secret that is used to verify API request signatures (Enterprise Only).
 var PlayerSecret: String
 
-#Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
+# Authentication token for the user, returned as a byte array from Steam, and converted to a string (for example, the byte 0x08 should become "08").
 var SteamTicket: String
 
-#True if ticket was generated using ISteamUser::GetAuthTicketForWebAPI() using "AzurePlayFab" as the identity string. False if the ticket was generated with ISteamUser::GetAuthSessionTicket().
+# True if ticket was generated using ISteamUser::GetAuthTicketForWebAPI() using "AzurePlayFab" as the identity string. False if the ticket was generated with ISteamUser::GetAuthSessionTicket().
 var TicketIsServiceSpecific: bool
