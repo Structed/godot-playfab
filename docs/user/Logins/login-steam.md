@@ -5,7 +5,8 @@
 1. [Prerequisites](#prerequisites)
 2. [Setup](#setup)
 3. [API](#api)
-4. [Examples](#examples)
+4. [Example](#example)
+5. [Example using **GodotSteam**](example-using-godotsteam)
 
 ---
 
@@ -53,7 +54,7 @@ The [PlayFab](/addons/godot-playfab/PlayFab.gd) Node class implements the login 
 
 ---
 
-## Examples
+## Example
 
 To call this method, you can use the [PlayFabManager](/addons/godot-playfab/PlayFabManager.gd) like below.
 
@@ -61,6 +62,8 @@ To call this method, you can use the [PlayFabManager](/addons/godot-playfab/Play
     PlayFabManager.client.login_with_steam(steam_auth_ticket, is_auth_ticket_for_api, create_account, info_request_parameter)
 ```
 
-<br />
+---
 
-> :information_desk_person: A more advanced example using GodotSteam is also available [here](/docs/user/Logins/login-steam-godotsteam.md).
+## Example using **GodotSteam**
+
+Given that the example is a bit long, a dedicated page as been created for it and can be find [here](/docs/user/Logins/login-steam-godotsteam.md)
