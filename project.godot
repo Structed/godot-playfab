@@ -37,6 +37,10 @@ PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 
 enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/godot-playfab/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global]
 
 reload=false
