@@ -41,6 +41,10 @@ enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/godot
 
 import/blender/enabled=false
 
+[gdunit4]
+
+ui/toolbar/run_overall=true
+
 [global]
 
 reload=false
