@@ -16,13 +16,13 @@
 
 ## Introduction
 
-This page is an advanced example that will show to login with Steam on PlayFab using GodotSteam.
-Please check 
+This page is an advanced example that will show you how to login with Steam on PlayFab using the third party [GodotSteam](https://godotsteam.com/) Plugin.
+Please check their documentation on how to use GodotSteam.
 
 
 ## Setup
 
-It exists many ways to install GodotSteam but for this example, we gonna used the GDExtension available for Godot 4.x.
+There are a couple of different ways to install GodotSteam but for this example, we gonna used the GDExtension available for Godot 4.x.
 
 > :warning: Be careful to install the normal extension and **not** the server extension
 
@@ -32,19 +32,19 @@ It exists many ways to install GodotSteam but for this example, we gonna used th
 
 ## Steam Wrapper
 
-To login to PlayFab with Steam, we gonna start by creating a wrapper that will manage Steam' stuffs. 
+To login to PlayFab with Steam, we going to start by creating a wrapper that will manage everything pertaining to Steam.
 
 ### Environments
 
-Inside this wrapper, we will setup the environments. When the game is run through the Steam client, it already knows which game you are playing. However, during development and testing, you must supply a valid app ID somehow. Typically, if you do not already have an app ID, you can use app ID 480 which is Valve's SpaceWar example game.
+Inside this wrapper, we will setup the environments. When the game is run through the Steam client, it already knows which game you are playing. However, during development and testing, you must supply a valid App ID somehow. Typically, if you do not already have an app ID, you can use App ID `480` which is Valve's *SpaceWar* example game.
 
-There is three ways to set the app ID. For this example, we will used one of them. If you want to see the other, check [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/).
+There is three ways to set the App ID. For this example, we will used one of them. If you want to see the other, check [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/).
 
-> :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your app id.
+> :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your App ID.
 
 ```gdscript
 func _init() -> void:
-    # Set steam environment only in editor because Steam know which game you are playing
+    # Set steam environment only in editor because Steam would already know which game you are playing
     if OS.has_feature("editor"):
         OS.set_environment("SteamAppId", STEAM_APP_ID)
         OS.set_environment("SteamGameId", STEAM_APP_ID)
@@ -52,7 +52,7 @@ func _init() -> void:
 
 ### Initialization
 
-Then, we need to initialize Steamworks through an initialization.
+Then, we need to initialize Steamworks through an initialization:
 
 ```gdscript
 func _ready() -> void:
@@ -64,8 +64,8 @@ func _ready() -> void:
 ### Create Steam Auth Session Ticket
 
 Once the above is done, we have two possibilities. The first one is to gather a Steam Auth Session Ticket.
-This ticket is mainly used by games in order to authentify players. To have one, we need to create it.
-The method is synchronously but 
+This ticket is mainly used by games in order to authenticate players. To get one, we need to create it.
+The method is synchronously but
 
 ```gdscript
 var steam_auth_ticket : Dictionary
@@ -88,7 +88,7 @@ func _on_get_auth_sesssion_ticket(auth_ticket_id: int, result: int) -> void:
 ```gdscript
 var steam_auth_ticket : Dictionary
 
-signal 
+signal
 
 func _ready() -> void:
     Steam.get_ticket_for_web_api.connect(_on_get_auth_ticket_for_web_api_response)
