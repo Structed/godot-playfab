@@ -24,7 +24,7 @@ Display=8
 
 config/name="godot-playfab"
 run/main_scene="res://Scenes/Main.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 boot_splash/image="res://raw_assets/SplashScreen.png"
 config/icon="res://addons/godot-playfab/icon.png"
 
@@ -35,7 +35,15 @@ PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/godot-playfab/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
+
+[gdunit4]
+
+ui/toolbar/run_overall=true
 
 [global]
 

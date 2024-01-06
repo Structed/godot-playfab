@@ -1,6 +1,4 @@
-class_name GdUnitGodotErrorAssertImpl
 extends GdUnitGodotErrorAssert
-
 
 var _current_error_message :String
 var _callable :Callable
@@ -17,14 +15,15 @@ func _init(callable :Callable):
 
 func _execute() -> Array[ErrorLogEntry]:
 	# execute the given code and monitor for runtime errors
-	var monitor := GodotGdErrorMonitor.new(true)
-	monitor.start()
 	if _callable == null or not _callable.is_valid():
 		_report_error("Invalid Callable '%s'" % _callable)
 	else:
 		await _callable.call()
-	monitor.stop()
-	return await monitor.scan()
+	return await _error_monitor().scan(true)
+
+
+func _error_monitor() -> GodotGdErrorMonitor:
+	return GdUnitThreadManager.get_current_context().get_execution_context().error_monitor
 
 
 func _failure_message() -> String:
@@ -37,7 +36,7 @@ func _report_success() -> GdUnitAssert:
 
 
 func _report_error(error_message :String, failure_line_number: int = -1) -> GdUnitAssert:
-	var line_number := failure_line_number if failure_line_number != -1 else GdUnitAssertImpl._get_line_number()
+	var line_number := failure_line_number if failure_line_number != -1 else GdUnitAssert._get_line_number()
 	_current_error_message = error_message
 	GdAssertReports.report_error(error_message, line_number)
 	return self
@@ -46,6 +45,8 @@ func _report_error(error_message :String, failure_line_number: int = -1) -> GdUn
 func _has_log_entry(log_entries :Array[ErrorLogEntry], type :ErrorLogEntry.TYPE, error :String) -> bool:
 	for entry in log_entries:
 		if entry._type == type and entry._message == error:
+			# Erase the log entry we already handled it by this assertion, otherwise it will report at twice
+			_error_monitor().erase_log_entry(entry)
 			return true
 	return false
 

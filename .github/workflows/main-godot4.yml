@@ -36,7 +36,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04]
-        godot-version: ['4.1.1']
+        godot-version: ['4.1.3', '4.2.1']
         godot-status-version: ['stable']
         include:
           - os: ubuntu-22.04
