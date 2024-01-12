@@ -4,7 +4,7 @@
 2. [Setup](#setup)
 3. [API](#api)
 4. [Example](#example)
-5. [Example using **GodotSteam**](example-using-godotsteam)
+5. [Example using **GodotSteam**](#example-using-godotsteam)
 
 ## Prerequisites
 

@@ -14,6 +14,7 @@
 ## Introduction
 
 This page is an advanced example that will show you how to login with Steam on PlayFab using the third party [GodotSteam](https://godotsteam.com/) plugin.
+</br>
 Please check their documentation on how to use GodotSteam.
 
 ## Setup
@@ -65,6 +66,9 @@ var steam_auth_ticket : Dictionary
 func _ready() -> void:
     Steam.get_auth_session_ticket_response.connect(_on_get_auth_sesssion_ticket)
 
+func _process(delta: float) -> void:
+	Steam.run_callbacks()
+
 func create_auth_session_ticket() -> void:
     steam_auth_ticket = Steam.getAuthSessionTicket()
 
@@ -85,6 +89,9 @@ var steam_auth_ticket : Dictionary
 
 func _ready() -> void:
     Steam.get_ticket_for_web_api.connect(_on_get_auth_ticket_for_web_api_response)
+
+func _process(delta: float) -> void:
+	Steam.run_callbacks()
 
 func create_auth_ticket_for_web_api() -> void:
     Steam.getAuthTicketForWebApi("AzurePlayFab")
@@ -126,6 +133,8 @@ func cancel_auth_ticket() -> void:
 
 Finally, putting it together with the previous example that you can find [here](/docs/user/Logins/login-steam.md) should give you something like below:
 
+> :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your App ID.
+
 ```gdscript
 extends Node
 
@@ -147,6 +156,12 @@ func _ready() -> void:
     var result : Dictionary = Steam.steamInitEx(false) # Set to true if you want some local user's data
     if result.status > 0:
         print("Failure to initialize Steam with status %s" % result.status)
+    else:
+        create_auth_session_ticket();
+        #create_auth_ticket_for_web_api(); Use this line instead if you need Steam Auth Ticket for Web Api
+
+func _process(delta: float) -> void:
+    Steam.run_callbacks()
 
 func _exit_tree() -> void:
     if steam_auth_ticket.size > 0:
@@ -183,7 +198,7 @@ func convert_auth_ticket() -> String:
         ticket += "%02X" % number
     return ticket
 
- func _on_get_auth_sesssion_ticket(auth_ticket_id: int, result: int) -> void:
+func _on_get_auth_sesssion_ticket(auth_ticket_id: int, result: int) -> void:
     print("Auth Session Ticket (%s) return with result %s" % [auth_ticket_id, result])
     if result == 0:
         login(convert_auth_ticket(), false)
@@ -196,8 +211,6 @@ func _on_get_auth_ticket_for_web_api_response(auth_ticket: int, result: int, tic
     if result == 0:
         login(convert_auth_ticket(), true)
 ```
-
-> :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your App ID.
 
 ## :warning: Troubleshooting
 
