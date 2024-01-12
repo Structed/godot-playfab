@@ -49,6 +49,8 @@ func login_with_steam(steam_auth_ticket: String, is_auth_ticket_for_api: bool, c
 This example below show you how to call the function seen above with the different callbacks needed.
 
 ```gdscript
+extends Node
+
 func _ready() -> void:
     PlayFabManager.client.logged_in.connect(_on_logged_in)
     PlayFabManager.client.api_error.connect(_on_api_error)
