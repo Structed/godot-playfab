@@ -58,7 +58,7 @@ func _ready() -> void:
 Once the initialization is done, you can create a Steam Auth Session Ticket.
 This type of ticket is mainly used by games in order to authenticate players.
 In the case of PlayFab, it will associate players with their corresponding event entries.
-To do it, we use a synchronous method but a callback exists and tell you whether getting the ticket was successful or not.
+To do it, we use a synchronous method but a callback exists and tell you whether getting the ticket was successful (result should be 1).
 
 ```gdscript
 var steam_auth_ticket : Dictionary
@@ -200,7 +200,7 @@ func convert_auth_ticket() -> String:
 
 func _on_get_auth_sesssion_ticket(auth_ticket_id: int, result: int) -> void:
     print("Auth Session Ticket (%s) return with result %s" % [auth_ticket_id, result])
-    if result == 0:
+    if result == 1:
         login(convert_auth_ticket(), false)
 
 func _on_get_auth_ticket_for_web_api_response(auth_ticket: int, result: int, ticket_size: int, ticket_buffer: Array) -> void:
@@ -208,7 +208,7 @@ func _on_get_auth_ticket_for_web_api_response(auth_ticket: int, result: int, tic
     steam_auth_ticket.id = auth_ticket
     steam_auth_ticket.buffer = ticket_buffer
     steam_auth_ticket.size = ticket_size
-    if result == 0:
+    if result == 1:
         login(convert_auth_ticket(), true)
 ```
 
