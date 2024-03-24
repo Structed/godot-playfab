@@ -7,3 +7,4 @@ This is the "user" or "game developer" documentation - if you are a developer se
 * [Basic Requests](basic-requests.md)
 * [Connecting Signals](connecting-signals.md)
 * [Events](Events/README.md)
+* [Login with Steam](Logins/login-steam.md)
