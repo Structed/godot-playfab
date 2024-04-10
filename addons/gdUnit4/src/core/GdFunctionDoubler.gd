@@ -40,6 +40,8 @@ const DEFAULT_TYPED_RETURN_VALUES := {
 	TYPE_PACKED_VECTOR2_ARRAY: "PackedVector2Array()",
 	TYPE_PACKED_VECTOR3_ARRAY: "PackedVector3Array()",
 	TYPE_PACKED_COLOR_ARRAY: "PackedColorArray()",
+	GdObjects.TYPE_VARIANT: "null",
+	GdObjects.TYPE_ENUM: "0"
 }
 
 # @GlobalScript enums
@@ -67,33 +69,52 @@ const DEFAULT_ENUM_RETURN_VALUES = {
 
 var _push_errors :String
 
+
+# Determine the enum default by reflection
+static func get_enum_default(value :String) -> Variant:
+	var script := GDScript.new()
+	script.source_code = """
+	extends Resource
+
+	static func get_enum_default() -> Variant:
+		return %s.values()[0]
+
+	""".dedent() % value
+	script.reload()
+	script.source_code
+	return script.new().call("get_enum_default")
+
+
 static func default_return_value(func_descriptor :GdFunctionDescriptor) -> String:
 	var return_type :Variant = func_descriptor.return_type()
 	if return_type == GdObjects.TYPE_ENUM:
-		var enum_path := func_descriptor._return_class.split(".")
-		if enum_path.size() == 2:
+		var enum_class := func_descriptor._return_class
+		var enum_path := enum_class.split(".")
+		if enum_path.size() >= 2:
 			var keys := ClassDB.class_get_enum_constants(enum_path[0], enum_path[1])
-			return "%s.%s" % [enum_path[0], keys[0]]
+			if not keys.is_empty():
+				return "%s.%s" % [enum_path[0], keys[0]]
+			var enum_value := get_enum_default(enum_class)
+			if enum_value != null:
+				return str(enum_value)
 		# we need fallback for @GlobalScript enums,
 		return DEFAULT_ENUM_RETURN_VALUES.get(func_descriptor._return_class, "0")
-	return DEFAULT_TYPED_RETURN_VALUES.get(return_type, "null")
+	return DEFAULT_TYPED_RETURN_VALUES.get(return_type, "invalid")
 
 
 func _init(push_errors :bool = false):
 	_push_errors = "true" if push_errors else "false"
-	if DEFAULT_TYPED_RETURN_VALUES.size() != TYPE_MAX:
-		push_error("missing default definitions! Expexting %d bud is %d" % [DEFAULT_TYPED_RETURN_VALUES.size(), TYPE_MAX])
-		for type_key in range(0, DEFAULT_TYPED_RETURN_VALUES.size()):
-			if not DEFAULT_TYPED_RETURN_VALUES.has(type_key):
-				prints("missing default definition for type", type_key)
-				assert(DEFAULT_TYPED_RETURN_VALUES.has(type_key), "Missing Type default definition!")
+	for type_key in TYPE_MAX:
+		if not DEFAULT_TYPED_RETURN_VALUES.has(type_key):
+			push_error("missing default definitions! Expexting %d bud is %d" % [DEFAULT_TYPED_RETURN_VALUES.size(), TYPE_MAX])
+			prints("missing default definition for type", type_key)
+			assert(DEFAULT_TYPED_RETURN_VALUES.has(type_key), "Missing Type default definition!")
 
 
 @warning_ignore("unused_parameter")
 func get_template(return_type :Variant, is_vararg :bool) -> String:
 	push_error("Must be implemented!")
 	return ""
-
 
 func double(func_descriptor :GdFunctionDescriptor) -> PackedStringArray:
 	var func_signature := func_descriptor.typeless()
@@ -106,16 +127,20 @@ func double(func_descriptor :GdFunctionDescriptor) -> PackedStringArray:
 	var return_value := GdFunctionDoubler.default_return_value(func_descriptor)
 	var arg_names := extract_arg_names(args)
 	var vararg_names := extract_arg_names(varargs)
-	
+
 	# save original constructor arguments
 	if func_name == "_init":
 		var constructor_args := ",".join(GdFunctionDoubler.extract_constructor_args(args))
-		var constructor := "func _init(%s):\n	super(%s)\n	pass\n" % [constructor_args, ", ".join(arg_names)]
+		var constructor := "func _init(%s) -> void:\n	super(%s)\n	pass\n" % [constructor_args, ", ".join(arg_names)]
 		return constructor.split("\n")
-	
+
 	var double_src := ""
+	double_src += '@warning_ignore("untyped_declaration")\n' if Engine.get_version_info().hex >= 0x40200 else '\n'
 	if func_descriptor.is_engine():
 		double_src += '@warning_ignore("native_method_override")\n'
+	if func_descriptor.return_type() == GdObjects.TYPE_ENUM:
+		double_src += '@warning_ignore("int_as_enum_without_match")\n'
+		double_src += '@warning_ignore("int_as_enum_without_cast")\n'
 	double_src += '@warning_ignore("shadowed_variable")\n'
 	double_src += func_signature
 	# fix to  unix format, this is need when the template is edited under windows than the template is stored with \r\n
@@ -127,7 +152,7 @@ func double(func_descriptor :GdFunctionDescriptor) -> PackedStringArray:
 		.replace("$(func_name)", func_name )\
 		.replace("${default_return_value}", return_value)\
 		.replace("$(push_errors)", _push_errors)
-	
+
 	if is_static:
 		double_src = double_src.replace("$(instance)", "__instance().")
 	else:
@@ -148,7 +173,10 @@ static func extract_constructor_args(args :Array) -> PackedStringArray:
 		var a := arg as GdFunctionArgument
 		var arg_name := a._name
 		var default_value = get_default(a)
-		constructor_args.append(arg_name + "=" + default_value)
+		if default_value == "null":
+			constructor_args.append(arg_name + ":Variant=" + default_value)
+		else:
+			constructor_args.append(arg_name + ":=" + default_value)
 	return constructor_args
 
 
