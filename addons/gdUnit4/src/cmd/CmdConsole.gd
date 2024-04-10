@@ -16,6 +16,7 @@ enum {
 	COLOR_RGB
 }
 
+
 # Control Sequence Introducer
 #var csi := PackedByteArray([0x1b]).get_string_from_ascii()
 var _debug_show_color_codes := false
@@ -32,6 +33,16 @@ func color(p_color :Color) -> CmdConsole:
 		printraw("[38;5;%dm" % c2 )
 	else:
 		printraw("[38;2;%d;%d;%dm" % [p_color.r8, p_color.g8, p_color.b8] )
+	return self
+
+
+func save_cursor() -> CmdConsole:
+	printraw("[s")
+	return self
+
+
+func restore_cursor() -> CmdConsole:
+	printraw("[u")
 	return self
 
 
@@ -123,7 +134,7 @@ func print_color_table():
 				print_color("████████ ", Color8(red*42, green*42, blue*42))
 			new_line()
 		new_line()
-		
+
 	prints_color("Color Table RGB", Color.ANTIQUE_WHITE)
 	_color_mode = COLOR_RGB
 	for green in range(0, 6):
