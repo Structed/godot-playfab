@@ -97,7 +97,7 @@ func create_auth_ticket_for_web_api() -> void:
     Steam.getAuthTicketForWebApi("AzurePlayFab")
 
 func _on_get_auth_ticket_for_web_api_response(auth_ticket: int, result: int, ticket_size: int, ticket_buffer: Array) -> void:
-    print("Auth Ticker For Web API (%s) return with the result %s" % [auth_ticket, result])
+    print("Auth Ticket for Web API (%s) return with the result %s" % [auth_ticket, result])
     steam_auth_ticket.id = auth_ticket
     steam_auth_ticket.buffer = ticket_buffer
     steam_auth_ticket.size = ticket_size
@@ -204,7 +204,7 @@ func _on_get_auth_sesssion_ticket(auth_ticket_id: int, result: int) -> void:
         login(convert_auth_ticket(), false)
 
 func _on_get_auth_ticket_for_web_api_response(auth_ticket: int, result: int, ticket_size: int, ticket_buffer: Array) -> void:
-    print("Auth Ticker For Web API (%s) return with the result %s" % [auth_ticket, result])
+    print("Auth Ticket for Web API (%s) return with the result %s" % [auth_ticket, result])
     steam_auth_ticket.id = auth_ticket
     steam_auth_ticket.buffer = ticket_buffer
     steam_auth_ticket.size = ticket_size
