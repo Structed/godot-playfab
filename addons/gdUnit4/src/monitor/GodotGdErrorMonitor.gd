@@ -36,12 +36,13 @@ static func _to_report(errorLog :ErrorLogEntry) -> GdUnitReport:
 		GdAssertMessages._error("Godot Runtime Error !"),
 		GdAssertMessages._colored_value(errorLog._details),
 		GdAssertMessages._error("Error:"),
-		GdAssertMessages._colored_value(errorLog._message)] 
+		GdAssertMessages._colored_value(errorLog._message)]
 	return GdUnitReport.new().create(GdUnitReport.ABORT, errorLog._line, failure)
 
 
 func scan(force_collect_reports := false) -> Array[ErrorLogEntry]:
 	await Engine.get_main_loop().process_frame
+	await Engine.get_main_loop().physics_frame
 	_entries.append_array(_collect_log_entries(force_collect_reports))
 	return _entries
 
