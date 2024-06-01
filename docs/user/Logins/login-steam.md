@@ -11,7 +11,7 @@
 Before beginning, you should have:
 - A PlayFab Title
 - A Steam App Id
-- A Steam Publish Web API Key
+- A Steam Publisher Web API Key
     - Follow [Creating a Publisher Web API Key](https://partner.steamgames.com/doc/webapi_overview/auth#create_publisher_key) in the Steamworks documentation in order to generate it.
 
 ## Setup
