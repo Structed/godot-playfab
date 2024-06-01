@@ -18,6 +18,11 @@ enum {
 	TESTSUITE_AFTER,
 	TESTCASE_BEFORE,
 	TESTCASE_AFTER,
+	DISCOVER_START,
+	DISCOVER_END,
+	DISCOVER_SUITE_ADDED,
+	DISCOVER_TEST_ADDED,
+	DISCOVER_TEST_REMOVED,
 }
 
 var _event_type :int
@@ -134,7 +139,7 @@ func is_skipped() -> bool:
 	return _statistics.get(SKIPPED, false)
 
 
-func reports() -> Array:
+func reports() -> Array[GdUnitReport]:
 	return _reports
 
 
@@ -164,9 +169,9 @@ func deserialize(serialized :Dictionary) -> GdUnitEvent:
 	_statistics    = serialized.get("statistics", Dictionary())
 	if serialized.has("reports"):
 		# needs this workaround to copy typed values in the array
-		var reports :Array[Dictionary] = []
-		reports.append_array(serialized.get("reports"))
-		_reports = _deserialize_reports(reports)
+		var reports_to_deserializ :Array[Dictionary] = []
+		reports_to_deserializ.append_array(serialized.get("reports"))
+		_reports = _deserialize_reports(reports_to_deserializ)
 	return self
 
 

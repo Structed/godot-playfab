@@ -1,13 +1,17 @@
 extends RefCounted
 
+
+static var _richtext_normalize: RegEx
+
+
 static func normalize_text(text :String) -> String:
 	return text.replace("\r", "");
 
 
 static func richtext_normalize(input :String) -> String:
-	return GdUnitSingleton.instance("regex_richtext", func _regex_richtext() -> RegEx:
-		return to_regex("\\[/?(b|color|bgcolor|right|table|cell).*?\\]") )\
-	.sub(input, "", true).replace("\r", "")
+	if _richtext_normalize == null:
+		_richtext_normalize = to_regex("\\[/?(b|color|bgcolor|right|table|cell).*?\\]")
+	return _richtext_normalize.sub(input, "", true).replace("\r", "")
 
 
 static func to_regex(pattern :String) -> RegEx:
@@ -25,7 +29,7 @@ static func prints_verbose(message :String) -> void:
 
 static func free_instance(instance :Variant, is_stdout_verbose :=false) -> bool:
 	if instance is Array:
-		for element in instance:
+		for element :Variant in instance:
 			free_instance(element)
 		instance.clear()
 		return true
@@ -40,8 +44,6 @@ static func free_instance(instance :Variant, is_stdout_verbose :=false) -> bool:
 	release_double(instance)
 	if instance is RefCounted:
 		instance.notification(Object.NOTIFICATION_PREDELETE)
-		await Engine.get_main_loop().process_frame
-		await Engine.get_main_loop().physics_frame
 		return true
 	else:
 		# is instance already freed?
@@ -79,7 +81,9 @@ static func _release_connections(instance :Object) -> void:
 
 static func release_timers() -> void:
 	# we go the new way to hold all gdunit timers in group 'GdUnitTimers'
-	for node in Engine.get_main_loop().root.get_children():
+	if Engine.get_main_loop().root == null:
+		return
+	for node :Node in Engine.get_main_loop().root.get_children():
 		if is_instance_valid(node) and node.is_in_group("GdUnitTimers"):
 			if is_instance_valid(node):
 				Engine.get_main_loop().root.remove_child(node)

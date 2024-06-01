@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm0jpqdjetv2c"
-path="res://.godot/imported/Progress4.svg-09def7d3fee66ec2764c9bbd72c3a961.ctex"
+uid="uid://bkh022wwqq7s3"
+path="res://.godot/imported/logo.png-deda0e4ba02a0b9e4e4a830029a5817f.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gdUnit4/src/ui/assets/spinner/Progress4.svg"
-dest_files=["res://.godot/imported/Progress4.svg-09def7d3fee66ec2764c9bbd72c3a961.ctex"]
+source_file="res://addons/gdUnit4/src/ui/settings/logo.png"
+dest_files=["res://.godot/imported/logo.png-deda0e4ba02a0b9e4e4a830029a5817f.ctex"]
 
 [params]
 
@@ -33,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true

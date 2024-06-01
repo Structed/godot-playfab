@@ -21,6 +21,27 @@ func get_global_mouse_position() -> Vector2:
 	return Vector2.ZERO
 
 
+## Simulates that an action has been pressed.[br]
+## [member action] : the action e.g. [code]"ui_up"[/code][br]
+@warning_ignore("unused_parameter")
+func simulate_action_pressed(action :String) -> GdUnitSceneRunner:
+	return self
+
+
+## Simulates that an action is pressed.[br]
+## [member action] : the action e.g. [code]"ui_up"[/code][br]
+@warning_ignore("unused_parameter")
+func simulate_action_press(action :String) -> GdUnitSceneRunner:
+	return self
+
+
+## Simulates that an action has been released.[br]
+## [member action] : the action e.g. [code]"ui_up"[/code][br]
+@warning_ignore("unused_parameter")
+func simulate_action_release(action :String) -> GdUnitSceneRunner:
+	return self
+
+
 ## Simulates that a key has been pressed.[br]
 ## [member key_code] : the key code e.g. [constant KEY_ENTER][br]
 ## [member shift_pressed] : false by default set to true if simmulate shift is press[br]
@@ -131,7 +152,18 @@ func simulate_frames(frames: int, delta_milli :int = -1) -> GdUnitSceneRunner:
 ## [member signal_name] : the signal to stop the simulation[br]
 ## [member args] : optional signal arguments to be matched for stop[br]
 @warning_ignore("unused_parameter")
-func simulate_until_signal(signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG) -> GdUnitSceneRunner:
+func simulate_until_signal(
+	signal_name :String,
+	arg0 :Variant = NO_ARG,
+	arg1 :Variant = NO_ARG,
+	arg2 :Variant = NO_ARG,
+	arg3 :Variant = NO_ARG,
+	arg4 :Variant = NO_ARG,
+	arg5 :Variant = NO_ARG,
+	arg6 :Variant = NO_ARG,
+	arg7 :Variant = NO_ARG,
+	arg8 :Variant = NO_ARG,
+	arg9 :Variant = NO_ARG) -> GdUnitSceneRunner:
 	await Engine.get_main_loop().process_frame
 	return self
 
@@ -141,9 +173,27 @@ func simulate_until_signal(signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=N
 ## [member signal_name] : the signal to stop the simulation[br]
 ## [member args] : optional signal arguments to be matched for stop
 @warning_ignore("unused_parameter")
-func simulate_until_object_signal(source :Object, signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG) -> GdUnitSceneRunner:
+func simulate_until_object_signal(
+	source :Object,
+	signal_name :String,
+	arg0 :Variant = NO_ARG,
+	arg1 :Variant = NO_ARG,
+	arg2 :Variant = NO_ARG,
+	arg3 :Variant = NO_ARG,
+	arg4 :Variant = NO_ARG,
+	arg5 :Variant = NO_ARG,
+	arg6 :Variant = NO_ARG,
+	arg7 :Variant = NO_ARG,
+	arg8 :Variant = NO_ARG,
+	arg9 :Variant = NO_ARG) -> GdUnitSceneRunner:
 	await Engine.get_main_loop().process_frame
 	return self
+
+
+### Waits for all input events are processed
+func await_input_processed() -> void:
+	await Engine.get_main_loop().process_frame
+	await Engine.get_main_loop().physics_frame
 
 
 ## Waits for the function return value until specified timeout or fails.[br]
@@ -166,7 +216,7 @@ func await_func_on(source :Object, func_name :String, args := []) -> GdUnitFuncA
 ## [member args] : the expected signal arguments as an array[br]
 ## [member timeout] : the timeout in ms, default is set to 2000ms
 @warning_ignore("unused_parameter")
-func await_signal(signal_name :String, args := [], timeout := 2000 ):
+func await_signal(signal_name :String, args := [], timeout := 2000 ) -> void:
 	await Engine.get_main_loop().process_frame
 	pass
 
@@ -177,7 +227,7 @@ func await_signal(signal_name :String, args := [], timeout := 2000 ):
 ## [member args] : the expected signal arguments as an array[br]
 ## [member timeout] : the timeout in ms, default is set to 2000ms
 @warning_ignore("unused_parameter")
-func await_signal_on(source :Object, signal_name :String, args := [], timeout := 2000 ):
+func await_signal_on(source :Object, signal_name :String, args := [], timeout := 2000 ) -> void:
 	pass
 
 
@@ -207,8 +257,19 @@ func set_property(name :String, value :Variant) -> bool:
 ## [member args] : optional function arguments[br]
 ## [member return] : the function result
 @warning_ignore("unused_parameter")
-func invoke(name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG):
-	pass
+func invoke(
+	name :String,
+	arg0 :Variant = NO_ARG,
+	arg1 :Variant = NO_ARG,
+	arg2 :Variant = NO_ARG,
+	arg3 :Variant = NO_ARG,
+	arg4 :Variant = NO_ARG,
+	arg5 :Variant = NO_ARG,
+	arg6 :Variant = NO_ARG,
+	arg7 :Variant = NO_ARG,
+	arg8 :Variant = NO_ARG,
+	arg9 :Variant = NO_ARG) -> Variant:
+	return null
 
 
 ## Searches for the specified node with the name in the current scene and returns it, otherwise null.[br]

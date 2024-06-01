@@ -44,6 +44,7 @@ import/blender/enabled=false
 [gdunit4]
 
 ui/toolbar/run_overall=true
+settings/test/test_discovery=true
 
 [global]
 

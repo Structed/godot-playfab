@@ -4,25 +4,21 @@ extends ConfirmationDialog
 const GdUnitTools := preload("res://addons/gdUnit4/src/core/GdUnitTools.gd")
 const GdUnitUpdateClient := preload("res://addons/gdUnit4/src/update/GdUnitUpdateClient.gd")
 
-const spinner_icon := "res://addons/gdUnit4/src/ui/assets/spinner.tres"
-
-
 @onready var _progress_content :RichTextLabel = %message
 @onready var _progress_bar :TextureProgressBar = %progress
 
 
 var _debug_mode := false
-var _editor_interface :EditorInterface
 var _update_client :GdUnitUpdateClient
 var _download_url :String
 
 
-func _ready():
+func _ready() -> void:
 	message_h4("Press 'Update' to start!", Color.GREEN)
 	init_progress(5)
 
 
-func _process(_delta):
+func _process(_delta :float) -> void:
 	if _progress_content != null and _progress_content.is_visible_in_tree():
 		_progress_content.queue_redraw()
 
@@ -32,8 +28,7 @@ func init_progress(max_value : int) -> void:
 	_progress_bar.value = 1
 
 
-func setup(editor_interface :EditorInterface, update_client :GdUnitUpdateClient, download_url :String) -> void:
-	_editor_interface = editor_interface
+func setup(update_client :GdUnitUpdateClient, download_url :String) -> void:
 	_update_client = update_client
 	_download_url = download_url
 
@@ -59,9 +54,9 @@ func run_update() -> void:
 	get_cancel_button().disabled = true
 	get_ok_button().disabled = true
 
-	await update_progress("Download Release ... [img=24x24]%s[/img]" % spinner_icon)
+	await update_progress("Download Release ... [img=24x24]%s[/img]" % GdUnitUiTools.get_spinner())
 	await download_release()
-	await update_progress("Extract update ... [img=24x24]%s[/img]" % spinner_icon)
+	await update_progress("Extract update ... [img=24x24]%s[/img]" % GdUnitUiTools.get_spinner())
 	var zip_file := temp_dir() + "/update.zip"
 	var tmp_path := create_temp_dir("update")
 	var result :Variant = extract_zip(zip_file, tmp_path)
@@ -71,7 +66,7 @@ func run_update() -> void:
 		queue_free()
 		return
 
-	await update_progress("Uninstall GdUnit4 ... [img=24x24]%s[/img]" % spinner_icon)
+	await update_progress("Uninstall GdUnit4 ... [img=24x24]%s[/img]" % GdUnitUiTools.get_spinner())
 	disable_gdUnit()
 	if not _debug_mode:
 		delete_directory("res://addons/gdUnit4/")
@@ -94,8 +89,7 @@ func run_update() -> void:
 
 func restart_godot() -> void:
 	prints("Force restart Godot")
-	if _editor_interface:
-		_editor_interface.restart_editor(true)
+	EditorInterface.restart_editor(true)
 
 
 func enable_gdUnit() -> void:
@@ -109,8 +103,7 @@ func enable_gdUnit() -> void:
 
 
 func disable_gdUnit() -> void:
-	if _editor_interface:
-		_editor_interface.set_plugin_enabled("gdUnit4", false)
+	EditorInterface.set_plugin_enabled("gdUnit4", false)
 
 
 const GDUNIT_TEMP := "user://tmp"
@@ -122,7 +115,7 @@ func temp_dir() -> String:
 
 
 func create_temp_dir(folder_name :String) -> String:
-	var new_folder = temp_dir() + "/" + folder_name
+	var new_folder := temp_dir() + "/" + folder_name
 	delete_directory(new_folder)
 	if not DirAccess.dir_exists_absolute(new_folder):
 		DirAccess.make_dir_recursive_absolute(new_folder)
@@ -143,7 +136,7 @@ func delete_directory(path :String, only_content := false) -> void:
 				delete_directory(next)
 			else:
 				# delete file
-				var err = dir.remove(next)
+				var err := dir.remove(next)
 				if err:
 					push_error("Delete %s failed: %s" % [next, error_string(err)])
 		if not only_content:
@@ -178,7 +171,7 @@ func copy_directory(from_dir :String, to_dir :String) -> bool:
 			if source_dir.current_is_dir():
 				copy_directory(source + "/", dest)
 				continue
-			var err = source_dir.copy(source, dest)
+			var err := source_dir.copy(source, dest)
 			if err != OK:
 				push_error("Error checked copy file '%s' to '%s'" % [source, dest])
 				return false
@@ -196,7 +189,7 @@ func extract_zip(zip_package :String, dest_path :String) -> Variant:
 		return null
 	var zip_entries: PackedStringArray = zip.get_files()
 	# Get base path and step over archive folder
-	var archive_path = zip_entries[0]
+	var archive_path := zip_entries[0]
 	zip_entries.remove_at(0)
 
 	for zip_entry in zip_entries:
@@ -226,5 +219,5 @@ func download_release() -> void:
 		return
 
 
-func _on_confirmed():
+func _on_confirmed() -> void:
 	await run_update()

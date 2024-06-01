@@ -26,6 +26,7 @@ var _simulate_start_time :LocalTime
 var _last_input_event :InputEvent = null
 var _mouse_button_on_press := []
 var _key_on_press := []
+var _action_on_press := []
 var _curent_mouse_position :Vector2
 
 # time factor settings
@@ -34,17 +35,17 @@ var _saved_iterations_per_second :float
 var _scene_auto_free := false
 
 
-func _init(p_scene, p_verbose :bool, p_hide_push_errors = false):
+func _init(p_scene :Variant, p_verbose :bool, p_hide_push_errors := false) -> void:
 	_verbose = p_verbose
 	_saved_iterations_per_second = Engine.get_physics_ticks_per_second()
 	set_time_factor(1)
 	# handle scene loading by resource path
 	if typeof(p_scene) == TYPE_STRING:
-		if !FileAccess.file_exists(p_scene):
+		if !ResourceLoader.exists(p_scene):
 			if not p_hide_push_errors:
-				push_error("GdUnitSceneRunner: Can't load scene by given resource path: '%s'. The resource not exists." % p_scene)
+				push_error("GdUnitSceneRunner: Can't load scene by given resource path: '%s'. The resource does not exists." % p_scene)
 			return
-		if !str(p_scene).ends_with("tscn"):
+		if !str(p_scene).ends_with(".tscn") and !str(p_scene).ends_with(".scn") and !str(p_scene).begins_with("uid://"):
 			if not p_hide_push_errors:
 				push_error("GdUnitSceneRunner: The given resource: '%s'. is not a scene." % p_scene)
 			return
@@ -63,7 +64,7 @@ func _init(p_scene, p_verbose :bool, p_hide_push_errors = false):
 		return
 	_scene_tree().root.add_child(_current_scene)
 	# do finally reset all open input events when the scene is removed
-	_scene_tree().root.child_exiting_tree.connect(func f(child):
+	_scene_tree().root.child_exiting_tree.connect(func f(child :Node) -> void:
 		if child == _current_scene:
 			_reset_input_to_default()
 	)
@@ -71,13 +72,13 @@ func _init(p_scene, p_verbose :bool, p_hide_push_errors = false):
 	# we need to set inital a valid window otherwise the warp_mouse() is not handled
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	# set inital mouse pos to 0,0
-	var max_iteration_to_wait = 0
+	var max_iteration_to_wait := 0
 	while get_global_mouse_position() != Vector2.ZERO and max_iteration_to_wait < 100:
 		Input.warp_mouse(Vector2.ZERO)
 		max_iteration_to_wait += 1
 
 
-func _notification(what):
+func _notification(what :int) -> void:
 	if what == NOTIFICATION_PREDELETE and is_instance_valid(self):
 		# reset time factor to normal
 		__deactivate_time_factor()
@@ -96,6 +97,30 @@ func _scene_tree() -> SceneTree:
 	return Engine.get_main_loop() as SceneTree
 
 
+func simulate_action_pressed(action :String) -> GdUnitSceneRunner:
+	simulate_action_press(action)
+	simulate_action_release(action)
+	return self
+
+
+func simulate_action_press(action :String) -> GdUnitSceneRunner:
+	__print_current_focus()
+	var event := InputEventAction.new()
+	event.pressed = true
+	event.action = action
+	_action_on_press.append(action)
+	return _handle_input_event(event)
+
+
+func simulate_action_release(action :String) -> GdUnitSceneRunner:
+	__print_current_focus()
+	var event := InputEventAction.new()
+	event.pressed = false
+	event.action = action
+	_action_on_press.erase(action)
+	return _handle_input_event(event)
+
+
 func simulate_key_pressed(key_code :int, shift_pressed := false, ctrl_pressed := false) -> GdUnitSceneRunner:
 	simulate_key_press(key_code, shift_pressed, ctrl_pressed)
 	simulate_key_release(key_code, shift_pressed, ctrl_pressed)
@@ -104,10 +129,10 @@ func simulate_key_pressed(key_code :int, shift_pressed := false, ctrl_pressed :=
 
 func simulate_key_press(key_code :int, shift_pressed := false, ctrl_pressed := false) -> GdUnitSceneRunner:
 	__print_current_focus()
-	var event = InputEventKey.new()
+	var event := InputEventKey.new()
 	event.pressed = true
-	event.keycode = key_code
-	event.physical_keycode = key_code
+	event.keycode = key_code as Key
+	event.physical_keycode = key_code as Key
 	event.alt_pressed = key_code == KEY_ALT
 	event.shift_pressed = shift_pressed or key_code == KEY_SHIFT
 	event.ctrl_pressed = ctrl_pressed or key_code == KEY_CTRL
@@ -118,10 +143,10 @@ func simulate_key_press(key_code :int, shift_pressed := false, ctrl_pressed := f
 
 func simulate_key_release(key_code :int, shift_pressed := false, ctrl_pressed := false) -> GdUnitSceneRunner:
 	__print_current_focus()
-	var event = InputEventKey.new()
+	var event := InputEventKey.new()
 	event.pressed = false
-	event.keycode = key_code
-	event.physical_keycode = key_code
+	event.keycode = key_code as Key
+	event.physical_keycode = key_code as Key
 	event.alt_pressed = key_code == KEY_ALT
 	event.shift_pressed = shift_pressed or key_code == KEY_SHIFT
 	event.ctrl_pressed = ctrl_pressed or key_code == KEY_CTRL
@@ -233,14 +258,37 @@ func simulate_frames(frames: int, delta_milli :int = -1) -> GdUnitSceneRunner:
 	return self
 
 
-func simulate_until_signal(signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG) -> GdUnitSceneRunner:
-	var args = GdArrayTools.filter_value([arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9], NO_ARG)
+func simulate_until_signal(
+	signal_name :String,
+	arg0 :Variant = NO_ARG,
+	arg1 :Variant = NO_ARG,
+	arg2 :Variant = NO_ARG,
+	arg3 :Variant = NO_ARG,
+	arg4 :Variant = NO_ARG,
+	arg5 :Variant = NO_ARG,
+	arg6 :Variant = NO_ARG,
+	arg7 :Variant = NO_ARG,
+	arg8 :Variant = NO_ARG,
+	arg9 :Variant = NO_ARG) -> GdUnitSceneRunner:
+	var args :Array = GdArrayTools.filter_value([arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9], NO_ARG)
 	await _awaiter.await_signal_idle_frames(scene(), signal_name, args, 10000)
 	return self
 
 
-func simulate_until_object_signal(source :Object, signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG) -> GdUnitSceneRunner:
-	var args = GdArrayTools.filter_value([arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9], NO_ARG)
+func simulate_until_object_signal(
+	source :Object,
+	signal_name :String,
+	arg0 :Variant = NO_ARG,
+	arg1 :Variant = NO_ARG,
+	arg2 :Variant = NO_ARG,
+	arg3 :Variant = NO_ARG,
+	arg4 :Variant = NO_ARG,
+	arg5 :Variant = NO_ARG,
+	arg6 :Variant = NO_ARG,
+	arg7 :Variant = NO_ARG,
+	arg8 :Variant = NO_ARG,
+	arg9 :Variant = NO_ARG) -> GdUnitSceneRunner:
+	var args :Array = GdArrayTools.filter_value([arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9], NO_ARG)
 	await _awaiter.await_signal_idle_frames(source, signal_name, args, 10000)
 	return self
 
@@ -253,11 +301,11 @@ func await_func_on(instance :Object, func_name :String, args := []) -> GdUnitFun
 	return GdUnitFuncAssertImpl.new(instance, func_name, args)
 
 
-func await_signal(signal_name :String, args := [], timeout := 2000 ):
+func await_signal(signal_name :String, args := [], timeout := 2000 ) -> void:
 	await _awaiter.await_signal_on(scene(), signal_name, args, timeout)
 
 
-func await_signal_on(source :Object, signal_name :String, args := [], timeout := 2000 ):
+func await_signal_on(source :Object, signal_name :String, args := [], timeout := 2000 ) -> void:
 	await _awaiter.await_signal_on(source, signal_name, args, timeout)
 
 
@@ -269,7 +317,7 @@ func maximize_view() -> GdUnitSceneRunner:
 
 
 func _property_exists(name :String) -> bool:
-	return scene().get_property_list().any(func(properties :Dictionary) : return properties["name"] == name)
+	return scene().get_property_list().any(func(properties :Dictionary) -> bool: return properties["name"] == name)
 
 
 func get_property(name :String) -> Variant:
@@ -286,8 +334,19 @@ func set_property(name :String, value :Variant) -> bool:
 	return true
 
 
-func invoke(name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG):
-	var args = GdArrayTools.filter_value([arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9], NO_ARG)
+func invoke(
+	name :String,
+	arg0 :Variant = NO_ARG,
+	arg1 :Variant = NO_ARG,
+	arg2 :Variant = NO_ARG,
+	arg3 :Variant = NO_ARG,
+	arg4 :Variant = NO_ARG,
+	arg5 :Variant = NO_ARG,
+	arg6 :Variant = NO_ARG,
+	arg7 :Variant = NO_ARG,
+	arg8 :Variant = NO_ARG,
+	arg9 :Variant = NO_ARG) -> Variant:
+	var args :Array = GdArrayTools.filter_value([arg0,arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9], NO_ARG)
 	if scene().has_method(name):
 		return scene().callv(name, args)
 	return "The method '%s' not exist checked loaded scene." % name
@@ -334,7 +393,7 @@ func _apply_input_mouse_mask(event :InputEvent) -> void:
 	if _last_input_event is InputEventMouse and event is InputEventMouse:
 		event.button_mask |= _last_input_event.button_mask
 	if event is InputEventMouseButton:
-		var button_mask = MAP_MOUSE_BUTTON_MASKS.get(event.get_button_index(), 0)
+		var button_mask :int = MAP_MOUSE_BUTTON_MASKS.get(event.get_button_index(), 0)
 		if event.is_pressed():
 			event.button_mask |= button_mask
 		else:
@@ -347,25 +406,27 @@ func _apply_input_mouse_position(event :InputEvent) -> void:
 		event.position = _last_input_event.position
 
 
-## just for testing maunally event to action handling
-func _handle_actions(event :InputEvent) -> bool:
-	var is_action_match := false
-	for action in InputMap.get_actions():
-		if InputMap.event_is_action(event, action, true):
-			is_action_match = true
-			prints(action, event, event.is_ctrl_pressed())
-			if event.is_pressed():
-				Input.action_press(action, InputMap.action_get_deadzone(action))
-			else:
-				Input.action_release(action)
-	return is_action_match
+## handle input action via Input modifieres
+func _handle_actions(event :InputEventAction) -> bool:
+	if not InputMap.event_is_action(event, event.action, true):
+		return false
+	__print("	process action %s (%s) <- %s" % [scene(), _scene_name(), event.as_text()])
+	if event.is_pressed():
+		Input.action_press(event.action, InputMap.action_get_deadzone(event.action))
+	else:
+		Input.action_release(event.action)
+	return true
 
 
 # for handling read https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html?highlight=inputevent#how-does-it-work
-func _handle_input_event(event :InputEvent):
+func _handle_input_event(event :InputEvent) -> GdUnitSceneRunner:
 	if event is InputEventMouse:
 		Input.warp_mouse(event.position)
 	Input.parse_input_event(event)
+
+	if event is InputEventAction:
+		_handle_actions(event)
+
 	Input.flush_buffered_events()
 	var current_scene := scene()
 	if is_instance_valid(current_scene):
@@ -375,6 +436,7 @@ func _handle_input_event(event :InputEvent):
 		if(current_scene.has_method("_unhandled_input")):
 			current_scene._unhandled_input(event)
 		current_scene.get_viewport().set_input_as_handled()
+
 	# save last input event needs to be merged with next InputEventMouseButton
 	_last_input_event = event
 	return self
@@ -382,15 +444,21 @@ func _handle_input_event(event :InputEvent):
 
 func _reset_input_to_default() -> void:
 	# reset all mouse button to inital state if need
-	for m_button in _mouse_button_on_press.duplicate():
+	for m_button :int in _mouse_button_on_press.duplicate():
 		if Input.is_mouse_button_pressed(m_button):
 			simulate_mouse_button_release(m_button)
 	_mouse_button_on_press.clear()
 
-	for key_scancode in _key_on_press.duplicate():
+	for key_scancode :int in _key_on_press.duplicate():
 		if Input.is_key_pressed(key_scancode):
 			simulate_key_release(key_scancode)
 	_key_on_press.clear()
+
+	for action :String in _action_on_press.duplicate():
+		if Input.is_action_pressed(action):
+			simulate_action_release(action)
+	_action_on_press.clear()
+
 	Input.flush_buffered_events()
 	_last_input_event = null
 
@@ -403,7 +471,7 @@ func __print(message :String) -> void:
 func __print_current_focus() -> void:
 	if not _verbose:
 		return
-	var focused_node = scene().get_viewport().gui_get_focus_owner()
+	var focused_node := scene().get_viewport().gui_get_focus_owner()
 	if focused_node:
 		prints("	focus checked %s" % focused_node)
 	else:
