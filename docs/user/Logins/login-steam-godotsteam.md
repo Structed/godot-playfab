@@ -214,7 +214,7 @@ func _on_get_auth_ticket_for_web_api_response(auth_ticket: int, result: int, tic
 
 ## :warning: Troubleshooting
 
-They are many possibles errors, the most commons are:
+They are many possible errors, but the most common ones are:
 - Steam is not launched on your device
 - Steam App Id is not correct
 - Steam add-ons is not enabled in the PlayFab Title
