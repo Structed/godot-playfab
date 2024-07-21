@@ -73,12 +73,8 @@ func _init() -> void:
 	register_command(GdUnitCommand.new(CMD_CREATE_TESTCASE, is_not_running, cmd_create_test, GdUnitShortcut.ShortCut.CREATE_TEST))
 	register_command(GdUnitCommand.new(CMD_STOP_TEST_RUN, is_running, cmd_stop.bind(_client_id), GdUnitShortcut.ShortCut.STOP_TEST_RUN))
 
-
-	# do not reschedule inside of test run (called on GdUnitCommandHandlerTest)
-	if Engine.has_meta("GdUnitRunner"):
-		return
-	# schedule discover tests if enabled
-	if GdUnitSettings.is_test_discover_enabled():
+	# schedule discover tests if enabled and running inside the editor
+	if Engine.is_editor_hint() and GdUnitSettings.is_test_discover_enabled():
 		var timer :SceneTreeTimer = Engine.get_main_loop().create_timer(5)
 		timer.timeout.connect(cmd_discover_tests)
 
@@ -232,9 +228,10 @@ func cmd_stop(client_id :int) -> void:
 	if _running_debug_mode:
 		EditorInterface.stop_playing_scene()
 	else: if _current_runner_process_id > 0:
-		var result := OS.kill(_current_runner_process_id)
-		if result != OK:
-			push_error("ERROR checked stopping GdUnit Test Runner. error code: %s" % result)
+		if OS.is_process_running(_current_runner_process_id):
+			var result := OS.kill(_current_runner_process_id)
+			if result != OK:
+				push_error("ERROR checked stopping GdUnit Test Runner. error code: %s" % result)
 	_current_runner_process_id = -1
 
 
