@@ -49,7 +49,7 @@ jobs:
         with:
           godot-version: ${{ matrix.godot-version }}
           godot-status: ${{ matrix.godot-status }}
-          version: "4.3.3"
+          version: "latest"
           paths: |
             'res://addons/godot-playfab/test'
           timeout: 10
