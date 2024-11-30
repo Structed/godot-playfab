@@ -24,7 +24,7 @@ Display=8
 
 config/name="godot-playfab"
 run/main_scene="res://Scenes/Main.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.3")
 boot_splash/image="res://raw_assets/SplashScreen.png"
 config/icon="res://addons/godot-playfab/icon.png"
 
