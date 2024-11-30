@@ -44,7 +44,7 @@ jobs:
       - name: "📦 Checkout"
         uses: actions/checkout@v4
 
-      - name: "🧪 Run Unit Tests on Godot version {{ matrix.godot-version }}"
+      - name: "🧪 Run Unit Tests on Godot version ${{ matrix.godot-version }}"
         uses: MikeSchulze/gdUnit4-action@v1
         with:
           godot-version: ${{ matrix.godot-version }}
