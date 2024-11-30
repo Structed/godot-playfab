@@ -28,7 +28,7 @@ concurrency:
 
 jobs:
   unit-tests:
-    name: "🤖 unit tests on Godot v${{ matrix.godot-version }}-${{ matrix.godot-status-version }}"
+    name: "🤖 unit tests on Godot v${{ matrix.godot-version }}-${{ matrix.godot-status }}"
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     continue-on-error: false
