@@ -7,11 +7,11 @@ const _base_dir := "res://addons/gdUnit4/src/update/patches/"
 var _patches := Dictionary()
 
 
-func scan(current :) -> void:
+func scan(current :GdUnit4Version) -> void:
 	_scan(_base_dir, current)
 
 
-func _scan(scan_path :String, current) -> void:
+func _scan(scan_path :String, current :GdUnit4Version) -> void:
 	_patches = Dictionary()
 	var patch_paths := _collect_patch_versions(scan_path, current)
 	for path in patch_paths:
@@ -21,28 +21,28 @@ func _scan(scan_path :String, current) -> void:
 
 func patch_count() -> int:
 	var count := 0
-	for key in _patches.keys():
+	for key :String in _patches.keys():
 		count += _patches[key].size()
 	return count
 
 
 func execute() -> void:
-	for key in _patches.keys():
-		var patch_root :String = key
-		for path in _patches[key]:
-			var patch :GdUnitPatch = load(patch_root + "/" + path).new()
+	for key :String in _patches.keys():
+		for path :String in _patches[key]:
+			var patch :GdUnitPatch = load(key + "/" + path).new()
 			if patch:
 				prints("execute patch", patch.version(), patch.get_script().resource_path)
 				if not patch.execute():
-					prints("error checked execution patch %s" % patch_root + "/" + path)
+					prints("error checked execution patch %s" % key + "/" + path)
 
 
-func _collect_patch_versions(scan_path :String, current :) -> PackedStringArray:
+func _collect_patch_versions(scan_path :String, current :GdUnit4Version) -> PackedStringArray:
 	if not DirAccess.dir_exists_absolute(scan_path):
 		return PackedStringArray()
 	var patches := Array()
 	var dir := DirAccess.open(scan_path)
 	if dir != null:
+		@warning_ignore("return_value_discarded")
 		dir.list_dir_begin() # TODO GODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var next := "."
 		while next != "":
@@ -60,6 +60,7 @@ func _scan_patches(path :String) -> PackedStringArray:
 	var patches := Array()
 	var dir := DirAccess.open(path)
 	if dir != null:
+		@warning_ignore("return_value_discarded")
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var next := "."
 		while next != "":

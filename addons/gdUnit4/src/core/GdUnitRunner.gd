@@ -1,8 +1,5 @@
 extends Node
 
-signal sync_rpc_id_result_received
-
-
 @onready var _client :GdUnitTcpClient = $GdUnitTcpClient
 @onready var _executor :GdUnitTestSuiteExecutor = GdUnitTestSuiteExecutor.new()
 
@@ -16,7 +13,7 @@ enum {
 const GDUNIT_RUNNER = "GdUnitRunner"
 
 var _config := GdUnitRunnerConfig.new()
-var _test_suites_to_process :Array
+var _test_suites_to_process :Array[Node]
 var _state :int = INIT
 var _cs_executor :RefCounted
 
@@ -39,7 +36,9 @@ func _ready() -> void:
 		push_error(config_result.error_message())
 		_state = EXIT
 		return
+	@warning_ignore("return_value_discarded")
 	_client.connect("connection_failed", _on_connection_failed)
+	@warning_ignore("return_value_discarded")
 	GdUnitSignals.instance().gdunit_event.connect(_on_gdunit_event)
 	var result := _client.start("127.0.0.1", _config.server_port())
 	if result.is_error():
@@ -78,11 +77,14 @@ func _process(_delta :float) -> void:
 				# process next test suite
 				set_process(false)
 				var test_suite :Node = _test_suites_to_process.pop_front()
+				@warning_ignore("unsafe_method_access")
 				if _cs_executor != null and _cs_executor.IsExecutable(test_suite):
+					@warning_ignore("unsafe_method_access")
 					_cs_executor.Execute(test_suite)
+					@warning_ignore("unsafe_property_access")
 					await _cs_executor.ExecutionCompleted
 				else:
-					await _executor.execute(test_suite)
+					await _executor.execute(test_suite as GdUnitTestSuite)
 				set_process(true)
 		STOP:
 			_state = EXIT
@@ -93,16 +95,16 @@ func _process(_delta :float) -> void:
 			get_tree().quit(0)
 
 
-func load_test_suits() -> Array:
+func load_test_suits() -> Array[Node]:
 	var to_execute := _config.to_execute()
 	if to_execute.is_empty():
 		prints("No tests selected to execute!")
 		_state = EXIT
 		return []
 	# scan for the requested test suites
-	var test_suites := Array()
+	var test_suites :Array[Node] = []
 	var _scanner := GdUnitTestSuiteScanner.new()
-	for resource_path in to_execute.keys():
+	for resource_path :String in to_execute.keys():
 		var selected_tests :PackedStringArray = to_execute.get(resource_path)
 		var scaned_suites := _scanner.scan(resource_path)
 		_filter_test_case(scaned_suites, selected_tests)
@@ -115,11 +117,12 @@ func gdUnitInit() -> void:
 	send_message("Scaned %d test suites" % _test_suites_to_process.size())
 	var total_count := _collect_test_case_count(_test_suites_to_process)
 	_on_gdunit_event(GdUnitInit.new(_test_suites_to_process.size(), total_count))
-	for test_suite in _test_suites_to_process:
-		send_test_suite(test_suite)
+	if not GdUnitSettings.is_test_discover_enabled():
+		for test_suite in _test_suites_to_process:
+			send_test_suite(test_suite)
 
 
-func _filter_test_case(test_suites :Array, included_tests :PackedStringArray) -> void:
+func _filter_test_case(test_suites :Array[Node], included_tests :PackedStringArray) -> void:
 	if included_tests.is_empty():
 		return
 	for test_suite in test_suites:
@@ -135,6 +138,7 @@ func _do_filter_test_case(test_suite :Node, test_case :Node, included_tests :Pac
 			# we have a paremeterized test selection
 			if test_meta.size() > 1:
 				var test_param_index := test_meta[1]
+				@warning_ignore("unsafe_method_access")
 				test_case.set_test_parameter_index(test_param_index.to_int())
 			return
 	# the test is filtered out
@@ -142,7 +146,7 @@ func _do_filter_test_case(test_suite :Node, test_case :Node, included_tests :Pac
 	test_case.free()
 
 
-func _collect_test_case_count(testSuites :Array) -> int:
+func _collect_test_case_count(testSuites :Array[Node]) -> int:
 	var total :int = 0
 	for test_suite in testSuites:
 		total += test_suite.get_child_count()

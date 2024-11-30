@@ -2,5 +2,9 @@
 class_name ValueProvider
 extends RefCounted
 
-func get_value():
+func get_value() -> Variant:
+	return null
+
+
+func dispose() -> void:
 	pass

@@ -29,7 +29,7 @@ static func check_leaked_instances() -> void:
 	## we check that all registered spy/mock instances are removed from the engine meta data
 	for key in Engine.get_meta_list():
 		if key.begins_with(DOUBLER_INSTANCE_ID_PREFIX):
-			var instance =  Engine.get_meta(key)
+			var instance :Variant = Engine.get_meta(key)
 			push_error("GdUnit internal error: an spy/mock instance '%s', class:'%s' is not removed from the engine and will lead in a leaked instance!" % [instance, instance.__SOURCE_CLASS])
 
 
@@ -37,12 +37,15 @@ static func check_leaked_instances() -> void:
 # class_info = { "class_name": <>, "class_path" : <>}
 static func load_template(template :String, class_info :Dictionary, instance :Object) -> PackedStringArray:
 	# store instance id
-	var source_code = template\
+	var clazz_name: String = class_info.get("class_name")
+	var source_code := template\
 		.replace("${instance_id}", "%s%d" % [DOUBLER_INSTANCE_ID_PREFIX, abs(instance.get_instance_id())])\
-		.replace("${source_class}", class_info.get("class_name"))
+		.replace("${source_class}", clazz_name)
 	var lines := GdScriptParser.to_unix_format(source_code).split("\n")
 	# replace template class_name with Doubled<class> name and extends form source class
-	lines.insert(0, "class_name Doubled%s" % class_info.get("class_name").replace(".", "_"))
+	@warning_ignore("return_value_discarded")
+	lines.insert(0, "class_name Doubled%s" % clazz_name.replace(".", "_"))
+	@warning_ignore("return_value_discarded")
 	lines.insert(1, extends_clazz(class_info))
 	# append Object interactions stuff
 	lines.append_array(GdScriptParser.to_unix_format(DOUBLER_TEMPLATE.source_code).split("\n"))
@@ -74,20 +77,18 @@ static func double_functions(instance :Object, clazz_name :String, clazz_path :P
 			push_error(result.error_message())
 			return PackedStringArray()
 		var class_descriptor :GdClassDescriptor = result.value()
-		while class_descriptor != null:
-			for func_descriptor in class_descriptor.functions():
-				if instance != null and not instance.has_method(func_descriptor.name()):
-					#prints("no virtual func implemented",clazz_name, func_descriptor.name() )
-					continue
-				if functions.has(func_descriptor.name()) or exclude_override_functions.has(func_descriptor.name()):
-					continue
-				doubled_source += func_doubler.double(func_descriptor)
-				functions.append(func_descriptor.name())
-			class_descriptor = class_descriptor.parent()
+		for func_descriptor in class_descriptor.functions():
+			if instance != null and not instance.has_method(func_descriptor.name()):
+				#prints("no virtual func implemented",clazz_name, func_descriptor.name() )
+				continue
+			if functions.has(func_descriptor.name()) or exclude_override_functions.has(func_descriptor.name()):
+				continue
+			doubled_source += func_doubler.double(func_descriptor, instance is CallableDoubler)
+			functions.append(func_descriptor.name())
 
 	# double regular class functions
 	var clazz_functions := GdObjects.extract_class_functions(clazz_name, clazz_path)
-	for method in clazz_functions:
+	for method : Dictionary in clazz_functions:
 		var func_descriptor := GdFunctionDescriptor.extract_from(method)
 		# exclude private core functions
 		if func_descriptor.is_private():
@@ -103,13 +104,13 @@ static func double_functions(instance :Object, clazz_name :String, clazz_path :P
 			#prints("no virtual func implemented",clazz_name, func_descriptor.name() )
 			continue
 		functions.append(func_descriptor.name())
-		doubled_source.append_array(func_doubler.double(func_descriptor))
+		doubled_source.append_array(func_doubler.double(func_descriptor, instance is CallableDoubler))
 	return doubled_source
 
 
 # GD-110
 static func is_invalid_method_descriptior(method :Dictionary) -> bool:
-	var return_info = method["return"]
+	var return_info :Dictionary = method["return"]
 	var type :int = return_info["type"]
 	var usage :int = return_info["usage"]
 	var clazz_name :String = return_info["class_name"]

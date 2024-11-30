@@ -22,7 +22,6 @@ var _expect_to_interupt := false
 var _timer: Timer
 var _interupted: bool = false
 var _failed := false
-var _report: GdUnitReport = null
 var _parameter_set_resolver: GdUnitTestParameterSetResolver
 var _is_disposed := false
 
@@ -47,7 +46,7 @@ func configure(p_name: String, p_line_number: int, p_script_path: String, p_time
 	return self
 
 
-func execute(p_test_parameter:=Array(), p_iteration:=0):
+func execute(p_test_parameter := Array(), p_iteration := 0) -> void:
 	_failure_received(false)
 	_current_iteration = p_iteration - 1
 	if _current_iteration == - 1:
@@ -61,7 +60,7 @@ func execute(p_test_parameter:=Array(), p_iteration:=0):
 	await completed
 
 
-func execute_paramaterized(p_test_parameter: Array):
+func execute_paramaterized(p_test_parameter: Array) -> void:
 	_failure_received(false)
 	set_timeout()
 	# We need here to add a empty array to override the `test_parameters` to prevent initial "default" parameters from being used.
@@ -72,7 +71,7 @@ func execute_paramaterized(p_test_parameter: Array):
 	await completed
 
 
-func dispose():
+func dispose() -> void:
 	if _is_disposed:
 		return
 	_is_disposed = true
@@ -80,46 +79,53 @@ func dispose():
 	stop_timer()
 	_remove_failure_handler()
 	_fuzzers.clear()
-	_report = null
 
 
 @warning_ignore("shadowed_variable_base_class", "redundant_await")
-func _execute_test_case(name: String, test_parameter: Array):
+func _execute_test_case(name: String, test_parameter: Array) -> void:
 	# needs at least on await otherwise it breaks the awaiting chain
 	await get_parent().callv(name, test_parameter)
-	await Engine.get_main_loop().process_frame
+	await (Engine.get_main_loop() as SceneTree).process_frame
 	completed.emit()
 
 
-func update_fuzzers(input_values: Array, iteration: int):
-	for fuzzer in input_values:
+func update_fuzzers(input_values: Array, iteration: int) -> void:
+	for fuzzer :Variant in input_values:
 		if fuzzer is Fuzzer:
 			fuzzer._iteration_index = iteration + 1
 
 
-func set_timeout():
+func set_timeout() -> void:
 	if is_instance_valid(_timer):
 		return
 	var time: float = timeout / 1000.0
 	_timer = Timer.new()
 	add_child(_timer)
 	_timer.set_name("gdunit_test_case_timer_%d" % _timer.get_instance_id())
-	_timer.timeout.connect(func do_interrupt():
-		if is_fuzzed():
-			_report = GdUnitReport.new().create(GdUnitReport.INTERUPTED, line_number(), GdAssertMessages.fuzzer_interuped(_current_iteration, "timedout"))
-		else:
-			_report = GdUnitReport.new().create(GdUnitReport.INTERUPTED, line_number(), GdAssertMessages.test_timeout(timeout))
-		_interupted = true
-		completed.emit()
-		, CONNECT_DEFERRED)
+	@warning_ignore("return_value_discarded")
+	_timer.timeout.connect(do_interrupt, CONNECT_DEFERRED)
 	_timer.set_one_shot(true)
 	_timer.set_wait_time(time)
 	_timer.set_autostart(false)
 	_timer.start()
 
 
+func do_interrupt() -> void:
+	_interupted = true
+	if not is_expect_interupted():
+		var execution_context:= GdUnitThreadManager.get_current_context().get_execution_context()
+		if is_fuzzed():
+			execution_context.add_report(GdUnitReport.new()\
+				.create(GdUnitReport.INTERUPTED, line_number(), GdAssertMessages.fuzzer_interuped(_current_iteration, "timedout")))
+		else:
+			execution_context.add_report(GdUnitReport.new()\
+				.create(GdUnitReport.INTERUPTED, line_number(), GdAssertMessages.test_timeout(timeout)))
+	completed.emit()
+
+
 func _set_failure_handler() -> void:
 	if not GdUnitSignals.instance().gdunit_set_test_failed.is_connected(_failure_received):
+		@warning_ignore("return_value_discarded")
 		GdUnitSignals.instance().gdunit_set_test_failed.connect(_failure_received)
 
 
@@ -136,7 +142,7 @@ func _failure_received(is_failed: bool) -> void:
 	Engine.set_meta("GD_TEST_FAILURE", is_failed)
 
 
-func stop_timer():
+func stop_timer() -> void:
 	# finish outstanding timeouts
 	if is_instance_valid(_timer):
 		_timer.stop()
@@ -162,10 +168,6 @@ func is_parameterized() -> bool:
 
 func is_skipped() -> bool:
 	return _skipped
-
-
-func report() -> GdUnitReport:
-	return _report
 
 
 func skip_info() -> String:
@@ -234,5 +236,5 @@ func parameter_set_resolver() -> GdUnitTestParameterSetResolver:
 	return _parameter_set_resolver
 
 
-func _to_string():
+func _to_string() -> String:
 	return "%s :%d (%dms)" % [get_name(), _line_number, timeout]

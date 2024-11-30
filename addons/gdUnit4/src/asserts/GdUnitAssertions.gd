@@ -3,6 +3,7 @@ class_name GdUnitAssertions
 extends RefCounted
 
 
+@warning_ignore("return_value_discarded")
 func _init() -> void:
 	# preload all gdunit assertions to speedup testsuite loading time
 	# gdlint:disable=private-method-call
@@ -32,8 +33,9 @@ static func __lazy_load(script_path :String) -> GDScript:
 	return ResourceLoader.load(script_path, "GDScript", ResourceLoader.CACHE_MODE_REUSE)
 
 
-static func validate_value_type(value, type :Variant.Type) -> bool:
+static func validate_value_type(value :Variant, type :Variant.Type) -> bool:
 	return value == null or typeof(value) == type
+
 
 # Scans the current stack trace for the root cause to extract the line number
 static func get_line_number() -> int:
