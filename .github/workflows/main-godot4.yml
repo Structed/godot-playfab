@@ -60,5 +60,5 @@ jobs:
           paths: |
             'res://addons/godot-playfab/test'
           timeout: 10
-          report-name: report_godot-playfab_Godot${{ matrix.godot-version }}-${{ matrix.godot-status }}.xml
+#          report-name: report_godot-playfab_Godot${{ matrix.godot-version }}-${{ matrix.godot-status }}.xml
 
