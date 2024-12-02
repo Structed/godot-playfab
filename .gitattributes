@@ -1,27 +1,32 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
 
-# IDE
-/.vscode                        export-ignore
-
-# Exclude other addons
-/addons/godot-plugin-refresher  export-ignore
-
-# GUT - Godot Unit Test Framework
-/addons/gdUnit4                 export-ignore
-.gut_editor_config.json         export-ignore
-.gut_editor_shortcuts.cfg       export-ignore
-.gutconfig.json                 export-ignore
-
-# Project items
-# Unit Tests
-/addons/godot-playfab/test      export-ignore
-# This is where I keep my raw assets
-/raw_assets                     export-ignore
-# Showing off the demo scene.
-demo-scene.gif                  export-ignore
-
-# CI/CD
-GitVersion.yml                  export-ignore
-/.github                        export-ignore
-.asset-template.json.hb         export-ignore # Template for AssetLib publishing
+.git    				export-ignore
+.github	    			export-ignore
+.godot		    		export-ignore
+.idea			    	export-ignore
+.vscode				    export-ignore
+addons/gdUnit4  	    export-ignore
+addons/godotsteam	    export-ignore
+Assets  				export-ignore
+docs	    			export-ignore
+raw_assets	    		export-ignore
+Scenes			    	export-ignore
+Scripts				    export-ignore
+Textures    			export-ignore
+.editorconfig   		export-ignore
+.gdlintrc		    	export-ignore
+.gitattributes			export-ignore
+.gitignore				export-ignore
+.asset-template.json.hb	export-ignore
+default_env.tres		export-ignore
+demo-scene.gif			export-ignore
+export_presets.cfg		export-ignore
+GitVersion.yml			export-ignore
+icon.png				export-ignore
+icon.png.import			export-ignore
+LICENSE				    export-ignore
+project.godot			export-ignore
+README.md				export-ignore
+runtest.cmd				export-ignore
+runtest.sh				export-ignore
