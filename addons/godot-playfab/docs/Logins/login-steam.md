@@ -22,14 +22,14 @@ To enable support for Steam authorization, PlayFab requires you to enable the St
 2. Select the **Add-ons** menu item.
 3. In the list of available **Add-ons**, locate and select Steam
 
-![Login Steam Setup 1](/docs/images/login-steam-setup-1.png)
+![Login Steam Setup 1](../images/login-steam-setup-1.png)
 
 1. Click on the "Install Steam"
 1. Enter your Steam Application ID
 2. Enter your Steam Publisher Web API Key created earlier
 3. Click on the "Install Steam" again
 
-![Login Steam Setup 3](/docs/images/login-steam-setup-2.png)
+![Login Steam Setup 3](../images/login-steam-setup-2.png)
 
 ## API
 

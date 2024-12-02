@@ -23,14 +23,14 @@ There are a couple of different ways to install GodotSteam but for this example,
 
 > :warning: Be careful to install the normal extension and **not** the server extension
 
-![Login Steam Godot Installation](/docs/images/login-steam-godot-installation.png)
+![Login Steam Godot Installation](../images/login-steam-godot-installation.png)
 
 
 ## Environments
 
 When the game is run through the Steam client, it already knows which game you are playing. However, during development and testing, you must supply a valid App ID somehow. Typically, if you do not already have an app ID, you can use App ID `480` which is Valve's *SpaceWar* example game.
 
-There is three ways to set the App ID. For this example, we will used one of them. If you want to see the other, check [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/).
+There is three ways to set the App ID. For this example, we will use one of them. If you want to see the other, check [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/).
 
 > :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your App ID.
 
