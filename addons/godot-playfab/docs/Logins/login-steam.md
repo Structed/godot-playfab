@@ -75,4 +75,4 @@ func login(ticket: String, is_auth_ticket_for_api: bool) -> void:
 
 ## Example using **GodotSteam**
 
-Given that the example is a bit long, a dedicated page as been created for it and can be find [here](/docs/user/Logins/login-steam-godotsteam.md)
+Given that the example is a bit long, a dedicated page as been created for it and can be found [here](login-steam-godotsteam.md)
