@@ -14,9 +14,12 @@
 .gutconfig.json                 export-ignore
 
 # Project items
-/addons/godot-playfab/test      export-ignore # Test project
-/raw_assets                     export-ignore # This is where I keep my raw assets
-demo-scene.gif                  export-ignore # Showing off the demo scene.
+# Unit Tests
+/addons/godot-playfab/test      export-ignore
+# This is where I keep my raw assets
+/raw_assets                     export-ignore
+# Showing off the demo scene.
+demo-scene.gif                  export-ignore
 
 # CI/CD
 GitVersion.yml                  export-ignore
