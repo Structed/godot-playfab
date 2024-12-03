@@ -12,6 +12,9 @@ signal event_batch_playstream_flushed(event_ids)
 # @param event_ids: The IDs of the events written
 signal event_batch_telemetry_flushed(event_ids)
 
+# Defines the maximum batch size. This is dictated by the PlayFab API
+const max_batch_size = 200
+
 # Defines the event batch size threshold
 @export var event_batch_size: int = 5
 
@@ -97,7 +100,10 @@ func write_title_player_playstream_event(event_name: String, payload: Dictionary
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
 func batch_title_player_telemetry_event(event_name: String, payload: Dictionary, callback: Callable = func():, event_namespace = "custom.%s" % _title_id):
 	var event = _assemble_event(event_name, payload, event_namespace)
-	telemetry_event_batch.append(event)
+	if (telemetry_event_batch.size() < max_batch_size):
+		telemetry_event_batch.append(event)
+	else:
+		push_warning("godot-playfab: dropping event as the telemetry event maximum per batch (%s) was reached." % max_batch_size)
 
 
 # Batch a PlayStream Event for later sending
@@ -108,11 +114,13 @@ func batch_title_player_telemetry_event(event_name: String, payload: Dictionary,
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
 func batch_title_player_playstream_event(event_name: String, payload: Dictionary, callback: Callable = func():, event_namespace = "custom.%s" % _title_id):
 	var event = _assemble_event(event_name, payload, event_namespace)
-	playstream_event_batch.append(event)
+	if (playstream_event_batch.size() < max_batch_size):
+		playstream_event_batch.append(event)
+	else:
+		push_warning("godot-playfab: dropping event as the playstream event maximum per batch (%s) was reached." % max_batch_size)
 
 # Assembles event data
 # @Visibility: Private
-# @Visibility: Public
 # @param event_name: String - The Event's name
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: Callable (optional) - A callback, providing a Dictionary containing the Event ID.
