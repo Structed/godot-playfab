@@ -1,3 +1,26 @@
+## [1.3.0](https://github.com/Structed/godot-playfab/compare/1.2.0...1.3.0) (2024-12-03)
+
+
+### Features
+
+* **login:** Login With Steam ([#132](https://github.com/Structed/godot-playfab/issues/132)) ([29bd210](https://github.com/Structed/godot-playfab/commit/29bd210e33924ca4cdc27517f879c4ddd03c84cf))
+
+
+### Bug Fixes
+
+* **docs:** documentation (add warning in order to avoid other developers to send invalid events) ([#129](https://github.com/Structed/godot-playfab/issues/129)) ([0c116fb](https://github.com/Structed/godot-playfab/commit/0c116fb1e83c25ce6e248055927d7ccb9616ad59))
+* **PlayFabEvent:** Events are dropped if batch size exceeds the playfab api limits (fixes [#147](https://github.com/Structed/godot-playfab/issues/147)) ([121be3b](https://github.com/Structed/godot-playfab/commit/121be3bbd9edfba97f23a371019e397a2808c1e2))
+
+
+### Documentation
+
+* **maintainer:** Add Commit message format documentation ([11e44b1](https://github.com/Structed/godot-playfab/commit/11e44b17fda6fc6d7a1317fa02036e0d9ec2998d))
+* **steam:** fixed link to godotsteam page ([a45c018](https://github.com/Structed/godot-playfab/commit/a45c018e7541376e5f6ab4a85b8bf047ac802fdd))
+* **steam:** moved images to user docs ([20bc925](https://github.com/Structed/godot-playfab/commit/20bc92501529c5ccd6c68686aaf5030544f74823))
+* **user:** Moved user docs to addons/godot-playfab ([#127](https://github.com/Structed/godot-playfab/issues/127)) ([ebd47e7](https://github.com/Structed/godot-playfab/commit/ebd47e7e682413d0b3a74a5ee5af979f9f68ce52))
+
+
+
 ## [1.2.0](https://github.com/Structed/godot-playfab/compare/1.1.0...1.2.0) (2023-10-12)
 
 
