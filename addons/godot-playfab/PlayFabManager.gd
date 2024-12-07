@@ -33,6 +33,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_process_mode(PROCESS_MODE_ALWAYS)
 	add_child(client)
 	add_child(event)
 	client_config = _client_config_loader.load(title_id)
