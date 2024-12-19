@@ -1,3 +1,24 @@
+### [1.3.1](https://github.com/Structed/godot-playfab/compare/1.3.0...1.3.1) (2024-12-19)
+
+
+### Bug Fixes
+
+* issue [#148](https://github.com/Structed/godot-playfab/issues/148) ([249de48](https://github.com/Structed/godot-playfab/commit/249de485c0249154eff5a4eaf70f3df9883973e8))
+
+
+### Tests
+
+* added tests for UUID library ([cd45d33](https://github.com/Structed/godot-playfab/commit/cd45d33e5f80ed9234d85965749cb60bb3bad29c))
+
+
+### Code Refactoring
+
+* fixed tabs ([7fb5dbc](https://github.com/Structed/godot-playfab/commit/7fb5dbc0fbfecb6e4c3c6f8ea9516adb1d31d0ec))
+* fixing tabs again ([bfab71c](https://github.com/Structed/godot-playfab/commit/bfab71ccfd17321bb4cf6f3871985fa96fd9df56))
+* moved library to originally named folders ([f870241](https://github.com/Structed/godot-playfab/commit/f870241b9dbd471cd8e70b94cb7488d5865b130a))
+
+
+
 ## [1.3.0](https://github.com/Structed/godot-playfab/compare/1.2.0...1.3.0) (2024-12-03)
 
 
