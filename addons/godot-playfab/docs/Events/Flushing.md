@@ -1,5 +1,5 @@
 # Flushing Events
-Events will be automatically sent if either of the thresholds in the [Conifguration](./Configuration.md) is met.
+Events will be automatically sent if either of the thresholds in the [Configuration](./Configuration.md) is met.
 
 However, you can also force flush the cache:
 
