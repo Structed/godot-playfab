@@ -141,7 +141,7 @@ func _assemble_event(event_name: String, payload: Dictionary, event_namespace = 
 	return event
 
 
-# Tiggers batch flush if comfigured treshold is met
+# Triggers batch flush if configured threshold is met
 # @Visibility: Private
 func _flush_batches_on_batch_size_met():
 	if playstream_event_batch.size() >= event_batch_size:
