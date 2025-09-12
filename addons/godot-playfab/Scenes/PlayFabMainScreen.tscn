@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5fda86xbwxbu"]
 
-[ext_resource type="Script" path="res://addons/godot-playfab/Scenes/PlayFabMainScreen.gd" id="2"]
+[ext_resource type="Script" uid="uid://c1kf0y6v7e05n" path="res://addons/godot-playfab/Scenes/PlayFabMainScreen.gd" id="2"]
 
 [node name="MainScreen" type="Control"]
 layout_mode = 3
