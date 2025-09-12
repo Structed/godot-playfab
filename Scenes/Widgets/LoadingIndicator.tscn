@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://wwvhjjuojn77"]
 
 [ext_resource type="Texture2D" uid="uid://c6h5mtp1aod6p" path="res://Textures/round_metal.png" id="1"]
-[ext_resource type="Script" path="res://Scenes/Widgets/LoadingIndicator.gd" id="2"]
+[ext_resource type="Script" uid="uid://klu0a1dxgp71" path="res://Scenes/Widgets/LoadingIndicator.gd" id="2"]
 
 [node name="LoadingIndicator" type="TextureProgressBar"]
 anchors_preset = 15
