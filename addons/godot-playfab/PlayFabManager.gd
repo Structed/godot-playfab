@@ -22,6 +22,10 @@ var client : PlayFabClient = PlayFabClient.new()
 # see https://docs.microsoft.com/en-us/rest/api/playfab/events/?view=playfab-rest
 var event: PlayFabEvent = PlayFabEvent.new()
 
+## Represents the PlayFab `Catalog` (Economy V2) API
+## @tutorial: https://learn.microsoft.com/en-us/rest/api/playfab/economy/catalog?view=playfab-rest
+var catalog: PlayFabCatalog = PlayFabCatalog.new()
+
 
 # Retrieves the `title_id` from `ProjectSettings`
 func _init():
@@ -39,6 +43,7 @@ func _ready():
 	set_process_mode(manager_process_mode)
 	add_child(client)
 	add_child(event)
+	add_child(catalog)
 	client_config = _client_config_loader.load(title_id)
 
 

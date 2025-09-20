@@ -96,3 +96,9 @@ func _get_type_for_property(property_name: String) -> String:
 	push_error("Could not find mapping for property: " + property_name)
 	return super._get_type_for_property(property_name)
 
+const ITEM_TYPE_BUNDLE: String = "bundle"
+const ITEM_TYPE_CATALOG_ITEM: String = "catalogItem"
+const ITEM_TYPE_CURRENCY: String = "currency"
+const ITEM_TYPE_STORE: String = "store"
+const ITEM_TYPE_UGC: String = "ugc"
+const ITEM_TYPE_SUBSCRIPTION: String = "subscription"
