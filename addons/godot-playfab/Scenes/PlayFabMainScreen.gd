@@ -7,31 +7,31 @@ func _ready():
 	# Needed, so can ater refresh the "FileSystem" panel of the Editor
 	editor_resource_filesystem_cached = EditorPlugin.new().get_editor_interface().get_resource_filesystem()
 
-func _on_SaveModel_pressed():
+func _on_SaveModel_pressed() -> void:
 
 	if !guard_class_name_set():
 		return
 
-	var file_dialog = $FileDialog
+	var file_dialog: FileDialog = $FileDialog
 	file_dialog.current_file = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
 	file_dialog.show()
 	file_dialog.connect("file_selected",Callable(self,"_on_file_selected").bind(),CONNECT_ONE_SHOT)
 
 
-func _on_save_direct_pressed():
+func _on_save_direct_pressed() -> void:
 
 	if !guard_class_name_set():
 		return
 
-	var file_name = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
-	var file_path = "res://addons/godot-playfab/Models/" + file_name
+	var file_name: String = $VBoxContainer/ClassNameContainer/LineEdit.text + ".gd"
+	var file_path: String = "res://addons/godot-playfab/Models/" + file_name
 	_on_file_selected(file_path)
 
 
 func _on_file_selected(file_path: String):
 
-	var model = to_model($VBoxContainer/ClassNameContainer/LineEdit.text, $VBoxContainer/Input.text)
-	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	var model: String = to_model($VBoxContainer/ClassNameContainer/LineEdit.text, $VBoxContainer/Input.text)
+	var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(model)
 
 	# Refresh the "FileSystem" panel
@@ -50,17 +50,17 @@ func guard_class_name_set() -> bool:
 
 
 func to_model(object_name: String, input: String) -> String:
-	var lines = input.split("\n", true)
+	var lines: PackedStringArray = input.split("\n", true)
 	lines.push_back("") # Hack: add an empty line at the bottom so below logic works & is simpler :-) Otherwise, the last prop would not be written
 
-	var props = []
-	var current_prop = ""
-	var prop_line = 0
+	var props: Array[Variant] = []
+	var current_prop: String = ""
+	var prop_line: int = 0
 	print("new prop")
 	for line in lines:
 		print(line)
 
-		var str_line = (line as String).strip_edges()
+		var str_line: String = (line as String).strip_edges()
 
 		if not str_line.is_empty():
 			match prop_line:
@@ -80,7 +80,7 @@ func to_model(object_name: String, input: String) -> String:
 			props.append(current_prop)
 			prop_line = 0
 
-	var model = "extends JsonSerializable\nclass_name " + object_name + "\n\n"
+	var model: String = "extends JsonSerializable\nclass_name " + object_name + "\n\n"
 	for prop in props:
 		model += prop + "\n\n"
 
@@ -106,8 +106,14 @@ func fix_type(type: String) -> String:
 			return "String"
 		"boolean":
 			return "bool"
+		"number":
+			return "float"
+		"object":
+			return "Dictionary[String, Variant]"
 		_:
-			if type.ends_with("]"):
-				return "Array"
+			if type.ends_with("[]"):
+				# Example: CatalogItem[] --> Array[CatalogItem]
+				var inner_type: String = type.substr(0, type.length() - 2)
+				return "Array[%s]" % inner_type
 			return type
 
