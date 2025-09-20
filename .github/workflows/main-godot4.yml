@@ -36,9 +36,19 @@ jobs:
       fail-fast: false
       max-parallel: 10
       matrix:
-        os: [ubuntu-latest]
-        godot-version: ['4.3', '4.4']
-        godot-status: ['stable']
+        include:
+          - os: ubuntu-latest
+            godot-version: '4.3'
+            godot-status: 'stable'
+            gdunit-version: 'v5.1'
+          - os: ubuntu-latest
+            godot-version: '4.4'
+            godot-status: 'stable'
+            gdunit-version: 'v5.1'
+          - os: ubuntu-latest
+            godot-version: '4.5'
+            godot-status: 'stable'
+            gdunit-version: 'master'
 
     permissions:
       actions: write
@@ -56,7 +66,7 @@ jobs:
         with:
           godot-version: ${{ matrix.godot-version }}
           godot-status: ${{ matrix.godot-status }}
-          version: "latest"
+          version: ${{ matrix.gdunit-version }}
           paths: |
             'res://addons/godot-playfab/test'
           timeout: 10
