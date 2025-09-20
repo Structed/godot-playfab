@@ -1,7 +1,7 @@
 extends JsonSerializable
 ## Request to get items from the catalog.
 ## @tutorial(PlayFab REST API Docs):https://learn.microsoft.com/en-us/rest/api/playfab/economy/catalog/get-items?view=playfab-rest
-class_name Catalog_GetItemsRequest
+class_name GetItemsRequest
 
 ## List of item alternate IDs.
 var AlternateIds: Array[CatalogAlternateId]
