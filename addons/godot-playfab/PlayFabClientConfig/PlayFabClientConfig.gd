@@ -21,12 +21,13 @@ var login_type = LoginType.LOGIN_NONE
 ## User Identifier - Email, UUID etc. This is dependent checked the Login Type
 ## LOGIN_EMAIL - Email
 ## LOGIN_CUSTOM_ID - UUID
+## LOGIN_STEAM - SteamTicket
 var login_id = ""
 
 # Last Login timestamp - when tokens were refreshed
 var login_timestamp = 0
 
-enum LoginType { LOGIN_NONE, LOGIN_EMAIL, LOGIN_CUSTOM_ID }
+enum LoginType { LOGIN_NONE, LOGIN_EMAIL, LOGIN_CUSTOM_ID, LOGIN_STEAM }
 
 # Whether the user should stay logged in
 var stay_logged_in = false

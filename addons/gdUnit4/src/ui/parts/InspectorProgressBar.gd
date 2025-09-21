@@ -1,45 +1,49 @@
 @tool
 extends ProgressBar
 
-@onready var bar = $"."
-@onready var status = $Label
-@onready var style :StyleBoxFlat = bar.get("theme_override_styles/fill")
 
+@onready var status: Label = $Label
+@onready var style: StyleBoxFlat = get("theme_override_styles/fill")
 
-func _ready():
-	GdUnitSignals.instance().gdunit_event.connect(_on_gdunit_event)
+var _state: GdUnitInspectorTreeConstants.STATE
+
+func _ready() -> void:
 	style.bg_color = Color.DARK_GREEN
+	value = 0
+	max_value = 0
 	update_text()
-
-
-func progress_init(p_max_value :int) -> void:
-	bar.value = 0
-	bar.max_value = p_max_value
-	style.bg_color = Color.DARK_GREEN
-	update_text()
-
-
-func progress_update(p_value :int, is_failed :bool) -> void:
-	bar.value += p_value
-	update_text()
-	if is_failed:
-		style.bg_color = Color.DARK_RED
 
 
 func update_text() -> void:
-	status.text = "%d:%d" % [bar.value, bar.max_value]
+	status.text = "%d:%d" % [value, max_value]
 
 
-func _on_gdunit_event(event :GdUnitEvent) -> void:
-	match event.type():
-		GdUnitEvent.INIT:
-			progress_init(event.total_count())
-		
-		GdUnitEvent.TESTCASE_AFTER:
-			# we only count when the test is finished (excluding parameterized test iterrations)
-			# test_name:<number> indicates a parameterized test run
-			if event.test_name().find(":") == -1:
-				progress_update(1, event.is_failed() or event.is_error())
-		
-		GdUnitEvent.TESTSUITE_AFTER:
-			progress_update(0, event.is_failed() or event.is_error())
+func _on_test_counter_changed(index: int, total: int, state: GdUnitInspectorTreeConstants.STATE) -> void:
+	value = index
+	max_value = total
+	update_text()
+
+	# inital state
+	if index == 0:
+		style.bg_color = Color.DARK_GREEN
+
+	# do only update the state is higher prio than current state
+	if state <= _state:
+		return
+	_state = state
+
+	if is_flaky(state):
+		style.bg_color = Color.WEB_GREEN
+	if is_failed(state):
+		style.bg_color = Color.DARK_RED
+
+
+func is_failed(state: GdUnitInspectorTreeConstants.STATE) -> bool:
+	return state in [
+		GdUnitInspectorTreeConstants.STATE.FAILED,
+		GdUnitInspectorTreeConstants.STATE.ERROR,
+		GdUnitInspectorTreeConstants.STATE.ABORDED]
+
+
+func is_flaky(state: GdUnitInspectorTreeConstants.STATE) -> bool:
+	return state == GdUnitInspectorTreeConstants.STATE.FLAKY

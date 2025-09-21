@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/SplashScreen.png-cdbee4260a2b9d5b352f2c1a850d
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
