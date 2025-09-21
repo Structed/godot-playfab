@@ -1,6 +1,11 @@
 @tool
 extends Control
 
+class DocProperty:
+	var name: String
+	var type: String
+	var comment: String
+
 var editor_resource_filesystem_cached
 
 func _ready():
@@ -54,37 +59,35 @@ func to_model(object_name: String, input: String) -> String:
 	lines = remove_empty_lines(lines)
 	lines.push_back("") # Hack: add an empty line at the bottom so below logic works & is simpler :-) Otherwise, the last prop would not be written
 
-	var props: Array[Variant] = []
+	var props: Array[DocProperty] = []
 	var prop_line: int = 0
-	var current_prop: Dictionary[String, String] = {}
+	var current_prop: DocProperty = DocProperty.new()
 	for line in lines:
-		print(line)
-
 		var str_line: String = (line as String).strip_edges()
 
 		match prop_line:
 			0: # Variable name
-				current_prop["name"] = "var " + str_line
+				current_prop.name = str_line
 			1:	# Type
 				str_line = fix_type(str_line)
 				if not str_line.is_empty() and not str_line.begins_with("#"):
-					current_prop["type"] = ": %s" % str_line
+					current_prop.type = str_line
 				else:
-					print ("No type specified for property %s, defaulting to Variant" % current_prop.get("name", "UNKNOWN"))
-					current_prop["type"] = "Variant"
+					push_warning("No type specified for property %s, defaulting to Variant" % current_prop.name)
+					current_prop.type = "Variant"
 			2:	# Comment
-				current_prop["comment"] = "## %s" % [str_line]
+				current_prop.comment = str_line
 
 		prop_line += 1
 		if prop_line > 2:
 			props.append(current_prop)
-			current_prop = {}
+			current_prop = DocProperty.new()
 			prop_line = 0
 
 	var model: String = "extends JsonSerializable\nclass_name " + object_name + "\n\n"
-	for prop in props:
-		model += prop["comment"] + "\n"
-		model += prop["name"] + prop["type"] + "\n"
+	for prop: DocProperty in props:
+		model += "## %s \n" % [prop.comment]
+		model += "var %s: %s \n" % [prop.name, prop.type]
 		model += "\n\n"
 
 	# TODO: Find a way to generate the mapping for props automatically!
