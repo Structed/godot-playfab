@@ -12,6 +12,9 @@ signal event_batch_playstream_flushed(event_ids)
 # @param event_ids: The IDs of the events written
 signal event_batch_telemetry_flushed(event_ids)
 
+# Defines the maximum batch size. This is dictated by the PlayFab API
+const max_batch_size = 200
+
 # Defines the event batch size threshold
 @export var event_batch_size: int = 5
 
@@ -28,7 +31,7 @@ var telemetry_event_batch = EventContentsCollection.new()
 
 func _ready():
 	super._ready()
-	
+
 	var timer = Timer.new()
 	timer.process_mode = Timer.TIMER_PROCESS_IDLE
 	timer.wait_time = event_batch_timeout_seconds
@@ -46,18 +49,18 @@ func _process(_delta):
 # Write batches of entity based events to as Telemetry events (bypass PlayStream).
 # Prefer using `batch_title_player_telemetry_event`
 # @Visibility: Public
-# @param request_data: WriteEventsRequest - Request object, holidng multiple requests.
-# @callback: Callable (optional) - Optjonal callback function, receiving a Dictionary with the returned Event ID.
-func event_telemetry_write_events(request_data: WriteEventsRequest, callback: Callable = func():):
+# @param request_data: WriteEventsRequest - Request object, holding multiple requests.
+# @callback: Callable (optional) - Optional callback function, receiving a Dictionary with the returned Event ID.
+func event_telemetry_write_events(request_data: WriteEventsRequest, callback: Callable = func(): pass):
 	_post_with_entity_auth(request_data, "/Event/WriteTelemetryEvents", callback)
 
 
 # Write batches of entity based events to PlayStream.
 # Prefer using `batch_title_player_playstream_event`
 # @Visibility: Public
-# @param request_data: WriteEventsRequest - Request object, holidng multiple requests.
-# @callback: Callable (optional) - Optjonal callback function, receiving a Dictionary with the returned Event ID.
-func event_playstream_write_events(request_data: WriteEventsRequest, callback: Callable = func():):
+# @param request_data: WriteEventsRequest - Request object, holding multiple requests.
+# @callback: Callable (optional) - Optional callback function, receiving a Dictionary with the returned Event ID.
+func event_playstream_write_events(request_data: WriteEventsRequest, callback: Callable = func(): pass):
 	_post_with_entity_auth(request_data, "/Event/WriteEvents", callback)
 
 
@@ -67,7 +70,7 @@ func event_playstream_write_events(request_data: WriteEventsRequest, callback: C
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: Callable (optional) - A callback, providing a Dictionary containing the Event ID.
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
-func write_title_player_telemetry_event(event_name: String, payload: Dictionary, callback: Callable = func():, event_namespace = "custom.%s" % _title_id):
+func write_title_player_telemetry_event(event_name: String, payload: Dictionary, callback: Callable = func(): pass, event_namespace = "custom.%s" % _title_id):
 	var event = _assemble_event(event_name, payload, event_namespace)
 	# We send a batch of events here!
 	var request = WriteEventsRequest.new()
@@ -81,7 +84,7 @@ func write_title_player_telemetry_event(event_name: String, payload: Dictionary,
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: Callable (optional) - A callback, providing a Dictionary containing the Event ID.
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
-func write_title_player_playstream_event(event_name: String, payload: Dictionary, callback: Callable = func():, event_namespace = "custom.%s" % _title_id):
+func write_title_player_playstream_event(event_name: String, payload: Dictionary, callback: Callable = func(): pass, event_namespace = "custom.%s" % _title_id):
 	var event = _assemble_event(event_name, payload, event_namespace)
 	# We send a batch of events here!
 	var request = WriteEventsRequest.new()
@@ -95,9 +98,12 @@ func write_title_player_playstream_event(event_name: String, payload: Dictionary
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: Callable (optional) - A callback, providing a Dictionary containing the Event ID.
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
-func batch_title_player_telemetry_event(event_name: String, payload: Dictionary, callback: Callable = func():, event_namespace = "custom.%s" % _title_id):
+func batch_title_player_telemetry_event(event_name: String, payload: Dictionary, callback: Callable = func(): pass, event_namespace = "custom.%s" % _title_id):
 	var event = _assemble_event(event_name, payload, event_namespace)
-	telemetry_event_batch.append(event)
+	if (telemetry_event_batch.size() < max_batch_size):
+		telemetry_event_batch.append(event)
+	else:
+		push_warning("godot-playfab: dropping event as the telemetry event maximum per batch (%s) was reached." % max_batch_size)
 
 
 # Batch a PlayStream Event for later sending
@@ -106,13 +112,15 @@ func batch_title_player_telemetry_event(event_name: String, payload: Dictionary,
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: Callable (optional) - A callback, providing a Dictionary containing the Event ID.
 # @param event_namespace: String (optional) - The namespace of the Event must be 'custom' or start with 'custom.'.
-func batch_title_player_playstream_event(event_name: String, payload: Dictionary, callback: Callable = func():, event_namespace = "custom.%s" % _title_id):
+func batch_title_player_playstream_event(event_name: String, payload: Dictionary, callback: Callable = func(): pass, event_namespace = "custom.%s" % _title_id):
 	var event = _assemble_event(event_name, payload, event_namespace)
-	playstream_event_batch.append(event)
+	if (playstream_event_batch.size() < max_batch_size):
+		playstream_event_batch.append(event)
+	else:
+		push_warning("godot-playfab: dropping event as the playstream event maximum per batch (%s) was reached." % max_batch_size)
 
 # Assembles event data
 # @Visibility: Private
-# @Visibility: Public
 # @param event_name: String - The Event's name
 # @param payload: Dictionary - A dictionary to send as event payload
 # @param callback: Callable (optional) - A callback, providing a Dictionary containing the Event ID.
@@ -133,7 +141,7 @@ func _assemble_event(event_name: String, payload: Dictionary, event_namespace = 
 	return event
 
 
-# Tiggers batch flush if comfigured treshold is met
+# Triggers batch flush if configured threshold is met
 # @Visibility: Private
 func _flush_batches_on_batch_size_met():
 	if playstream_event_batch.size() >= event_batch_size:
@@ -145,7 +153,7 @@ func _flush_batches_on_batch_size_met():
 # @Visibility: Private
 func _flush_playstream_event_batch():
 	if playstream_event_batch.size() < 1:
-		print_debug("No telemetry events to flush")
+		print_debug("No playstream events to flush")
 		return
 
 	var request = WriteEventsRequest.new()
@@ -159,7 +167,7 @@ func _flush_playstream_event_batch():
 # @Visibility: Private
 func _flush_telemetry_event_batch():
 	if telemetry_event_batch.size() < 1:
-		print_debug("No playstream events to flush")
+		print_debug("No telemetry events to flush")
 		return
 
 	var request = WriteEventsRequest.new()

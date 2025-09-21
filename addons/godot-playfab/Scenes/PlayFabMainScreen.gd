@@ -108,4 +108,3 @@ static func fix_type(type: String) -> String:
 			if type.ends_with("]"):
 				return "Array"
 			return type
-

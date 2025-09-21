@@ -1,25 +1,26 @@
-class_name GdUnitBoolAssertImpl
 extends GdUnitBoolAssert
 
 var _base: GdUnitAssertImpl
 
-func _init(current):
+
+func _init(current :Variant) -> void:
 	_base = GdUnitAssertImpl.new(current)
 	# save the actual assert instance on the current thread context
 	GdUnitThreadManager.get_current_context().set_assert(self)
-	if not _base.__validate_value_type(current, TYPE_BOOL):
+	if not GdUnitAssertions.validate_value_type(current, TYPE_BOOL):
+		@warning_ignore("return_value_discarded")
 		report_error("GdUnitBoolAssert inital error, unexpected type <%s>" % GdObjects.typeof_as_string(current))
 
 
-func _notification(event):
+func _notification(event :int) -> void:
 	if event == NOTIFICATION_PREDELETE:
 		if _base != null:
 			_base.notification(event)
 			_base = null
 
 
-func __current():
-	return _base.__current()
+func current_value() -> Variant:
+	return _base.current_value()
 
 
 func report_success() -> GdUnitBoolAssert:
@@ -32,44 +33,55 @@ func report_error(error :String) -> GdUnitBoolAssert:
 	return self
 
 
-func _failure_message() -> String:
-	return _base._current_error_message
+func failure_message() -> String:
+	return _base.failure_message()
 
 
 func override_failure_message(message :String) -> GdUnitBoolAssert:
+	@warning_ignore("return_value_discarded")
 	_base.override_failure_message(message)
+	return self
+
+
+func append_failure_message(message :String) -> GdUnitBoolAssert:
+	@warning_ignore("return_value_discarded")
+	_base.append_failure_message(message)
 	return self
 
 
 # Verifies that the current value is null.
 func is_null() -> GdUnitBoolAssert:
+	@warning_ignore("return_value_discarded")
 	_base.is_null()
 	return self
 
 
 # Verifies that the current value is not null.
 func is_not_null() -> GdUnitBoolAssert:
+	@warning_ignore("return_value_discarded")
 	_base.is_not_null()
 	return self
 
 
-func is_equal(expected) -> GdUnitBoolAssert:
+func is_equal(expected: Variant) -> GdUnitBoolAssert:
+	@warning_ignore("return_value_discarded")
 	_base.is_equal(expected)
 	return self
 
 
-func is_not_equal(expected) -> GdUnitBoolAssert:
+func is_not_equal(expected: Variant) -> GdUnitBoolAssert:
+	@warning_ignore("return_value_discarded")
 	_base.is_not_equal(expected)
 	return self
 
 
 func is_true() -> GdUnitBoolAssert:
-	if __current() != true:
-		return report_error(GdAssertMessages.error_is_true(__current()))
+	if current_value() != true:
+		return report_error(GdAssertMessages.error_is_true(current_value()))
 	return report_success()
 
 
 func is_false() -> GdUnitBoolAssert:
-	if __current() == true || __current() == null:
-		return report_error(GdAssertMessages.error_is_false(__current()))
+	if current_value() == true || current_value() == null:
+		return report_error(GdAssertMessages.error_is_false(current_value()))
 	return report_success()

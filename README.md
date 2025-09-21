@@ -1,7 +1,14 @@
 ![godot-playfab logo](addons/godot-playfab/icon.png)
 
-[![CI](https://github.com/structed/godot-playfab/workflows/CI/badge.svg?branch=main)](https://github.com/Structed/godot-playfab/actions/workflows/main.yml)
+| Main                                                                                                       | Develop                                                                                                          |
+|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| ![Main](https://github.com/structed/godot-playfab/actions/workflows/main-godot4.yml/badge.svg?branch=main) | ![Develop](https://github.com/structed/godot-playfab/actions/workflows/main-godot4.yml/badge.svg?branch=develop) |
+
+
 [![Discord](https://img.shields.io/discord/1020665079668166677?color=rgb%2888%2C%20101%2C%20242%29&label=Discord&logo=discord)](https://discord.gg/7K7q2YuNXe)
+![Godot Version - 4.2](https://img.shields.io/badge/Godot_Version-4.2-2ea44f?logo=godotengine)
+![Godot Version - 4.3](https://img.shields.io/badge/Godot_Version-4.3-2ea44f?logo=godotengine)
+
 
 
 # godot-playfab - for Godot 4!
@@ -22,15 +29,13 @@ but also use Godot's Signals and also provide in-editor tools to work with Godot
 
 **The overarching mission is:** *Providing a great Developer Experience!*
 
+## Example Projects
+You can find an example project in the [godot-playfab-example](https://github.com/Structed/godot-playfab-example) repository. However, the example projects are not included in the AssetLib or Itch.io packages, as to not confuse users. There are example projects for multiple use-cases in the [godot-playfab-example](https://github.com/Structed/godot-playfab-example) repository, such as general login and data retrieval, analytics as well as how to use [GodotSteam](https://godotsteam.com/) with godot-playfab to log into PlayFab using Steam!
+
 ## Users
 I am proud to say that there are already some games using `godot-playfab` in production! If you want to be listed here, please let me know!
 
 - [**Dome Keeper**](https://store.steampowered.com/app/1637320/Dome_Keeper/) by [Bippinbits](https://bippinbits.com/)
-
-# Need Help? Found a Bug? Have an idea for a feature?
-Don't hesitate and [join our Discord](https://discord.gg/7K7q2YuNXe)! Everyone is welcome and we're looking forward to hearing from you!
-Or create an [issue](/issues) directly in the repo. All your input is **very much appreciated**!
-
 
 ## Demo
 ![Demo](demo-scene.gif)
@@ -38,19 +43,23 @@ Or create an [issue](/issues) directly in the repo. All your input is **very muc
 You can use the included Demo scene setup in `Scenes` to see how `godot-playfab` can be used.
 
 ## First-Time Setup
-See [Initial Setup](./docs/user/initial-setup.md)
+See [Initial Setup](addons/godot-playfab/docs/initial-setup.md)
 
 ## Using `godot-playfab` in your Game
-See [Usage](./docs/user/usage.md)
+See [Usage](addons/godot-playfab/docs/usage.md)
 
 ### Connecting Signals
-See [Connecting Signals](./docs/user/connecting-signals.md)
+See [Connecting Signals](addons/godot-playfab/docs/connecting-signals.md)
 
 ## Usage Guide & Examples
-See the [User Documentation](docs/user/README.md)
+See the [User Documentation](addons/godot-playfab/README.md)
 
 ## Maintainer Documentation
 See [Maintainer Documentation](docs/README.md).
+
+# Need Help? Found a Bug? Have an idea for a feature?
+Don't hesitate and [join our Discord](https://discord.gg/7K7q2YuNXe)! Everyone is welcome, and we're looking forward to hearing from you!
+Or create an [issue](https://github.com/Structed/godot-playfab/issues/new/choose) directly in the repo. All your input is **very much appreciated**!
 
 # Thanks
 Thanks to [lentsius-bark](https://github.com/lentsius-bark) for the wonderful re-design of the logo and splash screen ❤

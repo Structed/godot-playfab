@@ -25,3 +25,20 @@ func test__assemble_event_returns_event_with_properties_according_to_parameters(
 	assert_str(event.Name).is_equal(expected_event_contents.Name)
 	assert_dict(event.Payload).is_equal(expected_event_contents.Payload)
 	assert_str(event.EventNamespace).is_equal(expected_event_contents.EventNamespace)
+
+
+func test__batch_title_player_telemetry_event__does_not_add_more_than_maximum_events() -> void:
+	var playfab_event: PlayFabEvent = auto_free(PlayFabEvent.new())
+	for i in 205:
+		playfab_event.batch_title_player_telemetry_event(str(i), {})
+	
+	assert_int(playfab_event.telemetry_event_batch.size()).is_less_equal(PlayFabEvent.max_batch_size)
+
+
+
+func test__batch_title_player_playstream_event__does_not_add_more_than_maximum_events() -> void:
+	var playfab_event: PlayFabEvent = auto_free(PlayFabEvent.new())
+	for i in 205:
+		playfab_event.batch_title_player_playstream_event(str(i), {})
+	
+	assert_int(playfab_event.playstream_event_batch.size()).is_less_equal(PlayFabEvent.max_batch_size)
