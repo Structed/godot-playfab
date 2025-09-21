@@ -51,38 +51,41 @@ func guard_class_name_set() -> bool:
 
 func to_model(object_name: String, input: String) -> String:
 	var lines: PackedStringArray = input.split("\n", true)
+	lines = remove_empty_lines(lines)
 	lines.push_back("") # Hack: add an empty line at the bottom so below logic works & is simpler :-) Otherwise, the last prop would not be written
 
 	var props: Array[Variant] = []
-	var current_prop: String = ""
 	var prop_line: int = 0
-	print("new prop")
+	var current_prop: Dictionary[String, String] = {}
 	for line in lines:
 		print(line)
 
 		var str_line: String = (line as String).strip_edges()
 
-		if not str_line.is_empty():
-			match prop_line:
-				0: # Variable name
-					current_prop = "var " + str_line
-				1:	# Type
-					str_line = fix_type(str_line)
-					if not str_line.is_empty() and not str_line.begins_with("#"):
-						current_prop += ": %s" % str_line
-					else:
-						current_prop = str_line
-				2:	# Comment
-					current_prop = "## %s\n%s" % [str_line, current_prop]
+		match prop_line:
+			0: # Variable name
+				current_prop["name"] = "var " + str_line
+			1:	# Type
+				str_line = fix_type(str_line)
+				if not str_line.is_empty() and not str_line.begins_with("#"):
+					current_prop["type"] = ": %s" % str_line
+				else:
+					print ("No type specified for property %s, defaulting to Variant" % current_prop.get("name", "UNKNOWN"))
+					current_prop["type"] = "Variant"
+			2:	# Comment
+				current_prop["comment"] = "## %s" % [str_line]
 
-			prop_line += 1
-		else:
+		prop_line += 1
+		if prop_line > 2:
 			props.append(current_prop)
+			current_prop = {}
 			prop_line = 0
 
 	var model: String = "extends JsonSerializable\nclass_name " + object_name + "\n\n"
 	for prop in props:
-		model += prop + "\n\n"
+		model += prop["comment"] + "\n"
+		model += prop["name"] + prop["type"] + "\n"
+		model += "\n\n"
 
 	# TODO: Find a way to generate the mapping for props automatically!
 	model += """
@@ -117,3 +120,10 @@ func fix_type(type: String) -> String:
 				return "Array[%s]" % inner_type
 			return type
 
+
+func remove_empty_lines(lines: PackedStringArray) -> PackedStringArray:
+	var result: PackedStringArray = []
+	for line in lines:
+		if not line.strip_edges().is_empty():
+			result.append(line)
+	return result
