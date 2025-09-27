@@ -23,7 +23,7 @@ var DeepLinks: Array[DeepLink]
 var DefaultStackId: String
 
 ## A dictionary of localized descriptions. Key is language code and localized string is the value. The NEUTRAL locale is required. Descriptions have a 10000 character limit per country code.
-var Description: Dictionary[String, String]
+var Description: Dictionary
 
 ## Game specific properties for display purposes. This is an arbitrary JSON blob. The Display Properties field has a 10000 byte limit per item.
 var DisplayProperties: Dictionary
@@ -50,7 +50,7 @@ var IsHidden: bool
 var ItemReferences: Array[CatalogItemReference]
 
 ## A dictionary of localized keywords. Key is language code and localized list of keywords is the value. Keywords have a 50 character limit per keyword and up to 32 keywords can be added per country code.
-var Keywords: Dictionary[String, String]
+var Keywords: Dictionary
 
 ## The date and time this item was last updated.
 var LastModifiedDate: String
@@ -80,7 +80,7 @@ var StoreDetails: StoreDetails
 var Tags: Array[String]
 
 ## A dictionary of localized titles. Key is language code and localized string is the value. The NEUTRAL locale is required. Titles have a 512 character limit per country code.
-var Title: Dictionary[String, String]
+var Title: Dictionary
 
 ## The high-level type of the item. The following item types are supported: bundle, catalogItem, currency, store, ugc, subscription.
 var Type: String
