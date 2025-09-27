@@ -89,9 +89,8 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 					var nested_instance = script.new()
 					nested_instance.from_dict(element, nested_instance)
 					field.append(nested_instance)
-				
-				
-			print(type, is_typed)
+#		elif type == TYPE_DICTIONARY:
+#			# TODO: implementation for Typed Dictionaries
 		elif type != TYPE_OBJECT:
 			instance.set(key, data[key])
 		elif data[key] == null:
