@@ -3,6 +3,57 @@
 extends PlayFab
 class_name PlayFabCatalog
 
+signal search_complete
+
+var _catalog: Dictionary[String, Dictionary] = {}          # item_id -> ShopItem
+var _last_catalog_fetch_time: float = 0
+var _fetching_catalog := false
+var _has_full_catalog := false
+
+const PAGE_SIZE := 50
+# Search for all items using PlayFabManager.catalog.search_items() with pagination
+var search_results : Dictionary[String, Variant] = {}
+var continuation_token := ""
+
+
+func _search_all_items():
+	search_results.clear()
+	_search_page("")
+
+func _search_page(token: String) -> void:
+	var request_data: SearchItemsRequest = SearchItemsRequest.new()
+	request_data.Search = ""
+#	request_data.Filter  "tags/any(t:t eq 'desert') and contentType eq 'gameitem'"
+	request_data.OrderBy = "CreationDate asc"
+	request_data.ContinuationToken = token
+	request_data.Count = PAGE_SIZE
+#	request_data.Language = _locale
+
+	if token != "":
+		request_data.ContinuationToken = token
+
+	search_items(request_data, _on_search_page_ok)
+
+func _on_search_page_ok(result: Dictionary) -> void:
+	Loggie.debug("Hello").color(Color.CYAN)
+	var res = SearchItemsResponse.new()
+	res.from_dict(result.data, res)
+	for item: CatalogItem in res.Items:
+		search_results[item.Id] = item
+
+	var next_token: String = res.ContinuationToken
+	if next_token != null and next_token != "":
+		_search_page(next_token)
+	else:
+		emit_signal("search_complete")
+		_on_search_complete()
+
+func _on_search_complete() -> void:
+	print("All item IDs:", search_results)
+	Loggie.debug(search_results)
+
+
+
 
 ## Retrieves items from the public catalog. Up to 50 items can be returned at once.
 ## GetItems does not work off a cache of the Catalog and should be used when trying to get recent item updates.
