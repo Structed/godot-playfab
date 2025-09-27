@@ -23,7 +23,8 @@ func _init():
 
 func _ready():
 	super._ready()
-	connect("logged_in",Callable(self,"_on_logged_in"))
+	connect("logged_in",_on_logged_in)
+	connect("api_error",_on_api_error)
 
 
 func _on_logged_in(login_result: LoginResult):
@@ -192,3 +193,16 @@ func _add_auth_headers(additional_headers: Dictionary, auth_type) -> bool:
 		push_error("auth_type \"" + auth_type + "\" is invalid")
 
 	return true
+
+
+func _on_api_error(api_error_wrapper: ApiErrorWrapper):
+	var text: String = "%s\n\n" % api_error_wrapper.errorMessage
+	var error_details = api_error_wrapper.errorDetails
+
+	if error_details:
+		for key in error_details.keys():
+			text += key
+			for element in error_details[key]:
+				text += "%s\n" % element
+
+	push_error(text)
