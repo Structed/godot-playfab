@@ -69,7 +69,21 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 				break
 
 		# If basic data type - just set it
-		if type != TYPE_OBJECT:
+		if type == TYPE_ARRAY:
+			var field = instance.get(key)
+			var is_typed = field.is_typed()
+			if is_typed:
+				var script = field.get_typed_script()
+				var elements
+				for i in data[key].size():
+					var element = data[key][i]
+					var nested_instance = script.new()
+					nested_instance.from_dict(element, nested_instance)
+					field.append(nested_instance)
+				
+				
+			print(type, is_typed)
+		elif type != TYPE_OBJECT:
 			instance.set(key, data[key])
 		elif data[key] == null:
 			instance.set(key, null)
