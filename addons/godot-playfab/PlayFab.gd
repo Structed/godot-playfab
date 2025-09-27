@@ -12,6 +12,8 @@ signal logged_in(login_result)
 
 enum AUTH_TYPE {SESSION_TICKET, ENTITY_TOKEN}
 
+const LANG_NEUTRAL := "NEUTRAL"
+
 
 func _init():
 
