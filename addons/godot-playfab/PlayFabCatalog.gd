@@ -35,7 +35,6 @@ func _search_page(token: String) -> void:
 	search_items(request_data, _on_search_page_ok)
 
 func _on_search_page_ok(result: Dictionary) -> void:
-	Loggie.debug("Hello").color(Color.CYAN)
 	var res = SearchItemsResponse.new()
 	res.from_dict(result.data, res)
 	for item: CatalogItem in res.Items:
