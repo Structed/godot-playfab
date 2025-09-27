@@ -75,6 +75,15 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 			if is_typed:
 				var script = field.get_typed_script()
 				var elements
+				if script == null:
+					# Builtin type, just set it and continue with the next element
+					for i in data[key].size():
+						var element = data[key][i]
+						field.append(key, element)
+					continue
+
+				var script_name: StringName = (script as Script).get_global_name()
+
 				for i in data[key].size():
 					var element = data[key][i]
 					var nested_instance = script.new()
