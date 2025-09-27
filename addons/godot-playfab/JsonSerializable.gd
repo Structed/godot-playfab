@@ -46,7 +46,10 @@ func to_dict() -> Dictionary:
 				dict[name] = type_name
 		else:
 			# Get the value of the property
-			dict[name] = get(name)
+			var value = get(name)
+			if type == TYPE_STRING && value == "":
+				continue
+			dict[name] = value
 
 	return dict
 

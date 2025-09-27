@@ -37,6 +37,10 @@ func _on_EventsPlayStream_pressed():
 	SceneManager.goto_scene("res://Scenes/Events.tscn")
 
 
+func _on_CatalogButton_pressed():
+	SceneManager.goto_scene("res://Scenes/Catalog.tscn")
+
+
 func _on_RequestBuilder_pressed():
 	SceneManager.goto_scene("res://Scenes/RequestBuilder.tscn")
 
