@@ -12,7 +12,7 @@ var _has_full_catalog := false
 
 const PAGE_SIZE := 50
 # Search for all items using PlayFabManager.catalog.search_items() with pagination
-var search_results : Dictionary[String, Variant] = {}
+var search_results : Dictionary[String, CatalogItem] = {}
 var continuation_token := ""
 
 
