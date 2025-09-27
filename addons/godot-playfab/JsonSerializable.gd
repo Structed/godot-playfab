@@ -72,9 +72,9 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 		if type == TYPE_ARRAY:
 			var field = instance.get(key)
 			var is_typed = field.is_typed()
+
 			if is_typed:
 				var script = field.get_typed_script()
-				var elements
 				if script == null:
 					# Builtin type, just set it and continue with the next element
 					for i in data[key].size():
