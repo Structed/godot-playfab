@@ -15,8 +15,8 @@ func _get_type_for_property(property_name: String):
 # @returns Dictionary - A Dictionary representation of this object instance
 func to_dict() -> Dictionary:
 
-	var dict = {}
-	var props = get_property_list()
+	var dict := {}
+	var props: Array[Dictionary] = get_property_list()
 
 	# Skipping the first 3 items because they are metadata we do not need
 	for prop in props:
@@ -59,7 +59,7 @@ func to_dict() -> Dictionary:
 # @returns void
 func from_dict(data: Dictionary, instance: JsonSerializable):
 
-	var props = instance.get_property_list()
+	var props: Array[Dictionary] = instance.get_property_list()
 	for key in data.keys():
 
 		var type
