@@ -5,28 +5,28 @@ class_name SearchItemsRequest
 var Count: int
 
 ## An opaque token used to retrieve the next page of items, if any are available.
-var ContinuationToken: String = ""
+var ContinuationToken: String
 
 ## The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-var CustomTags: Dictionary[String, Variant] = {}
+var CustomTags: Dictionary
 
 ## The entity to perform this action on.
 var Entity: EntityKey
 
 ## An OData filter used to refine the search query (For example: "type eq 'ugc'"). More info about Filter Complexity limits can be found here: https://learn.microsoft.com/en-us/gaming/playfab/features/economy-v2/catalog/search#limits
-var Filter: String = ""
+var Filter: String
 
 ## The locale to be returned in the result.
-var Language: String = ""
+var Language: String
 
 ## An OData orderBy used to order the results of the search query. For example: "rating/average asc"
-var OrderBy: String = ""
+var OrderBy: String
 
 ## The text to search for.
-var Search: String = ""
+var Search: String
 
 ## An OData select query option used to augment the search results. If not defined, the default search result metadata will be returned.
-var Select: String = ""
+var Select: String
 
 ## The store to restrict the search request to.
 var Store: StoreReference

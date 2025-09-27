@@ -7,7 +7,7 @@ class_name GetItemsRequest
 var AlternateIds: Array[CatalogAlternateId]
 
 ## The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-var CustomTags: Dictionary[String, String]
+var CustomTags: Dictionary
 
 ## The entity to perform this action on.
 var Entity: EntityKey
