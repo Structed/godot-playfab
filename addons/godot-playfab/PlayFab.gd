@@ -82,14 +82,14 @@ func login_with_custom_id(custom_id: String, create_user: bool, info_request_par
 func login_with_steam(steam_auth_ticket: String, is_auth_ticket_for_api: bool, create_account: bool, info_request_parameters: GetPlayerCombinedInfoRequestParams) -> void:
 	PlayFabManager.client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_STEAM
 	PlayFabManager.client_config.login_id = steam_auth_ticket
-	
+
 	var request_params = LoginWithSteamRequest.new()
 	request_params.TitleId = _title_id
 	request_params.CreateAccount = create_account
 	request_params.InfoRequestParameters = info_request_parameters
 	request_params.SteamTicket = steam_auth_ticket
 	request_params.TicketIsServiceSpecific = is_auth_ticket_for_api
-	
+
 	var result = _post(request_params, "/Client/LoginWithSteam", _on_login)
 
 # Anonymous login with a GUID as username
