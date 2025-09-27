@@ -5,12 +5,13 @@ class_name PlayFabCatalog
 
 signal search_complete
 
+const PAGE_SIZE := 50
+
 var _catalog: Dictionary[String, Dictionary] = {}          # item_id -> ShopItem
 var _last_catalog_fetch_time: float = 0
 var _fetching_catalog := false
 var _has_full_catalog := false
 
-const PAGE_SIZE := 50
 # Search for all items using PlayFabManager.catalog.search_items() with pagination
 var search_results : Dictionary[String, CatalogItem] = {}
 var continuation_token := ""
@@ -44,12 +45,7 @@ func _on_search_page_ok(result: Dictionary) -> void:
 	if next_token != null and next_token != "":
 		_search_page(next_token)
 	else:
-		emit_signal("search_complete")
-		_on_search_complete()
-
-func _on_search_complete() -> void:
-	print("All item IDs:", search_results)
-	Loggie.debug(search_results)
+		search_complete.emit()
 
 
 
@@ -72,4 +68,3 @@ func get_items(request_data: GetItemsRequest = GetItemsRequest.new(), callback: 
 ## @tutorial(Request Documentation): https://docs.microsoft.com/gaming/playfab/features/economy/catalog/get-items
 func search_items(request_data: SearchItemsRequest = SearchItemsRequest.new(), callback: Callable = func(): pass):
 	_post_with_entity_auth(request_data, "/Catalog/SearchItems", callback)
-	
