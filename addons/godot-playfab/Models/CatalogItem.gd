@@ -88,8 +88,18 @@ var Type: String
 
 func _get_type_for_property(property_name: String) -> String:
 	match property_name:
-#		"<PROPERTY NAME>":
-#			return "<PROPERTY TYPE>"
+		"CreatorEntity":
+			return "EntityKey"
+		"Moderation":
+			return "ModerationState"
+		"PriceOptions":
+			return "CatalogPriceOptions"
+		"Rating":
+			return "Rating"
+		"RealMoneyPriceDetails":
+			return "RealMoneyPriceDetails"
+		"StoreDetails":
+			return "StoreDetails"
 		_:
 			pass
 
