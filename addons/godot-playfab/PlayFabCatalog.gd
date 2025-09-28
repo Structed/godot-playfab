@@ -45,7 +45,7 @@ func _on_search_page_ok(result: Dictionary) -> void:
 	if next_token != null and next_token != "":
 		_search_page(next_token)
 	else:
-		search_complete.emit()
+		search_complete.emit(search_results)
 
 
 
