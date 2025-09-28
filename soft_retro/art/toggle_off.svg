@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="32"
+   height="16"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="toggle_off.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="4.2116046"
+     inkscape:cx="25.999592"
+     inkscape:cy="5.4611014"
+     inkscape:window-width="1104"
+     inkscape:window-height="403"
+     inkscape:window-x="3"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g1" />
+  <g
+     fill-opacity=".5"
+     id="g1">
+    <rect
+       width="30"
+       height="14"
+       x="1"
+       y="1"
+       fill="#1a1a1a"
+       rx="7"
+       id="rect1"
+       style="fill:#15788c;fill-opacity:1" />
+    <circle
+       cx="8"
+       cy="8"
+       r="5"
+       fill="#fff"
+       id="circle1"
+       style="fill:#ffeecc;fill-opacity:1" />
+  </g>
+</svg>

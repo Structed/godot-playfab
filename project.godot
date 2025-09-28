@@ -40,7 +40,7 @@ reload=false
 
 [gui]
 
-theme/custom="res://Assets/playfab_theme.tres"
+theme/custom="uid://b3klx57slj0l3"
 
 [physics]
 
