@@ -38,11 +38,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            godot-version: '4.3'
-            godot-status: 'stable'
-            gdunit-version: 'v5.1'
-          - os: ubuntu-latest
-            godot-version: '4.4'
+            godot-version: '4.4.1'
             godot-status: 'stable'
             gdunit-version: 'v5.1'
           - os: ubuntu-latest
