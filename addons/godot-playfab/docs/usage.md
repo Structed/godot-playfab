@@ -1,7 +1,7 @@
 # Using `godot-playfab` in your Game
 
 ## In Code
-> This is the preferred way of using `godot-playfab`!
+> ℹ️ This is the preferred way of using `godot-playfab`!
 
 Use the global `PlayFabManager.client` to call any PlayFab API.
 Please have a look at the example Scenes on how it is being used.
