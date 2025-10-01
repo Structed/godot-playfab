@@ -33,7 +33,10 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_process_mode(PROCESS_MODE_ALWAYS)
+	var manager_process_mode := Node.PROCESS_MODE_INHERIT
+	if ProjectSettings.has_setting(PlayFabConstants.SETTING_PLAYFAB_MANAGER_PROCESS_MODE):
+		manager_process_mode = int(ProjectSettings.get_setting(PlayFabConstants.SETTING_PLAYFAB_MANAGER_PROCESS_MODE))
+	set_process_mode(manager_process_mode)
 	add_child(client)
 	add_child(event)
 	client_config = _client_config_loader.load(title_id)

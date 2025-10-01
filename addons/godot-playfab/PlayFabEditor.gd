@@ -9,6 +9,15 @@ func _init():
 
 	add_custom_project_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID, "", TYPE_STRING, PROPERTY_HINT_PLACEHOLDER_TEXT, "Retieve from PlayFab Game Manager")
 
+	var process_mode_hint = ",".join([
+		"Inherit:%d" % Node.PROCESS_MODE_INHERIT,
+		"Disabled:%d" % Node.PROCESS_MODE_DISABLED,
+		"Pausable:%d" % Node.PROCESS_MODE_PAUSABLE,
+		"WhenPaused:%d" % Node.PROCESS_MODE_WHEN_PAUSED,
+		"Always:%d" % Node.PROCESS_MODE_ALWAYS,
+	])
+	add_custom_project_setting(PlayFabConstants.SETTING_PLAYFAB_MANAGER_PROCESS_MODE, Node.PROCESS_MODE_INHERIT, TYPE_INT, PROPERTY_HINT_ENUM, process_mode_hint)
+
 	var error: int = ProjectSettings.save()
 	if error: push_error("Encountered error %d when saving project settings." % error)
 
