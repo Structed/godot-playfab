@@ -65,6 +65,7 @@ The example includes general login, title data retrieval, analytics as well as h
 I am proud to say that there are already some games using `godot-playfab` in production! If you want to be listed here, please let me know!
 
 - [**Dome Keeper**](https://store.steampowered.com/app/1637320/Dome_Keeper/) by [Bippinbits](https://bippinbits.com/)
+- [**Stepland**](https://stepland.es/) by [Somni Games Studios](https://somnigamestudios.com/)
 
 ## Demo
 ![Demo](demo-scene.gif)
