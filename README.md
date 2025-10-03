@@ -8,6 +8,7 @@
 [![Discord](https://img.shields.io/discord/1020665079668166677?color=rgb%2888%2C%20101%2C%20242%29&label=Discord&logo=discord)](https://discord.gg/7K7q2YuNXe)
 ![Godot Version - 4.2](https://img.shields.io/badge/Godot_Version-4.2-2ea44f?logo=godotengine)
 ![Godot Version - 4.3](https://img.shields.io/badge/Godot_Version-4.3-2ea44f?logo=godotengine)
+![Godot Version - 4.4](https://img.shields.io/badge/Godot_Version-4.4-2ea44f?logo=godotengine)
 
 
 
