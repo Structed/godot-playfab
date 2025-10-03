@@ -14,4 +14,4 @@ $PlayFab._flush_telemetry_event_batch()
 $PlayFab._flush_playstream_event_batch()
 ````
 
-Back: [Sending Events](Sending.md) | Next: [Events Overview](README.md)
+⬅️ [2 - Sending Events](2-sending.md) | [Events Overview](README.md) ⬆️

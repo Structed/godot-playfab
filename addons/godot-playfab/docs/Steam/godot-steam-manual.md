@@ -14,11 +14,11 @@
 ## Introduction
 
 This page is an advanced example that will show you how to login with Steam on PlayFab using the third party [GodotSteam](https://godotsteam.com/) plugin.
-</br>
+
 Please check their documentation on how to use GodotSteam.
 
 ## Example
-You can check out a working example in the [godot-playfab](https://github.com/Structed/godot-playfab) repository.
+You can check out a working example in the [godot-playfab `integrate-steam` branch](https://github.com/Structed/godot-playfab/tree/integrate-steam).
 
 ## Setup
 
@@ -128,7 +128,7 @@ func cancel_auth_ticket() -> void:
 
 ## Altogether
 
-Finally, putting it together with the previous example that you can find [here](/docs/user/Logins/login-steam.md) should give you something like below:
+Finally, putting it together with the previous example that you can find [here](manual-integration.md) should give you something like below:
 
 > :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your App ID.
 

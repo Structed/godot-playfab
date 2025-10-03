@@ -30,9 +30,9 @@ Events can be sent in two ways:
 ## Steam integration
 godot-playfab has a built-in integration with [GodotSteam](https://godotsteam.com/).
 
-> ⚠️ Steam integration needs to be enabled in the example project, as it requires you to set up a Steam App ID and have the Steam client running.
+> ⚠️ Steam integration is hosted on the [`integrate-steam`](https://github.com/Structed/godot-playfab/tree/integrate-steam) branch of the repository. Make sure to check it out if you want to use Steam login.
 >
-> You can easily enable Steam login in your game by following the steps in the [Login with Steam](addons/godot-playfab/docs/Logins/login-steam.md) documentation.
+> You can easily enable Steam login in your game by following the steps in the [Steam integration](Steam/README.md) documentation.
 
 
 ## Example Project
@@ -42,3 +42,5 @@ are implemented.
 You can absolutely use the example project as a starting point for your own game! In fact, I encourage you to do so!
 
 Start with the default scene in `Scenes/Main.tscn` to see how to use `godot-playfab` in your game.
+
+⬅️ [User Documentation](../README.md) | [Initial Setup](1-initial-setup.md) ➡️
