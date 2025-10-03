@@ -1,7 +1,7 @@
 # Using `godot-playfab` in your Game
 
 ## In Code
-> This is the preferred way of using `godot-playfab`!
+> ℹ️ This is the preferred way of using `godot-playfab`!
 
 Use the global `PlayFabManager.client` to call any PlayFab API.
 Please have a look at the example Scenes on how it is being used.
@@ -14,4 +14,4 @@ You can use an arbitrary number of `PlayFabClient` nodes. Each will get their co
 # Working with Events
 See [Events](Events/README.md)
 
-Back: [Initial Setup](initial-setup.md) | Next: [Basic Requests](basic-requests.md)
+⬅️ [1 - Initial Setup](1-initial-setup.md) | [3 - Basic Requests](3-basic-requests.md) ➡️

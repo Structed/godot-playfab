@@ -9,4 +9,4 @@ There are a few Signals that you can & should connect to:
 | registered        | Emitted when a new User is registered. You should only connect this in the Scene where you do Player Registrations.                                  |
 | logged_in         | Emitted when a Player successfully logs in.                                                                                                          |
 
-Back: [Basic Requests](basic-requests.md) | Next: [Events](Events/README.md)
+⬅️ [3 - Basic Requests](3-basic-requests.md) | [Events](Events/README.md) ➡️

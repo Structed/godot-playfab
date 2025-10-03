@@ -40,4 +40,4 @@ PlayStream events...
 Instead of (or in addition to any) `PlayFabClient` Nodes, drop a `PlayFabEvent` node in your scene!
 You just need to make sure, a login was done before, so the EntityToken is available for Authentication
 
-Back: [User Documentation](../README.md) | Next: [Configuration for Events](Configuration.md)
+⬆️️ [User Documentation](../README.md) | [1 - Configuration for Events](1-configuration.md) ➡️

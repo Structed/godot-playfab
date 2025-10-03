@@ -39,4 +39,4 @@ This Config is used to store transient client data PlayFab needs to work across 
 # Example Project
 Clone the full repo for a full example project where you can find out how different features are implemented and how you can make more sophisticated calls!
 
-Back: [User Documentation](README.md) | Next: [Using `godot-playfab` in your Game](usage.md)
+⬅️ [Feature overview](README.md) | [Using `godot-playfab` in your Game](2-usage.md) ➡️

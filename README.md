@@ -29,8 +29,37 @@ but also use Godot's Signals and also provide in-editor tools to work with Godot
 
 **The overarching mission is:** *Providing a great Developer Experience!*
 
-## Example Projects
-You can find an example project in the [godot-playfab-example](https://github.com/Structed/godot-playfab-example) repository. However, the example projects are not included in the AssetLib or Itch.io packages, as to not confuse users. There are example projects for multiple use-cases in the [godot-playfab-example](https://github.com/Structed/godot-playfab-example) repository, such as general login and data retrieval, analytics as well as how to use [GodotSteam](https://godotsteam.com/) with godot-playfab to log into PlayFab using Steam!
+## Key Features
+- **Multiple Authentication Methods**: Supports various login methods:
+    - Anonymous
+    - Custom ID (with or without password)
+    - Steam
+- Events for **Telemetry** and **PlayStream**
+    - Batched sending to optimize costs
+    - Direct write for urgent events
+- **Session Management**: Automatic handling of session tokens and re-authentication.
+- **Signal-Based Callbacks**: Utilizes Godot's signal system for handling success and failure callbacks.
+- **Steam Integration**: Built-in support for [GodotSteam](https://godotsteam.com/) for seamless Steam authentication.
+
+- **Example Project**: A fully functional example project demonstrating common use cases.
+- **Configuration Management**: Centralized configuration for PlayFab settings.
+
+## Example Project
+You can find an example project within this repository.
+In fact, if you just clone this repository, it's a working example! There are only a few things to do:
+
+>💡 I encourage you to use the example project as a starting point for your own game!
+
+1. Create a [PlayFab](https://playfab.com) title and get the Title ID
+2. Set the Title ID in project settings under `playfab/title_id`. See [Initial Setup](addons/godot-playfab/docs/initial-setup.md).
+
+> To use the Steam login, please refer to: [Steam Integration](addons/godot-playfab/docs/Steam/README.md).
+
+
+However, the example projects are not included in the AssetLib or Itch.io packages, as to not confuse users.
+Please clone the full repository to get the example projects: [godot-playfab on GitHub](https://github.com/Structed/godot-playfab).
+
+The example includes general login, title data retrieval, analytics as well as how to use [GodotSteam](https://godotsteam.com/) with godot-playfab to log into PlayFab using Steam!
 
 ## Users
 I am proud to say that there are already some games using `godot-playfab` in production! If you want to be listed here, please let me know!
@@ -42,17 +71,8 @@ I am proud to say that there are already some games using `godot-playfab` in pro
 
 You can use the included Demo scene setup in `Scenes` to see how `godot-playfab` can be used.
 
-## First-Time Setup
-See [Initial Setup](addons/godot-playfab/docs/initial-setup.md)
-
-## Using `godot-playfab` in your Game
-See [Usage](addons/godot-playfab/docs/usage.md)
-
-### Connecting Signals
-See [Connecting Signals](addons/godot-playfab/docs/connecting-signals.md)
-
-## Usage Guide & Examples
-See the [User Documentation](addons/godot-playfab/README.md)
+## User Documentation
+See [User Documentation](addons/godot-playfab/README.md)
 
 ## Maintainer Documentation
 See [Maintainer Documentation](docs/README.md).

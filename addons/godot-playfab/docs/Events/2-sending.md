@@ -47,13 +47,13 @@ var callback = "_on_write_events_request_completed"
 ### Telemetry Event
 Batch a Telemetry Event:
 ```gdscript
-$PlayFabEvent.batch_title_player_telemetry_event(event_name, payload, Calable(self, callback))
+$PlayFabEvent.batch_title_player_telemetry_event(event_name, payload, Callable(self, callback))
 ```
 
 ### PlayStream Event
 Batch a PlayStream Event:
 ```gdscript
-$PlayFabEvent.batch_title_player_playstream_event(event_name, payload, Calable(self, callback))
+$PlayFabEvent.batch_title_player_playstream_event(event_name, payload, Callable(self, callback))
 ```
 
 
@@ -62,13 +62,13 @@ $PlayFabEvent.batch_title_player_playstream_event(event_name, payload, Calable(s
 ### Telemetry Event
 Write a Telemetry Event:
 ````gdscript
-$PlayFabEvent.write_title_player_telemetry_event(event_name, payload, Calable(self, callback))
+$PlayFabEvent.write_title_player_telemetry_event(event_name, payload, Callable(self, callback))
 ````
 
 ### PlayStream Event
 Write a PlayStream Event:
 ````gdscript
-$PlayFabEvent.write_title_player_playstream_event(event_name, payload, Calable(self, callback))
+$PlayFabEvent.write_title_player_playstream_event(event_name, payload, Callable(self, callback))
 ````
 
-Back: [Configuration for Events](Configuration.md) | Next: [Flushing Events](Flushing.md)
+⬅️ [1 - Configuration for Events](1-configuration.md) | [3 - Flushing Events](3-flushing.md) ➡️

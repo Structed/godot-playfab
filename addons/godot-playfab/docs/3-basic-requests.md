@@ -36,4 +36,4 @@ Check out the [RequestBuilder.gd](/Scenes/RequestBuilder.gd) in the Scenes folde
 
 
 
-Back: [Initial Setup](usage.md) | Next: [Connecting Signals](connecting-signals.md)
+⬅️ [2 - Usage](2-usage.md) | [3 - Connecting Signals](4-connecting-signals.md) ➡️
