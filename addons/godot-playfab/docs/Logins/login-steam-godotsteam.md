@@ -18,7 +18,7 @@ This page is an advanced example that will show you how to login with Steam on P
 Please check their documentation on how to use GodotSteam.
 
 ## Example
-You can check out a working example in the [godot-playfab-example](https://github.com/Structed/godot-playfab-example) repository. Just load up the `godot-steam` project in that repository!
+You can check out a working example in the [godot-playfab](https://github.com/Structed/godot-playfab) repository.
 
 ## Setup
 
@@ -33,17 +33,11 @@ There are a couple of different ways to install GodotSteam but for this example,
 
 When the game is run through the Steam client, it already knows which game you are playing. However, during development and testing, you must supply a valid App ID somehow. Typically, if you do not already have an app ID, you can use App ID `480` which is Valve's *SpaceWar* example game.
 
-There is three ways to set the App ID. For this example, we will use one of them. If you want to see the other, check [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/).
+There are three ways to set the App ID. For this example, we will use one of them. If you want to see the other, check [GodotSteam (Initializing Steam)](https://godotsteam.com/tutorials/initializing/).
 
 > :warning: Don't forget to replace **STEAM_APP_ID** by a valid String that contains your App ID.
 
-```gdscript
-func _init() -> void:
-    # Set steam environment only in editor because Steam would already know which game you are playing
-    if OS.has_feature("editor"):
-        OS.set_environment("SteamAppId", STEAM_APP_ID)
-        OS.set_environment("SteamGameId", STEAM_APP_ID)
-```
+The easiest way to set your AppID, is to create a file called `steam_appid.txt` in your project root folder (the same folder as your `project.godot` file) and put the App ID in that file.
 
 ## Initialization
 
