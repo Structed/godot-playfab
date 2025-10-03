@@ -38,7 +38,7 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="CardGridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Items"]
+[node name="ItemCardGridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Items"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
@@ -53,6 +53,16 @@ columns = 4
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="CurrencyCardGridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Currencies"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_top = 29.0
+offset_right = 1152.0
+offset_bottom = 553.0
+size_flags_vertical = 3
+columns = 4
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 1

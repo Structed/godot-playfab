@@ -35,6 +35,27 @@ func _search_page(token: String) -> void:
 
 	search_items(request_data, _on_search_page_ok)
 
+## Searches for currencies.
+## Not paginated!
+func search_currency(callback: Callable = func(): pass) -> void:
+	var request_data: SearchItemsRequest = SearchItemsRequest.new()
+	request_data.Search = ""
+	request_data.Filter = "type eq 'currency'"
+	request_data.OrderBy = "CreationDate asc"
+	request_data.Count = PAGE_SIZE
+
+	search_items(request_data, _on_search_currency_complete)
+
+func _on_search_currency_complete(result: Dictionary) -> void:
+	var res = SearchItemsResponse.new()
+	res.from_dict(result.data, res)
+	var results_items : Dictionary[String, CatalogItem] = {}
+	for item: CatalogItem in res.Items:
+		results_items[item.Id] = item
+
+	search_currency_complete.emit(results_items)
+
+
 func _on_search_page_ok(result: Dictionary) -> void:
 	var res = SearchItemsResponse.new()
 	res.from_dict(result.data, res)
