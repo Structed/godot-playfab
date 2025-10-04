@@ -41,11 +41,12 @@ metadata/_tab_index = 0
 [node name="ItemCardGridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Items"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -2.0
-offset_top = 6.0
-offset_right = 1150.0
-offset_bottom = 530.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 columns = 4
 
@@ -57,10 +58,12 @@ metadata/_tab_index = 1
 [node name="CurrencyCardGridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Currencies"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_top = 29.0
-offset_right = 1152.0
-offset_bottom = 553.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 columns = 4
 
