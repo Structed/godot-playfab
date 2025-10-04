@@ -24,6 +24,7 @@ exports/
 
 # GDUnit4
 /addons/gdUnit4/GdUnitRunner.cfg
+/reports
 
 
 [Ee]xport/
