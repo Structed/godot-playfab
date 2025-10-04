@@ -25,6 +25,7 @@ func _search_all_items():
 func _search_page(token: String) -> void:
 	var request_data: SearchItemsRequest = SearchItemsRequest.new()
 	request_data.Search = ""
+	request_data.Filter = "type ne 'currency'"
 #	request_data.Filter  "tags/any(t:t eq 'desert') and contentType eq 'gameitem'"
 	request_data.OrderBy = "CreationDate asc"
 	request_data.ContinuationToken = token
