@@ -47,8 +47,11 @@ func _get_api_url() -> String:
 
 
 func _http_request(request_method: int, body: Dictionary, path: String, callback: Callable, additional_headers: Dictionary = {}):
+	# Create a new HTTPRequest instance for each request
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+
 	var json = JSON.stringify(body)
-	#print_debug(JSON.stringify(body, "\t"))
 	var headers = [
 		"Content-Type: application/json",
 		"Content-Length: " + str(json.length()),
@@ -59,29 +62,28 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 
 	headers.append_array(_dict_to_header_array(additional_headers))
 
-	while (_request_in_progress):
-		await _http.get_tree().process_frame
-
-	_request_in_progress = true
 	var request_uri = "%s%s" % [ _get_api_url(), path]
-	var error = _http.request(request_uri, headers, request_method, json)
+	var error = http_request.request(request_uri, headers, request_method, json)
+
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 		return
 
-	var args = await _http.request_completed
-	# TODO: Perhaps build response object?
+	# Use await to wait for *this specific request* to complete
+	var args = await http_request.request_completed
+
+	# After the request completes, remove the node
+	http_request.queue_free()
+
 	var response_result = args[0] as int
 	var response_code = args[1] as int
 	var response_headers = args[2] as PackedStringArray
 	var response_body = args[3] as PackedByteArray
-	_request_in_progress = false
 
 	var response_body_string = response_body.get_string_from_utf8()
 	var test_json_conv = JSON.new()
 	var parse_error = test_json_conv.parse(response_body_string)
 	var json_parse_result = test_json_conv.data
-	#print_debug("JSON Parse result: %s" % JSON.stringify(json_parse_result, "\t"))
 
 	if parse_error != OK:
 		emit_signal("json_parse_error", json_parse_result)
@@ -102,9 +104,3 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	if response_code >= 500:
 		emit_signal("server_error", path)
 		return
-
-
-func _test_http(body, path: String):
-	var error = _http.request("https://httpbin.org/post", [], HTTPClient.METHOD_POST, JSON.stringify(body))
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
