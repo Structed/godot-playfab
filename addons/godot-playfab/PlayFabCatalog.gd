@@ -4,6 +4,7 @@ extends PlayFab
 class_name PlayFabCatalog
 
 signal search_complete
+signal search_currency_complete
 
 const PAGE_SIZE := 50
 
