@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cq24viuorfsjc"]
 
-[ext_resource type="Script" uid="uid://cvn4peu38pqpe" path="res://Scenes/Catalog.gd" id="1_lnqhp"]
+[ext_resource type="Script" uid="uid://cvn4peu38pqpe" path="res://Scenes/Economy/Catalog.gd" id="1_lnqhp"]
 [ext_resource type="PackedScene" uid="uid://wwvhjjuojn77" path="res://Scenes/Widgets/LoadingIndicator.tscn" id="2_8nk0b"]
 
 [node name="Catalog" type="Control"]
@@ -76,7 +76,7 @@ anchor_bottom = 1.0
 offset_top = -29.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Back"
+text = "Back to Economy"
 
 [node name="ProgressCenter" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(100, 100)

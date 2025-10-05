@@ -32,4 +32,4 @@ func _on_search_currency_complete(result: Dictionary[String, CatalogItem]) -> vo
 		%CurrencyCardGridContainer.add_child(card)
 
 func _on_back_button_pressed() -> void:
-	SceneManager.goto_scene("res://Scenes/LoggedIn.tscn")
+	SceneManager.goto_scene("res://Scenes/Economy.tscn")
