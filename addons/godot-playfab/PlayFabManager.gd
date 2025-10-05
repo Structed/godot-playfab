@@ -26,6 +26,10 @@ var event: PlayFabEvent = PlayFabEvent.new()
 ## @tutorial: https://learn.microsoft.com/en-us/rest/api/playfab/economy/catalog?view=playfab-rest
 var catalog: PlayFabCatalog = PlayFabCatalog.new()
 
+## Represents the PlayFab `Inventory` (Economy V2) API
+## @tutorial: https://learn.microsoft.com/en-us/rest/api/playfab/economy/inventory?view=playfab-rest
+var inventory: PlayFabInventory = PlayFabInventory.new()
+
 
 # Retrieves the `title_id` from `ProjectSettings`
 func _init():
