@@ -47,6 +47,26 @@ func _get_api_url() -> String:
 
 
 func _http_request(request_method: int, body: Dictionary, path: String, callback: Callable, additional_headers: Dictionary = {}):
+	var http_response: PlayFabHttpResult = await _individual_http_request(request_method, body, path, callback, additional_headers)
+	if http_response.response_code >= 200 and http_response.response_code < 400:
+		if callback != null:
+			if callback.is_valid():
+				callback.call(http_response.json_parse_result)
+			else:
+				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+		return
+	elif http_response.response_code >= 400:
+		var apiErrorWrapper = ApiErrorWrapper.new()
+		for key in http_response.json_parse_result.keys():
+			apiErrorWrapper.set(key, http_response.json_parse_result[key])
+		emit_signal("api_error", apiErrorWrapper)
+		return
+	if http_response.response_code >= 500:
+		emit_signal("server_error", path)
+		return
+
+
+func _individual_http_request(request_method: int, body: Dictionary, path: String, callback: Callable, additional_headers: Dictionary = {}) -> PlayFabHttpResult:
 	# Create a new HTTPRequest instance for each request
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
@@ -75,32 +95,5 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	# After the request completes, remove the node
 	http_request.queue_free()
 
-	var response_result = args[0] as int
-	var response_code = args[1] as int
-	var response_headers = args[2] as PackedStringArray
-	var response_body = args[3] as PackedByteArray
-
-	var response_body_string = response_body.get_string_from_utf8()
-	var test_json_conv = JSON.new()
-	var parse_error = test_json_conv.parse(response_body_string)
-	var json_parse_result = test_json_conv.data
-
-	if parse_error != OK:
-		emit_signal("json_parse_error", json_parse_result)
-		return
-	if response_code >= 200 and response_code < 400:
-		if callback != null:
-			if callback.is_valid():
-				callback.call(json_parse_result)
-			else:
-				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
-		return
-	elif response_code >= 400:
-		var apiErrorWrapper = ApiErrorWrapper.new()
-		for key in json_parse_result.keys():
-			apiErrorWrapper.set(key, json_parse_result[key])
-		emit_signal("api_error", apiErrorWrapper)
-		return
-	if response_code >= 500:
-		emit_signal("server_error", path)
-		return
+	var http_result := PlayFabHttpResult.new(args)
+	return http_result
