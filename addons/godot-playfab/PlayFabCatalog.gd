@@ -7,22 +7,35 @@ signal search_complete
 signal search_currency_complete
 
 const PAGE_SIZE := 50
+const FULL_CATALOG_FETCH_TIMEOUT := 3600 # seconds
 
-var _catalog: Dictionary[String, Dictionary] = {}          # item_id -> ShopItem
-var _last_catalog_fetch_time: float = 0
+var _catalog: Dictionary[String, CatalogItem] = {}          # item_id -> ShopItem
+var _last_catalog_fetch_time: int = 0
 var _fetching_catalog := false
 var _has_full_catalog := false
 
 # Search for all items using PlayFabManager.catalog.search_items() with pagination
-var search_results : Dictionary[String, CatalogItem] = {}
+var _search_results : Dictionary[String, CatalogItem] = {}
 var continuation_token := ""
 
+## Returns the cached catalog, fetching it if it's older than 5 minutes.
+func get_catalog() -> Dictionary[String, CatalogItem]:
+	if _last_catalog_fetch_time == 0 or Time.get_unix_time_from_system() - _last_catalog_fetch_time > FULL_CATALOG_FETCH_TIMEOUT:
+		fetch_catalog()
+	return _catalog
 
-func fetch_catalog():
-	search_results.clear()
-	_search_page("")
+## Fetches the entire catalog with pagination.
+## Emits [search_complete] when done.
+func fetch_catalog() -> void:
+	if _fetching_catalog:
+		return
+	_fetching_catalog = true
+	_last_catalog_fetch_time = Time.get_unix_time_from_system()
+	_search_results.clear()
+	_fetch_catalog_page()
 
-func _search_page(token: String) -> void:
+## Internal function to fetch a page of search results.
+func _fetch_catalog_page(token: String = "") -> void:
 	var request_data: SearchItemsRequest = SearchItemsRequest.new()
 	request_data.Search = ""
 #	request_data.Filter = "type ne 'currency'"
@@ -39,6 +52,7 @@ func _search_page(token: String) -> void:
 
 ## Searches for currencies.
 ## Not paginated!
+## Emits [search_currency_complete] when done.
 func search_currency(callback: Callable = func(): pass) -> void:
 	var request_data: SearchItemsRequest = SearchItemsRequest.new()
 	request_data.Search = ""
@@ -48,6 +62,7 @@ func search_currency(callback: Callable = func(): pass) -> void:
 
 	search_items(request_data, _on_search_currency_complete)
 
+## Internal callback for search_currency
 func _on_search_currency_complete(result: Dictionary) -> void:
 	var res = SearchItemsResponse.new()
 	res.from_dict(result.data, res)
@@ -62,13 +77,16 @@ func _on_search_page_ok(result: Dictionary) -> void:
 	var res = SearchItemsResponse.new()
 	res.from_dict(result.data, res)
 	for item: CatalogItem in res.Items:
-		search_results[item.Id] = item
+		_search_results[item.Id] = item
 
 	var next_token: String = res.ContinuationToken
 	if next_token != null and next_token != "":
-		_search_page(next_token)
+		_fetch_catalog_page(next_token)
 	else:
-		search_complete.emit(search_results)
+		_fetching_catalog = false
+		_catalog.clear()
+		_catalog = _search_results
+		search_complete.emit(_search_results)
 
 
 
