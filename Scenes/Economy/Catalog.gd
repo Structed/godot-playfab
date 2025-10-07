@@ -14,7 +14,6 @@ func _ready() -> void:
 
 
 func _on_search_complete(result: Dictionary[String, CatalogItem]) -> void:
-	print("All item IDs:", PlayFabManager.catalog.search_results)
 	for key in result.keys():
 		var catalog_item: CatalogItem = result[key]
 		var card: ItemCard = card_scene.instantiate()
@@ -23,7 +22,6 @@ func _on_search_complete(result: Dictionary[String, CatalogItem]) -> void:
 		%ItemCardGridContainer.add_child(card)
 
 func _on_search_currency_complete(result: Dictionary[String, CatalogItem]) -> void:
-	print("Currency item IDs:", PlayFabManager.catalog.search_results)
 	for key in result.keys():
 		var catalog_item: CatalogItem = result[key]
 		var card: ItemCard = card_scene.instantiate()
