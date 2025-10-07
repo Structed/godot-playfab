@@ -5,7 +5,7 @@ extends Control
 func _ready() -> void:
 	%LoadingIndicator.show()
 	PlayFabManager.catalog.search_complete.connect(_on_search_complete)
-	PlayFabManager.catalog._search_all_items()
+	PlayFabManager.catalog.fetch_catalog()
 
 	var catalog: PlayFabCatalog = PlayFabCatalog.new()
 	add_child(catalog)
