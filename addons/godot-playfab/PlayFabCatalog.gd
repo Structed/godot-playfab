@@ -84,9 +84,10 @@ func _on_search_page_ok(result: Dictionary) -> void:
 		_fetch_catalog_page(next_token)
 	else:
 		_fetching_catalog = false
+		_has_full_catalog = true
 		_catalog.clear()
 		_catalog = _search_results
-		search_complete.emit(_search_results)
+		search_complete.emit()
 
 
 
