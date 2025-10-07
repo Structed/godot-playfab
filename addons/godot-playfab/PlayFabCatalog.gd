@@ -18,6 +18,12 @@ var _has_full_catalog := false
 var _search_results : Dictionary[String, CatalogItem] = {}
 var continuation_token := ""
 
+func _ready():
+	PlayFabManager.playfab_initialized.connect(func():
+		get_catalog()
+	)
+
+
 ## Returns the cached catalog, fetching it if it's older than 5 minutes.
 func get_catalog() -> Dictionary[String, CatalogItem]:
 	if _last_catalog_fetch_time == 0 or Time.get_unix_time_from_system() - _last_catalog_fetch_time > FULL_CATALOG_FETCH_TIMEOUT:

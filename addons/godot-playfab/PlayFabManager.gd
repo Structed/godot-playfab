@@ -2,6 +2,8 @@ extends Node
 # This is script must be auto-loaded as `PlayFabManager`.
 # Use it as a global state/config manager for PlayFab data, like login persistence.
 
+signal playfab_initialized
+
 # Handles saving/loading of the `PlayFabClientConfig`
 var _client_config_loader = PlayFabClientConfigLoader.new()
 
@@ -50,6 +52,7 @@ func _ready():
 	add_child(catalog)
 	add_child(inventory)
 	client_config = _client_config_loader.load(title_id)
+	playfab_initialized.emit()
 
 
 # Saves the client config to a file
