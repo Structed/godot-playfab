@@ -2,26 +2,27 @@ extends Control
 
 @onready var card_scene: PackedScene = preload("res://Scenes/Widgets/ItemCard.tscn")
 
+var inventory_items: Array = []
+
 func _ready() -> void:
 	%LoadingIndicator.show()
-	PlayFabManager.inventory.get_inventory_items(GetInventoryItemsRequest.new(), _on_get_inventory_complete)
 
-	#var catalog: PlayFabCatalog = PlayFabCatalog.new()
-	#add_child(catalog)
-	#catalog.search_currency_complete.connect(_on_search_currency_complete)
-	#catalog.search_currency()
+	var catalog: Dictionary[String, CatalogItem] = PlayFabManager.catalog.get_catalog()
 
+	var turboload_complete: Callable = func(res: GetInventoryItemsResponse) -> void:
+		for item in res.Items:
+			var catalog_item: CatalogItem = resolve_catalog_item(item.Id, catalog)
+			var card: ItemCard = card_scene.instantiate()
+			card.reset(catalog_item)
+			%LoadingIndicator.hide()
+			%ItemCardGridContainer.add_child(card)
 
-func _on_get_inventory_complete(result: Dictionary) -> void:
-	var res = GetInventoryItemsResponse.new()
-	res.from_dict(result.data, res)
-		
-	for item in res.Items:
-		var catalog_item: CatalogItem = item
-		var card: ItemCard = card_scene.instantiate()
-		card.reset(catalog_item)
-		%LoadingIndicator.hide()
-		%ItemCardGridContainer.add_child(card)
+	PlayFabManager.inventory.turboload_inventory(turboload_complete)
+
+func resolve_catalog_item(item_id: String, catalog: Dictionary[String, CatalogItem]) -> CatalogItem:
+	var item = catalog.get(item_id, CatalogItem.new())
+	return item
+
 
 func _on_back_button_pressed() -> void:
 	SceneManager.goto_scene("res://Scenes/Economy.tscn")
