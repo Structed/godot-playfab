@@ -48,6 +48,7 @@ func _ready():
 	add_child(client)
 	add_child(event)
 	add_child(catalog)
+	add_child(inventory)
 	client_config = _client_config_loader.load(title_id)
 
 
