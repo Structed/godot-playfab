@@ -28,7 +28,7 @@ func get_inventory() -> Dictionary[String, InventoryItem]:
 ## Callback receives a [GetInventoryItemsResponse]
 ## @tutorial: https://learn.microsoft.com/en-us/gaming/playfab/economy-monetization/economy-v2/inventory/turboloading
 func turboload_inventory(callback: Callable = func(): pass) -> void:
-	if _fetching_inventory or _has_full_inventory:
+	if _fetching_inventory:
 		callback.call(GetInventoryItemsResponse.new())
 		return
 
