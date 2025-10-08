@@ -23,7 +23,7 @@ grow_vertical = 2
 
 [node name="Header" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Catalog"
+text = "Inventory"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
