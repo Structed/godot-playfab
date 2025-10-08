@@ -41,3 +41,7 @@ text = "Type"
 [node name="VirtualPrices" type="VBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Amount" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

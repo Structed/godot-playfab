@@ -14,3 +14,10 @@ func reset(catalog_item: CatalogItem) -> void:
 		var buy_button = Button.new()
 		buy_button.text = text
 		%VirtualPrices.add_child(buy_button)
+
+
+func reset_inventory(catalog_item: CatalogItem, inventory_item: InventoryItem) -> void:
+	%Title.text = catalog_item.Title[PlayFab.LANG_NEUTRAL]
+	%Description.text = catalog_item.Description[PlayFab.LANG_NEUTRAL]
+	%Type.text = catalog_item.Type
+	%Amount.text = "%dx" % inventory_item.Amount
