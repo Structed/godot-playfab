@@ -18,7 +18,7 @@ func _update_inventory() -> void:
 		var card: ItemCard = card_scene.instantiate()
 		card.reset(catalog_item)
 
-		if inventory_item.Type == "currency":
+		if inventory_item.Type == CatalogItem.TYPE_CURRENCY:
 			%CurrencyCardGridContainer.add_child(card)
 		else:
 			%ItemCardGridContainer.add_child(card)

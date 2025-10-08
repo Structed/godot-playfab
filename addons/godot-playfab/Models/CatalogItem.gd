@@ -1,6 +1,14 @@
 extends JsonSerializable
 class_name CatalogItem
 
+
+const TYPE_CATALOG_ITEM: String = "catalogItem"
+const TYPE_CURRENCY: String = "currency"
+const TYPE_BUNDLE: String = "bundle"
+const TYPE_STORE: String = "store"
+const TYPE_UGC: String = "ugc"
+const TYPE_SUBSCRIPTION: String = "subscription"
+
 ## The alternate IDs associated with this item. An alternate ID can be set to 'FriendlyId' or any of the supported marketplace names.
 var AlternateIds: Array[CatalogAlternateId]
 

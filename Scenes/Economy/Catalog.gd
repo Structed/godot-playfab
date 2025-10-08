@@ -17,7 +17,7 @@ func _on_search_complete() -> void:
 		var catalog_item: CatalogItem = catalog[key]
 		var card: ItemCard = card_scene.instantiate()
 		card.reset(catalog_item)
-		if catalog_item.Type == "currency":
+		if catalog_item.Type == CatalogItem.TYPE_CURRENCY:
 			%LoadingIndicator.hide()
 			%CurrencyCardGridContainer.add_child(card)
 		else:
