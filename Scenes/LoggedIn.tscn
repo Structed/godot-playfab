@@ -107,7 +107,7 @@ text = "Events & PlayStream API"
 
 [node name="EconomyButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Catalog (Economy V2)"
+text = "Economy V2"
 
 [node name="RequestBuilder" type="Button" parent="VBoxContainer"]
 layout_mode = 2
