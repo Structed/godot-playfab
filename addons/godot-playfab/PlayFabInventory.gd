@@ -5,6 +5,7 @@ class_name PlayFabInventory
 
 const PAGE_SIZE := 50
 const TURBOLOAD_PAGE_SIZE := 10000
+const FULL_INVENTORY_CACHE_DURATION := 3600  # seconds
 
 
 var _inventory_items: Dictionary[String, InventoryItem] = {}	# item_id -> ShopItem
@@ -22,6 +23,8 @@ func _ready():
 ## Get current inventory items stored locally.
 ## Returns a dictionary of InventoryItem objects, keyed by their item IDs.
 func get_inventory() -> Dictionary[String, InventoryItem]:
+	if _last_inventory_fetch_time == 0 or Time.get_unix_time_from_system() - _last_inventory_fetch_time > FULL_INVENTORY_CACHE_DURATION:
+		turboload_inventory()
 	return _inventory_items
 
 ## Get current inventory items and store them locally.
