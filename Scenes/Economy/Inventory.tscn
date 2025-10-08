@@ -67,6 +67,11 @@ grow_vertical = 2
 size_flags_vertical = 3
 columns = 4
 
+[node name="RefereshButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh Inventory"
+
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 12
@@ -94,4 +99,5 @@ visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
+[connection signal="pressed" from="VBoxContainer/RefereshButton" to="." method="_on_referesh_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
