@@ -11,13 +11,13 @@ func _ready() -> void:
 
 	var inventory: Dictionary[String, InventoryItem] = PlayFabManager.inventory.get_inventory()
 	for id in inventory:
-		var item: InventoryItem = inventory[id]
-		var catalog_item: CatalogItem = resolve_catalog_item(item.Id, catalog)
+		var inventory_item: InventoryItem = inventory[id]
+		var catalog_item: CatalogItem = resolve_catalog_item(inventory_item.Id, catalog)
 		var card: ItemCard = card_scene.instantiate()
 		card.reset(catalog_item)
 		%LoadingIndicator.hide()
 
-		if item.Type == "currency":
+		if inventory_item.Type == "currency":
 			%CurrencyCardGridContainer.add_child(card)
 		else:
 			%ItemCardGridContainer.add_child(card)
