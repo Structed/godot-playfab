@@ -5,7 +5,7 @@ extends Node
 signal playfab_initialized
 
 # Handles saving/loading of the `PlayFabClientConfig`
-var _client_config_loader = PlayFabClientConfigLoader.new()
+var _client_config_loader := PlayFabClientConfigLoader.new()
 
 # **READONLY**
 # The Tile ID to use for this project. Will be pulled from ProjectSettings.

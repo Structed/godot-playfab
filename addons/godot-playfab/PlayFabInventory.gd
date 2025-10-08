@@ -8,7 +8,7 @@ const TURBOLOAD_PAGE_SIZE := 10000
 const FULL_INVENTORY_CACHE_DURATION := 3600  # seconds
 
 
-var _inventory_items: Dictionary[String, InventoryItem] = {}	# item_id -> ShopItem
+var _inventory_items: Dictionary[String, InventoryItem] = {}	# item_id -> InventoryItem
 var _last_inventory_fetch_time: int = 0
 var _fetching_inventory := false
 var _has_full_inventory := false
