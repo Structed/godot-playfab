@@ -16,7 +16,11 @@ func _ready() -> void:
 		var card: ItemCard = card_scene.instantiate()
 		card.reset(catalog_item)
 		%LoadingIndicator.hide()
-		%ItemCardGridContainer.add_child(card)
+
+		if item.Type == "currency":
+			%CurrencyCardGridContainer.add_child(card)
+		else:
+			%ItemCardGridContainer.add_child(card)
 
 func resolve_catalog_item(item_id: String, catalog: Dictionary[String, CatalogItem]) -> CatalogItem:
 	var item = catalog.get(item_id, CatalogItem.new())
