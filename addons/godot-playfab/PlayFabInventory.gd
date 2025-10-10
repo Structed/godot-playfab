@@ -63,3 +63,16 @@ func get_inventory_items(request_data: GetInventoryItemsRequest = GetInventoryIt
 		res.from_dict(result.data, res)
 		callback.call(res)
 	)
+
+
+## Purchase an item or bundle.
+## Up to 10,000 stacks of items can be added to a single inventory collection.
+## Stack size is uncapped.
+## @turorial(Quickstart): https://learn.microsoft.com/en-us/gaming/playfab/economy-monetization/economy-v2/inventory/quickstart#purchase-the-item
+## @tutorial(Request Documentation): https://learn.microsoft.com/en-us/rest/api/playfab/economy/inventory/purchase-inventory-items?view=playfab-rest
+func purchase_inventory_items(request_data: PurchaseInventoryItemsRequest, callback: Callable = func(): pass) -> void:
+	_post_with_entity_auth(request_data, "/Inventory/PurchaseInventoryItems", func(result: Dictionary) -> void:
+		var res = PurchaseInventoryItemsResponse.new()
+		res.from_dict(result.data, res)
+		callback.call(res)
+	)
