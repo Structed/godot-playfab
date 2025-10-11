@@ -96,6 +96,11 @@ func _on_search_page_ok(result: Dictionary) -> void:
 		search_complete.emit()
 
 
+## Resolves an item from the cached catalog by its item ID.
+func resolve_item(item_id: String) -> CatalogItem:
+	if item_id in _catalog:
+		return _catalog[item_id]
+	return null
 
 
 ## Retrieves items from the public catalog. Up to 50 items can be returned at once.

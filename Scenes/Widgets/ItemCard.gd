@@ -9,8 +9,12 @@ func reset(catalog_item: CatalogItem) -> void:
 
 	for price in catalog_item.PriceOptions.Prices:
 		var unit_amount: float = price.UnitAmount
-		var price_amount = price.Amounts[0]["Amount"]	# TODO: Get all costs, not just the first one
-		var text: String = "%s pieces: %sG" % [unit_amount, price_amount]
+		var text: String = "%s pieces: " % [unit_amount]
+
+		for currency_amount in price.Amounts:
+			var currency := PlayFabManager.catalog.resolve_item(currency_amount.ItemId)
+			text += "| %s (%s)" % [currency_amount.Amount, currency.Title.get("NEUTRAL")]
+
 		var buy_button = Button.new()
 		buy_button.text = text
 		buy_button.pressed.connect(_on_purchase_button_pressed.bindv([unit_amount, catalog_item]))
