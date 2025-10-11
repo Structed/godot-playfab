@@ -13,7 +13,7 @@ func reset(catalog_item: CatalogItem) -> void:
 
 		for currency_amount in price.Amounts:
 			var currency := PlayFabManager.catalog.resolve_item(currency_amount.ItemId)
-			text += "| %s (%s)" % [currency_amount.Amount, currency.Title.get("NEUTRAL")]
+			text += "| %s (%s)" % [currency_amount.Amount, currency.Title.get(PlayFab.LANG_NEUTRAL)]
 
 		var buy_button = Button.new()
 		buy_button.text = text
