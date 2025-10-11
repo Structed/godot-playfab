@@ -44,6 +44,34 @@ func to_dict() -> Dictionary:
 				#push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
 				print_debug("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
 				dict[name] = type_name
+		elif type == TYPE_ARRAY:
+			var arr = get(name)
+			if arr.size() == 0:
+				continue
+
+			var is_typed = arr.is_typed()
+			if is_typed:
+				var script = arr.get_typed_script()
+				if script == null:
+					# Builtin type, just set it and continue with the next element
+					dict[name] = arr
+					continue
+
+				var script_name: StringName = (script as Script).get_global_name()
+				var new_arr := []
+				for i in arr.size():
+					var element = arr[i]
+					if element == null:
+						new_arr.append(null)
+					elif element.has_method("to_dict"):
+						new_arr.append(element.to_dict())
+					else:
+						push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % script_name)
+						new_arr.append(script_name)
+				dict[name] = new_arr
+			else:
+				# Untyped array - just set it
+				dict[name] = arr
 		else:
 			# Get the value of the property
 			var value = get(name)
@@ -79,7 +107,7 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 					# Builtin type, just set it and continue with the next element
 					for i in data[key].size():
 						var element = data[key][i]
-						field.append(key, element)
+						field.append(element)
 					continue
 
 				var script_name: StringName = (script as Script).get_global_name()
