@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bdlfoyj3jgt24" path="res://Scenes/Economy/Inventory.gd" id="1_ersrd"]
 [ext_resource type="PackedScene" uid="uid://wwvhjjuojn77" path="res://Scenes/Widgets/LoadingIndicator.tscn" id="2_s30pp"]
 
-[node name="Invenory" type="Control"]
+[node name="Inventory" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
