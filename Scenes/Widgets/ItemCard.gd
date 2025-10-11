@@ -9,10 +9,11 @@ func reset(catalog_item: CatalogItem) -> void:
 
 	for price in catalog_item.PriceOptions.Prices:
 		var unit_amount: float = price.UnitAmount
-		var price_amount = price.Amounts[0]["Amount"]
+		var price_amount = price.Amounts[0]["Amount"]	# TODO: Get all costs, not just the first one
 		var text: String = "%s pieces: %sG" % [unit_amount, price_amount]
 		var buy_button = Button.new()
 		buy_button.text = text
+		buy_button.pressed.connect(_on_purchase_button_pressed.bindv([unit_amount, catalog_item]))
 		%VirtualPrices.add_child(buy_button)
 
 
@@ -21,3 +22,12 @@ func reset_inventory(catalog_item: CatalogItem, inventory_item: InventoryItem) -
 	%Description.text = catalog_item.Description[PlayFab.LANG_NEUTRAL]
 	%Type.text = catalog_item.Type
 	%Amount.text = "%dx" % inventory_item.Amount
+
+
+func _on_purchase_button_pressed(amount: int, catalog_item: CatalogItem) -> void:
+	var request_data := PurchaseInventoryItemsRequest.from_catalog_item(amount, catalog_item)
+
+	PlayFabManager.inventory.purchase_inventory_items(request_data, func(response: PurchaseInventoryItemsResponse):
+		pass
+		# TODO: Update inventory, currency
+	)
