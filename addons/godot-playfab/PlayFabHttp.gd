@@ -59,10 +59,10 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 		var apiErrorWrapper = ApiErrorWrapper.new()
 		for key in http_response.json_parse_result.keys():
 			apiErrorWrapper.set(key, http_response.json_parse_result[key])
-		emit_signal("api_error", apiErrorWrapper)
+		api_error.emit(apiErrorWrapper)
 		return
 	if http_response.response_code >= 500:
-		emit_signal("server_error", path)
+		server_error.emit(path)
 		return
 
 
