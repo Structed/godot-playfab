@@ -1,0 +1,50 @@
+{
+    "appid": 2908850,
+    "items": [
+        {
+            "itemdefid": 1,
+            "type": "item",
+            "name": "Godots 25",
+            "description": "25 Godots pack.",
+            "price": "1;VLV25",
+            "name_color": "7D6D00",
+            "background_color": "3C352E",
+            "icon_url": "https://content1.prod.catalog.playfab.com/pf-title-1a64f85c3341b8ed-b5f9b/9a487eef-e468-4588-906e-d58c78dc8d05/shortcut_icon.png",
+            "icon_url_large": "https://content1.prod.catalog.playfab.com/pf-title-1a64f85c3341b8ed-b5f9b/9a487eef-e468-4588-906e-d58c78dc8d05/shortcut_icon.png",
+            "store_tags": "Godots",
+            "tradable": false,
+            "marketable": false,
+            "auto_stack": true
+        },
+        {
+            "itemdefid": 2,
+            "type": "item",
+            "name": "Godots 50",
+            "description": "50 Godots value pack.",
+            "price": "1;VLV50",
+            "name_color": "7D6D00",
+            "background_color": "3C352E",
+            "icon_url": "https://content1.prod.catalog.playfab.com/pf-title-1a64f85c3341b8ed-b5f9b/9a487eef-e468-4588-906e-d58c78dc8d05/shortcut_icon.png",
+            "icon_url_large": "https://content1.prod.catalog.playfab.com/pf-title-1a64f85c3341b8ed-b5f9b/9a487eef-e468-4588-906e-d58c78dc8d05/shortcut_icon.png",
+            "store_tags": "Godots",
+            "tradable": false,
+            "marketable": false,
+            "auto_stack": true
+        },
+        {
+            "itemdefid": 3,
+            "type": "item",
+            "name": "Godots 75",
+            "description": "75 Godots super saver pack.",
+            "price": "1;VLV75",
+            "name_color": "7D6D00",
+            "background_color": "3C352E",
+            "icon_url": "https://content1.prod.catalog.playfab.com/pf-title-1a64f85c3341b8ed-b5f9b/9a487eef-e468-4588-906e-d58c78dc8d05/shortcut_icon.png",
+            "icon_url_large": "https://content1.prod.catalog.playfab.com/pf-title-1a64f85c3341b8ed-b5f9b/9a487eef-e468-4588-906e-d58c78dc8d05/shortcut_icon.png",
+            "store_tags": "Godots",
+            "tradable": false,
+            "marketable": false,
+            "auto_stack": true
+        }
+    ]
+}
