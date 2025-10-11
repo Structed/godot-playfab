@@ -29,6 +29,23 @@ func _ready():
 	_http = HTTPRequest.new()
 	add_child(_http)
 
+	api_error.connect(func(api_error_wrapper: ApiErrorWrapper):
+		var text = "[b]%s[/b]\n\n" % api_error_wrapper.errorMessage
+		var error_details = api_error_wrapper.errorDetails
+
+		if error_details:
+			for key in error_details.keys():
+				text += "[color=red][b]%s[/b][/color]: " % key
+				for element in error_details[key]:
+					text += "%s\n" % element
+
+		print_rich(text)
+	)
+
+	server_error.connect(func(path: String):
+		push_error("A server error occured while querying %s" % path)
+	)
+
 
 func _dict_to_header_array(dict: Dictionary):
 	if dict.size() < 1:
