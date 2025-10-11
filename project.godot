@@ -20,10 +20,11 @@ config/icon="res://addons/godot-playfab/icon.png"
 
 SceneManager="*res://Scripts/SceneManager.gd"
 PlayFabManager="*res://addons/godot-playfab/PlayFabManager.gd"
+ToastParty="*res://addons/toastparty/toast-autoload.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/godot-playfab/plugin.cfg", "res://addons/toastparty/plugin.cfg")
 
 [filesystem]
 
