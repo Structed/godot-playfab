@@ -2,7 +2,7 @@ extends JsonSerializable
 class_name PurchasePriceAmount
 
 ## The amount of the inventory item to use in the purchase . 
-var Amount: float 
+var Amount: int 
 
 
 ## The inventory item id to use in the purchase . 
