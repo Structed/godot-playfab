@@ -24,6 +24,8 @@ func _init():
 
 func _enter_tree():
 	add_autoload_singleton("PlayFabManager", "res://addons/godot-playfab/PlayFabManager.gd")
+	if Engine.get_version_info().hex >= 0x040401:	# load only if Godot 4.4.1
+		add_autoload_singleton("PlayFabSteam", "res://addons/godot-playfab/PlayFabSteam.gd")
 
 	main_panel_instance = MainPanel.instantiate()
 	# Add the main panel to the editor's main viewport.
@@ -33,6 +35,7 @@ func _enter_tree():
 
 
 func _exit_tree():
+	remove_autoload_singleton("PlayFabSteam")
 	remove_autoload_singleton("PlayFabManager")
 
 	if main_panel_instance:

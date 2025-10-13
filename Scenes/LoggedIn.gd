@@ -9,11 +9,11 @@ func _ready():
 	var _error = PlayFabManager.client.connect("api_error", func(error: ApiErrorWrapper):
 		print_debug(error.errorMessage)
 	)
+	update()
 
-
-# Called when the node enters the scene tree for the first time.
 func update():
-	if login_result != null:
+	if PlayFabManager.client.is_logged_in():
+		login_result = PlayFabManager.client.get_login_result()
 		$VBoxContainer/LoginResultContainer/AccountPlayerId/Edit.text = login_result.PlayFabId
 		$VBoxContainer/LoginResultContainer/TitlePlayerId/Edit.text = login_result.InfoResultPayload.AccountInfo.TitleInfo.TitlePlayerAccount.Id
 		$VBoxContainer/LoginResultContainer/TitlePlayerName/Edit.text = login_result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName

@@ -93,7 +93,6 @@ func _on_logged_in(login_result: LoginResult):
 	_hide_progess()
 
 	$LoggedIn.login_result = login_result
-	$LoggedIn.update()
 	$LoggedIn.show()
 
 func _on_api_error(api_error_wrapper: ApiErrorWrapper):
