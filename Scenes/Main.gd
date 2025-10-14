@@ -4,7 +4,7 @@ func _ready():
 	# determine whether godot-steam addon is enabled
 	if ClassDB.can_instantiate("Steam"):
 		%LoginWithSteam.disabled = true
-#		PlayFabSteam.connect("logged_in", _on_logged_in) # Enable, if using GodotSteam/PlayFabSteam (4.4.1+)
+		PlayFabSteam.connect("logged_in", _on_logged_in) # Enable, if using GodotSteam/PlayFabSteam (4.4.1+)
 	else:
 		print_debug("Steam is NOT installed")
 		%LoginWithSteam.visible = false
