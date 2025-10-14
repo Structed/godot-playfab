@@ -113,7 +113,7 @@ func _update_player_inventory(_playFabId, _steam_persona_name) -> void:
 	Steam.inventory_result_ready.connect(_on_inventory_result_ready)
 
 func _on_inventory_result_ready(_result: int, _inventory_handle: int):
-	inventory_items = Steam.getResultItems(Steam.inventory_handle)
+	inventory_items = Steam.getResultItems(_inventory_handle)
 	inventory_updated.emit(inventory_items)
 	print("Items in inventory: %s" % inventory_items.size())
 
