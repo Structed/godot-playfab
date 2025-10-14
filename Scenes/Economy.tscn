@@ -31,10 +31,15 @@ text = "Catalog"
 layout_mode = 2
 text = "Inventory"
 
+[node name="SteamInventoryButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Steam Inventory"
+
 [node name="BackButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Back to Main Menu"
 
 [connection signal="pressed" from="VBoxContainer/CatalogButton" to="." method="_on_catalog_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SteamInventoryButton" to="." method="_on_steam_inventory_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

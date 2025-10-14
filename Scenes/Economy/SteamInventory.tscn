@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj4k8m9n5x7wp"]
+
+[ext_resource type="Script" path="res://Scenes/Economy/SteamInventory.gd" id="1_steam_inv"]
+[ext_resource type="PackedScene" uid="uid://wwvhjjuojn77" path="res://Scenes/Widgets/LoadingIndicator.tscn" id="2_loading"]
+
+[node name="SteamInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_steam_inv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Steam Inventory"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemCardGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="NoItemsLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "No items in Steam inventory"
+horizontal_alignment = 1
+
+[node name="NoSteamLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Steam is not available or not running"
+horizontal_alignment = 1
+
+[node name="RefreshButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh Steam Inventory"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back to Economy"
+
+[node name="ProgressCenter" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LoadingIndicator" parent="ProgressCenter" instance=ExtResource("2_loading")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(100, 100)
+
+[connection signal="pressed" from="VBoxContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+
