@@ -25,7 +25,7 @@ PlayFabSteam="*res://addons/godot-playfab/PlayFabSteam.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-playfab/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/godot-playfab/plugin.cfg", "res://addons/toastparty/plugin.cfg")
 
 [filesystem]
 
