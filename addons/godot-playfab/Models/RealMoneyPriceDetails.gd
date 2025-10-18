@@ -2,22 +2,28 @@ extends JsonSerializable
 class_name RealMoneyPriceDetails
 
 ## The 'AppleAppStore' price amount per CurrencyCode. 'USD' supported only.
-var AppleAppStorePrices: Object
+var AppleAppStorePrices: Dictionary[String, String]
+
 
 ## The 'GooglePlay' price amount per CurrencyCode. 'USD' supported only.
-var GooglePlayPrices: Object
+var GooglePlayPrices: Dictionary[String, String]
+
 
 ## The 'MicrosoftStore' price amount per CurrencyCode. 'USD' supported only.
-var MicrosoftStorePrices: Object
+var MicrosoftStorePrices: Dictionary[String, String]
+
 
 ## The 'NintendoEShop' price amount per CurrencyCode. 'USD' supported only.
-var NintendoEShopPrices: Object
+var NintendoEShopPrices: Dictionary[String, String]
+
 
 ## The 'PlayStationStore' price amount per CurrencyCode. 'USD' supported only.
-var PlayStationStorePrices: Object
+var PlayStationStorePrices: Dictionary[String, String]
+
 
 ## The 'Steam' price amount per CurrencyCode. 'USD' supported only.
-var SteamPrices: Object
+var SteamPrices: Dictionary[String, String]
+
 
 
 func _get_type_for_property(property_name: String) -> String:
@@ -29,4 +35,3 @@ func _get_type_for_property(property_name: String) -> String:
 
 	push_error("Could not find mapping for property: " + property_name)
 	return super._get_type_for_property(property_name)
-
