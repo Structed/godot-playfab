@@ -35,6 +35,10 @@ text = "Inventory"
 layout_mode = 2
 text = "Steam Inventory"
 
+[node name="SteamPurchaseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Steam Purchase (Demo)"
+
 [node name="BackButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Back to Main Menu"
@@ -42,4 +46,5 @@ text = "Back to Main Menu"
 [connection signal="pressed" from="VBoxContainer/CatalogButton" to="." method="_on_catalog_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SteamInventoryButton" to="." method="_on_steam_inventory_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SteamPurchaseButton" to="." method="_on_steam_purchase_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

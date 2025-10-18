@@ -9,6 +9,7 @@ builder.ConfigureFunctionsWebApplication();
 
 builder.Services
     .AddApplicationInsightsTelemetryWorkerService()
-    .ConfigureFunctionsApplicationInsights();
+    .ConfigureFunctionsApplicationInsights()
+    .AddHttpClient();
 
 builder.Build().Run();

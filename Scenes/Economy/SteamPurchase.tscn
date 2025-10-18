@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr8h3v5p2w4kn"]
+
+[ext_resource type="Script" uid="uid://dvkx0x2vckjxl" path="res://Scenes/Economy/SteamPurchase.gd" id="1_steam_purchase"]
+
+[node name="SteamPurchase" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_steam_purchase")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Steam Purchase Demo"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ItemPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ItemNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ItemPanel/ItemVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Test Item"
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="MarginContainer/VBoxContainer/ItemPanel/ItemVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "$4.99"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ready to purchase"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PurchaseButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Purchase with Steam"
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="InstructionsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Instructions:
+1. Click 'Purchase with Steam' to initiate the purchase flow
+2. Steam overlay will open for payment authorization
+3. After payment, items will be granted to your PlayFab inventory
+
+Note: This is a demo. Configure your backend URL and Steam credentials first."
+autowrap_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsHBox/PurchaseButton" to="." method="_on_purchase_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsHBox/BackButton" to="." method="_on_back_button_pressed"]
