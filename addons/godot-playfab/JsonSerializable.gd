@@ -40,7 +40,7 @@ func to_dict() -> Dictionary:
 			else:
 				var type_name = sub_prop.get_class()
 				# No to_dict method - likely an error!
-				# If it is a builtin class, however, a special handler needs to be iomplemented here.
+				# If it is a builtin class, however, a special handler needs to be implemented here.
 				#push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
 				print_debug("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
 				dict[name] = type_name

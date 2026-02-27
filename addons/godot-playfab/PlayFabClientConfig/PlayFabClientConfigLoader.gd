@@ -8,7 +8,7 @@ class_name PlayFabClientConfigLoader
 # Will only work in Debug Mode
 const DEBUG_DO_NOT_ENCRYPT = false  # Only works checked debug builds
 
-# Section to write key/value paris to
+# Section to write key/value pairs to
 const SECTION_NAME = "PlayFab"
 
 # **Accessibility: protected/virtual**
@@ -45,7 +45,7 @@ func _save(password: String):
 
 # Loads an encrypted ConfigFile from disk and returns a `PlayFabClientConfig`
 # with all properties set from values of ConfigFile
-# @paramref password: String - Password used for file enxryption
+# @paramref password: String - Password used for file encryption
 func load(password: String) -> PlayFabClientConfig:
 	_config = ConfigFile.new()
 	var new_config = PlayFabClientConfig.new()
@@ -61,7 +61,7 @@ func load(password: String) -> PlayFabClientConfig:
 		if err == ERR_FILE_NOT_FOUND:
 			print_debug("No config file found. After login, it will be created at \"%s\"." % _load_path)
 		else:
-			var error_message = "Config file didn't load. Error code: %f" % err
+			var error_message = "Config file didn't load. Error code: %d" % err
 			print_debug(error_message)
 			errors.append(error_message)
 

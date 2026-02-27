@@ -189,6 +189,6 @@ func _add_auth_headers(additional_headers: Dictionary, auth_type) -> bool:
 	elif auth_type == AUTH_TYPE.ENTITY_TOKEN:
 		additional_headers["X-EntityToken"] = PlayFabManager.client_config.entity_token.EntityToken
 	else:
-		push_error("auth_type \"" + auth_type + "\" is invalid")
+		push_error("auth_type \"" + str(auth_type) + "\" is invalid")
 
 	return true
