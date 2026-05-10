@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://5fda86xbwxbu"]
+[gd_scene format=3 uid="uid://5fda86xbwxbu"]
 
 [ext_resource type="Script" uid="uid://c1kf0y6v7e05n" path="res://addons/godot-playfab/Scenes/PlayFabMainScreen.gd" id="2"]
 
-[node name="MainScreen" type="Control"]
+[node name="MainScreen" type="Control" unique_id=454160997]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,16 +12,16 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("2")
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." unique_id=1508768967]
 filters = PackedStringArray("*.gd")
 show_hidden_files = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=404188997]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=351195205]
 layout_mode = 2
 text = "Convert Model Text to a model
 
@@ -29,33 +29,33 @@ text = "Convert Model Text to a model
 2. Paste text below
 3. Click \"Save Model\""
 
-[node name="ClassNameContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ClassNameContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=389576975]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ClassNameContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ClassNameContainer" unique_id=1898394148]
 layout_mode = 2
 text = "Class Name:"
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/ClassNameContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/ClassNameContainer" unique_id=357874816]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SaveModel" type="Button" parent="VBoxContainer/ClassNameContainer"]
+[node name="SaveModel" type="Button" parent="VBoxContainer/ClassNameContainer" unique_id=1382425885]
 layout_mode = 2
 text = "Save As"
 
-[node name="Button" type="Button" parent="VBoxContainer/ClassNameContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/ClassNameContainer" unique_id=34003431]
 layout_mode = 2
 text = "Save Direct"
 
-[node name="Input" type="TextEdit" parent="VBoxContainer"]
+[node name="Input" type="TextEdit" parent="VBoxContainer" unique_id=1259623273]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ErrorPopupDialog" type="Popup" parent="."]
+[node name="ErrorPopupDialog" type="Popup" parent="." unique_id=454896466]
 
-[node name="Label" type="Label" parent="ErrorPopupDialog"]
+[node name="Label" type="Label" parent="ErrorPopupDialog" unique_id=1533018711]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
