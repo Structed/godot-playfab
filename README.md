@@ -13,9 +13,9 @@
 
 
 # godot-playfab - for Godot 4!
-is an [Azure PlayFab](https://playfab.com) addon for the [Godot Engine](https://godotengine.org/). While it is very early, it is supposed to be two things:
+is a [PlayFab](https://playfab.com) addon for the [Godot Engine](https://godotengine.org/). While it is very early, it is supposed to be two things:
 
-1. A GDScript-native SDK to Azure PlayFab
+1. A GDScript-native SDK to PlayFab
 2. A Godot Editor integration to administer your game
 
 > **Note:**
