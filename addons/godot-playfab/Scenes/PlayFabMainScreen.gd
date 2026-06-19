@@ -5,7 +5,11 @@ var editor_resource_filesystem_cached
 
 func _ready():
 	# Needed, so can ater refresh the "FileSystem" panel of the Editor
-	editor_resource_filesystem_cached = EditorPlugin.new().get_editor_interface().get_resource_filesystem()
+	if Engine.is_editor_hint():
+		editor_resource_filesystem_cached = EditorInterface.get_resource_filesystem()
+	else:
+		print("Not running in editor, skipping filesystem cache.")
+
 
 func _on_SaveModel_pressed():
 	
@@ -35,7 +39,13 @@ func _on_file_selected(file_path: String):
 	file.store_string(model)
 
 	# Refresh the "FileSystem" panel
-	editor_resource_filesystem_cached.scan()
+	if file:
+		file.store_string(model)
+		file.close() 
+		print("Saved model to file path: \"%s\"" % file_path)
+	else:
+		push_error("Failed to open file for writing: " + file_path)
+		return
 	
 	print("Saved model to file path: \"%s\"" % file_path)
 	
