@@ -21,7 +21,7 @@ var OriginalId: String
 var OriginalTimestamp: String
 
 # Arbitrary data associated with the event. `PayloadJSON` is not implemented.
-# If you ***need*** to use `PayloadJSON`, please use a verbaitim request instead.
+# If you ***need*** to use `PayloadJSON`, please use a verbatim request instead.
 var Payload: Dictionary
 
 

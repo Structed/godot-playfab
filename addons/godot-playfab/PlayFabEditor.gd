@@ -7,7 +7,7 @@ var main_panel_instance
 
 func _init():
 
-	add_custom_project_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID, "", TYPE_STRING, PROPERTY_HINT_PLACEHOLDER_TEXT, "Retieve from PlayFab Game Manager")
+	add_custom_project_setting(PlayFabConstants.SETTING_PLAYFAB_TITLE_ID, "", TYPE_STRING, PROPERTY_HINT_PLACEHOLDER_TEXT, "Retrieve from PlayFab Game Manager")
 
 	var process_mode_hint = ",".join([
 		"Inherit:%d" % Node.PROCESS_MODE_INHERIT,

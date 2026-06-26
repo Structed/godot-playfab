@@ -93,14 +93,14 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 			if callback.is_valid():
 				callback.call(json_parse_result)
 			else:
-				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+				push_error("Response callback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+		return
+	elif response_code >= 500:
+		emit_signal("server_error", path)
 		return
 	elif response_code >= 400:
 		var apiErrorWrapper = ApiErrorWrapper.new()
 		for key in json_parse_result.keys():
 			apiErrorWrapper.set(key, json_parse_result[key])
 		emit_signal("api_error", apiErrorWrapper)
-		return
-	if response_code >= 500:
-		emit_signal("server_error", path)
 		return
