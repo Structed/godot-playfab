@@ -88,14 +88,24 @@ func _http_request(request_method: int, body: Dictionary, path: String, callback
 	if parse_error != OK:
 		emit_signal("json_parse_error", json_parse_result)
 		return
-	if response_code >= 200 and response_code < 400:
-		if callback != null:
-			if callback.is_valid():
-				callback.call(json_parse_result)
-			else:
-				push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+
+	if callback == null:
+		push_error("Response calback is null!")
 		return
-	elif response_code >= 400:
+
+	if not callback.is_valid():
+		push_error("Response calback " + callback.get_method() + " is no longer valid! Make sure, a script is only removed after all requests returned!")
+		return
+
+
+	# Intended use includes await - always invoke the callback.
+	# Note: response_code 400 may not mean network or server error!
+	# (e.g. "UpdateUserTitleDisplayName" may return { "code": 400.0, "status": "BadRequest", "error": "NameNotAvailable", "errorCode": 1058.0, "errorMessage": "Name not available" }.)
+	callback.call(json_parse_result)
+
+
+	# Emit error signals as metadata on top of the response - can be "subscribed" to on demand.
+	if response_code >= 400:
 		var apiErrorWrapper = ApiErrorWrapper.new()
 		for key in json_parse_result.keys():
 			apiErrorWrapper.set(key, json_parse_result[key])
