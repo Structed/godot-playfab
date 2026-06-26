@@ -121,6 +121,8 @@ func _on_LogoutButton_pressed():
 	PlayFabManager.forget_login()
 	$LoggedIn.hide()
 	update_login_button_states()
+	PlayFabManager.client_config.stay_logged_in = false
+	$Login/StayLoggedInCheckbox.button_pressed = false
 	$Login.show()
 
 
