@@ -12,6 +12,8 @@ signal logged_in(login_result)
 
 enum AUTH_TYPE {SESSION_TICKET, ENTITY_TOKEN}
 
+const LANG_NEUTRAL := "NEUTRAL"
+
 
 func _init():
 
@@ -23,7 +25,8 @@ func _init():
 
 func _ready():
 	super._ready()
-	connect("logged_in",Callable(self,"_on_logged_in"))
+	connect("logged_in",_on_logged_in)
+	connect("api_error",_on_api_error)
 
 
 func _on_logged_in(login_result: LoginResult):
@@ -81,14 +84,14 @@ func login_with_custom_id(custom_id: String, create_user: bool, info_request_par
 func login_with_steam(steam_auth_ticket: String, is_auth_ticket_for_api: bool, create_account: bool, info_request_parameters: GetPlayerCombinedInfoRequestParams) -> void:
 	PlayFabManager.client_config.login_type = PlayFabClientConfig.LoginType.LOGIN_STEAM
 	PlayFabManager.client_config.login_id = steam_auth_ticket
-	
+
 	var request_params = LoginWithSteamRequest.new()
 	request_params.TitleId = _title_id
 	request_params.CreateAccount = create_account
 	request_params.InfoRequestParameters = info_request_parameters
 	request_params.SteamTicket = steam_auth_ticket
 	request_params.TicketIsServiceSpecific = is_auth_ticket_for_api
-	
+
 	var result = _post(request_params, "/Client/LoginWithSteam", _on_login)
 
 # Anonymous login with a GUID as username
@@ -192,3 +195,16 @@ func _add_auth_headers(additional_headers: Dictionary, auth_type) -> bool:
 		push_error("auth_type \"" + auth_type + "\" is invalid")
 
 	return true
+
+
+func _on_api_error(api_error_wrapper: ApiErrorWrapper):
+	var text: String = "%s\n\n" % api_error_wrapper.errorMessage
+	var error_details = api_error_wrapper.errorDetails
+
+	if error_details:
+		for key in error_details.keys():
+			text += key
+			for element in error_details[key]:
+				text += "%s\n" % element
+
+	push_error(text)

@@ -2,8 +2,10 @@ extends Node
 # This is script must be auto-loaded as `PlayFabManager`.
 # Use it as a global state/config manager for PlayFab data, like login persistence.
 
+signal playfab_initialized
+
 # Handles saving/loading of the `PlayFabClientConfig`
-var _client_config_loader = PlayFabClientConfigLoader.new()
+var _client_config_loader := PlayFabClientConfigLoader.new()
 
 # **READONLY**
 # The Tile ID to use for this project. Will be pulled from ProjectSettings.
@@ -22,6 +24,14 @@ var client : PlayFabClient = PlayFabClient.new()
 # see https://docs.microsoft.com/en-us/rest/api/playfab/events/?view=playfab-rest
 var event: PlayFabEvent = PlayFabEvent.new()
 
+## Represents the PlayFab `Catalog` (Economy V2) API
+## @tutorial: https://learn.microsoft.com/en-us/rest/api/playfab/economy/catalog?view=playfab-rest
+var catalog: PlayFabCatalog = PlayFabCatalog.new()
+
+## Represents the PlayFab `Inventory` (Economy V2) API
+## @tutorial: https://learn.microsoft.com/en-us/rest/api/playfab/economy/inventory?view=playfab-rest
+var inventory: PlayFabInventory = PlayFabInventory.new()
+
 
 # Retrieves the `title_id` from `ProjectSettings`
 func _init():
@@ -39,7 +49,10 @@ func _ready():
 	set_process_mode(manager_process_mode)
 	add_child(client)
 	add_child(event)
+	add_child(catalog)
+	add_child(inventory)
 	client_config = _client_config_loader.load(title_id)
+	playfab_initialized.emit()
 
 
 # Saves the client config to a file

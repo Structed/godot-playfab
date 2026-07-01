@@ -15,15 +15,15 @@ func _get_type_for_property(property_name: String):
 # @returns Dictionary - A Dictionary representation of this object instance
 func to_dict() -> Dictionary:
 
-	var dict = {}
-	var props = get_property_list()
+	var dict := {}
+	var props: Array[Dictionary] = get_property_list()
 
 	# Skipping the first 3 items because they are metadata we do not need
 	for prop in props:
 		var name = prop["name"] # The name of the property on the object. Will be used to access its's value
 		var type = prop["type"]	# The godot built-in type (Array, Object etc)
 		var usage = prop["usage"]	# is a combination of PropertyUsageFlags.
-		
+
 		# If it's not PROPERTY_USAGE_SCRIPT_VARIABLE, it's not an actual property and we can ignore it
 		if (usage & PROPERTY_USAGE_SCRIPT_VARIABLE) != PROPERTY_USAGE_SCRIPT_VARIABLE:
 			continue
@@ -44,9 +44,40 @@ func to_dict() -> Dictionary:
 				#push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
 				print_debug("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % type_name)
 				dict[name] = type_name
+		elif type == TYPE_ARRAY:
+			var arr = get(name)
+			if arr.size() == 0:
+				continue
+
+			var is_typed = arr.is_typed()
+			if is_typed:
+				var script = arr.get_typed_script()
+				if script == null:
+					# Builtin type, just set it and continue with the next element
+					dict[name] = arr
+					continue
+
+				var script_name: StringName = (script as Script).get_global_name()
+				var new_arr := []
+				for i in arr.size():
+					var element = arr[i]
+					if element == null:
+						new_arr.append(null)
+					elif element.has_method("to_dict"):
+						new_arr.append(element.to_dict())
+					else:
+						push_error("If '%s' is not a builtin class, please implement a to_dict() method! If it IS a builtin class, a special handler needs to be implemented in JsonSerializable." % script_name)
+						new_arr.append(script_name)
+				dict[name] = new_arr
+			else:
+				# Untyped array - just set it
+				dict[name] = arr
 		else:
 			# Get the value of the property
-			dict[name] = get(name)
+			var value = get(name)
+			if type == TYPE_STRING && value == "":
+				continue
+			dict[name] = value
 
 	return dict
 
@@ -56,7 +87,7 @@ func to_dict() -> Dictionary:
 # @returns void
 func from_dict(data: Dictionary, instance: JsonSerializable):
 
-	var props = instance.get_property_list()
+	var props: Array[Dictionary] = instance.get_property_list()
 	for key in data.keys():
 
 		var type
@@ -66,7 +97,29 @@ func from_dict(data: Dictionary, instance: JsonSerializable):
 				break
 
 		# If basic data type - just set it
-		if type != TYPE_OBJECT:
+		if type == TYPE_ARRAY:
+			var field = instance.get(key)
+			var is_typed = field.is_typed()
+
+			if is_typed:
+				var script = field.get_typed_script()
+				if script == null:
+					# Builtin type, just set it and continue with the next element
+					for i in data[key].size():
+						var element = data[key][i]
+						field.append(element)
+					continue
+
+				var script_name: StringName = (script as Script).get_global_name()
+
+				for i in data[key].size():
+					var element = data[key][i]
+					var nested_instance = script.new()
+					nested_instance.from_dict(element, nested_instance)
+					field.append(nested_instance)
+#		elif type == TYPE_DICTIONARY:
+#			# TODO: implementation for Typed Dictionaries
+		elif type != TYPE_OBJECT:
 			instance.set(key, data[key])
 		elif data[key] == null:
 			instance.set(key, null)
