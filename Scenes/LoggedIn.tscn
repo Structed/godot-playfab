@@ -109,6 +109,12 @@ text = "Events & PlayStream API"
 layout_mode = 2
 text = "Request Builder"
 
+[node name="StatisticsButton" type="Button" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 1024.0
+margin_bottom = 68.0
+text = "Statistics/Leaderboards"
+
 [node name="Response" type="RichTextLabel" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -127,3 +133,4 @@ text = "Logout"
 [connection signal="pressed" from="VBoxContainer/RequestBuilder" to="." method="_on_RequestBuilder_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/LogoutButton" to="." method="_on_LogoutButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/StatisticsButton" to="." method="_on_StatisticsButton_pressed"]

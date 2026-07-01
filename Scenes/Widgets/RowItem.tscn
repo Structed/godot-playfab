@@ -1,0 +1,25 @@
+[gd_scene format=2]
+
+[node name="RowItem" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Rank" type="Label" parent="."]
+margin_top = 293.0
+margin_right = 8.0
+margin_bottom = 307.0
+text = "0"
+
+[node name="Name" type="Label" parent="."]
+margin_left = 12.0
+margin_top = 293.0
+margin_right = 93.0
+margin_bottom = 307.0
+text = "Player Name"
+
+[node name="Score" type="Label" parent="."]
+margin_left = 97.0
+margin_top = 293.0
+margin_right = 121.0
+margin_bottom = 307.0
+text = "000"
