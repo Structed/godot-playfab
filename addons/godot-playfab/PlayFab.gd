@@ -9,6 +9,7 @@ signal registered(RegisterPlayFabUserResult)
 ## Emitted when the player logged in successfully
 ## @param login_result: LoginResult
 signal logged_in(login_result)
+var _login_result: LoginResult
 
 enum AUTH_TYPE {SESSION_TICKET, ENTITY_TOKEN}
 
@@ -28,6 +29,7 @@ func _ready():
 
 func _on_logged_in(login_result: LoginResult):
 	# Setting SessionTicket for subsequent client requests
+	_login_result = login_result
 	PlayFabManager.client_config.session_ticket = login_result.SessionTicket
 	PlayFabManager.client_config.master_player_account_id = login_result.PlayFabId
 	PlayFabManager.client_config.entity_token = login_result.EntityToken
@@ -192,3 +194,12 @@ func _add_auth_headers(additional_headers: Dictionary, auth_type) -> bool:
 		push_error("auth_type \"" + auth_type + "\" is invalid")
 
 	return true
+	
+func is_logged_in():
+	return _login_result != null
+	
+func get_login_result():
+	if (!is_logged_in()):
+		push_error("No use logged in with PlayFab")
+		
+	return _login_result
